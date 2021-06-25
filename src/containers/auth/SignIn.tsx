@@ -1,3 +1,9 @@
+import Container from "../../components/Container";
+
 export default function SignIn() {
-  return <div />;
+  return (
+    <Container>
+      <div />
+    </Container>
+  );
 }
