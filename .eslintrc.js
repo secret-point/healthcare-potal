@@ -6,7 +6,6 @@ module.exports = {
     "plugin:prettier/recommended",
     "airbnb-typescript",
     "airbnb/hooks",
-    "plugin:jest/recommended",
   ],
   env: {
     browser: true,
@@ -26,6 +25,8 @@ module.exports = {
   rules: {
     "linebreak-style": "off",
     "object-curly-newline": "off",
+    "implicit-arrow-linebreak": "off",
+    "@typescript-eslint/indent": "off",
     "@typescript-eslint/quotes": "off",
     "@typescript-eslint/comma-dangle": "off",
     "@typescript-eslint/camelcase": "off",
