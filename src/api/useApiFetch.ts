@@ -1,14 +1,13 @@
 import axios, { AxiosRequestConfig } from "axios";
-import useAuth from "../auth/useAuth";
 import config from "../utils/config";
+import { getToken } from "./authApi";
 
 function useApiFetch() {
-  const { getToken } = useAuth();
   return async function apiFetch(path: string, opts?: AxiosRequestConfig) {
     if (path && path.length && path[0] !== "/") {
       path = `/${path}`;
     }
-    const token = await getToken();
+    const token = getToken();
     const headers = {
       authorization: token,
     };

@@ -1,6 +1,6 @@
 import { useContext, useState, useMemo, createContext, useEffect } from "react";
-import { Nullable, User } from "../types";
-import { useFetchUser, useSignIn } from "../api/authApi";
+import { User } from "../types";
+import { useFetchUser, useSignIn, removeToken } from "../api/authApi";
 
 type AuthContextType = {
   user?: User;
@@ -9,10 +9,9 @@ type AuthContextType = {
   logIn: (email: string, password: string) => Promise<any>;
   logOut: () => Promise<any>;
   loadUser: () => void;
-  getToken: () => Nullable<string>;
-  removeToken: () => void;
 };
 
+// eslint-disable-next-line
 export const AuthContext = createContext<AuthContextType>(undefined!);
 
 export function AuthProvider(props: any) {
@@ -37,14 +36,6 @@ export function AuthProvider(props: any) {
     // eslint-disable-next-line
   }, []);
 
-  function getToken() {
-    return sessionStorage.getItem("token");
-  }
-
-  function removeToken() {
-    sessionStorage.removeItem("token");
-  }
-
   async function logIn(email: string, password: string) {
     const user = await signIn(email, password);
     setUser(user);
@@ -65,8 +56,6 @@ export function AuthProvider(props: any) {
       logIn,
       logOut,
       loadUser,
-      getToken,
-      removeToken,
     }),
     // eslint-disable-next-line
     [user, isAuthenticated, isLoading]

@@ -23,6 +23,7 @@ module.exports = {
     project: "./tsconfig.json",
   },
   rules: {
+    "function-paren-newline": "off",
     "linebreak-style": "off",
     "object-curly-newline": "off",
     "implicit-arrow-linebreak": "off",

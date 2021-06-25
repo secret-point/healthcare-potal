@@ -39,6 +39,9 @@ export const theme = createMuiTheme({
     blue: {
       main: "#005FFA",
     },
+    backgoundGreen: {
+      main: "#F8FAF8",
+    },
     contrastThreshold: 3,
   },
 });

@@ -35,3 +35,9 @@ export const useRegister = () => {
     return data;
   };
 };
+
+export const getToken = () => sessionStorage.getItem("token");
+
+export const removeToken = () => {
+  sessionStorage.removeItem("token");
+};
