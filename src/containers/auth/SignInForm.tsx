@@ -12,7 +12,7 @@ import TextInput from "../../components/TextInput";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
-    buttonWrapper: {
+    mt3: {
       marginTop: theme.spacing(3),
     },
     iconButton: {
@@ -70,7 +70,7 @@ const SignInForm = () => {
           />
         </Grid>
 
-        <Grid item xs={12} className={classes.buttonWrapper}>
+        <Grid item xs={12} className={classes.mt3}>
           <Button
             text="SIGN IN"
             color="primary"

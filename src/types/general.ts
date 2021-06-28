@@ -22,3 +22,10 @@ export enum DEVICE {
   MOBILE = "MOBILE",
   DESKTOP = "DESKTOP",
 }
+
+export enum ONBOARDING {
+  NAME = "What’s your name?",
+  CONTACT = "How can we best contact you?",
+  PASSWORD = "Finally, let’s set up your password.",
+  FINAL = "Great! You're all set up.",
+}

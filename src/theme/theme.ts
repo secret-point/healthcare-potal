@@ -57,6 +57,9 @@ export const theme = createMuiTheme({
     linkColor: {
       main: "#6D9147",
     },
+    progressActiveCircleColor: {
+      main: "#BBDC9C",
+    },
     contrastThreshold: 3,
   },
 });

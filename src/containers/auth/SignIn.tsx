@@ -10,11 +10,11 @@ import SignInForm from "./SignInForm";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
-    formHeader: {
+    mb6: {
       marginBottom: theme.spacing(6),
     },
 
-    formBody: {
+    mb4: {
       marginBottom: theme.spacing(4),
     },
   })
@@ -27,13 +27,13 @@ export default function SignIn() {
     <Container>
       <PlainModal>
         <Grid container>
-          <Grid item xs={12} className={classes.formHeader}>
+          <Grid item xs={12} className={classes.mb6}>
             <Typography variant="h1" align="center">
               Sign In
             </Typography>
           </Grid>
 
-          <Grid item xs={12} className={classes.formBody}>
+          <Grid item xs={12} className={classes.mb4}>
             <SignInForm />
           </Grid>
 
@@ -44,7 +44,7 @@ export default function SignIn() {
           <Grid item xs={12}>
             <Link
               align="center"
-              to="/forgot-password"
+              to="/reset-password"
               text="Don't remember your password?"
             />
           </Grid>

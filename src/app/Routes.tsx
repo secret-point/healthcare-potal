@@ -45,7 +45,7 @@ export function UnauthorizedRoutes() {
         <SignIn />
       </Route>
 
-      <Route path="/onboarding">
+      <Route path="/register">
         <Onboarding />
       </Route>
 

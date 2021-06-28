@@ -6,6 +6,7 @@ declare module "@material-ui/core/styles/createPalette" {
     inputColor: PaletteColorOptions;
     textColor: PaletteColorOptions;
     linkColor: PaletteColorOptions;
+    progressActiveCircleColor: PaletteColorOptions;
   }
 }
 
