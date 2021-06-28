@@ -2,6 +2,10 @@ declare module "@material-ui/core/styles/createPalette" {
   interface PaletteOptions {
     blue: PaletteColorOptions;
     backgroundGreen: PaletteColorOptions;
+    border: PaletteColorOptions;
+    inputColor: PaletteColorOptions;
+    textColor: PaletteColorOptions;
+    linkColor: PaletteColorOptions;
   }
 }
 

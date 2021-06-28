@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import Grid from "@material-ui/core/Grid";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 
@@ -6,21 +7,29 @@ import PrairieIcon from "../icons/PrairieIcon";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    container: {
+    main: {
       padding: theme.spacing(4),
       backgroundColor: theme.palette.backgroundGreen.main,
+    },
+
+    mainContent: {
+      marginTop: theme.spacing(10),
     },
   })
 );
 
-const Container: React.FC = ({ children }) => {
+interface ContainerProps {
+  className?: string;
+}
+
+const Container: React.FC<ContainerProps> = ({ children, className }) => {
   const classes = useStyles();
   return (
-    <Grid className={classes.container}>
+    <Grid className={clsx(classes.main, className)}>
       <Grid container justify="center">
         <PrairieIcon />
       </Grid>
-      <Grid container justify="center">
+      <Grid container justify="center" className={classes.mainContent}>
         {children}
       </Grid>
     </Grid>
