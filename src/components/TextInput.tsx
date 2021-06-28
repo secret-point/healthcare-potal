@@ -1,13 +1,12 @@
-import React from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import clsx from "clsx";
+import dotProp from "dot-prop";
 
 import TextField, { OutlinedTextFieldProps } from "@material-ui/core/TextField";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import createStyles from "@material-ui/core/styles/createStyles";
 
 import { Theme } from "../theme/types/createPalette";
-import { getCapitalizedValue } from "../utils/string";
 
 export const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -31,12 +30,17 @@ export const useStyles = makeStyles((theme: Theme) =>
         borderColor: theme.palette.distinctiveGray.main,
       },
       "& .MuiFormLabel-root.Mui-focused": {
-        color: theme.palette.primaryNavy.main,
+        color: theme.palette.secondaryNavy2.main,
       },
       "& .MuiOutlinedInput-root.Mui-focused": {
         "& .MuiOutlinedInput-notchedOutline": {
           borderColor: theme.palette.secondaryNavy2.main,
           borderWidth: 1,
+        },
+      },
+      "& .MuiOutlinedInput-root.Mui-error": {
+        "& .MuiOutlinedInput-notchedOutline": {
+          borderColor: theme.palette.accentRed.main,
         },
       },
     },
@@ -46,7 +50,6 @@ export const useStyles = makeStyles((theme: Theme) =>
 interface TextInputProps extends OutlinedTextFieldProps {
   name: string;
   validator?: any;
-  transformation?: any;
 }
 
 export default function TextInput({
@@ -54,52 +57,37 @@ export default function TextInput({
   label,
   variant = "outlined",
   validator = {},
-  transformation = {},
   helperText,
   className,
   type,
   required,
-  onChange,
   ...props
 }: TextInputProps) {
   const classes = useStyles();
   const {
     control,
-    register: formRegister,
-    setValue,
+    register,
+    formState: { errors },
     getValues,
   } = useFormContext();
 
-  const register: any = formRegister;
-
   const values = getValues();
   const started = values[name];
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    let value = e.target.value;
-    if (transformation.capitalize) {
-      value = getCapitalizedValue(value);
-    } else if (transformation.custom) {
-      value = transformation.custom(value);
-    }
-    setValue(name, value);
-    onChange?.(e);
-  };
+  const error = dotProp.get(errors, name);
 
   return (
     <Controller
       defaultValue={started || ""}
-      render={() => (
+      render={({ field }) => (
         <TextField
           id={name}
           type={type}
           label={label}
           variant={variant}
+          error={Boolean(error)}
           className={clsx(className, classes.textField)}
-          onChange={handleChange}
           {...register(name, validator)}
+          {...field}
           {...props}
         />
       )}

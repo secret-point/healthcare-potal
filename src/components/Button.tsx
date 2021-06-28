@@ -17,6 +17,16 @@ const useStyles = makeStyles((theme: Theme) =>
       "&:hover": {
         boxShadow: "none",
       },
+
+      "&.MuiButton-containedPrimary": {
+        "&:hover": {
+          backgroundColor: theme.palette.secondaryMint2.main,
+        },
+      },
+
+      "&.Mui-disabled": {
+        backgroundColor: theme.palette.distinctiveGray.main,
+      },
     },
     text: {
       color: theme.palette.primaryNavy.main,
