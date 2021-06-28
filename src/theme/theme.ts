@@ -39,26 +39,50 @@ export const theme = createMuiTheme({
     primary: {
       main: "#DAEFED",
     },
-    blue: {
-      main: "#005FFA",
-    },
     backgroundGreen: {
       main: "#F8FAF8",
     },
-    border: {
-      main: "#E3E3E3",
-    },
-    inputColor: {
-      main: "#7C989B",
-    },
-    textColor: {
+    primaryNavy: {
       main: "#183F4F",
     },
-    linkColor: {
+    primaryGreen: {
+      main: "#92be71",
+    },
+    secondaryGreen1: {
       main: "#6D9147",
     },
-    progressActiveCircleColor: {
+    secondaryGreen2: {
       main: "#BBDC9C",
+    },
+    secondaryMint1: {
+      main: "#278c79",
+    },
+    secondaryMint2: {
+      main: "#A3D9CF",
+    },
+    secondaryNavy1: {
+      main: "#456772",
+    },
+    secondaryNavy2: {
+      main: "#7C989B",
+    },
+    backgroundMint: {
+      main: "#DAEFED",
+    },
+    backgroundGray: {
+      main: "#F2F2F2",
+    },
+    accentRed: {
+      main: "#EB5757",
+    },
+    yellow: {
+      main: "#FFE68F",
+    },
+    distinctiveGray: {
+      main: "#E3E3E3",
+    },
+    backgroundRed: {
+      main: "#FEDEDE",
     },
     contrastThreshold: 3,
   },

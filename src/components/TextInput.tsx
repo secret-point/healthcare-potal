@@ -22,17 +22,22 @@ export const useStyles = makeStyles((theme: Theme) =>
         fontSize: 18,
         lineHeight: 1.3,
         fontWeight: "normal",
-        color: theme.palette.inputColor.main,
+        color: theme.palette.secondaryNavy2.main,
       },
       "& .MuiOutlinedInput-input": {
         padding: theme.spacing(2, 3),
       },
       "& .MuiOutlinedInput-notchedOutline": {
-        borderColor: `${theme.palette.border.main} !important`,
+        borderColor: theme.palette.distinctiveGray.main,
       },
-
       "& .MuiFormLabel-root.Mui-focused": {
-        color: theme.palette.textColor.main,
+        color: theme.palette.primaryNavy.main,
+      },
+      "& .MuiOutlinedInput-root.Mui-focused": {
+        "& .MuiOutlinedInput-notchedOutline": {
+          borderColor: theme.palette.secondaryNavy2.main,
+          borderWidth: 1,
+        },
       },
     },
   })

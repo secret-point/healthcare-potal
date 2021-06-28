@@ -42,7 +42,7 @@ const useStepIconStyles = makeStyles((theme: Theme) =>
       alignItems: "center",
     },
     active: {
-      color: theme.palette.progressActiveCircleColor.main,
+      color: theme.palette.secondaryGreen2.main,
     },
     circle: {
       width: theme.spacing(2),
@@ -51,7 +51,7 @@ const useStepIconStyles = makeStyles((theme: Theme) =>
       backgroundColor: "currentColor",
     },
     completed: {
-      color: theme.palette.linkColor.main,
+      color: theme.palette.secondaryGreen1.main,
     },
   })
 );

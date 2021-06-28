@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     text: {
-      color: theme.palette.textColor.main,
+      color: theme.palette.primaryNavy.main,
     },
   })
 );

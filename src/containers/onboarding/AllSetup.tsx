@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme: Theme) =>
       marginBottom: theme.spacing(3),
     },
     typography: {
-      color: theme.palette.textColor.main,
+      color: theme.palette.primaryNavy.main,
     },
   })
 );

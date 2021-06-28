@@ -7,7 +7,7 @@ import { Theme } from "../theme/types/createPalette";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     link: {
-      color: theme.palette.linkColor.main,
+      color: theme.palette.secondaryGreen1.main,
       textDecoration: "none",
     },
   })

@@ -1,12 +1,20 @@
 declare module "@material-ui/core/styles/createPalette" {
   interface PaletteOptions {
-    blue: PaletteColorOptions;
     backgroundGreen: PaletteColorOptions;
-    border: PaletteColorOptions;
-    inputColor: PaletteColorOptions;
-    textColor: PaletteColorOptions;
-    linkColor: PaletteColorOptions;
-    progressActiveCircleColor: PaletteColorOptions;
+    primaryNavy: PaletteColorOptions;
+    primaryGreen: PaletteColorOptions;
+    secondaryGreen1: PaletteColorOptions;
+    secondaryGreen2: PaletteColorOptions;
+    secondaryMint1: PaletteColorOptions;
+    secondaryMint2: PaletteColorOptions;
+    secondaryNavy1: PaletteColorOptions;
+    secondaryNavy2: PaletteColorOptions;
+    backgroundMint: PaletteColorOptions;
+    backgroundGray: PaletteColorOptions;
+    accentRed: PaletteColorOptions;
+    yellow: PaletteColorOptions;
+    distinctiveGray: PaletteColorOptions;
+    backgroundRed: PaletteColorOptions;
   }
 }
 
