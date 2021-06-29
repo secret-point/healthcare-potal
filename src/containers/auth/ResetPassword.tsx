@@ -1,3 +1,4 @@
+import { useForm, FormProvider } from "react-hook-form";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
@@ -21,6 +22,10 @@ const useStyles = makeStyles((theme) =>
 export default function ResetPassword() {
   const classes = useStyles();
 
+  const methods = useForm({
+    mode: "onBlur",
+  });
+
   return (
     <Container>
       <PlainModal>
@@ -38,7 +43,9 @@ export default function ResetPassword() {
           </Grid>
 
           <Grid item xs={12}>
-            <ResetForm />
+            <FormProvider {...methods}>
+              <ResetForm />
+            </FormProvider>
           </Grid>
         </Grid>
       </PlainModal>

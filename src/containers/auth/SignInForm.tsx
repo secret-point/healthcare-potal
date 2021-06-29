@@ -3,16 +3,16 @@ import { useFormContext } from "react-hook-form";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
 import InputAdornment from "@material-ui/core/InputAdornment";
-import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 
 import Button from "../../components/Button";
+import ErrorText from "../../components/ErrorText";
 import TextInput from "../../components/TextInput";
 import { Nullable } from "../../types/general";
 import { Theme } from "../../theme/types/createPalette";
-import { validateEmail } from "../../utils/string";
+import { emailPattern } from "../../utils/string";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -22,8 +22,8 @@ const useStyles = makeStyles((theme: Theme) =>
     iconButton: {
       padding: theme.spacing(0),
     },
-    errorText: {
-      color: theme.palette.accentRed.main,
+    errorTextWrapper: {
+      marginTop: theme.spacing(1.5),
     },
   })
 );
@@ -39,7 +39,8 @@ const SignInForm = () => {
   } = useFormContext();
   const email = getValues("email");
   const password = getValues("password");
-  const disabled = !email || !password || Boolean(Object.values(errors).length);
+  const disabled =
+    !email || !password || Boolean(errors.email || errors.password);
 
   const handleSubmit = () => {
     setErrorText(
@@ -51,6 +52,9 @@ const SignInForm = () => {
     setShowPassword((showPassword) => !showPassword);
   };
 
+  const currentErrorText =
+    errors.email?.message || errors.password?.message || errorText;
+
   return (
     <Grid container spacing={1}>
       <Grid item xs={12}>
@@ -59,18 +63,24 @@ const SignInForm = () => {
           label="Email"
           variant="outlined"
           placeholder="Email"
-          validator={{ required: true, validate: validateEmail }}
+          validator={{
+            required: "Your email is required.",
+            pattern: {
+              value: emailPattern,
+              message: "Please enter your email address in the correct format.",
+            },
+          }}
         />
       </Grid>
 
       <Grid item xs={12}>
         <TextInput
           name="password"
-          type="password"
+          type={showPassword ? "text" : "password"}
           label="Password"
           variant="outlined"
           placeholder="Password"
-          validator={{ required: true }}
+          validator={{ required: "Your password is required." }}
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
@@ -87,14 +97,6 @@ const SignInForm = () => {
         />
       </Grid>
 
-      {errorText && (
-        <Grid item xs={12}>
-          <Typography variant="body1" className={classes.errorText}>
-            {errorText}
-          </Typography>
-        </Grid>
-      )}
-
       <Grid item xs={12} className={classes.mt3}>
         <Button
           text="SIGN IN"
@@ -104,6 +106,12 @@ const SignInForm = () => {
           onClick={handleSubmit}
         />
       </Grid>
+
+      {currentErrorText && (
+        <Grid item xs={12} className={classes.errorTextWrapper}>
+          <ErrorText errorText={currentErrorText} />
+        </Grid>
+      )}
     </Grid>
   );
 };

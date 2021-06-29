@@ -1,38 +1,68 @@
-import { useForm, FormProvider } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 import Grid from "@material-ui/core/Grid";
+import { makeStyles, createStyles } from "@material-ui/core/styles";
 
 import Button from "../../components/Button";
+import ErrorText from "../../components/ErrorText";
 import TextInput from "../../components/TextInput";
+import { emailPattern } from "../../utils/string";
+import { Theme } from "../../theme/types/createPalette";
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    errorTextWrapper: {
+      marginTop: theme.spacing(1.5),
+    },
+  })
+);
 
 const ResetForm = () => {
-  const methods = useForm({
-    mode: "onBlur",
-  });
+  const classes = useStyles();
+
+  const {
+    getValues,
+    formState: { errors },
+  } = useFormContext();
+  const email = getValues("email");
+  const disabled = !email || Boolean(errors.email);
+  const errorText = errors.email?.message;
 
   const handleResetPassword = () => {};
 
   return (
-    <FormProvider {...methods}>
-      <Grid container spacing={2}>
-        <Grid item xs={12}>
-          <TextInput
-            name="email"
-            label="Email"
-            variant="outlined"
-            placeholder="Email"
-          />
-        </Grid>
-
-        <Grid item xs={12}>
-          <Button
-            text="RESET PASSWORD"
-            color="primary"
-            variant="contained"
-            onClick={handleResetPassword}
-          />
-        </Grid>
+    <Grid container spacing={2}>
+      <Grid item xs={12}>
+        <TextInput
+          name="email"
+          label="Email"
+          variant="outlined"
+          placeholder="Email"
+          validator={{
+            required: "Your email is required.",
+            pattern: {
+              value: emailPattern,
+              message: "Please enter your email address in the correct format.",
+            },
+          }}
+        />
       </Grid>
-    </FormProvider>
+
+      <Grid item xs={12}>
+        <Button
+          text="RESET PASSWORD"
+          color="primary"
+          variant="contained"
+          disabled={disabled}
+          onClick={handleResetPassword}
+        />
+      </Grid>
+
+      {errorText && (
+        <Grid item xs={12} className={classes.errorTextWrapper}>
+          <ErrorText errorText={errorText} />
+        </Grid>
+      )}
+    </Grid>
   );
 };
 

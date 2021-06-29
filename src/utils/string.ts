@@ -1,5 +1,13 @@
+export const emailPattern = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+
+export const phoneNumberPattern =
+  /^(\([0-9]{3}\)\s*|[0-9]{3}-)[0-9]{3}-[0-9]{4}$/;
+
 export const validateEmail = (email: string): boolean =>
-  /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email);
+  emailPattern.test(email);
+
+export const validatePhoneNumber = (phoneNumber: string): boolean =>
+  phoneNumberPattern.test(phoneNumber);
 
 export const getCapitalizedValue = (value: string) => {
   if (value.length) return value[0].toUpperCase() + value.substr(1);

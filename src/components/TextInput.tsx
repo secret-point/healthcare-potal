@@ -3,8 +3,7 @@ import clsx from "clsx";
 import dotProp from "dot-prop";
 
 import TextField, { OutlinedTextFieldProps } from "@material-ui/core/TextField";
-import makeStyles from "@material-ui/core/styles/makeStyles";
-import createStyles from "@material-ui/core/styles/createStyles";
+import { makeStyles, createStyles } from "@material-ui/core/styles";
 
 import { Theme } from "../theme/types/createPalette";
 

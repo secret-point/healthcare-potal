@@ -44,11 +44,11 @@ export default function SignIn() {
             </FormProvider>
           </Grid>
 
-          <Grid item xs={12}>
+          <Grid container item xs={12} justify="center">
             <Link align="center" to="/register" text="Don't have an account?" />
           </Grid>
 
-          <Grid item xs={12}>
+          <Grid container item xs={12} justify="center">
             <Link
               align="center"
               to="/reset-password"
