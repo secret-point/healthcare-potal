@@ -21,11 +21,11 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface SignInFormProps {
+interface NameInputformProps {
   onNext: () => void;
 }
 
-const NameInputForm: React.FC<SignInFormProps> = ({ onNext }) => {
+const NameInputForm: React.FC<NameInputformProps> = ({ onNext }) => {
   const classes = useStyles();
 
   const {

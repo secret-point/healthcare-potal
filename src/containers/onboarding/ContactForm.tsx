@@ -22,11 +22,11 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface SignInFormProps {
+interface ContactFormProps {
   onNext: () => void;
 }
 
-const ContactForm: React.FC<SignInFormProps> = ({ onNext }) => {
+const ContactForm: React.FC<ContactFormProps> = ({ onNext }) => {
   const classes = useStyles();
 
   const {

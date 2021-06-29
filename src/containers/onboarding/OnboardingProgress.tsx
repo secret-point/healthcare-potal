@@ -90,6 +90,7 @@ const OnboardingProgress: React.FC<OnboardingProgressProps> = ({
   const onboardingSteps = [
     ONBOARDING.NAME,
     ONBOARDING.CONTACT,
+    ONBOARDING.ADDRESS,
     ONBOARDING.PASSWORD,
   ];
   const activeStep = onboardingSteps.findIndex((step) => step === currentStep);
