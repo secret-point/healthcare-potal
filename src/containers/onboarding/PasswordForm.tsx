@@ -49,6 +49,7 @@ const PasswordForm: React.FC<PasswordFormProps> = ({ onNext }) => {
     <Grid container spacing={1}>
       <Grid item xs={12}>
         <TextInput
+          type="password"
           name="password"
           label="Password"
           variant="outlined"
@@ -62,6 +63,7 @@ const PasswordForm: React.FC<PasswordFormProps> = ({ onNext }) => {
 
       <Grid item xs={12}>
         <TextInput
+          type="password"
           name="confirm"
           label="Confirm Password"
           variant="outlined"
