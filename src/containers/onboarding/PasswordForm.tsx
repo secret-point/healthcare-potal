@@ -1,7 +1,12 @@
+import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import Grid from "@material-ui/core/Grid";
+import IconButton from "@material-ui/core/IconButton";
+import InputAdornment from "@material-ui/core/InputAdornment";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
+import VisibilityIcon from "@material-ui/icons/Visibility";
+import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 
 import Button from "../../components/Button";
 import TextInput from "../../components/TextInput";
@@ -31,6 +36,8 @@ interface PasswordFormProps {
 
 const PasswordForm: React.FC<PasswordFormProps> = ({ onNext }) => {
   const classes = useStyles();
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const {
     getValues,
@@ -39,6 +46,10 @@ const PasswordForm: React.FC<PasswordFormProps> = ({ onNext }) => {
   } = useFormContext();
   const password = getValues("password");
   const confirmPassword = getValues("confirm");
+
+  const handleTogglePassword = () => setShowPassword((show) => !show);
+  const handleToggleConfirmPassword = () =>
+    setShowConfirmPassword((show) => !show);
 
   const showResult = Boolean(password || confirmPassword);
   const doesPasswordMatch =
@@ -49,28 +60,58 @@ const PasswordForm: React.FC<PasswordFormProps> = ({ onNext }) => {
     <Grid container spacing={1}>
       <Grid item xs={12}>
         <TextInput
-          type="password"
           name="password"
           label="Password"
           variant="outlined"
           placeholder="Password"
+          type={showPassword ? "text" : "password"}
           validator={{
             required: true,
             minLength: 8,
+          }}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  className={classes.iconButton}
+                  onClick={handleTogglePassword}
+                >
+                  {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                </IconButton>
+              </InputAdornment>
+            ),
           }}
         />
       </Grid>
 
       <Grid item xs={12}>
         <TextInput
-          type="password"
           name="confirm"
           label="Confirm Password"
           variant="outlined"
           placeholder="Confirm Password"
+          type={showConfirmPassword ? "text" : "password"}
           validator={{
             required: true,
             validate: (value: string) => value === watch("password"),
+          }}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle confirm password visibility"
+                  className={classes.iconButton}
+                  onClick={handleToggleConfirmPassword}
+                >
+                  {showConfirmPassword ? (
+                    <VisibilityIcon />
+                  ) : (
+                    <VisibilityOffIcon />
+                  )}
+                </IconButton>
+              </InputAdornment>
+            ),
           }}
         />
       </Grid>
