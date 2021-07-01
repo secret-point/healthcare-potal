@@ -13,3 +13,18 @@ code {
 body > * {
 	box-sizing: border-box;
 }
+
+@font-face {
+	font-family: DM Sans;
+	src: url(fonts/DMSans-Regular.ttf);
+}
+
+@font-face {
+	font-family: DM Sans Bold;
+	src: url(fonts/DMSans-Bold.ttf);
+}
+
+@font-face {
+	font-family: DM Sans Italic;
+	src: url(fonts/DMSans-Italic.ttf);
+}
