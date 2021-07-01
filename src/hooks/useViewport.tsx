@@ -32,6 +32,6 @@ export const ViewportProvider = ({
 
 export const useViewport = () => {
   const { width, height } = useContext(viewportContext);
-  const breakpoint = 620;
+  const breakpoint = 560;
   return { width, height, isMobile: width <= breakpoint };
 };

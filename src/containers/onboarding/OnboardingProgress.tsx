@@ -77,6 +77,9 @@ const useStyles = makeStyles((theme) =>
     container: {
       marginBottom: theme.spacing(6),
     },
+    stepper: {
+      background: "transparent",
+    },
   })
 );
 interface OnboardingProgressProps {
@@ -101,6 +104,7 @@ const OnboardingProgress: React.FC<OnboardingProgressProps> = ({
         <Stepper
           activeStep={activeStep}
           connector={<OnobardingStepConnector />}
+          className={classes.stepper}
         >
           {onboardingSteps.map((label) => (
             <Step key={label}>
