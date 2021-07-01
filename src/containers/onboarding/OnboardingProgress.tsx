@@ -45,8 +45,8 @@ const useStepIconStyles = makeStyles((theme: Theme) =>
       color: theme.palette.secondaryGreen2.main,
     },
     circle: {
-      width: theme.spacing(2),
-      height: theme.spacing(2),
+      width: theme.spacing(1.5),
+      height: theme.spacing(1.5),
       borderRadius: "50%",
       backgroundColor: "currentColor",
     },
@@ -80,6 +80,11 @@ const useStyles = makeStyles((theme) =>
     stepper: {
       background: "transparent",
     },
+    stepLabel: {
+      "& .MuiStepLabel-iconContainer": {
+        paddingRight: 0,
+      },
+    },
   })
 );
 interface OnboardingProgressProps {
@@ -108,7 +113,10 @@ const OnboardingProgress: React.FC<OnboardingProgressProps> = ({
         >
           {onboardingSteps.map((label) => (
             <Step key={label}>
-              <StepLabel StepIconComponent={StepIcon} />
+              <StepLabel
+                className={classes.stepLabel}
+                StepIconComponent={StepIcon}
+              />
             </Step>
           ))}
         </Stepper>
