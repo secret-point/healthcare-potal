@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     text: {
-      color: theme.palette.primaryNavy.main,
+      letterSpacing: "0.1em",
     },
   })
 );

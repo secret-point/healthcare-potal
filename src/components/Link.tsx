@@ -7,8 +7,10 @@ import { Theme } from "../theme/types/createPalette";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     link: {
-      color: theme.palette.secondaryMint1.main,
       textDecoration: "none",
+    },
+    linkTypography: {
+      color: theme.palette.secondaryGreen1.main,
     },
   })
 );
@@ -24,7 +26,11 @@ const Link = ({ align, to, text }: LinkProps) => {
 
   return (
     <RouterLink to={to} className={classes.link}>
-      <Typography align={align} variant="body1">
+      <Typography
+        align={align}
+        variant="body1"
+        className={classes.linkTypography}
+      >
         {text}
       </Typography>
     </RouterLink>
