@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useFormContext } from "react-hook-form";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -13,6 +12,7 @@ import TextInput from "../../components/TextInput";
 import { Nullable } from "../../types/general";
 import { Theme } from "../../theme/types/createPalette";
 import { emailPattern } from "../../utils/string";
+import { useInputDetails } from "../../hooks/useInputDetails";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -33,14 +33,10 @@ const SignInForm = () => {
   const [errorText, setErrorText] = useState<Nullable<string>>(null);
   const [showPassword, setShowPassword] = useState(false);
 
-  const {
-    getValues,
-    formState: { errors },
-  } = useFormContext();
-  const email = getValues("email");
-  const password = getValues("password");
-  const disabled =
-    !email || !password || Boolean(errors.email || errors.password);
+  const requiredFields = ["email", "password"];
+  const { inputErrors, editedFields } = useInputDetails({
+    fields: requiredFields,
+  });
 
   const handleSubmit = () => {
     setErrorText(
@@ -51,9 +47,6 @@ const SignInForm = () => {
   const handleTogglePassword = () => {
     setShowPassword((showPassword) => !showPassword);
   };
-
-  const currentErrorText =
-    errors.email?.message || errors.password?.message || errorText;
 
   return (
     <Grid container spacing={1}>
@@ -102,14 +95,25 @@ const SignInForm = () => {
           text="SIGN IN"
           color="primary"
           variant="contained"
-          disabled={disabled}
+          disabled={
+            Boolean(inputErrors.length) ||
+            editedFields.length !== requiredFields.length
+          }
           onClick={handleSubmit}
         />
       </Grid>
 
-      {currentErrorText && (
+      {Boolean(inputErrors.length) && (
         <Grid item xs={12} className={classes.errorTextWrapper}>
-          <ErrorText errorText={currentErrorText} />
+          {inputErrors.map((errorText, index) => (
+            <ErrorText key={index} errorText={errorText} />
+          ))}
+        </Grid>
+      )}
+
+      {errorText && (
+        <Grid item xs={12} className={classes.errorTextWrapper}>
+          <ErrorText errorText={errorText} />
         </Grid>
       )}
     </Grid>

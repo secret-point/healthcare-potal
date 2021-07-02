@@ -1,4 +1,3 @@
-import { useFormContext } from "react-hook-form";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
@@ -6,6 +5,7 @@ import Button from "../../components/Button";
 import TextInput from "../../components/TextInput";
 import { Theme } from "../../theme/types/createPalette";
 import ErrorText from "../../components/ErrorText";
+import { useInputDetails } from "../../hooks/useInputDetails";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -28,15 +28,10 @@ interface NameInputformProps {
 const NameInputForm: React.FC<NameInputformProps> = ({ onNext }) => {
   const classes = useStyles();
 
-  const {
-    getValues,
-    formState: { errors },
-  } = useFormContext();
-  const firstName = getValues("firstName");
-  const lastName = getValues("lastName");
-  const disabled =
-    !firstName || !lastName || Boolean(errors.firstName || errors.lastName);
-  const errorText = errors.firstName?.message || errors.lastName?.message;
+  const requiredFields = ["firstName", "lastName"];
+  const { inputErrors, editedFields } = useInputDetails({
+    fields: requiredFields,
+  });
 
   return (
     <Grid container spacing={1}>
@@ -65,14 +60,19 @@ const NameInputForm: React.FC<NameInputformProps> = ({ onNext }) => {
           text="NEXT"
           color="primary"
           variant="contained"
-          disabled={disabled}
+          disabled={
+            Boolean(inputErrors.length) ||
+            editedFields.length !== requiredFields.length
+          }
           onClick={onNext}
         />
       </Grid>
 
-      {errorText && (
+      {Boolean(inputErrors.length) && (
         <Grid item xs={12} className={classes.errorTextWrapper}>
-          <ErrorText errorText={errorText} />
+          {inputErrors.map((errorText, index) => (
+            <ErrorText key={index} errorText={errorText} />
+          ))}
         </Grid>
       )}
     </Grid>

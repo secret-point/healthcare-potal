@@ -44,8 +44,7 @@ const PasswordForm: React.FC<PasswordFormProps> = ({ onNext }) => {
     watch,
     formState: { errors },
   } = useFormContext();
-  const password = getValues("password");
-  const confirmPassword = getValues("confirm");
+  const [password, confirmPassword] = getValues(["password", "confirm"]);
 
   const handleTogglePassword = () => setShowPassword((show) => !show);
   const handleToggleConfirmPassword = () =>

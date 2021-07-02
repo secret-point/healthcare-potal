@@ -1,4 +1,3 @@
-import { useFormContext } from "react-hook-form";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
@@ -7,6 +6,7 @@ import ErrorText from "../../components/ErrorText";
 import TextInput from "../../components/TextInput";
 import { emailPattern, phoneNumberPattern } from "../../utils/string";
 import { Theme } from "../../theme/types/createPalette";
+import { useInputDetails } from "../../hooks/useInputDetails";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -29,15 +29,10 @@ interface ContactFormProps {
 const ContactForm: React.FC<ContactFormProps> = ({ onNext }) => {
   const classes = useStyles();
 
-  const {
-    getValues,
-    formState: { errors },
-  } = useFormContext();
-  const email = getValues("email");
-  const phoneNumber = getValues("phoneNumber");
-  const disabled =
-    !email || !phoneNumber || Boolean(errors.email || errors.phoneNumber);
-  const errorText = errors.email?.message || errors.phoneNumber?.message;
+  const requiredFields = ["email", "phoneNumber"];
+  const { inputErrors, editedFields } = useInputDetails({
+    fields: requiredFields,
+  });
 
   return (
     <Grid container spacing={1}>
@@ -79,14 +74,19 @@ const ContactForm: React.FC<ContactFormProps> = ({ onNext }) => {
           text="NEXT"
           color="primary"
           variant="contained"
-          disabled={disabled}
+          disabled={
+            Boolean(inputErrors.length) ||
+            editedFields.length !== requiredFields.length
+          }
           onClick={onNext}
         />
       </Grid>
 
-      {errorText && (
+      {Boolean(inputErrors.length) && (
         <Grid item xs={12} className={classes.errorTextWrapper}>
-          <ErrorText errorText={errorText} />
+          {inputErrors.map((errorText, index) => (
+            <ErrorText key={index} errorText={errorText} />
+          ))}
         </Grid>
       )}
     </Grid>

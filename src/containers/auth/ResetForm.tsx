@@ -1,4 +1,3 @@
-import { useFormContext } from "react-hook-form";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
@@ -7,6 +6,7 @@ import ErrorText from "../../components/ErrorText";
 import TextInput from "../../components/TextInput";
 import { emailPattern } from "../../utils/string";
 import { Theme } from "../../theme/types/createPalette";
+import { useInputDetails } from "../../hooks/useInputDetails";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -19,13 +19,10 @@ const useStyles = makeStyles((theme: Theme) =>
 const ResetForm = () => {
   const classes = useStyles();
 
-  const {
-    getValues,
-    formState: { errors },
-  } = useFormContext();
-  const email = getValues("email");
-  const disabled = !email || Boolean(errors.email);
-  const errorText = errors.email?.message;
+  const requiredFields = ["email"];
+  const { inputErrors, editedFields } = useInputDetails({
+    fields: requiredFields,
+  });
 
   const handleResetPassword = () => {};
 
@@ -52,14 +49,19 @@ const ResetForm = () => {
           text="RESET PASSWORD"
           color="primary"
           variant="contained"
-          disabled={disabled}
+          disabled={
+            Boolean(inputErrors.length) ||
+            editedFields.length !== requiredFields.length
+          }
           onClick={handleResetPassword}
         />
       </Grid>
 
-      {errorText && (
+      {Boolean(inputErrors.length) && (
         <Grid item xs={12} className={classes.errorTextWrapper}>
-          <ErrorText errorText={errorText} />
+          {inputErrors.map((errorText, index) => (
+            <ErrorText key={index} errorText={errorText} />
+          ))}
         </Grid>
       )}
     </Grid>

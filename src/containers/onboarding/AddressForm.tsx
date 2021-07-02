@@ -3,7 +3,9 @@ import { makeStyles, createStyles } from "@material-ui/core/styles";
 
 import Button from "../../components/Button";
 import TextInput from "../../components/TextInput";
+import ErrorText from "../../components/ErrorText";
 import { Theme } from "../../theme/types/createPalette";
+import { useInputDetails } from "../../hooks/useInputDetails";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -26,6 +28,11 @@ interface AddressFormProps {
 const AddressForm: React.FC<AddressFormProps> = ({ onNext }) => {
   const classes = useStyles();
 
+  const requiredFields = ["addressLine1", "city", "state", "zipcode"];
+  const { inputErrors, editedFields } = useInputDetails({
+    fields: requiredFields,
+  });
+
   return (
     <Grid container spacing={1}>
       <Grid item xs={12}>
@@ -34,6 +41,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ onNext }) => {
           label="Address Line 1"
           variant="outlined"
           placeholder="Address Line 1"
+          validator={{ required: "Your address is required." }}
         />
       </Grid>
 
@@ -52,6 +60,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ onNext }) => {
           label="City"
           variant="outlined"
           placeholder="City"
+          validator={{ required: "Your city is required." }}
         />
       </Grid>
 
@@ -63,6 +72,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ onNext }) => {
               label="State"
               variant="outlined"
               placeholder="State"
+              validator={{ required: "Your state is required." }}
             />
           </Grid>
           <Grid item xs={6}>
@@ -71,6 +81,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ onNext }) => {
               label="Zip Code"
               variant="outlined"
               placeholder="Zip Code"
+              validator={{ required: "Your zip code is required." }}
             />
           </Grid>
         </Grid>
@@ -81,9 +92,21 @@ const AddressForm: React.FC<AddressFormProps> = ({ onNext }) => {
           text="NEXT"
           color="primary"
           variant="contained"
+          disabled={
+            Boolean(inputErrors.length) ||
+            editedFields.length !== requiredFields.length
+          }
           onClick={onNext}
         />
       </Grid>
+
+      {Boolean(inputErrors.length) && (
+        <Grid item xs={12} className={classes.errorTextWrapper}>
+          {inputErrors.map((errorText, index) => (
+            <ErrorText key={index} errorText={errorText} />
+          ))}
+        </Grid>
+      )}
     </Grid>
   );
 };
