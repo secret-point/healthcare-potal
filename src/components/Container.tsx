@@ -9,16 +9,16 @@ import { useViewport } from "../hooks/useViewport";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     main: {
-      padding: theme.spacing(4),
+      padding: theme.spacing(3),
       backgroundColor: theme.palette.backgroundGreen.main,
     },
 
     mainContent: {
-      marginTop: theme.spacing(10),
+      marginTop: theme.spacing(6),
     },
 
     mobileContent: {
-      marginTop: theme.spacing(4),
+      marginTop: theme.spacing(3),
     },
   })
 );

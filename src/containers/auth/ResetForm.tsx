@@ -16,15 +16,17 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const ResetForm = () => {
+interface ResetFormProps {
+  onReset: () => void;
+}
+
+const ResetForm = ({ onReset }: ResetFormProps) => {
   const classes = useStyles();
 
   const requiredFields = ["email"];
   const { inputErrors, editedFields } = useInputDetails({
     fields: requiredFields,
   });
-
-  const handleResetPassword = () => {};
 
   return (
     <Grid container spacing={2}>
@@ -53,7 +55,7 @@ const ResetForm = () => {
             Boolean(inputErrors.length) ||
             editedFields.length !== requiredFields.length
           }
-          onClick={handleResetPassword}
+          onClick={onReset}
         />
       </Grid>
 

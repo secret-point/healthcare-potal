@@ -5,7 +5,7 @@ import Dashboard from "../containers/Dashboard/Dashboard";
 import SignIn from "../containers/auth/SignIn";
 import Onboarding from "../containers/onboarding/Onboarding";
 import ResetPassword from "../containers/auth/ResetPassword";
-import CheckInbox from "../containers/auth/CheckInbox";
+import ConfirmVerificationLink from "../containers/auth/ConfirmVerificationLink";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -54,8 +54,8 @@ export function UnauthorizedRoutes() {
         <ResetPassword />
       </Route>
 
-      <Route path="/verification-code">
-        <CheckInbox />
+      <Route path="/verification-link">
+        <ConfirmVerificationLink />
       </Route>
 
       <Redirect to={{ pathname: "/login", state: { from: location } }} />
