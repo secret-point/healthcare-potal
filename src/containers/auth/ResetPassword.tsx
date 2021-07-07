@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
+import { useHistory } from "react-router";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
@@ -8,7 +9,7 @@ import Button from "../../components/Button";
 import Container from "../../components/Container";
 import PlainModal from "../../components/PlainModal";
 
-import ResetForm from "./ResetForm";
+import ResetPasswordForm from "./ResetPasswordForm";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -23,6 +24,7 @@ const useStyles = makeStyles((theme) =>
 
 export default function ResetPassword() {
   const classes = useStyles();
+  const history = useHistory();
   const [linkSent, setLinkSent] = useState(false);
 
   const methods = useForm({
@@ -33,7 +35,9 @@ export default function ResetPassword() {
     setLinkSent(true);
   };
 
-  const handleGoBack = () => {};
+  const handleGoBack = () => {
+    history.push("/login");
+  };
 
   return (
     <Container>
@@ -54,7 +58,7 @@ export default function ResetPassword() {
 
             <Grid item xs={12}>
               <FormProvider {...methods}>
-                <ResetForm onReset={handleResetPassword} />
+                <ResetPasswordForm onReset={handleResetPassword} />
               </FormProvider>
             </Grid>
           </Grid>

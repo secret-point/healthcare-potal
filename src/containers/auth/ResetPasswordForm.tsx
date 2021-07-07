@@ -16,11 +16,11 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface ResetFormProps {
+interface ResetPasswordFormProps {
   onReset: () => void;
 }
 
-const ResetForm = ({ onReset }: ResetFormProps) => {
+const ResetPasswordForm = ({ onReset }: ResetPasswordFormProps) => {
   const classes = useStyles();
 
   const requiredFields = ["email"];
@@ -70,4 +70,4 @@ const ResetForm = ({ onReset }: ResetFormProps) => {
   );
 };
 
-export default ResetForm;
+export default ResetPasswordForm;
