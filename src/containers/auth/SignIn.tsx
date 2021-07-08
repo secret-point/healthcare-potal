@@ -1,11 +1,15 @@
+import { useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
 import Container from "../../components/Container";
+import ErrorText from "../../components/ErrorText";
 import Link from "../../components/Link";
 import PlainModal from "../../components/PlainModal";
+import { Nullable } from "../../types/general";
+import useAuth from "../../hooks/useAuth";
 
 import SignInForm from "./SignInForm";
 
@@ -14,19 +18,31 @@ const useStyles = makeStyles((theme) =>
     mb6: {
       marginBottom: theme.spacing(6),
     },
-
     mb4: {
       marginBottom: theme.spacing(4),
+    },
+    errorTextWrapper: {
+      marginTop: theme.spacing(1.5),
     },
   })
 );
 
 export default function SignIn() {
+  const { logIn } = useAuth();
   const classes = useStyles();
+  const [errorText, setErrorText] = useState<Nullable<string>>(null);
 
   const methods = useForm({
     mode: "onBlur",
   });
+
+  const handleSubmit = async () => {
+    try {
+      await logIn(methods.getValues("email"), methods.getValues("password"));
+    } catch (error) {
+      setErrorText(error.message);
+    }
+  };
 
   return (
     <Container>
@@ -40,8 +56,14 @@ export default function SignIn() {
 
           <Grid item xs={12} className={classes.mb4}>
             <FormProvider {...methods}>
-              <SignInForm />
+              <SignInForm onSubmit={handleSubmit} />
             </FormProvider>
+
+            {errorText && (
+              <Grid item xs={12} className={classes.errorTextWrapper}>
+                <ErrorText errorText={errorText} />
+              </Grid>
+            )}
           </Grid>
 
           <Grid container item xs={12} justify="center">

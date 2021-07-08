@@ -1,6 +1,6 @@
 import { useContext, useState, useMemo, createContext, useEffect } from "react";
 import { User } from "../types";
-import { useFetchUser, useSignIn, removeToken } from "../api/authApi";
+import { useFetchUser, useSignIn, setToken, removeToken } from "../api/authApi";
 
 type AuthContextType = {
   user?: User;
@@ -37,8 +37,9 @@ export function AuthProvider(props: any) {
   }, []);
 
   async function logIn(email: string, password: string) {
-    const user = await signIn(email, password);
+    const user = await signIn({ email, password });
     setUser(user);
+    setToken(user.token);
   }
 
   async function logOut() {

@@ -1,5 +1,5 @@
 import useApiFetch from "./useApiFetch";
-import { User } from "../types/user";
+import { AuthorizedUser } from "../types/user";
 
 export const useFetchUser = () => {
   const apiFetch = useApiFetch();
@@ -15,8 +15,35 @@ export const useFetchUser = () => {
 export const useSignIn = () => {
   const apiFetch = useApiFetch();
 
-  return async (email: string, password: string): Promise<User> => {
-    const { data } = await apiFetch("/login", {
+  return async ({
+    email,
+    password,
+  }: {
+    email: string;
+    password: string;
+  }): Promise<AuthorizedUser> => {
+    const { data } = await apiFetch("/cp/login", {
+      method: "POST",
+      data: { email, password },
+    });
+    return {
+      ...data.member,
+      token: data.token,
+    };
+  };
+};
+
+export const useRegister = () => {
+  const apiFetch = useApiFetch();
+
+  return async ({
+    email,
+    password,
+  }: {
+    email: string;
+    password: string;
+  }): Promise<AuthorizedUser> => {
+    const { data } = await apiFetch("/register", {
       method: "POST",
       data: { email, password },
     });
@@ -24,16 +51,8 @@ export const useSignIn = () => {
   };
 };
 
-export const useRegister = () => {
-  const apiFetch = useApiFetch();
-
-  return async (email: string, password: string): Promise<User> => {
-    const { data } = await apiFetch("/register", {
-      method: "POST",
-      data: { email, password },
-    });
-    return data;
-  };
+export const setToken = (token: string) => {
+  sessionStorage.setItem("token", token);
 };
 
 export const getToken = () => sessionStorage.getItem("token");

@@ -9,7 +9,6 @@ import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import Button from "../../components/Button";
 import ErrorText from "../../components/ErrorText";
 import TextInput from "../../components/TextInput";
-import { Nullable } from "../../types/general";
 import { Theme } from "../../theme/types/createPalette";
 import { emailPattern } from "../../utils/string";
 import { useInputDetails } from "../../hooks/useInputDetails";
@@ -28,21 +27,18 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const SignInForm = () => {
+interface SignInFormProps {
+  onSubmit: () => void;
+}
+
+const SignInForm = ({ onSubmit }: SignInFormProps) => {
   const classes = useStyles();
-  const [errorText, setErrorText] = useState<Nullable<string>>(null);
   const [showPassword, setShowPassword] = useState(false);
 
   const requiredFields = ["email", "password"];
   const { inputErrors, editedFields } = useInputDetails({
     fields: requiredFields,
   });
-
-  const handleSubmit = () => {
-    setErrorText(
-      "Seems like the information you provided doesn’t match our records."
-    );
-  };
 
   const handleTogglePassword = () => {
     setShowPassword((showPassword) => !showPassword);
@@ -99,7 +95,7 @@ const SignInForm = () => {
             Boolean(inputErrors.length) ||
             editedFields.length !== requiredFields.length
           }
-          onClick={handleSubmit}
+          onClick={onSubmit}
         />
       </Grid>
 
@@ -108,12 +104,6 @@ const SignInForm = () => {
           {inputErrors.map((errorText, index) => (
             <ErrorText key={index} errorText={errorText} />
           ))}
-        </Grid>
-      )}
-
-      {errorText && (
-        <Grid item xs={12} className={classes.errorTextWrapper}>
-          <ErrorText errorText={errorText} />
         </Grid>
       )}
     </Grid>
