@@ -78,6 +78,9 @@ export const theme = createMuiTheme({
     accentRed: {
       main: "#EB5757",
     },
+    accentYellow: {
+      main: "#FFE68F",
+    },
     yellow: {
       main: "#FFE68F",
     },
