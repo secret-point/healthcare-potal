@@ -1,6 +1,11 @@
 import { useContext, useState, useMemo, createContext, useEffect } from "react";
 import { User } from "../types";
-import { useFetchUser, useSignIn, setToken, removeToken } from "../api/authApi";
+import {
+  setToken,
+  removeToken,
+  useSignIn,
+  useFetchCurrentUser,
+} from "../api/authApi";
 
 type AuthContextType = {
   user?: User;
@@ -16,13 +21,13 @@ export const AuthContext = createContext<AuthContextType>(undefined!);
 
 export function AuthProvider(props: any) {
   const signIn = useSignIn();
-  const fetchUser = useFetchUser();
+  const fetchCurrentUser = useFetchCurrentUser();
   const [user, setUser] = useState<User | undefined>();
   const [isLoading, setIsLoading] = useState(true);
 
   async function loadUser() {
     try {
-      const user = await fetchUser();
+      const user = await fetchCurrentUser();
       setUser(user);
     } catch (error) {
       setUser(undefined);

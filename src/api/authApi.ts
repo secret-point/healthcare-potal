@@ -1,11 +1,11 @@
 import useApiFetch from "./useApiFetch";
 import { AuthorizedUser } from "../types/user";
 
-export const useFetchUser = () => {
+export const useFetchCurrentUser = () => {
   const apiFetch = useApiFetch();
 
   return async () => {
-    const { data } = await apiFetch("/cp/user", {
+    const { data } = await apiFetch("/cp/current", {
       method: "GET",
     });
     return data;
