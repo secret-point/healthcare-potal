@@ -1,11 +1,13 @@
+import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
-import { Theme } from "../../theme/types/createPalette";
-import { User } from "../../types/user";
+import { Theme } from "../theme/types/createPalette";
+import { User } from "../types/user";
+import { extractCapitalizedFirstLetter } from "../utils/string";
 
 interface StyleProps {
-  width: number;
-  height: number;
+  width?: number;
+  height?: number;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -15,6 +17,10 @@ const useStyles = makeStyles((theme: Theme) =>
       height: (props: StyleProps) => props.height,
       borderRadius: (props: StyleProps) => props.width,
       backgroundColor: theme.palette.accentYellow.main,
+
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
     },
   })
 );
@@ -30,5 +36,13 @@ export default function ProfileAvatar({
 }: ProfileAvatarProps) {
   const classes = useStyles({ width, height });
 
-  return <div className={classes.avatar}>{user.firstName}</div>;
+  return (
+    <div className={classes.avatar}>
+      <Typography variant="h3">
+        {extractCapitalizedFirstLetter([user.firstName, user.lastName]).join(
+          ""
+        )}
+      </Typography>
+    </div>
+  );
 }

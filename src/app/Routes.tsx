@@ -8,14 +8,13 @@ import Onboarding from "../containers/onboarding/Onboarding";
 import ResetPassword from "../containers/auth/ResetPassword";
 import ConfirmVerificationLink from "../containers/auth/ConfirmVerificationLink";
 
-const useStyles = makeStyles((theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     mainRoot: {
       display: "flex",
     },
     mainContent: {
       flexGrow: 1,
-      margin: theme.spacing(2),
     },
   })
 );

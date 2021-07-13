@@ -1,3 +1,5 @@
+import { VerificationStatus } from "../types";
+
 export const emailPattern = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 
 export const phoneNumberPattern =
@@ -13,3 +15,13 @@ export const getCapitalizedValue = (value: string) => {
   if (value.length) return value[0].toUpperCase() + value.substr(1);
   return value;
 };
+
+export const extractCapitalizedFirstLetter = (values: string[]) =>
+  values.map((value) => {
+    if (value.length) return value[0].toUpperCase();
+    return "";
+  });
+
+export const shouldVerifyId = (status: any) =>
+  status !== VerificationStatus.VERIFIED &&
+  status !== VerificationStatus.PENDING;

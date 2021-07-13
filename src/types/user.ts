@@ -6,3 +6,11 @@ export interface User {
 export interface AuthorizedUser extends User {
   token: string;
 }
+
+export enum VerificationStatus {
+  VERIFIED = "Verified",
+  SKIPPED = "Skipped",
+  EXPIRED = "Expired",
+  UNVERIFIED = "Unverified",
+  PENDING = "Pending",
+}

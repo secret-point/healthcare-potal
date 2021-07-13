@@ -30,3 +30,15 @@ export enum ONBOARDING {
   PASSWORD = "Finally, let’s set up your password.",
   FINAL = "Great! You're all set up.",
 }
+
+export type TCustomField = {
+  label: string;
+  path: string;
+  xs?: number;
+  render?: (value: any) => any;
+};
+
+export type TFieldRow = {
+  row: string;
+  fields: TCustomField[];
+};

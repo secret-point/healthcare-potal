@@ -2,7 +2,7 @@ import { Controller, useFormContext } from "react-hook-form";
 import clsx from "clsx";
 import dotProp from "dot-prop";
 
-import TextField, { OutlinedTextFieldProps } from "@material-ui/core/TextField";
+import TextField, { TextFieldProps } from "@material-ui/core/TextField";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
 import { Theme } from "../theme/types/createPalette";
@@ -46,10 +46,10 @@ export const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface TextInputProps extends OutlinedTextFieldProps {
+type TextInputProps = TextFieldProps & {
   name: string;
   validator?: any;
-}
+};
 
 export default function TextInput({
   name,
