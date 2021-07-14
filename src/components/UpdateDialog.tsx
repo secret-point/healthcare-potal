@@ -10,7 +10,7 @@ import { makeStyles, createStyles } from "@material-ui/core/styles";
 
 import { TFieldRow } from "../types/general";
 import Button from "./Button";
-import TextInput from "./TextInput";
+import FieldComponent from "./FieldComponent";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) =>
       },
 
       "& .MuiDialogActions-root": {
-        padding: theme.spacing(4),
+        padding: theme.spacing(2),
       },
     },
   })
@@ -62,14 +62,10 @@ const UpdateDialog: FC<UpdateDialogProps> = ({
       <DialogContent>
         <FormProvider {...methods}>
           {rows.map((row) => (
-            <Grid container key={row.row}>
+            <Grid container key={row.row} spacing={3}>
               {row.fields.map((field) => (
                 <Grid item key={field.path} xs={(field.xs || 12) as any}>
-                  <TextInput
-                    name={field.path}
-                    label={field.label}
-                    variant="standard"
-                  />
+                  <FieldComponent field={field} />
                 </Grid>
               ))}
             </Grid>
@@ -77,8 +73,8 @@ const UpdateDialog: FC<UpdateDialogProps> = ({
         </FormProvider>
       </DialogContent>
       <DialogActions>
-        <Button text="Cancel" noPadding fullWidth={false} onClick={onClose} />
-        <Button text="Save" noPadding fullWidth={false} onClick={handleSave} />
+        <Button text="Cancel" fullWidth={false} onClick={onClose} />
+        <Button text="Save" fullWidth={false} onClick={handleSave} />
       </DialogActions>
     </Dialog>
   );

@@ -31,9 +31,18 @@ export enum ONBOARDING {
   FINAL = "Great! You're all set up.",
 }
 
+export type SelectOption = { code: string; display: string };
+
+export enum FieldType {
+  SELECT = "SELECT",
+  TEXT = "TEXT",
+}
+
 export type TCustomField = {
   label: string;
   path: string;
+  type?: FieldType;
+  options?: SelectOption[];
   xs?: number;
   render?: (value: any) => any;
 };

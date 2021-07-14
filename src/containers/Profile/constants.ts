@@ -1,4 +1,6 @@
 import { EditableField } from "./types";
+import { usStates } from "../../constants/usStates";
+import { FieldType } from "../../types/general";
 
 export const UPDATE_PROFILE_DIALOGS = {
   [EditableField.PREFERRED_NAME]: {
@@ -81,7 +83,13 @@ export const UPDATE_PROFILE_DIALOGS = {
       {
         row: "State & Zip",
         fields: [
-          { label: "State", path: "address.state", xs: 6 },
+          {
+            label: "State",
+            path: "address.state",
+            type: FieldType.SELECT,
+            options: usStates,
+            xs: 6,
+          },
           { label: "Zip Code", path: "address.zipCode", xs: 6 },
         ],
       },
