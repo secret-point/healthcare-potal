@@ -4,6 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import useAuth from "../../hooks/useAuth";
 import Container from "../../components/Container";
 import UpdateDialog from "../../components/UpdateDialog";
+import VerifyIDDialog from "../../components/VerifyID/VerifyIDDialog";
 import { EditableField } from "./types";
 import { UPDATE_PROFILE_DIALOGS } from "./constants";
 import AccountInformation from "./AccountInformation";
@@ -13,6 +14,7 @@ import PhotoInformation from "./PhotoInformation";
 export default function Profile() {
   const { user } = useAuth();
   const [editingField, setEditingField] = useState<EditableField>();
+  const [showVerifyIDDialog, setShowVerifyIDDialog] = useState(false);
 
   if (!user) return null;
 
@@ -24,6 +26,14 @@ export default function Profile() {
     setEditingField(undefined);
   };
 
+  const handleShowVerifyIDDialog = () => {
+    setShowVerifyIDDialog(true);
+  };
+
+  const handleCloseVerifyIDDialog = () => {
+    setShowVerifyIDDialog(false);
+  };
+
   return (
     <Container>
       <Grid container spacing={4}>
@@ -32,7 +42,11 @@ export default function Profile() {
         </Grid>
 
         <Grid item xs={12}>
-          <AccountInformation user={user} onClickEdit={handleClickEdit} />
+          <AccountInformation
+            user={user}
+            onClickEdit={handleClickEdit}
+            onShowVerifyIDDialog={handleShowVerifyIDDialog}
+          />
         </Grid>
 
         <Grid item xs={12}>
@@ -47,6 +61,10 @@ export default function Profile() {
           rows={UPDATE_PROFILE_DIALOGS[editingField].rows}
           onClose={handleCloseUpdateDialog}
         />
+      )}
+
+      {showVerifyIDDialog && (
+        <VerifyIDDialog open onClose={handleCloseVerifyIDDialog} />
       )}
     </Container>
   );

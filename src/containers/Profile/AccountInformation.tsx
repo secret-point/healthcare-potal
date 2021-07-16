@@ -34,17 +34,17 @@ const useStyles = makeStyles((theme: Theme) =>
 interface AccountInformationProps {
   user: User;
   onClickEdit: (fieldName: EditableField) => void;
+  onShowVerifyIDDialog: () => void;
 }
 
 const AccountInformation: FC<AccountInformationProps> = ({
   user,
   onClickEdit,
+  onShowVerifyIDDialog,
 }) => {
   const classes = useStyles();
 
   const handleResetPasswordClick = () => {};
-
-  const handleVerifyIDClick = () => {};
 
   const fields: TCustomField[] = [
     { label: "First Name", path: "firstName" },
@@ -83,7 +83,7 @@ const AccountInformation: FC<AccountInformationProps> = ({
             {value || "Unverified"}
           </Typography>
           {shouldVerifyId(value) && (
-            <EditButton title="Verify ID" onClick={handleVerifyIDClick} />
+            <EditButton title="Verify ID" onClick={onShowVerifyIDDialog} />
           )}
         </Box>
       ),

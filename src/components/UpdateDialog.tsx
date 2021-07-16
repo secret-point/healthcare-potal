@@ -3,7 +3,6 @@ import { useForm, FormProvider } from "react-hook-form";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
-import DialogTitle from "@material-ui/core/DialogTitle";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
@@ -19,10 +18,6 @@ const useStyles = makeStyles((theme) =>
         width: 640,
       },
 
-      "& .MuiDialogTitle-root": {
-        padding: theme.spacing(4, 4, 2),
-      },
-
       "& .MuiDialogContent-root": {
         padding: theme.spacing(0, 4),
       },
@@ -30,6 +25,10 @@ const useStyles = makeStyles((theme) =>
       "& .MuiDialogActions-root": {
         padding: theme.spacing(2),
       },
+    },
+
+    dialogTitle: {
+      padding: theme.spacing(4, 4, 2),
     },
   })
 );
@@ -56,9 +55,10 @@ const UpdateDialog: FC<UpdateDialogProps> = ({
 
   return (
     <Dialog open={open} maxWidth="lg" className={classes.dialog}>
-      <DialogTitle>
-        <Typography variant="h2">{title}</Typography>
-      </DialogTitle>
+      <Typography variant="h2" className={classes.dialogTitle}>
+        {title}
+      </Typography>
+
       <DialogContent>
         <FormProvider {...methods}>
           {rows.map((row) => (

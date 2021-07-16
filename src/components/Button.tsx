@@ -63,6 +63,7 @@ interface ButtonProps extends MuiButtonProps {
   fullWidth?: boolean;
   noPadding?: boolean;
   className?: string;
+  textClassName?: string;
 }
 
 const Button: FC<ButtonProps> = ({
@@ -70,6 +71,7 @@ const Button: FC<ButtonProps> = ({
   fullWidth = true,
   noPadding = false,
   className,
+  textClassName,
   onClick,
   ...props
 }) => {
@@ -86,7 +88,7 @@ const Button: FC<ButtonProps> = ({
       onClick={onClick}
       {...props}
     >
-      <Typography variant="h5" className={classes.text}>
+      <Typography variant="h5" className={clsx(classes.text, textClassName)}>
         {text}
       </Typography>
     </MuiButton>
