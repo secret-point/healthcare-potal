@@ -1,13 +1,9 @@
-import clsx from "clsx";
-import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
+import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
 import { TCareTeamMember } from "../../types";
-import { EditButton } from "../../components/Button";
-import { theme } from "../../theme/theme";
+import CareTeamMemberCard from "../../components/CareTeamMemberCard";
 
 const teamMembers: TCareTeamMember[] = [
   {
@@ -30,63 +26,53 @@ const teamMembers: TCareTeamMember[] = [
   },
 ];
 
-const useStyles = makeStyles(() =>
+const useStyles = makeStyles((theme) =>
   createStyles({
-    teamMemberCard: {
-      height: "100%",
+    mb1: {
+      marginBottom: theme.spacing(1),
     },
-    noPadding: {
+    mb3: {
+      marginBottom: theme.spacing(3),
+    },
+    teamMemberList: {
+      display: "flex",
+      flexDirection: "row",
+      alignItems: "flex-start",
       padding: 0,
     },
-    mb2: {
-      marginBottom: theme.spacing(2),
-    },
-    normalFontWeight: {
-      fontWeight: 400,
+    teamMemberItem: {
+      width: 274,
+      padding: 0,
     },
   })
 );
 
-interface CareTeamMemberCardProps {
-  member: TCareTeamMember;
-}
-
-const CareTeamMemberCard = ({ member }: CareTeamMemberCardProps) => {
+const CareTeam = () => {
   const classes = useStyles();
 
   return (
-    <Card variant="outlined" className={classes.teamMemberCard}>
-      <CardContent className={clsx(classes.noPadding, classes.mb2)}>
-        <Typography variant="body2">{member.job}</Typography>
-        <Typography
-          variant="h3"
-          className={clsx(classes.normalFontWeight, classes.mb2)}
-        >
-          {member.name}
-        </Typography>
-      </CardContent>
-      <CardActions className={classes.noPadding}>
-        <EditButton title={member.contact} />
-      </CardActions>
-    </Card>
+    <>
+      <Typography variant="h2" className={classes.mb1}>
+        Your Care Team
+      </Typography>
+      <Typography variant="body2" className={classes.mb3}>
+        Meet your personal team of providers. Your Care Coordinator is available
+        to answer your questions Mon-Fri, 9AM to 5PM.
+      </Typography>
+      <Grid container className={classes.teamMemberList}>
+        {teamMembers.map((teamMember) => (
+          <Grid
+            item
+            xs={3}
+            key={teamMember.id}
+            className={classes.teamMemberItem}
+          >
+            <CareTeamMemberCard member={teamMember} />
+          </Grid>
+        ))}
+      </Grid>
+    </>
   );
 };
-
-const CareTeam = () => (
-  <>
-    <Typography variant="h2">Your Care Team</Typography>
-    <Typography variant="body2">
-      Meet your personal team of providers. Your Care Coordinator is available
-      to answer your questions Mon-Fri, 9AM to 5PM.
-    </Typography>
-    <ul>
-      {teamMembers.map((teamMember) => (
-        <li key={teamMember.id}>
-          <CareTeamMemberCard member={teamMember} />
-        </li>
-      ))}
-    </ul>
-  </>
-);
 
 export default CareTeam;

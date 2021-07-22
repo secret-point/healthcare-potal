@@ -5,6 +5,7 @@ import Container from "../../components/Container";
 import { Theme } from "../../theme/types/createPalette";
 import CareTeam from "./CareTeam";
 import TodoList from "./TodoList";
+import ActivityProgress from "./ActivityProgress";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -12,7 +13,10 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: theme.palette.backgroundGreen.main,
     },
     todoListWrapper: {
-      width: "calc(100vw - 24px)",
+      width: 1024,
+      maxWidth: "90vw",
+      marginLeft: theme.spacing(-1.5),
+      marginBottom: theme.spacing(6),
     },
   })
 );
@@ -29,6 +33,10 @@ export default function Dashboard() {
 
         <Grid item xs={12}>
           <CareTeam />
+        </Grid>
+
+        <Grid item xs={12}>
+          <ActivityProgress />
         </Grid>
       </Grid>
     </Container>

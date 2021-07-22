@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import MCarousel, {
   CarouselProps as MCarouselProps,
 } from "react-multi-carousel";
@@ -21,21 +22,23 @@ const useStyles = makeStyles((theme: Theme) =>
 
       display: "flex",
       flexDirection: "column-reverse",
+      alignItems: "flex-start",
 
       "& .ButtonGroup": {
         alignSelf: "flex-end",
         display: "flex",
         gap: theme.spacing(3),
-        paddingRight: theme.spacing(3),
+        paddingRight: theme.spacing(1.5),
+        marginBottom: theme.spacing(2),
       },
     },
     carouselTitle: {
       position: "absolute",
-      left: theme.spacing(3),
+      left: theme.spacing(1.5),
       top: theme.spacing(2),
     },
     item: {
-      padding: theme.spacing(3),
+      padding: theme.spacing(0, 1.5),
     },
     arrowButton: {
       color: "white",
@@ -91,7 +94,13 @@ interface CarouselProps extends MCarouselProps {
   title: string;
 }
 
-const Carousel: React.FC<CarouselProps> = ({ children, title, responsive }) => {
+const Carousel: React.FC<CarouselProps> = ({
+  children,
+  title,
+  responsive,
+  itemClass,
+  containerClass,
+}) => {
   const classes = useStyles();
   const { deviceType } = useViewport();
 
@@ -103,8 +112,8 @@ const Carousel: React.FC<CarouselProps> = ({ children, title, responsive }) => {
       <MCarousel
         arrows={false}
         deviceType={deviceType}
-        itemClass={classes.item}
-        containerClass={classes.carousel}
+        itemClass={clsx(classes.item, itemClass)}
+        containerClass={clsx(classes.carousel, containerClass)}
         responsive={responsive}
         customButtonGroup={<CustomButtonGroup />}
       >
