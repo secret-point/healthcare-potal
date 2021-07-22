@@ -1,4 +1,5 @@
 import { BrowserRouter } from "react-router-dom";
+import "react-multi-carousel/lib/styles.css";
 
 import useAuth from "../hooks/useAuth";
 import CenterLoader from "../components/CenterLoader";

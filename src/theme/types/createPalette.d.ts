@@ -1,5 +1,6 @@
 declare module "@material-ui/core/styles/createPalette" {
   interface PaletteOptions {
+    disabled: PaletteColorOptions;
     backgroundGreen: PaletteColorOptions;
     primaryNavy: PaletteColorOptions;
     primaryGreen: PaletteColorOptions;

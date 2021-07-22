@@ -14,3 +14,10 @@ export enum VerificationStatus {
   UNVERIFIED = "Unverified",
   PENDING = "Pending",
 }
+
+export type TCareTeamMember = {
+  id: string | number;
+  name: string;
+  job: string;
+  contact: string;
+};

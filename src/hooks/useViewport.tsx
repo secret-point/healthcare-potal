@@ -30,8 +30,33 @@ export const ViewportProvider = ({
   );
 };
 
+const responsive = {
+  desktop: {
+    max: 3000,
+    min: 1024,
+  },
+  tablet: {
+    max: 1024,
+    min: 468,
+  },
+  mobile: {
+    max: 468,
+    min: 0,
+  },
+};
+
 export const useViewport = () => {
   const { width, height } = useContext(viewportContext);
-  const breakpoint = 560;
-  return { width, height, isMobile: width <= breakpoint };
+  const getDeviceType = (width: number) => {
+    if (width >= responsive.desktop.min) return "desktop";
+    if (width >= responsive.tablet.min) return "tablet";
+    return "mobile";
+  };
+
+  return {
+    width,
+    height,
+    isMobile: width <= responsive.mobile.max,
+    deviceType: getDeviceType(width),
+  };
 };

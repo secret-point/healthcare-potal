@@ -51,3 +51,15 @@ export type TFieldRow = {
   row: string;
   fields: TCustomField[];
 };
+
+export enum TodoItemType {
+  COMPLETE_INTAKE_FORM = "COMPLETE_INTAKE_FORM",
+  VERIFY_ID = "VERIFY_ID",
+  CHECK_YOUR_PROGRESS = "CHECK_YOUR_PROGRESS",
+}
+
+export type TTodoItem = {
+  title: string;
+  dueDate: Date;
+  type: TodoItemType;
+};

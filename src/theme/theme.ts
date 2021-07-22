@@ -46,6 +46,9 @@ export const theme = createMuiTheme({
     primary: {
       main: "#DAEFED",
     },
+    disabled: {
+      main: "#B4C2C3",
+    },
     backgroundGreen: {
       main: "#F8FAF8",
     },
