@@ -63,3 +63,9 @@ export type TTodoItem = {
   dueDate: Date;
   type: TodoItemType;
 };
+
+export type ScoreHistory = {
+  previousScore: number;
+  currentScore: number;
+  date: Date;
+};

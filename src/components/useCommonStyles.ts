@@ -23,6 +23,124 @@ export const useFontStyles = makeStyles(() =>
   })
 );
 
+export const useColorStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    primary: {
+      color: theme.palette.primary.main,
+    },
+    disabled: {
+      color: theme.palette.disabled.main,
+    },
+    backgroundGreen: {
+      color: theme.palette.backgroundGreen.main,
+    },
+    primaryNavy: {
+      color: theme.palette.primaryNavy.main,
+    },
+    primaryGreen: {
+      color: theme.palette.primaryGreen.main,
+    },
+    secondaryGreen1: {
+      color: theme.palette.secondaryGreen1.main,
+    },
+    secondaryGreen2: {
+      color: theme.palette.secondaryGreen2.main,
+    },
+    secondaryMint1: {
+      color: theme.palette.secondaryMint1.main,
+    },
+    secondaryMint2: {
+      color: theme.palette.secondaryMint2.main,
+    },
+    secondaryNavy1: {
+      color: theme.palette.secondaryNavy1.main,
+    },
+    secondaryNavy2: {
+      color: theme.palette.secondaryNavy2.main,
+    },
+    backgroundMint: {
+      color: theme.palette.backgroundMint.main,
+    },
+    backgroundGray: {
+      color: theme.palette.backgroundGray.main,
+    },
+    accentRed: {
+      color: theme.palette.accentRed.main,
+    },
+    accentYellow: {
+      color: theme.palette.accentYellow.main,
+    },
+    yellow: {
+      color: theme.palette.yellow.main,
+    },
+    distinctiveGray: {
+      color: theme.palette.distinctiveGray.main,
+    },
+    backgroundRed: {
+      color: theme.palette.backgroundRed.main,
+    },
+  })
+);
+
+export const useBackgroundColorStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    primary: {
+      backgroundColor: theme.palette.primary.main,
+    },
+    disabled: {
+      backgroundColor: theme.palette.disabled.main,
+    },
+    backgroundGreen: {
+      backgroundColor: theme.palette.backgroundGreen.main,
+    },
+    primaryNavy: {
+      backgroundColor: theme.palette.primaryNavy.main,
+    },
+    primaryGreen: {
+      backgroundColor: theme.palette.primaryGreen.main,
+    },
+    secondaryGreen1: {
+      backgroundColor: theme.palette.secondaryGreen1.main,
+    },
+    secondaryGreen2: {
+      backgroundColor: theme.palette.secondaryGreen2.main,
+    },
+    secondaryMint1: {
+      backgroundColor: theme.palette.secondaryMint1.main,
+    },
+    secondaryMint2: {
+      backgroundColor: theme.palette.secondaryMint2.main,
+    },
+    secondaryNavy1: {
+      backgroundColor: theme.palette.secondaryNavy1.main,
+    },
+    secondaryNavy2: {
+      backgroundColor: theme.palette.secondaryNavy2.main,
+    },
+    backgroundMint: {
+      backgroundColor: theme.palette.backgroundMint.main,
+    },
+    backgroundGray: {
+      backgroundColor: theme.palette.backgroundGray.main,
+    },
+    accentRed: {
+      backgroundColor: theme.palette.accentRed.main,
+    },
+    accentYellow: {
+      backgroundColor: theme.palette.accentYellow.main,
+    },
+    yellow: {
+      backgroundColor: theme.palette.yellow.main,
+    },
+    distinctiveGray: {
+      backgroundColor: theme.palette.distinctiveGray.main,
+    },
+    backgroundRed: {
+      backgroundColor: theme.palette.backgroundRed.main,
+    },
+  })
+);
+
 export const useLayoutStyles = makeStyles((theme: Theme) =>
   createStyles({
     mb05: {
@@ -30,6 +148,9 @@ export const useLayoutStyles = makeStyles((theme: Theme) =>
     },
     mb1: {
       marginBottom: theme.spacing(1),
+    },
+    mb15: {
+      marginBottom: theme.spacing(1.5),
     },
     mb2: {
       marginBottom: theme.spacing(2),
@@ -87,6 +208,9 @@ export const useLayoutStyles = makeStyles((theme: Theme) =>
     },
     noMargin: {
       padding: 0,
+    },
+    fullHeight: {
+      height: "100%",
     },
   })
 );

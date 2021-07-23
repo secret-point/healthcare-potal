@@ -16,7 +16,6 @@ const useStyles = makeStyles((theme: Theme) =>
       width: 1024,
       maxWidth: "90vw",
       marginLeft: theme.spacing(-1.5),
-      marginBottom: theme.spacing(6),
     },
   })
 );
@@ -26,7 +25,7 @@ export default function Dashboard() {
 
   return (
     <Container>
-      <Grid container className={classes.container}>
+      <Grid container spacing={6} className={classes.container}>
         <Grid item xs={12} className={classes.todoListWrapper}>
           <TodoList />
         </Grid>
