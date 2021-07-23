@@ -7,6 +7,7 @@ import { makeStyles, createStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 
 import { Theme } from "../theme/types/createPalette";
+import { useLayoutStyles } from "./useCommonStyles";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -76,13 +77,14 @@ const Button: FC<ButtonProps> = ({
   ...props
 }) => {
   const classes = useStyles();
+  const layoutClasses = useLayoutStyles();
 
   return (
     <MuiButton
       className={clsx(
         classes.button,
         fullWidth && classes.fullWidth,
-        noPadding && classes.noPadding,
+        noPadding && layoutClasses.noPadding,
         className
       )}
       onClick={onClick}

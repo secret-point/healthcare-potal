@@ -12,15 +12,10 @@ import { Nullable } from "../../types/general";
 import useAuth from "../../hooks/useAuth";
 
 import SignInForm from "./SignInForm";
+import { useLayoutStyles } from "../../components/useCommonStyles";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
-    mb6: {
-      marginBottom: theme.spacing(6),
-    },
-    mb4: {
-      marginBottom: theme.spacing(4),
-    },
     errorTextWrapper: {
       marginTop: theme.spacing(1.5),
     },
@@ -30,6 +25,7 @@ const useStyles = makeStyles((theme) =>
 export default function SignIn() {
   const { logIn } = useAuth();
   const classes = useStyles();
+  const layoutClasses = useLayoutStyles();
   const [errorText, setErrorText] = useState<Nullable<string>>(null);
 
   const methods = useForm({
@@ -48,13 +44,13 @@ export default function SignIn() {
     <Container>
       <PlainModal>
         <Grid container>
-          <Grid item xs={12} className={classes.mb6}>
+          <Grid item xs={12} className={layoutClasses.mb6}>
             <Typography variant="h1" align="center">
               Sign In
             </Typography>
           </Grid>
 
-          <Grid item xs={12} className={classes.mb4}>
+          <Grid item xs={12} className={layoutClasses.mb4}>
             <FormProvider {...methods}>
               <SignInForm onSubmit={handleSubmit} />
             </FormProvider>

@@ -3,15 +3,10 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import { Theme } from "../../theme/types/createPalette";
+import { useLayoutStyles } from "../useCommonStyles";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    mb3: {
-      marginBottom: theme.spacing(3),
-    },
-    mb2: {
-      marginBottom: theme.spacing(2),
-    },
     recommended: {
       fontSize: 12,
       lineHeight: 1.3,
@@ -37,10 +32,11 @@ interface InitialStepProps {
 
 const InitialStep = ({ onSkipVerification, onUploadID }: InitialStepProps) => {
   const classes = useStyles();
+  const layoutClasses = useLayoutStyles();
 
   return (
     <Grid container>
-      <Grid item xs={12} className={classes.mb3}>
+      <Grid item xs={12} className={layoutClasses.mb3}>
         <Typography variant="body1">
           Before we provide clinical service, we need to verify your
           identification. You may choose one of the following options:
@@ -52,7 +48,7 @@ const InitialStep = ({ onSkipVerification, onUploadID }: InitialStepProps) => {
         xs={12}
         role="button"
         tabIndex={0}
-        className={clsx(classes.selectBox, classes.mb2)}
+        className={clsx(classes.selectBox, layoutClasses.mb2)}
         onClick={onUploadID}
       >
         <Grid container spacing={1}>

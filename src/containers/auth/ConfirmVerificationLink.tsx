@@ -4,26 +4,15 @@ import { useHistory } from "react-router";
 import { useSnackbar } from "notistack";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import { makeStyles, createStyles } from "@material-ui/core/styles";
 
 import Button from "../../components/Button";
 import Container from "../../components/Container";
 import PlainModal from "../../components/PlainModal";
 import PasswordForm from "../onboarding/PasswordForm";
-
-const useStyles = makeStyles((theme) =>
-  createStyles({
-    mb2: {
-      marginBottom: theme.spacing(2),
-    },
-    mb6: {
-      marginBottom: theme.spacing(6),
-    },
-  })
-);
+import { useLayoutStyles } from "../../components/useCommonStyles";
 
 const ConfirmVerificationLink = () => {
-  const classes = useStyles();
+  const layoutClasses = useLayoutStyles();
   const history = useHistory();
   const { enqueueSnackbar } = useSnackbar();
   const [passwordChanged, setPasswordChanged] = useState(false);
@@ -51,7 +40,7 @@ const ConfirmVerificationLink = () => {
       <PlainModal>
         {!passwordChanged ? (
           <Grid container>
-            <Grid item xs={12} className={classes.mb6}>
+            <Grid item xs={12} className={layoutClasses.mb6}>
               <Typography variant="h2" align="center">
                 Change your password
               </Typography>
@@ -65,13 +54,13 @@ const ConfirmVerificationLink = () => {
           </Grid>
         ) : (
           <Grid container>
-            <Grid item xs={12} className={classes.mb2}>
+            <Grid item xs={12} className={layoutClasses.mb2}>
               <Typography variant="h2" align="center">
                 Your password has been updated.
               </Typography>
             </Grid>
 
-            <Grid item xs={12} className={classes.mb6}>
+            <Grid item xs={12} className={layoutClasses.mb6}>
               <Typography variant="body1" align="center">
                 You may now sign to your account using your email and your new
                 password.

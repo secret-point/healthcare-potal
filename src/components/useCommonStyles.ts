@@ -37,6 +37,12 @@ export const useLayoutStyles = makeStyles((theme: Theme) =>
     mb3: {
       marginBottom: theme.spacing(3),
     },
+    mb4: {
+      marginBottom: theme.spacing(4),
+    },
+    mb6: {
+      marginBottom: theme.spacing(6),
+    },
     margin1: {
       marginBottom: theme.spacing(1),
     },

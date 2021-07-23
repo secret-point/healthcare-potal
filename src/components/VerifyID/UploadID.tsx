@@ -4,12 +4,10 @@ import Link from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import { Theme } from "../../theme/types/createPalette";
+import { useLayoutStyles } from "../useCommonStyles";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    mb2: {
-      marginBottom: theme.spacing(2),
-    },
     uploadLabel: {
       fontWeight: 500,
       color: theme.palette.secondaryGreen1.main,
@@ -27,6 +25,7 @@ interface UploadIDProps {
 
 const UploadID: FC<UploadIDProps> = ({ file, onSelectFile }) => {
   const classes = useStyles();
+  const layoutClasses = useLayoutStyles();
 
   const handleChangeFile = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target?.files?.[0];
@@ -36,7 +35,7 @@ const UploadID: FC<UploadIDProps> = ({ file, onSelectFile }) => {
 
   return (
     <Grid container>
-      <Grid item xs={12} className={classes.mb2}>
+      <Grid item xs={12} className={layoutClasses.mb2}>
         <Typography variant="body1">
           We accept any valid federal/state identification card with a clear
           photo of yourself. These include: Passport, Driver’s License, State
@@ -44,7 +43,7 @@ const UploadID: FC<UploadIDProps> = ({ file, onSelectFile }) => {
         </Typography>
       </Grid>
 
-      <Grid item xs={12} className={classes.mb2}>
+      <Grid item xs={12} className={layoutClasses.mb2}>
         <Typography variant="body1">
           Please make sure your&nbsp;
           <b>all the information and the photo</b>
@@ -52,7 +51,13 @@ const UploadID: FC<UploadIDProps> = ({ file, onSelectFile }) => {
         </Typography>
       </Grid>
 
-      <Grid item xs={12} role="button" tabIndex={0} className={classes.mb2}>
+      <Grid
+        item
+        xs={12}
+        role="button"
+        tabIndex={0}
+        className={layoutClasses.mb2}
+      >
         <Link component="label" className={classes.buttonRole}>
           <input
             id="json"

@@ -4,6 +4,7 @@ import { makeStyles, createStyles } from "@material-ui/core/styles";
 
 import { TCareTeamMember } from "../../types";
 import CareTeamMemberCard from "../../components/CareTeamMemberCard";
+import { useLayoutStyles } from "../../components/useCommonStyles";
 
 const teamMembers: TCareTeamMember[] = [
   {
@@ -49,17 +50,18 @@ const useStyles = makeStyles((theme) =>
 
 const CareTeam = () => {
   const classes = useStyles();
+  const layoutClasses = useLayoutStyles();
 
   return (
     <>
-      <Typography variant="h2" className={classes.mb1}>
+      <Typography variant="h2" className={layoutClasses.mb1}>
         Your Care Team
       </Typography>
-      <Typography variant="body2" className={classes.mb3}>
+      <Typography variant="body2" className={layoutClasses.mb3}>
         Meet your personal team of providers. Your Care Coordinator is available
         to answer your questions Mon-Fri, 9AM to 5PM.
       </Typography>
-      <Grid container className={classes.teamMemberList}>
+      <Grid container spacing={3} className={classes.teamMemberList}>
         {teamMembers.map((teamMember) => (
           <Grid
             item

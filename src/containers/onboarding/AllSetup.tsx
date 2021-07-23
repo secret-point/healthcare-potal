@@ -4,6 +4,7 @@ import { makeStyles, createStyles } from "@material-ui/core/styles";
 
 import { Theme } from "../../theme/types/createPalette";
 import Button from "../../components/Button";
+import { useLayoutStyles } from "../../components/useCommonStyles";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -28,16 +29,17 @@ interface AllSetupProps {
 
 const AllSetup: React.FC<AllSetupProps> = ({ onSignIn }) => {
   const classes = useStyles();
+  const layoutClasses = useLayoutStyles();
 
   return (
     <Grid container>
       <Grid item xs={12}>
-        <Typography align="center" variant="h2" className={classes.mb2}>
+        <Typography align="center" variant="h2" className={layoutClasses.mb2}>
           Great! You&apos;re all set up.
         </Typography>
       </Grid>
 
-      <Grid item xs={12} className={classes.mb6}>
+      <Grid item xs={12} className={layoutClasses.mb6}>
         <Typography
           align="center"
           variant="body1"
@@ -47,7 +49,7 @@ const AllSetup: React.FC<AllSetupProps> = ({ onSignIn }) => {
         </Typography>
       </Grid>
 
-      <Grid item xs={12} className={classes.mb3}>
+      <Grid item xs={12} className={layoutClasses.mb3}>
         <img src="/images/together.png" width="100%" alt="We are done." />
       </Grid>
 
