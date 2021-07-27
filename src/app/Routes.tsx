@@ -1,6 +1,7 @@
 import { Redirect, Route, Switch, useLocation } from "react-router-dom";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 
+import CheckInSurvey from "../containers/CheckInSurvey/CheckInSurvey";
 import Dashboard from "../containers/Dashboard/Dashboard";
 import Profile from "../containers/Profile/Profile";
 import SignIn from "../containers/auth/SignIn";
@@ -32,6 +33,9 @@ export function AuthorizedRoutes() {
           </Route>
           <Route path="/profile" exact>
             <Profile />
+          </Route>
+          <Route path="/check-in" exact>
+            <CheckInSurvey />
           </Route>
           <Redirect to={defaultRedirect} />
         </Switch>
