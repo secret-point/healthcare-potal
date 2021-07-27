@@ -164,6 +164,15 @@ export const useLayoutStyles = makeStyles((theme: Theme) =>
     mb6: {
       marginBottom: theme.spacing(6),
     },
+    ml1: {
+      marginLeft: theme.spacing(1),
+    },
+    ml15: {
+      marginLeft: theme.spacing(1.5),
+    },
+    ml2: {
+      marginLeft: theme.spacing(2),
+    },
     margin1: {
       marginBottom: theme.spacing(1),
     },
@@ -193,6 +202,9 @@ export const useLayoutStyles = makeStyles((theme: Theme) =>
     },
     pt3: {
       paddingTop: theme.spacing(3),
+    },
+    pb0: {
+      paddingBottom: theme.spacing(0),
     },
     pb1: {
       paddingBottom: theme.spacing(1),

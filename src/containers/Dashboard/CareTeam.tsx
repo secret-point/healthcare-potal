@@ -1,10 +1,13 @@
+import { useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
 import { TCareTeamMember } from "../../types";
 import CareTeamMemberCard from "../../components/CareTeamMemberCard";
+import { EditButton } from "../../components/Button";
 import { useLayoutStyles } from "../../components/useCommonStyles";
+import { useViewport } from "../../hooks/useViewport";
 
 const teamMembers: TCareTeamMember[] = [
   {
@@ -42,8 +45,7 @@ const useStyles = makeStyles((theme) =>
       padding: 0,
     },
     teamMemberItem: {
-      width: 274,
-      padding: 0,
+      alignSelf: "stretch",
     },
   })
 );
@@ -51,6 +53,12 @@ const useStyles = makeStyles((theme) =>
 const CareTeam = () => {
   const classes = useStyles();
   const layoutClasses = useLayoutStyles();
+  const { isMobile } = useViewport();
+  const [showCareTeam, setShowCareTeam] = useState(false);
+
+  const handleToggleShowCareTeam = () => {
+    setShowCareTeam(!showCareTeam);
+  };
 
   return (
     <>
@@ -61,18 +69,39 @@ const CareTeam = () => {
         Meet your personal team of providers. Your Care Coordinator is available
         to answer your questions Mon-Fri, 9AM to 5PM.
       </Typography>
-      <Grid container spacing={3} className={classes.teamMemberList}>
-        {teamMembers.map((teamMember) => (
-          <Grid
-            item
-            xs={3}
-            key={teamMember.id}
-            className={classes.teamMemberItem}
-          >
-            <CareTeamMemberCard member={teamMember} />
-          </Grid>
-        ))}
-      </Grid>
+
+      {isMobile && !showCareTeam && (
+        <EditButton
+          title="▾ View your care team"
+          onClick={handleToggleShowCareTeam}
+        />
+      )}
+
+      {(!isMobile || showCareTeam) && (
+        <Grid container spacing={3} className={classes.teamMemberList}>
+          {teamMembers.map((teamMember) => (
+            <Grid
+              item
+              xs={12}
+              sm={6}
+              md={4}
+              lg={3}
+              key={teamMember.id}
+              className={classes.teamMemberItem}
+            >
+              <CareTeamMemberCard member={teamMember} />
+            </Grid>
+          ))}
+        </Grid>
+      )}
+
+      {isMobile && showCareTeam && (
+        <EditButton
+          title="▴ Hide your care team"
+          className={layoutClasses.mt1}
+          onClick={handleToggleShowCareTeam}
+        />
+      )}
     </>
   );
 };

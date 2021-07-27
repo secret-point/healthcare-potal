@@ -5,9 +5,8 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
-import { TCareTeamMember } from "../types";
 import { EditButton } from "./Button";
-import { useFontStyles, useLayoutStyles } from "./useCommonStyles";
+import { useLayoutStyles } from "./useCommonStyles";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -23,40 +22,32 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-interface CareTeamMemberCardProps {
-  member: TCareTeamMember;
+interface EmptyCareTeamMemberCardProps {
+  onSetupCareCoordination?: VoidFunction;
 }
 
-const CareTeamMemberCard = ({ member }: CareTeamMemberCardProps) => {
+const EmptyCareTeamMemberCard = ({
+  onSetupCareCoordination,
+}: EmptyCareTeamMemberCardProps) => {
   const classes = useStyles();
   const layoutClasses = useLayoutStyles();
-  const fontClasses = useFontStyles();
 
   return (
     <Card variant="outlined" className={classes.teamMemberCard}>
       <CardContent className={clsx(layoutClasses.noPadding, layoutClasses.mb1)}>
-        <img
-          width={40}
-          height={40}
-          alt="User Profile"
-          src="https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg"
-          className={layoutClasses.mb2}
-        />
-        <Typography variant="body2" className={layoutClasses.mb05}>
-          {member.job}
-        </Typography>
-        <Typography
-          variant="h3"
-          className={clsx(fontClasses.normalFontWeight, layoutClasses.mb1)}
-        >
-          {member.name}
+        <Typography variant="body1" className={layoutClasses.mb3}>
+          We can coordinate care with your other providers, such as PCPs and
+          therapists.
         </Typography>
       </CardContent>
       <CardActions className={layoutClasses.noPadding}>
-        <EditButton title={member.contact} />
+        <EditButton
+          title="Set up care coordination"
+          onClick={onSetupCareCoordination}
+        />
       </CardActions>
     </Card>
   );
 };
 
-export default CareTeamMemberCard;
+export default EmptyCareTeamMemberCard;

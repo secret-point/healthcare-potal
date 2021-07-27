@@ -4,16 +4,19 @@ import { TodoItemType, TTodoItem } from "../../types";
 
 const responsive = {
   desktop: {
-    breakpoint: { max: 3000, min: 1024 },
     items: 4,
+    partialVisibilityGutter: 40,
+    breakpoint: { max: 3000, min: 1024 },
   },
   tablet: {
-    breakpoint: { max: 1024, min: 468 },
     items: 2,
+    partialVisibilityGutter: 40,
+    breakpoint: { max: 1024, min: 468 },
   },
   mobile: {
-    breakpoint: { max: 468, min: 0 },
     items: 1,
+    partialVisibilityGutter: 40,
+    breakpoint: { max: 468, min: 0 },
   },
 };
 
@@ -60,7 +63,12 @@ const TodoList: React.FC<TodoListProps> = ({ onClick }) => {
   };
 
   return (
-    <Carousel title="To-do Items" responsive={responsive}>
+    <Carousel
+      title="To-do Items"
+      itemCount={todoList.length}
+      missingCount={todoList.length}
+      responsive={responsive}
+    >
       {todoList.map((item, index) => (
         <TodoItem
           key={index}

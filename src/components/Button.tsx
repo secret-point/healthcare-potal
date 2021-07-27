@@ -100,6 +100,7 @@ const Button: FC<ButtonProps> = ({
 export const EditButton: FC<MuiButtonProps> = ({
   onClick,
   title = "Edit",
+  className,
   ...props
 }) => {
   const classes = useStyles();
@@ -108,7 +109,7 @@ export const EditButton: FC<MuiButtonProps> = ({
     <MuiButton
       variant="text"
       onClick={onClick}
-      className={clsx(classes.button, classes.editButton)}
+      className={clsx(classes.button, classes.editButton, className)}
       {...props}
     >
       <Typography variant="body1" role="button" className={classes.buttonText}>

@@ -64,8 +64,9 @@ export type TTodoItem = {
   type: TodoItemType;
 };
 
-export type ScoreHistory = {
-  previousScore: number;
-  currentScore: number;
+export type TScoreItem = {
+  score: number;
   date: Date;
 };
+
+export type TScoreHistory = TScoreItem[];
