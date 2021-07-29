@@ -52,7 +52,7 @@ export default function ProfileAvatarUpload() {
           multiple={false}
           onChange={handleChangeFile}
         />
-        <Typography variant="h6" className={classes.uploadLabel}>
+        <Typography variant="body1" className={classes.uploadLabel}>
           Upload new picture
         </Typography>
       </Link>
@@ -62,7 +62,7 @@ export default function ProfileAvatarUpload() {
           className={classes.buttonRole}
           onClick={handleDeleteFile}
         >
-          <Typography variant="h6" className={classes.deleteLabel}>
+          <Typography variant="body1" className={classes.deleteLabel}>
             Delete picture
           </Typography>
         </Link>

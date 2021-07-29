@@ -97,5 +97,6 @@ module.exports = {
     "no-debugger": "warn",
     // disable this in root repo
     "@typescript-eslint/no-empty-interface": "off",
+    "react/jsx-wrap-multilines": "off",
   },
 };

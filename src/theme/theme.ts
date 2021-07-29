@@ -28,7 +28,7 @@ export const theme = createMuiTheme({
     },
     h6: {
       fontSize: 16,
-      fontWeight: 400,
+      fontWeight: 500,
     },
     body1: {
       fontSize: 16,
@@ -45,6 +45,9 @@ export const theme = createMuiTheme({
   palette: {
     primary: {
       main: "#DAEFED",
+    },
+    secondary: {
+      main: "#6D9147",
     },
     disabled: {
       main: "#B4C2C3",

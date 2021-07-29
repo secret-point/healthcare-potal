@@ -44,11 +44,11 @@ const TodoItem: FC<TodoItemProps> = ({ item, onClick }) => {
       <CardContent className={clsx(layoutClasses.noPadding, layoutClasses.mb2)}>
         <Typography
           variant="h3"
-          className={clsx(fontClasses.normalFontWeight, layoutClasses.mb1)}
+          className={clsx(fontClasses.fontNormal, layoutClasses.mb1)}
         >
           {item.title}
         </Typography>
-        <Typography variant="body2" className={fontClasses.normalFontWeight}>
+        <Typography variant="body2" className={fontClasses.fontNormal}>
           {["By", formatFullDay(item.dueDate)].join(" ")}
         </Typography>
       </CardContent>

@@ -17,7 +17,13 @@ export const useCardStyles = makeStyles((theme: Theme) =>
 
 export const useFontStyles = makeStyles(() =>
   createStyles({
-    normalFontWeight: {
+    fontBolder: {
+      fontWeight: 700,
+    },
+    fontBold: {
+      fontWeight: 600,
+    },
+    fontNormal: {
       fontWeight: 400,
     },
   })
@@ -25,6 +31,9 @@ export const useFontStyles = makeStyles(() =>
 
 export const useColorStyles = makeStyles((theme: Theme) =>
   createStyles({
+    white: {
+      color: "#ffffff",
+    },
     primary: {
       color: theme.palette.primary.main,
     },
@@ -84,6 +93,9 @@ export const useColorStyles = makeStyles((theme: Theme) =>
 
 export const useBackgroundColorStyles = makeStyles((theme: Theme) =>
   createStyles({
+    white: {
+      backgroundColor: "#ffffff",
+    },
     primary: {
       backgroundColor: theme.palette.primary.main,
     },

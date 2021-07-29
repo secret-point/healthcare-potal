@@ -70,3 +70,16 @@ export type TScoreItem = {
 };
 
 export type TScoreHistory = TScoreItem[];
+
+export type TLabelCode = {
+  code: string;
+  label: string;
+};
+
+export type TQuestion = {
+  code: string;
+  type: "GAD" | "PHQ" | "MCQ" | "FRQ";
+  header?: string;
+  question: string;
+  options: TLabelCode[];
+};

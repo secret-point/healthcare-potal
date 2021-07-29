@@ -8,12 +8,11 @@ import {
   useLayoutStyles,
 } from "../../components/useCommonStyles";
 
-interface WelcomeProps {
-  onCancel: VoidFunction;
+interface CompleteSurveyProps {
   onNext: VoidFunction;
 }
 
-const Welcome: React.FC<WelcomeProps> = ({ onCancel, onNext }) => {
+const CompleteSurvey: React.FC<CompleteSurveyProps> = ({ onNext }) => {
   const layoutClasses = useLayoutStyles();
   const fontClasses = useFontStyles();
 
@@ -26,7 +25,7 @@ const Welcome: React.FC<WelcomeProps> = ({ onCancel, onNext }) => {
         xs={12}
         className={layoutClasses.mb3}
       >
-        <img src="/images/together.png" width={480} alt="All together." />
+        <img src="/images/celebration.png" width={480} alt="Celebration." />
       </Grid>
       <Grid item xs={12}>
         <Typography
@@ -34,30 +33,26 @@ const Welcome: React.FC<WelcomeProps> = ({ onCancel, onNext }) => {
           align="center"
           className={clsx(fontClasses.fontNormal, layoutClasses.mb2)}
         >
-          Welcome to your
-          <b> 2nd check-in!</b>
+          Thank you for completing your check-in!
         </Typography>
       </Grid>
       <Grid item xs={12} className={layoutClasses.mb6}>
         <Typography variant="body1" align="center">
-          Completing this survey allows you and your care team to measure your
-          progress. Once you complete your check-in, your care team will review
-          your response.
+          Your care team will be reviewing your response and reach out to you if
+          needed. You can view your progress and your score history by clicking
+          on the button below.
         </Typography>
       </Grid>
       <Grid item xs={12}>
         <Button
-          text="Start"
+          text="View My Progress"
           color="primary"
           variant="contained"
           onClick={onNext}
         />
       </Grid>
-      <Grid item xs={12}>
-        <Button text="Go Back Home" variant="text" onClick={onCancel} />
-      </Grid>
     </Grid>
   );
 };
 
-export default Welcome;
+export default CompleteSurvey;

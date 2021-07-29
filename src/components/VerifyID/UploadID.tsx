@@ -68,7 +68,7 @@ const UploadID: FC<UploadIDProps> = ({ file, onSelectFile }) => {
             multiple={false}
             onChange={handleChangeFile}
           />
-          <Typography variant="h6" className={classes.uploadLabel}>
+          <Typography variant="body1" className={classes.uploadLabel}>
             Upload ID
           </Typography>
         </Link>

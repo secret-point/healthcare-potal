@@ -47,7 +47,7 @@ const CareTeamMemberCard = ({ member }: CareTeamMemberCardProps) => {
         </Typography>
         <Typography
           variant="h3"
-          className={clsx(fontClasses.normalFontWeight, layoutClasses.mb1)}
+          className={clsx(fontClasses.fontNormal, layoutClasses.mb1)}
         >
           {member.name}
         </Typography>
