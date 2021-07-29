@@ -148,4 +148,11 @@ export const QUESTIONS: TQuestion[] = [
       "Are you experiencing any side effects? Please select all that apply.",
     options: SIDE_EFFECTS,
   },
+  {
+    type: "FRQ",
+    code: "FRQ_QUESTION",
+    header:
+      "Is there anything else you want your doctor to know? Your doctor and your care coordinator will review your response and get back to you, if necessary.",
+    question: "",
+  },
 ];

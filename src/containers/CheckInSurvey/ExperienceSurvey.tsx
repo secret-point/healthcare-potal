@@ -7,6 +7,7 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 
 import Button from "../../components/Button";
 import RadioField from "../../components/RadioField";
+import TextInput from "../../components/TextInput";
 import {
   useFontStyles,
   useLayoutStyles,
@@ -71,7 +72,7 @@ const ExperienceSurvey: FC<ExperienceSurveyProps> = ({ questions, onNext }) => {
       </Grid>
 
       <Grid item xs={12} className={layoutClasses.mb6}>
-        {["GAD", "PHQ"].includes(question.type) && (
+        {["GAD", "PHQ"].includes(question.type) && question.options && (
           <RadioField
             layout={{ xs: 6 }}
             name={question.code}
@@ -79,6 +80,9 @@ const ExperienceSurvey: FC<ExperienceSurveyProps> = ({ questions, onNext }) => {
           />
         )}
         {question.type === "MCQ" && <MCQQuestion question={question} />}
+        {question.type === "FRQ" && (
+          <TextInput name="Some placeholder text TBD" multiline rows={4} />
+        )}
       </Grid>
 
       <Grid item xs={12}>

@@ -37,7 +37,7 @@ const MCQQuestion: FC<MCQQuestionProps> = ({ question }) => {
 
   return (
     <Grid container spacing={3}>
-      {question.options.map((option) => (
+      {question.options?.map((option) => (
         <Grid item key={option.code} xs={6}>
           <CheckboxField
             name={option.code}

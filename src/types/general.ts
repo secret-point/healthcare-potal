@@ -81,5 +81,5 @@ export type TQuestion = {
   type: "GAD" | "PHQ" | "MCQ" | "FRQ";
   header?: string;
   question: string;
-  options: TLabelCode[];
+  options?: TLabelCode[];
 };

@@ -12,6 +12,9 @@ export const useStyles = makeStyles((theme: Theme) =>
     textField: {
       width: "100%",
 
+      "& .MuiOutlinedInput-multiline": {
+        padding: theme.spacing(3),
+      },
       "& .MuiInputBase-root": {
         borderRadius: theme.spacing(2),
       },
@@ -22,7 +25,7 @@ export const useStyles = makeStyles((theme: Theme) =>
         fontWeight: "normal",
         color: theme.palette.secondaryNavy2.main,
       },
-      "& .MuiOutlinedInput-input": {
+      "& .MuiOutlinedInput-input:not(.MuiOutlinedInput-inputMultiline)": {
         padding: theme.spacing(2, 3),
       },
       "& .MuiOutlinedInput-notchedOutline": {
