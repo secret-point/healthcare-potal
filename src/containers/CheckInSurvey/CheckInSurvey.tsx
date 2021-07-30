@@ -12,7 +12,7 @@ import { CheckInSurveySteps, QUESTIONS } from "./constants";
 
 const CheckInSurvey = () => {
   const history = useHistory();
-  const [surveyStep, setSurveyStep] = useState(CheckInSurveySteps.WELCOME);
+  const [surveyStep, setSurveyStep] = useState(CheckInSurveySteps.COMPLETE);
 
   const methods = useForm({
     mode: "onBlur",

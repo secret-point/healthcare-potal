@@ -15,6 +15,7 @@ import {
 import { TQuestion } from "../../types";
 
 import MCQQuestion from "./MCQQuestion";
+import { useViewport } from "../../hooks/useViewport";
 
 interface ExperienceSurveyProps {
   questions: TQuestion[];
@@ -25,8 +26,14 @@ const ExperienceSurvey: FC<ExperienceSurveyProps> = ({ questions, onNext }) => {
   const fontClasses = useFontStyles();
   const layoutClasses = useLayoutStyles();
   const [number, setNumber] = useState(0);
+  const { isMobile } = useViewport();
 
   const { watch } = useFormContext();
+
+  const question = questions[number];
+  const answer = watch(question.code);
+  const progress = (number * 100) / questions.length;
+  const isRadioQuestion = ["GAD", "PHQ"].includes(question.type);
 
   const handleClickNext = () => {
     if (number + 1 >= questions.length) {
@@ -41,14 +48,13 @@ const ExperienceSurvey: FC<ExperienceSurveyProps> = ({ questions, onNext }) => {
     setNumber(number - 1);
   };
 
-  const question = questions[number];
-  const answer = watch(question.code);
-  const progress = (number * 100) / questions.length;
-  const isRadioQuestion = ["GAD", "PHQ"].includes(question.type);
-
   return (
     <Grid container>
-      <Grid item xs={12} className={layoutClasses.mb6}>
+      <Grid
+        item
+        xs={12}
+        className={isMobile ? layoutClasses.mb4 : layoutClasses.mb6}
+      >
         <LinearProgress
           variant="determinate"
           color="secondary"
@@ -56,7 +62,11 @@ const ExperienceSurvey: FC<ExperienceSurveyProps> = ({ questions, onNext }) => {
         />
       </Grid>
 
-      <Grid item xs={12} className={layoutClasses.mb6}>
+      <Grid
+        item
+        xs={12}
+        className={isMobile ? layoutClasses.mb4 : layoutClasses.mb6}
+      >
         <Typography
           variant="body2"
           className={clsx(fontClasses.fontBolder, layoutClasses.mb1)}
@@ -71,17 +81,26 @@ const ExperienceSurvey: FC<ExperienceSurveyProps> = ({ questions, onNext }) => {
         <Typography variant="h3">{question.question}</Typography>
       </Grid>
 
-      <Grid item xs={12} className={layoutClasses.mb6}>
+      <Grid
+        item
+        xs={12}
+        className={isMobile ? layoutClasses.mb4 : layoutClasses.mb6}
+      >
         {["GAD", "PHQ"].includes(question.type) && question.options && (
           <RadioField
-            layout={{ xs: 6 }}
+            layout={{ xs: 12, sm: 6 }}
             name={question.code}
             options={question.options}
           />
         )}
         {question.type === "MCQ" && <MCQQuestion question={question} />}
         {question.type === "FRQ" && (
-          <TextInput name="Some placeholder text TBD" multiline rows={4} />
+          <TextInput
+            name={question.code}
+            placeholder="Some placeholder text TBD"
+            multiline
+            rows={4}
+          />
         )}
       </Grid>
 

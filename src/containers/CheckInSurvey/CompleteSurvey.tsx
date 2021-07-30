@@ -9,6 +9,7 @@ import {
   useLayoutStyles,
 } from "../../components/useCommonStyles";
 import FeedbackForm from "../../components/FeedbackForm";
+import { useViewport } from "../../hooks/useViewport";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -28,6 +29,7 @@ const CompleteSurvey: React.FC<CompleteSurveyProps> = ({ onNext }) => {
   const classes = useStyles();
   const fontClasses = useFontStyles();
   const layoutClasses = useLayoutStyles();
+  const { isMobile } = useViewport();
 
   return (
     <Grid container>
@@ -49,7 +51,11 @@ const CompleteSurvey: React.FC<CompleteSurveyProps> = ({ onNext }) => {
           Thank you for completing your check-in!
         </Typography>
       </Grid>
-      <Grid item xs={12} className={layoutClasses.mb6}>
+      <Grid
+        item
+        xs={12}
+        className={isMobile ? layoutClasses.mb4 : layoutClasses.mb6}
+      >
         <Typography variant="body1" align="center">
           Your care team will be reviewing your response and reach out to you if
           needed. You can view your progress and your score history by clicking

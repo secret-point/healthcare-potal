@@ -38,7 +38,7 @@ const MCQQuestion: FC<MCQQuestionProps> = ({ question }) => {
   return (
     <Grid container spacing={3}>
       {question.options?.map((option) => (
-        <Grid item key={option.code} xs={6}>
+        <Grid item key={option.code} xs={12} sm={6}>
           <CheckboxField
             name={option.code}
             label={option.label}
@@ -48,7 +48,7 @@ const MCQQuestion: FC<MCQQuestionProps> = ({ question }) => {
         </Grid>
       ))}
 
-      <Grid item xs={6}>
+      <Grid item xs={12} sm={6}>
         <TextInput
           name="MCQ_OTHER_REASON"
           placeholder="Others(please specify)"
