@@ -38,6 +38,11 @@ export const theme = createMuiTheme({
       fontSize: 14,
       fontWeight: 400,
     },
+    caption: {
+      fontSize: 12,
+      fontWeight: 400,
+      color: "#7C989B",
+    },
     allVariants: {
       color: "#183F4F",
     },
@@ -99,6 +104,9 @@ export const theme = createMuiTheme({
     },
     backgroundRed: {
       main: "#FEDEDE",
+    },
+    backgroundYellow: {
+      main: "#FFF4CC",
     },
     contrastThreshold: 3,
   },

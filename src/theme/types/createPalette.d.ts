@@ -17,6 +17,7 @@ declare module "@material-ui/core/styles/createPalette" {
     yellow: PaletteColorOptions;
     distinctiveGray: PaletteColorOptions;
     backgroundRed: PaletteColorOptions;
+    backgroundYellow: PaletteColorOptions;
   }
 }
 

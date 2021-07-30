@@ -23,6 +23,9 @@ export const useFontStyles = makeStyles(() =>
     fontBold: {
       fontWeight: 600,
     },
+    font500: {
+      fontWeight: 500,
+    },
     fontNormal: {
       fontWeight: 400,
     },
@@ -149,6 +152,9 @@ export const useBackgroundColorStyles = makeStyles((theme: Theme) =>
     },
     backgroundRed: {
       backgroundColor: theme.palette.backgroundRed.main,
+    },
+    backgroundYellow: {
+      backgroundColor: theme.palette.backgroundYellow.main,
     },
   })
 );
