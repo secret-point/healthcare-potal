@@ -16,10 +16,10 @@ const GreatStrides = () => {
   const layoutClasses = useLayoutStyles();
 
   return (
-    <Card variant="outlined">
-      <CardContent className={clsx(layoutClasses.noPadding, layoutClasses.mb1)}>
+    <Card variant="outlined" className={layoutClasses.fullHeight}>
+      <CardContent className={clsx(layoutClasses.padding3, layoutClasses.mb1)}>
         <Grid container>
-          <Grid item xs={12}>
+          <Grid item xs={12} className={layoutClasses.mb2}>
             <Typography variant="h3">
               You’re making great strides! 🎉
             </Typography>

@@ -7,6 +7,7 @@ import Typography from "@material-ui/core/Typography";
 
 import {
   useColorStyles,
+  useFontStyles,
   useLayoutStyles,
 } from "../../../components/useCommonStyles";
 import { MAX_PRAIRIE_SCORE } from "../constants";
@@ -16,20 +17,36 @@ interface LatestPrairieScoreProps {
 }
 
 const LatestPrairieScore: FC<LatestPrairieScoreProps> = ({ current }) => {
+  const fontClasses = useFontStyles();
   const colorClasses = useColorStyles();
   const layoutClasses = useLayoutStyles();
 
   return (
-    <Card variant="outlined">
-      <CardContent className={clsx(layoutClasses.noPadding, layoutClasses.mb1)}>
+    <Card variant="outlined" className={layoutClasses.fullHeight}>
+      <CardContent className={clsx(layoutClasses.padding3, layoutClasses.mb1)}>
         <Grid container>
-          <Grid item xs={12}>
-            <Typography variant="h3">Latest PrairieScore</Typography>
+          <Grid
+            container
+            item
+            xs={12}
+            justify="space-between"
+            alignItems="center"
+            className={layoutClasses.mb3}
+          >
+            <Typography variant="h3" className={fontClasses.fontNormal}>
+              Latest PrairieScore
+            </Typography>
             <Typography variant="caption">Updated 7 days ago</Typography>
           </Grid>
 
-          <Grid item xs={12}>
-            <Typography variant="body1">{current}</Typography>
+          <Grid
+            container
+            item
+            xs={12}
+            alignItems="flex-end"
+            className={layoutClasses.mb2}
+          >
+            <Typography variant="h1">{current}</Typography>
             <Typography variant="body2">
               {["/", MAX_PRAIRIE_SCORE].join("")}
             </Typography>

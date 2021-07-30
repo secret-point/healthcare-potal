@@ -212,6 +212,18 @@ export const useLayoutStyles = makeStyles((theme: Theme) =>
     mt3: {
       marginTop: theme.spacing(3),
     },
+    pl1: {
+      paddingLeft: theme.spacing(1),
+    },
+    pl2: {
+      paddingLeft: theme.spacing(2),
+    },
+    pl3: {
+      paddingLeft: theme.spacing(3),
+    },
+    pl4: {
+      paddingLeft: theme.spacing(4),
+    },
     pt1: {
       paddingTop: theme.spacing(1),
     },
@@ -232,6 +244,15 @@ export const useLayoutStyles = makeStyles((theme: Theme) =>
     },
     pb3: {
       paddingBotom: theme.spacing(3),
+    },
+    padding1: {
+      padding: theme.spacing(3),
+    },
+    padding2: {
+      padding: theme.spacing(2),
+    },
+    padding3: {
+      padding: theme.spacing(3),
     },
     noPadding: {
       padding: 0,
