@@ -1,13 +1,16 @@
 import clsx from "clsx";
+import { useState } from "react";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 
 import useAuth from "../hooks/useAuth";
-import ProfileAvatar from "./ProfileAvatar";
-import { Theme } from "../theme/types/createPalette";
 import PrairieIcon from "../icons/PrairieIcon";
+import { Theme } from "../theme/types/createPalette";
 import { useViewport } from "../hooks/useViewport";
+import ProfileAvatar from "./ProfileAvatar";
+import MenuIconButton from "./MenuIconButton";
+import LeftSidebar from "./LeftSidebar";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -34,9 +37,11 @@ const useStyles = makeStyles((theme: Theme) =>
       right: 0,
       bottom: 0,
       left: 0,
+
       display: "flex",
       alignItems: "center",
-      justifyContent: "flex-end",
+      justifyContent: "flex-start",
+      gap: theme.spacing(2),
     },
   })
 );
@@ -47,26 +52,47 @@ interface ContainerProps {
 
 const Container: React.FC<ContainerProps> = ({ children, className }) => {
   const classes = useStyles();
-  const { user } = useAuth();
+  const { user, fullName } = useAuth();
   const { isMobile } = useViewport();
+  const [showMenu, setShowMenu] = useState(false);
+
+  const handleClickMenuButton = () => {
+    setShowMenu(true);
+  };
+
+  const handleCloseMenuButton = () => {
+    setShowMenu(false);
+  };
 
   return (
     <Grid className={clsx(classes.main, className)}>
-      <Grid container justify="center" className={classes.topBar}>
-        <PrairieIcon />
-        {user && (
-          <Box className={classes.avatarWrapper}>
-            <ProfileAvatar user={user} />
-          </Box>
-        )}
-      </Grid>
+      {showMenu && (
+        <Grid item xs={3}>
+          <LeftSidebar userName={fullName} onClose={handleCloseMenuButton} />
+        </Grid>
+      )}
 
-      <Grid
-        container
-        justify="center"
-        className={clsx(classes.mainContent, isMobile && classes.mobileContent)}
-      >
-        {children}
+      <Grid item xs={showMenu ? 9 : 12}>
+        <Grid container justify="center" className={classes.topBar}>
+          {user && (
+            <Box className={classes.avatarWrapper}>
+              <MenuIconButton onClick={handleClickMenuButton} />
+              <ProfileAvatar user={user} />
+            </Box>
+          )}
+          <PrairieIcon />
+        </Grid>
+
+        <Grid
+          container
+          justify="center"
+          className={clsx(
+            classes.mainContent,
+            isMobile && classes.mobileContent
+          )}
+        >
+          {children}
+        </Grid>
       </Grid>
     </Grid>
   );

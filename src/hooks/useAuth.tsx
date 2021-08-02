@@ -9,6 +9,7 @@ import {
 
 type AuthContextType = {
   user?: User;
+  fullName: string;
   isLoading: boolean;
   isAuthenticated: boolean;
   logIn: (email: string, password: string) => Promise<any>;
@@ -54,9 +55,12 @@ export function AuthProvider(props: any) {
 
   const isAuthenticated = Boolean(user);
 
+  const fullName = [user?.firstName, user?.lastName].join("");
+
   const values = useMemo<AuthContextType>(
     () => ({
       user,
+      fullName,
       isLoading,
       isAuthenticated,
       logIn,
