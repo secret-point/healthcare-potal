@@ -10,6 +10,8 @@ import ResetPassword from "../containers/auth/ResetPassword";
 import CheckInSurvey from "../containers/CheckInSurvey/CheckInSurvey";
 import ConfirmVerificationLink from "../containers/auth/ConfirmVerificationLink";
 
+import { ROUTES } from "./types";
+
 const useStyles = makeStyles(() =>
   createStyles({
     mainRoot: {
@@ -23,25 +25,24 @@ const useStyles = makeStyles(() =>
 
 export function AuthorizedRoutes() {
   const classes = useStyles();
-  const defaultRedirect = "/dashboard";
 
   return (
     <div className={classes.mainRoot}>
       <main className={classes.mainContent}>
         <Switch>
-          <Route path="/dashboard" exact>
+          <Route path={ROUTES.DASHBOARD} exact>
             <Dashboard />
           </Route>
-          <Route path="/profile" exact>
+          <Route path={ROUTES.PROFILE} exact>
             <Profile />
           </Route>
-          <Route path="/check-in" exact>
+          <Route path={ROUTES.CHECKIN} exact>
             <CheckInSurvey />
           </Route>
-          <Route path="/progress" exact>
+          <Route path={ROUTES.PROGRESS} exact>
             <Progress />
           </Route>
-          <Redirect to={defaultRedirect} />
+          <Redirect to={ROUTES.DASHBOARD} />
         </Switch>
       </main>
     </div>
@@ -53,23 +54,23 @@ export function UnauthorizedRoutes() {
 
   return (
     <Switch>
-      <Route path="/login">
+      <Route path={ROUTES.LOGIN}>
         <SignIn />
       </Route>
 
-      <Route path="/register">
+      <Route path={ROUTES.REGISTER}>
         <Onboarding />
       </Route>
 
-      <Route path="/reset-password">
+      <Route path={ROUTES.RESET_PASSWORD}>
         <ResetPassword />
       </Route>
 
-      <Route path="/verification-link">
+      <Route path={ROUTES.VERIFICATION_LINK}>
         <ConfirmVerificationLink />
       </Route>
 
-      <Redirect to={{ pathname: "/login", state: { from: location } }} />
+      <Redirect to={{ pathname: ROUTES.LOGIN, state: { from: location } }} />
     </Switch>
   );
 }

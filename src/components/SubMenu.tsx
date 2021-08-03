@@ -17,11 +17,17 @@ const useStyles = makeStyles((theme) =>
 
 interface SubMenuProps {
   main: string;
+  selectedPath: string;
   className?: string;
   links: TMenuItem[];
 }
 
-const SubMenu: FC<SubMenuProps> = ({ main, links, className }) => {
+const SubMenu: FC<SubMenuProps> = ({
+  main,
+  links,
+  selectedPath,
+  className,
+}) => {
   const classes = useStyles();
   const layoutClasses = useLayoutStyles();
 
@@ -38,6 +44,7 @@ const SubMenu: FC<SubMenuProps> = ({ main, links, className }) => {
             link={item.link}
             variant="h4"
             className={classes.subMenuItem}
+            selected={selectedPath === item.link}
           />
         ))}
       </Box>

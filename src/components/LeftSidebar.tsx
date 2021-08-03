@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { FC } from "react";
+import { useLocation } from "react-router-dom";
 import Box from "@material-ui/core/Box";
 import Drawer from "@material-ui/core/Drawer";
 import Typography from "@material-ui/core/Typography";
@@ -7,6 +8,7 @@ import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
+import { ROUTES } from "../app/types";
 import { useViewport } from "../hooks/useViewport";
 import { Theme } from "../theme/types/createPalette";
 
@@ -62,6 +64,7 @@ const LeftSidebar: FC<LeftSidebarProps> = ({
   onLogOut,
 }) => {
   const classes = useStyles();
+  const { pathname: selectedPath } = useLocation();
   const { isMobile } = useViewport();
   const colorClasses = useColorStyles();
 
@@ -107,7 +110,12 @@ const LeftSidebar: FC<LeftSidebarProps> = ({
 
         <Box width={1}>
           <Box width={1} mb={5}>
-            <MenuLink variant="h4" title="Home" link="/dashboard" />
+            <MenuLink
+              variant="h4"
+              title="Home"
+              link="/dashboard"
+              selected={selectedPath === ROUTES.DASHBOARD}
+            />
           </Box>
 
           {subMenus.map((subMenu) => (
@@ -115,6 +123,7 @@ const LeftSidebar: FC<LeftSidebarProps> = ({
               key={subMenu.main}
               main={subMenu.main}
               links={subMenu.links}
+              selectedPath={selectedPath}
               className={classes.subMenu}
             />
           ))}
