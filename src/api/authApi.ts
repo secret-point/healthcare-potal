@@ -5,10 +5,12 @@ export const useFetchCurrentUser = () => {
   const apiFetch = useApiFetch();
 
   return async () => {
-    const { data } = await apiFetch("/cp/current", {
+    const {
+      data: { user },
+    } = await apiFetch("/cp/current", {
       method: "GET",
     });
-    return data;
+    return user;
   };
 };
 

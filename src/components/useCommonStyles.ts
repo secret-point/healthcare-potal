@@ -29,6 +29,9 @@ export const useFontStyles = makeStyles(() =>
     fontNormal: {
       fontWeight: 400,
     },
+    noneTextDecoration: {
+      textDecoration: "none",
+    },
   })
 );
 

@@ -83,3 +83,8 @@ export type TQuestion = {
   question: string;
   options?: TLabelCode[];
 };
+
+export type TMenuItem = {
+  title: string;
+  link: string;
+};

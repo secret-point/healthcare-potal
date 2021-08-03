@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { useState } from "react";
+import { useHistory } from "react-router";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
@@ -15,8 +16,22 @@ import LeftSidebar from "./LeftSidebar";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     main: {
+      position: "relative",
       padding: theme.spacing(3),
       backgroundColor: theme.palette.backgroundGreen.main,
+    },
+
+    contentWrapper: {
+      width: "100%",
+    },
+
+    sideContentWrapper: {
+      marginLeft: 320,
+      width: "calc(100% - 320px)",
+    },
+
+    mobileSideContentWrapper: {
+      display: "none",
     },
 
     mainContent: {
@@ -27,17 +42,16 @@ const useStyles = makeStyles((theme: Theme) =>
       marginTop: theme.spacing(3),
     },
 
-    topBar: {
+    topBarWrapper: {
       position: "relative",
     },
 
-    avatarWrapper: {
+    menuTriggerWrapper: {
       position: "absolute",
       top: 0,
       right: 0,
       bottom: 0,
       left: 0,
-
       display: "flex",
       alignItems: "center",
       justifyContent: "flex-start",
@@ -52,8 +66,9 @@ interface ContainerProps {
 
 const Container: React.FC<ContainerProps> = ({ children, className }) => {
   const classes = useStyles();
-  const { user, fullName } = useAuth();
+  const history = useHistory();
   const { isMobile } = useViewport();
+  const { user, fullName, logOut } = useAuth();
   const [showMenu, setShowMenu] = useState(false);
 
   const handleClickMenuButton = () => {
@@ -64,25 +79,37 @@ const Container: React.FC<ContainerProps> = ({ children, className }) => {
     setShowMenu(false);
   };
 
+  const handleLogOut = () => {
+    logOut();
+    history.push("/login");
+  };
+
   return (
-    <Grid className={clsx(classes.main, className)}>
-      {showMenu && (
-        <Grid item xs={3}>
-          <LeftSidebar userName={fullName} onClose={handleCloseMenuButton} />
+    <Grid container className={clsx(classes.main, className)}>
+      <LeftSidebar
+        open={showMenu}
+        userName={fullName}
+        onLogOut={handleLogOut}
+        onClose={handleCloseMenuButton}
+      />
+
+      {user && (
+        <Grid container justify="center" className={classes.topBarWrapper}>
+          <Box className={classes.menuTriggerWrapper}>
+            <MenuIconButton onClick={handleClickMenuButton} />
+            {!isMobile && <ProfileAvatar user={user} />}
+          </Box>
+          <PrairieIcon />
         </Grid>
       )}
 
-      <Grid item xs={showMenu ? 9 : 12}>
-        <Grid container justify="center" className={classes.topBar}>
-          {user && (
-            <Box className={classes.avatarWrapper}>
-              <MenuIconButton onClick={handleClickMenuButton} />
-              <ProfileAvatar user={user} />
-            </Box>
-          )}
-          <PrairieIcon />
-        </Grid>
-
+      <Box
+        className={clsx(
+          classes.contentWrapper,
+          showMenu && classes.sideContentWrapper,
+          showMenu && isMobile && classes.mobileSideContentWrapper
+        )}
+      >
         <Grid
           container
           justify="center"
@@ -93,7 +120,7 @@ const Container: React.FC<ContainerProps> = ({ children, className }) => {
         >
           {children}
         </Grid>
-      </Grid>
+      </Box>
     </Grid>
   );
 };
