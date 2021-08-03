@@ -25,11 +25,6 @@ const useStyles = makeStyles((theme: Theme) =>
       width: "100%",
     },
 
-    sideContentWrapper: {
-      marginLeft: 320,
-      width: "calc(100% - 320px)",
-    },
-
     mobileSideContentWrapper: {
       display: "none",
     },
@@ -106,7 +101,6 @@ const Container: React.FC<ContainerProps> = ({ children, className }) => {
       <Box
         className={clsx(
           classes.contentWrapper,
-          showMenu && classes.sideContentWrapper,
           showMenu && isMobile && classes.mobileSideContentWrapper
         )}
       >
