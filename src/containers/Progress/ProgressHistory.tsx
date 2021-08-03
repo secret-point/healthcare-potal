@@ -6,12 +6,12 @@ import {
   useFontStyles,
   useLayoutStyles,
 } from "../../components/useCommonStyles";
+import PrairieScoreHistory from "./components/PrairieScoreHistory";
+import PrairieCurrentStatus from "./components/PrairieCurrentStatus";
 
-import GreatStrides from "./components/GreatStrides";
-import CheckInNotice from "./components/CheckInNotice";
-import LatestPrairieScore from "./components/LatestPrairieScore";
+import { mockScoreHistory } from "./constants";
 
-const LatestProgress = () => {
+const ProgressHistory = () => {
   const fontClasses = useFontStyles();
   const layoutClasses = useLayoutStyles();
 
@@ -21,12 +21,12 @@ const LatestProgress = () => {
         container
         item
         xs={12}
-        justify="space-between"
         alignItems="center"
+        justify="space-between"
         className={layoutClasses.mb2}
       >
         <Typography variant="h2" className={fontClasses.font500}>
-          Your Latest Progress
+          Your Progress History
         </Typography>
         <EditButton title="Update my score" />
       </Grid>
@@ -37,19 +37,15 @@ const LatestProgress = () => {
         alignItems="stretch"
         className={layoutClasses.mb3}
       >
-        <Grid item xs={6}>
-          <LatestPrairieScore current={40} />
+        <Grid item xs={8}>
+          <PrairieScoreHistory scoreHistory={mockScoreHistory} />
         </Grid>
-        <Grid item xs={6}>
-          <GreatStrides />
+        <Grid item xs={4}>
+          <PrairieCurrentStatus score={mockScoreHistory[0]} />
         </Grid>
-      </Grid>
-
-      <Grid item xs={12}>
-        <CheckInNotice />
       </Grid>
     </Grid>
   );
 };
 
-export default LatestProgress;
+export default ProgressHistory;

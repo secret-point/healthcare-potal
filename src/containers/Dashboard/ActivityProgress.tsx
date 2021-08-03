@@ -5,15 +5,10 @@ import PrairieScore from "../../components/Progress/PrairieScore";
 import SurveyProgress from "../../components/Progress/SurveyProgress";
 import SymptomsReport from "../../components/Progress/SymptomsReport";
 import { useLayoutStyles } from "../../components/useCommonStyles";
-import { TScoreHistory } from "../../types";
+import { mockScoreHistory } from "../Progress/constants";
 
 const ActivityProgress = () => {
   const layoutClasses = useLayoutStyles();
-  const scoreHistory: TScoreHistory = [
-    { score: 20, date: new Date(2021, 6, 1) },
-    { score: 25, date: new Date(2021, 6, 3) },
-    { score: 10, date: new Date(2021, 6, 5) },
-  ];
 
   return (
     <>
@@ -21,9 +16,9 @@ const ActivityProgress = () => {
         Your Progress
       </Typography>
       <Grid container spacing={3}>
-        {scoreHistory.length && (
+        {mockScoreHistory.length && (
           <Grid item xs={12} sm={12} lg={6}>
-            <PrairieScore scoreHistory={scoreHistory} />
+            <PrairieScore scoreHistory={mockScoreHistory} />
           </Grid>
         )}
         <Grid item xs={12} sm={6} lg={3}>

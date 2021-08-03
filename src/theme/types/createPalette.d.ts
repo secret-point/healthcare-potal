@@ -13,6 +13,7 @@ declare module "@material-ui/core/styles/createPalette" {
     backgroundMint: PaletteColorOptions;
     backgroundGray: PaletteColorOptions;
     accentRed: PaletteColorOptions;
+    accentRed1: PaletteColorOptions;
     accentYellow: PaletteColorOptions;
     yellow: PaletteColorOptions;
     distinctiveGray: PaletteColorOptions;

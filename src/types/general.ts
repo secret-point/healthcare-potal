@@ -64,9 +64,19 @@ export type TTodoItem = {
   type: TodoItemType;
 };
 
+export enum SeverityTypes {
+  SEVERE = "Severe",
+  MODERATE_SEVERE = "Moderately Severe",
+  MODERATE = "Moderate",
+  MILD = "Mild",
+  REMISSION = "Remission",
+}
+
 export type TScoreItem = {
   score: number;
   date: Date;
+  severity: SeverityTypes;
+  symptoms: string[];
 };
 
 export type TScoreHistory = TScoreItem[];
