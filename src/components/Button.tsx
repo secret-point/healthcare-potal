@@ -112,7 +112,11 @@ export const EditButton: FC<MuiButtonProps> = ({
       className={clsx(classes.button, classes.editButton, className)}
       {...props}
     >
-      <Typography variant="body1" role="button" className={classes.buttonText}>
+      <Typography
+        variant="subtitle1"
+        role="button"
+        className={classes.buttonText}
+      >
         {title}
       </Typography>
     </MuiButton>

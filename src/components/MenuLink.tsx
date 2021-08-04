@@ -31,7 +31,7 @@ const MenuLink: FC<LinkProps> = ({
   link,
   selected,
   className,
-  variant = "body2",
+  variant = "subtitle2",
 }) => {
   const classes = useStyles();
   const fontClasses = useFontStyles();

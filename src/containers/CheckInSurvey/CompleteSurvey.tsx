@@ -56,7 +56,7 @@ const CompleteSurvey: React.FC<CompleteSurveyProps> = ({ onNext }) => {
         xs={12}
         className={isMobile ? layoutClasses.mb4 : layoutClasses.mb6}
       >
-        <Typography variant="body1" align="center">
+        <Typography variant="subtitle1" align="center">
           Your care team will be reviewing your response and reach out to you if
           needed. You can view your progress and your score history by clicking
           on the button below.

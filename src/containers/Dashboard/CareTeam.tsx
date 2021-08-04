@@ -65,7 +65,7 @@ const CareTeam = () => {
       <Typography variant="h2" className={layoutClasses.mb1}>
         Your Care Team
       </Typography>
-      <Typography variant="body2" className={layoutClasses.mb3}>
+      <Typography variant="subtitle2" className={layoutClasses.mb3}>
         Meet your personal team of providers. Your Care Coordinator is available
         to answer your questions Mon-Fri, 9AM to 5PM.
       </Typography>

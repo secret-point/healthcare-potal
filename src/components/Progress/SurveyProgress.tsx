@@ -23,7 +23,7 @@ const SurveyProgress = () => {
         <AssessmentOutlinedIcon
           className={clsx(colorClasses.secondaryGreen1, layoutClasses.mb1)}
         />
-        <Typography variant="body2" className={layoutClasses.mb05}>
+        <Typography variant="subtitle2" className={layoutClasses.mb05}>
           It&apos;s been
           <b> 4 weeks </b>
           since your last check-in.

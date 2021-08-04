@@ -42,7 +42,7 @@ const CareTeamMemberCard = ({ member }: CareTeamMemberCardProps) => {
           src="https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg"
           className={layoutClasses.mb2}
         />
-        <Typography variant="body2" className={layoutClasses.mb05}>
+        <Typography variant="subtitle2" className={layoutClasses.mb05}>
           {member.job}
         </Typography>
         <Typography

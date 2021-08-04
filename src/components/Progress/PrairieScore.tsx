@@ -87,7 +87,7 @@ const PrairieScore = ({ scoreHistory }: PrairieScoreProps) => {
         <Grid item xs={12} sm={5} className={layoutClasses.fullHeight}>
           <Grid container className={layoutClasses.fullHeight}>
             <Box width={1}>
-              <Typography variant="body2" className={layoutClasses.mb1}>
+              <Typography variant="subtitle2" className={layoutClasses.mb1}>
                 Prairie Score
               </Typography>
               <Box width={1} display="flex">
@@ -99,7 +99,7 @@ const PrairieScore = ({ scoreHistory }: PrairieScoreProps) => {
                   {` (${lastScoreItem.score - firstScoreItem.score})`}
                 </Typography>
               </Box>
-              <Typography variant="body2" className={layoutClasses.mb15}>
+              <Typography variant="subtitle2" className={layoutClasses.mb15}>
                 {formatFullDay(lastScoreItem.date)}
               </Typography>
             </Box>

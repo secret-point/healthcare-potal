@@ -35,7 +35,7 @@ const EmptyCareTeamMemberCard = ({
   return (
     <Card variant="outlined" className={classes.teamMemberCard}>
       <CardContent className={clsx(layoutClasses.noPadding, layoutClasses.mb1)}>
-        <Typography variant="body1" className={layoutClasses.mb3}>
+        <Typography variant="subtitle1" className={layoutClasses.mb3}>
           We can coordinate care with your other providers, such as PCPs and
           therapists.
         </Typography>

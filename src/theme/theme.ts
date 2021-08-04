@@ -30,18 +30,22 @@ export const theme = createMuiTheme({
       fontSize: 16,
       fontWeight: 500,
     },
-    body1: {
+    subtitle1: {
       fontSize: 16,
       fontWeight: 400,
     },
-    body2: {
+    subtitle2: {
       fontSize: 14,
       fontWeight: 400,
     },
-    caption: {
+    body1: {
       fontSize: 12,
       fontWeight: 400,
       color: "#7C989B",
+    },
+    caption: {
+      fontSize: 10,
+      fontWeight: 400,
     },
     allVariants: {
       color: "#183F4F",

@@ -37,7 +37,7 @@ const InitialStep = ({ onSkipVerification, onUploadID }: InitialStepProps) => {
   return (
     <Grid container>
       <Grid item xs={12} className={layoutClasses.mb3}>
-        <Typography variant="body1">
+        <Typography variant="subtitle1">
           Before we provide clinical service, we need to verify your
           identification. You may choose one of the following options:
         </Typography>
@@ -59,7 +59,7 @@ const InitialStep = ({ onSkipVerification, onUploadID }: InitialStepProps) => {
             <Typography variant="h5" className={classes.weight700}>
               Upload a picture of your photo ID
             </Typography>
-            <Typography variant="body2">
+            <Typography variant="subtitle2">
               Once we verify your ID, you won&apos;t have to bring your ID card
               to your online visit.
             </Typography>
@@ -78,7 +78,7 @@ const InitialStep = ({ onSkipVerification, onUploadID }: InitialStepProps) => {
         <Typography variant="h5" className={classes.weight700}>
           Manual Verification
         </Typography>
-        <Typography variant="body2">
+        <Typography variant="subtitle2">
           Skip the verification now &&nbsp;
           <b>present your ID at the start of every visit.</b>
         </Typography>

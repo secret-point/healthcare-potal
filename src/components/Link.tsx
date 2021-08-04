@@ -28,7 +28,7 @@ const Link = ({ align, to, text }: LinkProps) => {
     <RouterLink to={to} className={classes.link}>
       <Typography
         align={align}
-        variant="body1"
+        variant="subtitle1"
         className={classes.linkTypography}
       >
         {text}

@@ -42,7 +42,7 @@ const AllSetup: React.FC<AllSetupProps> = ({ onSignIn }) => {
       <Grid item xs={12} className={layoutClasses.mb6}>
         <Typography
           align="center"
-          variant="body1"
+          variant="subtitle1"
           className={classes.typography}
         >
           You can now sign in to your account using your email and password.

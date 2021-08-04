@@ -41,11 +41,11 @@ const CustomList: FC<CustomListProps> = ({ value, fields }) => {
     <List className={classes.list}>
       {fields.map((field) => (
         <ListItem key={field.label} className={classes.listItem}>
-          <Typography variant="body1">{field.label}</Typography>
+          <Typography variant="subtitle1">{field.label}</Typography>
           {field.render ? (
             field.render(_get(value, field.path))
           ) : (
-            <Typography variant="body1" className={classes.listValue}>
+            <Typography variant="subtitle1" className={classes.listValue}>
               {_get(value, field.path)}
             </Typography>
           )}

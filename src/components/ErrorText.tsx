@@ -19,7 +19,7 @@ export default function ErrorText({ errorText }: ErrorTextProps) {
   const classes = useStyles();
 
   return (
-    <Typography variant="body1" className={classes.errorText}>
+    <Typography variant="subtitle1" className={classes.errorText}>
       {errorText}
     </Typography>
   );

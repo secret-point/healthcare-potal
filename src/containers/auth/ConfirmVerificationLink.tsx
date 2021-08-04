@@ -61,7 +61,7 @@ const ConfirmVerificationLink = () => {
             </Grid>
 
             <Grid item xs={12} className={layoutClasses.mb6}>
-              <Typography variant="body1" align="center">
+              <Typography variant="subtitle1" align="center">
                 You may now sign to your account using your email and your new
                 password.
               </Typography>

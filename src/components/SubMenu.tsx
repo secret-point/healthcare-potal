@@ -33,7 +33,7 @@ const SubMenu: FC<SubMenuProps> = ({
 
   return (
     <Box width={1} className={className}>
-      <Typography variant="body2" className={layoutClasses.mb2}>
+      <Typography variant="subtitle2" className={layoutClasses.mb2}>
         {main}
       </Typography>
       <Box ml={2}>

@@ -60,7 +60,7 @@ const Welcome: React.FC<WelcomeProps> = ({ onCancel, onNext }) => {
         xs={12}
         className={isMobile ? layoutClasses.mb4 : layoutClasses.mb6}
       >
-        <Typography variant="body1" align="center">
+        <Typography variant="subtitle1" align="center">
           Completing this survey allows you and your care team to measure your
           progress. Once you complete your check-in, your care team will review
           your response.

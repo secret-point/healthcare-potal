@@ -1,7 +1,6 @@
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 
-import { EditButton } from "../../components/Button";
 import {
   useFontStyles,
   useLayoutStyles,
@@ -28,7 +27,6 @@ const ProgressHistory = () => {
         <Typography variant="h2" className={fontClasses.font500}>
           Your Progress History
         </Typography>
-        <EditButton title="Update my score" />
       </Grid>
 
       <Grid

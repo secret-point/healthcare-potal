@@ -54,7 +54,7 @@ const AccountInformation: FC<AccountInformationProps> = ({
       path: "preferredName",
       render: (value: string) => (
         <Box className={classes.editableFieldWrapper}>
-          <Typography variant="body1" className={classes.listValue}>
+          <Typography variant="subtitle1" className={classes.listValue}>
             {value}
           </Typography>
           <EditButton
@@ -79,7 +79,7 @@ const AccountInformation: FC<AccountInformationProps> = ({
       path: "verificationStatus",
       render: (value: string) => (
         <Box className={classes.editableFieldWrapper}>
-          <Typography variant="body1" className={classes.listValue}>
+          <Typography variant="subtitle1" className={classes.listValue}>
             {value || "Unverified"}
           </Typography>
           {shouldVerifyId(value) && (

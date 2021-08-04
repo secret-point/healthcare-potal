@@ -13,6 +13,7 @@ import {
   useLayoutStyles,
 } from "../../../components/useCommonStyles";
 import PrairieStatus from "./PrairieStatus";
+import { ButtonGroup } from "../../../components/ArrowButtonGroup";
 
 interface PrairieCurrentStatusProps {
   score: TScoreItem;
@@ -36,12 +37,14 @@ const PrairieCurrentStatus: FC<PrairieCurrentStatusProps> = ({ score }) => {
         </Grid>
 
         <Grid item xs={12} alignItems="flex-end" className={layoutClasses.mb2}>
-          <Typography variant="body2">PrairieScore</Typography>
+          <Typography variant="subtitle2" className={layoutClasses.mb05}>
+            PrairieScore
+          </Typography>
 
           <Box width={1} display="flex" alignItems="flex-end">
             <Typography variant="h2">{score.score}</Typography>
             <Typography
-              variant="body1"
+              variant="subtitle1"
               className={clsx(colorClasses.secondaryGreen1, layoutClasses.ml1)}
             >
               (-6)
@@ -50,15 +53,21 @@ const PrairieCurrentStatus: FC<PrairieCurrentStatusProps> = ({ score }) => {
         </Grid>
 
         <Grid container className={layoutClasses.mb2}>
-          <Grid item xs={12}>
-            <Typography variant="body2">Severity</Typography>
+          <Grid item xs={12} className={layoutClasses.mb1}>
+            <Typography variant="subtitle2">Severity</Typography>
           </Grid>
           <PrairieStatus current={score.severity} />
         </Grid>
 
+        <Grid item xs={12} className={layoutClasses.mb2}>
+          <Typography variant="subtitle2">Symptoms</Typography>
+          <Typography variant="subtitle1">
+            {score.symptoms.join(", ") || "None reported"}
+          </Typography>
+        </Grid>
+
         <Grid item xs={12}>
-          <Typography variant="body2">Symptoms</Typography>
-          <Typography variant="body1">{score.symptoms.join(",")}</Typography>
+          <ButtonGroup />
         </Grid>
       </Grid>
     </Card>

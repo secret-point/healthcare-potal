@@ -40,7 +40,7 @@ export default function ResetPassword() {
             </Grid>
 
             <Grid item xs={12} className={layoutClasses.mb6}>
-              <Typography variant="body1" align="center">
+              <Typography variant="subtitle1" align="center">
                 We&apos;ll send you an email with a link to reset your password
               </Typography>
             </Grid>
@@ -60,7 +60,7 @@ export default function ResetPassword() {
             </Grid>
 
             <Grid item xs={12} className={layoutClasses.mb6}>
-              <Typography variant="body1" align="center">
+              <Typography variant="subtitle1" align="center">
                 If there is an account associated with the email address you
                 provided, you will recieve an email with a password reset link.
               </Typography>

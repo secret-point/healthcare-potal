@@ -27,7 +27,9 @@ const CheckInNotice = () => {
         className={clsx(classes.content, backgroundClasses.backgroundYellow)}
       >
         <Grid container justify="space-between">
-          <Typography>It’s been 7 days since your last check-in.</Typography>
+          <Typography variant="h5">
+            It’s been 7 days since your last check-in.
+          </Typography>
           <EditButton title="Take the survey" />
         </Grid>
       </CardContent>

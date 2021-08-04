@@ -48,7 +48,7 @@ const TodoItem: FC<TodoItemProps> = ({ item, onClick }) => {
         >
           {item.title}
         </Typography>
-        <Typography variant="body2" className={fontClasses.fontNormal}>
+        <Typography variant="subtitle2" className={fontClasses.fontNormal}>
           {["By", formatFullDay(item.dueDate)].join(" ")}
         </Typography>
       </CardContent>

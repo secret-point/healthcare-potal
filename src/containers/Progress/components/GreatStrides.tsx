@@ -25,7 +25,7 @@ const GreatStrides = () => {
             </Typography>
           </Grid>
           <Grid item xs={12}>
-            <Typography variant="body1">
+            <Typography variant="subtitle1">
               Your score &nbsp;
               <b
                 className={clsx(

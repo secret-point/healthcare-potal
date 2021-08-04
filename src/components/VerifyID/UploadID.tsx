@@ -36,7 +36,7 @@ const UploadID: FC<UploadIDProps> = ({ file, onSelectFile }) => {
   return (
     <Grid container>
       <Grid item xs={12} className={layoutClasses.mb2}>
-        <Typography variant="body1">
+        <Typography variant="subtitle1">
           We accept any valid federal/state identification card with a clear
           photo of yourself. These include: Passport, Driver’s License, State
           ID, Military ID, etc.
@@ -44,7 +44,7 @@ const UploadID: FC<UploadIDProps> = ({ file, onSelectFile }) => {
       </Grid>
 
       <Grid item xs={12} className={layoutClasses.mb2}>
-        <Typography variant="body1">
+        <Typography variant="subtitle1">
           Please make sure your&nbsp;
           <b>all the information and the photo</b>
           &nbsp;on your ID card is clearly visible.
@@ -68,12 +68,12 @@ const UploadID: FC<UploadIDProps> = ({ file, onSelectFile }) => {
             multiple={false}
             onChange={handleChangeFile}
           />
-          <Typography variant="body1" className={classes.uploadLabel}>
+          <Typography variant="subtitle1" className={classes.uploadLabel}>
             Upload ID
           </Typography>
         </Link>
 
-        {file && <Typography variant="body1">{file.name}</Typography>}
+        {file && <Typography variant="subtitle1">{file.name}</Typography>}
       </Grid>
     </Grid>
   );

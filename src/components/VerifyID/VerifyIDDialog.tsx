@@ -96,7 +96,7 @@ const VerifyIDDialog: FC<VerifyIDDialogProps> = ({ open, onClose }) => {
         )}
         {step === VerifySteps.FINAL && (
           <Grid item xs={12}>
-            <Typography variant="body1">
+            <Typography variant="subtitle1">
               We will be verifying your ID within 1 business day. Your Care
               Coordinator will reach out to you if we encounter any issues
               verifying your identity.

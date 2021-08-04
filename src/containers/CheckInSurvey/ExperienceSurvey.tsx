@@ -68,7 +68,7 @@ const ExperienceSurvey: FC<ExperienceSurveyProps> = ({ questions, onNext }) => {
         className={isMobile ? layoutClasses.mb4 : layoutClasses.mb6}
       >
         <Typography
-          variant="body2"
+          variant="subtitle2"
           className={clsx(fontClasses.fontBolder, layoutClasses.mb1)}
         >
           {["QUESTION", number + 1].join(" ")}

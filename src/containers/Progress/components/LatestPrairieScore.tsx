@@ -11,6 +11,7 @@ import {
   useLayoutStyles,
 } from "../../../components/useCommonStyles";
 import { MAX_PRAIRIE_SCORE } from "../constants";
+import PrairieScoreBar from "./PrairieScoreBar";
 
 interface LatestPrairieScoreProps {
   current: number;
@@ -36,7 +37,7 @@ const LatestPrairieScore: FC<LatestPrairieScoreProps> = ({ current }) => {
             <Typography variant="h3" className={fontClasses.fontNormal}>
               Latest PrairieScore
             </Typography>
-            <Typography variant="caption">Updated 7 days ago</Typography>
+            <Typography variant="body1">Updated 7 days ago</Typography>
           </Grid>
 
           <Grid
@@ -47,15 +48,19 @@ const LatestPrairieScore: FC<LatestPrairieScoreProps> = ({ current }) => {
             className={layoutClasses.mb2}
           >
             <Typography variant="h1">{current}</Typography>
-            <Typography variant="body2">
+            <Typography variant="subtitle2">
               {["/", MAX_PRAIRIE_SCORE].join("")}
             </Typography>
             <Typography
-              variant="body2"
+              variant="subtitle2"
               className={colorClasses.secondaryGreen1}
             >
               &nbsp;(-3)
             </Typography>
+          </Grid>
+
+          <Grid item xs={12}>
+            <PrairieScoreBar score={40} />
           </Grid>
         </Grid>
       </CardContent>

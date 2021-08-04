@@ -23,7 +23,7 @@ const SymptomsReport = () => {
         <EmojiPeopleIcon
           className={clsx(colorClasses.secondaryGreen1, layoutClasses.mb1)}
         />
-        <Typography variant="body2" className={layoutClasses.mb05}>
+        <Typography variant="subtitle2" className={layoutClasses.mb05}>
           Not feeling too well? Let your care team know.
         </Typography>
       </CardContent>

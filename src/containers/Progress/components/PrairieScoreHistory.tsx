@@ -60,7 +60,7 @@ const PrairieScoreHistory = ({ scoreHistory }: PrairieScoreHistoryProps) => {
           PrairieScore History
         </Typography>
         <Typography
-          variant="body2"
+          variant="subtitle2"
           className={clsx(layoutClasses.mb1, colorClasses.secondaryNavy2)}
         >
           Select a dot on the graph to view your progress from that date
