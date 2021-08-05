@@ -66,7 +66,6 @@ const PrairieScore = ({ scoreHistory }: PrairieScoreProps) => {
           <Box className={classes.responsiveLineWrapper}>
             <ResponsiveLine
               margin={{ top: 4, bottom: 4, left: 4 }}
-              animate
               enableSlices="x"
               enableArea
               curve="natural"

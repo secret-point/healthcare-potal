@@ -6,7 +6,7 @@ import {
   useLayoutStyles,
 } from "../../components/useCommonStyles";
 import PrairieScoreHistory from "./components/PrairieScoreHistory";
-import PrairieCurrentStatus from "./components/PrairieCurrentStatus";
+import PrairieStatusCardSlices from "./components/PrairieStatusCardSlices";
 
 import { mockScoreHistory } from "./constants";
 
@@ -39,7 +39,7 @@ const ProgressHistory = () => {
           <PrairieScoreHistory scoreHistory={mockScoreHistory} />
         </Grid>
         <Grid item xs={4}>
-          <PrairieCurrentStatus score={mockScoreHistory[0]} />
+          <PrairieStatusCardSlices scores={mockScoreHistory} />
         </Grid>
       </Grid>
     </Grid>

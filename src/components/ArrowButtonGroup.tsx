@@ -16,6 +16,8 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     arrowButton: {
       color: "white",
+      width: theme.spacing(4),
+      height: theme.spacing(4),
       backgroundColor: theme.palette.secondaryGreen1.main,
 
       "&:hover": {

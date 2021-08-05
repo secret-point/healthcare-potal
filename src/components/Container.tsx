@@ -22,7 +22,9 @@ const useStyles = makeStyles((theme: Theme) =>
     },
 
     contentWrapper: {
+      display: "flex",
       width: "100%",
+      justifyContent: "center",
     },
 
     mobileSideContentWrapper: {
@@ -106,6 +108,11 @@ const Container: React.FC<ContainerProps> = ({ children, className }) => {
       >
         <Grid
           container
+          item
+          xs={12}
+          sm={12}
+          md={10}
+          lg={8}
           justify="center"
           className={clsx(
             classes.mainContent,

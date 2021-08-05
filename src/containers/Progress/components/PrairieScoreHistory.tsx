@@ -12,6 +12,7 @@ import { linearGradientDef } from "@nivo/core";
 import { TScoreHistory } from "../../../types/general";
 import {
   useCardStyles,
+  useFontStyles,
   useColorStyles,
   useLayoutStyles,
 } from "../../../components/useCommonStyles";
@@ -32,6 +33,7 @@ interface PrairieScoreHistoryProps {
 const PrairieScoreHistory = ({ scoreHistory }: PrairieScoreHistoryProps) => {
   const classes = useStyles();
   const cardClasses = useCardStyles();
+  const fontClasses = useFontStyles();
   const colorClasses = useColorStyles();
   const layoutClasses = useLayoutStyles();
 
@@ -56,7 +58,10 @@ const PrairieScoreHistory = ({ scoreHistory }: PrairieScoreHistoryProps) => {
       className={clsx(cardClasses.card, layoutClasses.pb0)}
     >
       <Grid item xs={12}>
-        <Typography variant="h3" className={layoutClasses.mb1}>
+        <Typography
+          variant="h3"
+          className={clsx(fontClasses.font500, layoutClasses.mb1)}
+        >
           PrairieScore History
         </Typography>
         <Typography
@@ -79,7 +84,6 @@ const PrairieScoreHistory = ({ scoreHistory }: PrairieScoreHistoryProps) => {
       >
         <ResponsiveLine
           margin={{ top: 4, bottom: 30, left: 30 }}
-          animate
           enableSlices="x"
           enableArea
           curve="natural"

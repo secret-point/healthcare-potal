@@ -16,7 +16,7 @@ export const getCapitalizedValue = (value: string) => {
   return value;
 };
 
-export const extractCapitalizedFirstLetter = (values: string[]) =>
+export const getCapitalizedFirstLetters = (values: string[]) =>
   values.map((value) => {
     if (value.length) return value[0].toUpperCase();
     return "";

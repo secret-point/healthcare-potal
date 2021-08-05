@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) =>
   createStyles({
     button: {
       minWidth: 32,
-      padding: theme.spacing(1.5),
+      padding: theme.spacing(1, 1.5),
       borderRadius: theme.spacing(2.5),
       textTransform: "none",
     },

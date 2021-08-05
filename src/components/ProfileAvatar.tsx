@@ -1,9 +1,11 @@
+import { useHistory } from "react-router";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
 import { Theme } from "../theme/types/createPalette";
 import { User } from "../types/user";
-import { extractCapitalizedFirstLetter } from "../utils/string";
+import { getCapitalizedFirstLetters } from "../utils/string";
+import { ROUTES } from "../app/types";
 
 interface StyleProps {
   width?: number;
@@ -13,6 +15,7 @@ interface StyleProps {
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     avatar: {
+      cursor: "pointer",
       width: (props: StyleProps) => props.width,
       height: (props: StyleProps) => props.height,
       borderRadius: (props: StyleProps) => props.width,
@@ -34,14 +37,22 @@ export default function ProfileAvatar({
   height = 40,
   user,
 }: ProfileAvatarProps) {
+  const history = useHistory();
   const classes = useStyles({ width, height });
 
+  const handleClickAvatar = () => {
+    history.push(ROUTES.PROFILE);
+  };
+
   return (
-    <div className={classes.avatar}>
+    <div
+      role="button"
+      tabIndex={-1}
+      className={classes.avatar}
+      onClick={handleClickAvatar}
+    >
       <Typography variant="h3">
-        {extractCapitalizedFirstLetter([user.firstName, user.lastName]).join(
-          ""
-        )}
+        {getCapitalizedFirstLetters([user.firstName, user.lastName]).join("")}
       </Typography>
     </div>
   );

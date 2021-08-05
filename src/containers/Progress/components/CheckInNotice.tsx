@@ -12,7 +12,7 @@ import { useBackgroundColorStyles } from "../../../components/useCommonStyles";
 const useStyles = makeStyles((theme) =>
   createStyles({
     content: {
-      padding: `${theme.spacing(2, 4)} !important`,
+      padding: `${theme.spacing(2, 2, 2, 4)} !important`,
     },
   })
 );
@@ -26,7 +26,7 @@ const CheckInNotice = () => {
       <CardContent
         className={clsx(classes.content, backgroundClasses.backgroundYellow)}
       >
-        <Grid container justify="space-between">
+        <Grid container justify="space-between" alignItems="center">
           <Typography variant="h5">
             It’s been 7 days since your last check-in.
           </Typography>

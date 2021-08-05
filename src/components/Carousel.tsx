@@ -26,9 +26,8 @@ const useStyles = makeStyles((theme: Theme) =>
 
       "& .ButtonGroup": {
         alignSelf: "flex-end",
-        paddingRight: theme.spacing(1.5),
+        minHeight: theme.spacing(5),
         marginBottom: theme.spacing(2),
-        minHeight: 40,
       },
     },
     carouselTitle: {

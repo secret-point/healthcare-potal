@@ -45,8 +45,8 @@ const useStyles = makeStyles((theme: Theme) =>
     },
 
     editButton: {
-      padding: theme.spacing(0),
       minWidth: 40,
+      padding: theme.spacing(0),
 
       "& .MuiButton-label": {
         textTransform: "none",
@@ -54,6 +54,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
 
     buttonText: {
+      fontWeight: 700,
       color: theme.palette.secondaryGreen1.main,
     },
   })
