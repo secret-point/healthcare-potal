@@ -1,13 +1,16 @@
 import clsx from "clsx";
+import dayjs from "dayjs";
+import { FC } from "react";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
-import { EditButton } from "../../../components/Button";
-
+import { ButtonLink } from "../../../components/Link";
 import { useBackgroundColorStyles } from "../../../components/useCommonStyles";
+import { ROUTES } from "../../../app/types";
+import { TScoreItem } from "../../../types";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -17,9 +20,15 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-const CheckInNotice = () => {
+interface CheckInNoticeProps {
+  latestItem: TScoreItem;
+}
+
+const CheckInNotice: FC<CheckInNoticeProps> = ({ latestItem }) => {
   const classes = useStyles();
   const backgroundClasses = useBackgroundColorStyles();
+
+  const diffInDays = dayjs().diff(latestItem.date, "day");
 
   return (
     <Card>
@@ -28,9 +37,9 @@ const CheckInNotice = () => {
       >
         <Grid container justify="space-between" alignItems="center">
           <Typography variant="h5">
-            It’s been 7 days since your last check-in.
+            {`It’s been ${diffInDays} days since your last check-in.`}
           </Typography>
-          <EditButton title="Take the survey" />
+          <ButtonLink text="Take the survey" to={ROUTES.CHECKIN} align="left" />
         </Grid>
       </CardContent>
     </Card>

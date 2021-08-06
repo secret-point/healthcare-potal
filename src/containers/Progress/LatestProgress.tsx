@@ -1,7 +1,8 @@
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 
-import { EditButton } from "../../components/Button";
+import { ROUTES } from "../../app/types";
+import { ButtonLink } from "../../components/Link";
 import {
   useFontStyles,
   useLayoutStyles,
@@ -10,10 +11,14 @@ import {
 import GreatStrides from "./components/GreatStrides";
 import CheckInNotice from "./components/CheckInNotice";
 import LatestPrairieScore from "./components/LatestPrairieScore";
+import { mockScoreHistory } from "./constants";
 
 const LatestProgress = () => {
   const fontClasses = useFontStyles();
   const layoutClasses = useLayoutStyles();
+
+  const previousItem = mockScoreHistory[mockScoreHistory.length - 2];
+  const latestItem = mockScoreHistory[mockScoreHistory.length - 1];
 
   return (
     <Grid container>
@@ -28,7 +33,7 @@ const LatestProgress = () => {
         <Typography variant="h2" className={fontClasses.font500}>
           Your Latest Progress
         </Typography>
-        <EditButton title="Update my score" />
+        <ButtonLink text="Update my score" to={ROUTES.CHECKIN} align="left" />
       </Grid>
 
       <Grid
@@ -38,15 +43,20 @@ const LatestProgress = () => {
         className={layoutClasses.mb3}
       >
         <Grid item xs={6}>
-          <LatestPrairieScore current={40} />
+          <LatestPrairieScore
+            previousItem={previousItem}
+            latestItem={latestItem}
+          />
         </Grid>
         <Grid item xs={6}>
-          <GreatStrides />
+          <GreatStrides previousItem={previousItem} latestItem={latestItem} />
         </Grid>
       </Grid>
 
       <Grid item xs={12}>
-        <CheckInNotice />
+        <CheckInNotice
+          latestItem={mockScoreHistory[mockScoreHistory.length - 1]}
+        />
       </Grid>
     </Grid>
   );

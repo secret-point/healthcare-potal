@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import dayjs from "dayjs";
 import { FC } from "react";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -10,17 +11,23 @@ import {
   useFontStyles,
   useLayoutStyles,
 } from "../../../components/useCommonStyles";
+import { TScoreItem } from "../../../types";
 import { MAX_PRAIRIE_SCORE } from "../constants";
 import PrairieScoreBar from "./PrairieScoreBar";
 
 interface LatestPrairieScoreProps {
-  current: number;
+  previousItem?: TScoreItem;
+  latestItem: TScoreItem;
 }
 
-const LatestPrairieScore: FC<LatestPrairieScoreProps> = ({ current }) => {
+const LatestPrairieScore: FC<LatestPrairieScoreProps> = ({
+  previousItem,
+  latestItem,
+}) => {
   const fontClasses = useFontStyles();
   const colorClasses = useColorStyles();
   const layoutClasses = useLayoutStyles();
+  const diffInDays = dayjs().diff(latestItem.date, "day");
 
   return (
     <Card variant="outlined" className={layoutClasses.fullHeight}>
@@ -37,7 +44,9 @@ const LatestPrairieScore: FC<LatestPrairieScoreProps> = ({ current }) => {
             <Typography variant="h3" className={fontClasses.fontNormal}>
               Latest PrairieScore
             </Typography>
-            <Typography variant="body1">Updated 7 days ago</Typography>
+            <Typography variant="body1">
+              {`Updated ${diffInDays} days ago`}
+            </Typography>
           </Grid>
 
           <Grid
@@ -47,7 +56,7 @@ const LatestPrairieScore: FC<LatestPrairieScoreProps> = ({ current }) => {
             alignItems="flex-end"
             className={layoutClasses.mb2}
           >
-            <Typography variant="h1">{current}</Typography>
+            <Typography variant="h1">{latestItem.score}</Typography>
             <Typography variant="subtitle2">
               {["/", MAX_PRAIRIE_SCORE].join("")}
             </Typography>
@@ -55,12 +64,12 @@ const LatestPrairieScore: FC<LatestPrairieScoreProps> = ({ current }) => {
               variant="subtitle2"
               className={colorClasses.secondaryGreen1}
             >
-              &nbsp;(-3)
+              {` (${latestItem.score - (previousItem?.score || 0)})`}
             </Typography>
           </Grid>
 
           <Grid item xs={12}>
-            <PrairieScoreBar score={40} />
+            <PrairieScoreBar score={latestItem.score} />
           </Grid>
         </Grid>
       </CardContent>

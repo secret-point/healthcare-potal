@@ -25,7 +25,8 @@ const useStyles = makeStyles(() =>
 );
 
 interface PrairieStatusCardProps {
-  score: TScoreItem;
+  previousScore?: TScoreItem;
+  currentScore: TScoreItem;
   disabledNext: boolean;
   disabledPrevious: boolean;
   onClickNext: VoidFunction;
@@ -33,7 +34,8 @@ interface PrairieStatusCardProps {
 }
 
 const PrairieStatusCard: FC<PrairieStatusCardProps> = ({
-  score,
+  previousScore,
+  currentScore,
   disabledNext,
   disabledPrevious,
   onClickNext,
@@ -43,6 +45,7 @@ const PrairieStatusCard: FC<PrairieStatusCardProps> = ({
   const cardClasses = useCardStyles();
   const colorClasses = useColorStyles();
   const layoutClasses = useLayoutStyles();
+  const scoreDifference = currentScore.score - (previousScore?.score || 0);
 
   return (
     <Card variant="outlined" className={clsx(cardClasses.card)}>
@@ -50,22 +53,17 @@ const PrairieStatusCard: FC<PrairieStatusCardProps> = ({
         <Grid item xs={12}>
           <Grid item xs={12} className={layoutClasses.mb2}>
             <Typography variant="h3">
-              {dayjs(score.date).format("MMM D, YYYY")}
+              {dayjs(currentScore.date).format("MMM D, YYYY")}
             </Typography>
           </Grid>
 
-          <Grid
-            item
-            xs={12}
-            alignItems="flex-end"
-            className={layoutClasses.mb2}
-          >
+          <Grid item xs={12} className={layoutClasses.mb2}>
             <Typography variant="subtitle2" className={layoutClasses.mb05}>
               PrairieScore
             </Typography>
 
             <Box width={1} display="flex" alignItems="flex-end">
-              <Typography variant="h2">{score.score}</Typography>
+              <Typography variant="h2">{currentScore.score}</Typography>
               <Typography
                 variant="subtitle1"
                 className={clsx(
@@ -73,7 +71,7 @@ const PrairieStatusCard: FC<PrairieStatusCardProps> = ({
                   layoutClasses.ml1
                 )}
               >
-                (-6)
+                {`(${scoreDifference})`}
               </Typography>
             </Box>
           </Grid>
@@ -82,13 +80,13 @@ const PrairieStatusCard: FC<PrairieStatusCardProps> = ({
             <Grid item xs={12} className={layoutClasses.mb1}>
               <Typography variant="subtitle2">Severity</Typography>
             </Grid>
-            <PrairieStatus current={score.severity} />
+            <PrairieStatus current={currentScore.severity} />
           </Grid>
 
           <Grid item xs={12} className={layoutClasses.mb2}>
             <Typography variant="subtitle2">Symptoms</Typography>
             <Typography variant="subtitle1">
-              {score.symptoms.join(", ") || "None reported"}
+              {currentScore.symptoms.join(", ") || "None reported"}
             </Typography>
           </Grid>
         </Grid>

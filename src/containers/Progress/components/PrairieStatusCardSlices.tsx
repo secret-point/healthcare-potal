@@ -25,7 +25,8 @@ const PrairieStatusCardSlices: FC<PrairieStatusCardSlicesProps> = ({
 
   return (
     <PriaireStatusCard
-      score={scores[index]}
+      previousScore={scores[index - 1]}
+      currentScore={scores[index]}
       disabledNext={disabledNext}
       disabledPrevious={disabledPrevious}
       onClickNext={handleClickNext}

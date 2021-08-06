@@ -5,7 +5,8 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import AssessmentOutlinedIcon from "@material-ui/icons/AssessmentOutlined";
 
-import { EditButton } from "../Button";
+import { ROUTES } from "../../app/types";
+import { ButtonLink } from "../Link";
 import {
   useCardStyles,
   useColorStyles,
@@ -30,7 +31,7 @@ const SurveyProgress = () => {
         </Typography>
       </CardContent>
       <CardActions className={layoutClasses.noPadding}>
-        <EditButton title="Take the survey" />
+        <ButtonLink text="Take the survey" to={ROUTES.CHECKIN} align="left" />
       </CardActions>
     </Card>
   );

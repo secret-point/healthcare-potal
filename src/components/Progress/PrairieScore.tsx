@@ -10,7 +10,7 @@ import { ResponsiveLine } from "@nivo/line";
 // @ts-ignore
 import { linearGradientDef } from "@nivo/core";
 
-import { EditButton } from "../Button";
+import { ButtonLink } from "../Link";
 import { TScoreHistory } from "../../types/general";
 import { formatFullDay } from "../../utils/date";
 import {
@@ -18,6 +18,7 @@ import {
   useColorStyles,
   useLayoutStyles,
 } from "../useCommonStyles";
+import { ROUTES } from "../../app/types";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -103,7 +104,11 @@ const PrairieScore = ({ scoreHistory }: PrairieScoreProps) => {
               </Typography>
             </Box>
 
-            <EditButton title="View my progress" />
+            <ButtonLink
+              text="View my progress"
+              to={ROUTES.PROGRESS}
+              align="left"
+            />
           </Grid>
         </Grid>
       </Grid>

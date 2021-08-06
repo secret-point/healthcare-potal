@@ -1,8 +1,14 @@
+import { useState } from "react";
+import { useHistory } from "react-router";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
-
-import Container from "../../components/Container";
 import { Theme } from "../../theme/types/createPalette";
+
+import { ROUTES } from "../../app/types";
+import { TodoItemType, TTodoItem } from "../../types";
+import Container from "../../components/Container";
+import VerifyIDDialog from "../../components/VerifyID/VerifyIDDialog";
+
 import CareTeam from "./CareTeam";
 import TodoList from "./TodoList";
 import ActivityProgress from "./ActivityProgress";
@@ -22,12 +28,34 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function Dashboard() {
   const classes = useStyles();
+  const history = useHistory();
+  const [showVerifyIDDialog, setShowVerifyIDDialog] = useState(false);
+
+  const handleCloseVerifyIDDialog = () => {
+    setShowVerifyIDDialog(false);
+  };
+
+  const handleClickTodoItem = (item: TTodoItem) => {
+    switch (item.type) {
+      case TodoItemType.COMPLETE_INTAKE_FORM:
+        history.push(ROUTES.PROFILE);
+        break;
+      case TodoItemType.CHECK_YOUR_PROGRESS:
+        history.push(ROUTES.PROGRESS);
+        break;
+      case TodoItemType.VERIFY_ID:
+        setShowVerifyIDDialog(true);
+        break;
+      default:
+        break;
+    }
+  };
 
   return (
     <Container>
       <Grid container spacing={6} className={classes.container}>
         <Grid item xs={12} className={classes.todoListWrapper}>
-          <TodoList />
+          <TodoList onClickItem={handleClickTodoItem} />
         </Grid>
 
         <Grid item xs={12}>
@@ -38,6 +66,11 @@ export default function Dashboard() {
           <ActivityProgress />
         </Grid>
       </Grid>
+
+      <VerifyIDDialog
+        open={showVerifyIDDialog}
+        onClose={handleCloseVerifyIDDialog}
+      />
     </Container>
   );
 }

@@ -114,8 +114,9 @@ export const EditButton: FC<MuiButtonProps> = ({
       {...props}
     >
       <Typography
-        variant="subtitle1"
         role="button"
+        align="center"
+        variant="subtitle1"
         className={classes.buttonText}
       >
         {title}

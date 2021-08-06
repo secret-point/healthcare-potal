@@ -1,4 +1,6 @@
 import clsx from "clsx";
+import dayjs from "dayjs";
+import { FC } from "react";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Grid from "@material-ui/core/Grid";
@@ -9,11 +11,23 @@ import {
   useFontStyles,
   useLayoutStyles,
 } from "../../../components/useCommonStyles";
+import { TScoreItem } from "../../../types";
+import { MAX_PRAIRIE_SCORE } from "../constants";
 
-const GreatStrides = () => {
+interface GreatStridesProps {
+  previousItem?: TScoreItem;
+  latestItem: TScoreItem;
+}
+
+const GreatStrides: FC<GreatStridesProps> = ({ previousItem, latestItem }) => {
   const fontClasses = useFontStyles();
   const colorClasses = useColorStyles();
   const layoutClasses = useLayoutStyles();
+  const difference =
+    (previousItem?.score || MAX_PRAIRIE_SCORE) - latestItem.score;
+  const previousDate = dayjs(previousItem?.date).format("MMM DD, YYYY");
+
+  if (difference <= 0) return null;
 
   return (
     <Card variant="outlined" className={layoutClasses.fullHeight}>
@@ -33,10 +47,10 @@ const GreatStrides = () => {
                   fontClasses.fontBolder
                 )}
               >
-                decreased by 3 points
+                {`decreased by ${difference} points`}
               </b>
-              &nbsp;since May 25, 2021. This means you’ve been experienceing
-              less symptoms related to anxiety and depression.
+              {` since ${previousDate}. This means you’ve been experienceing
+              less symptoms related to anxiety and depression.`}
             </Typography>
           </Grid>
         </Grid>

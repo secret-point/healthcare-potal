@@ -266,5 +266,9 @@ export const useLayoutStyles = makeStyles((theme: Theme) =>
     fullHeight: {
       height: "100%",
     },
+    center: {
+      alignItems: "center",
+      justifyContent: "center",
+    },
   })
 );
