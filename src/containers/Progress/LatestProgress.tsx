@@ -8,7 +8,7 @@ import {
   useLayoutStyles,
 } from "../../components/useCommonStyles";
 
-import GreatStrides from "./components/GreatStrides";
+import ProgressSummary from "./components/ProgressSummary";
 import CheckInNotice from "./components/CheckInNotice";
 import LatestPrairieScore from "./components/LatestPrairieScore";
 import { mockScoreHistory } from "./constants";
@@ -49,7 +49,7 @@ const LatestProgress = () => {
           />
         </Grid>
         <Grid item xs={6}>
-          <GreatStrides previousItem={previousItem} latestItem={latestItem} />
+          <ProgressSummary history={mockScoreHistory} />
         </Grid>
       </Grid>
 

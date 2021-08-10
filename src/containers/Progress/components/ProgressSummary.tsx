@@ -11,18 +11,20 @@ import {
   useFontStyles,
   useLayoutStyles,
 } from "../../../components/useCommonStyles";
-import { TScoreItem } from "../../../types";
+import { TScoreHistory } from "../../../types";
 import { MAX_PRAIRIE_SCORE } from "../constants";
 
-interface GreatStridesProps {
-  previousItem?: TScoreItem;
-  latestItem: TScoreItem;
+interface ProgressSummaryProps {
+  history: TScoreHistory;
 }
 
-const GreatStrides: FC<GreatStridesProps> = ({ previousItem, latestItem }) => {
+const ProgressSummary: FC<ProgressSummaryProps> = ({ history }) => {
   const fontClasses = useFontStyles();
   const colorClasses = useColorStyles();
   const layoutClasses = useLayoutStyles();
+
+  const previousItem = history[history.length - 2];
+  const latestItem = history[history.length - 1];
   const difference =
     (previousItem?.score || MAX_PRAIRIE_SCORE) - latestItem.score;
   const previousDate = dayjs(previousItem?.date).format("MMM DD, YYYY");
@@ -59,4 +61,4 @@ const GreatStrides: FC<GreatStridesProps> = ({ previousItem, latestItem }) => {
   );
 };
 
-export default GreatStrides;
+export default ProgressSummary;
