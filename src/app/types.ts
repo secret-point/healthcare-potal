@@ -7,4 +7,5 @@ export enum ROUTES {
   PROFILE = "/profile",
   CHECKIN = "/check-in",
   PROGRESS = "/progress",
+  INTAKE_FORM = "/intake-form",
 }

@@ -8,6 +8,7 @@ import Dashboard from "../containers/Dashboard/Dashboard";
 import Onboarding from "../containers/onboarding/Onboarding";
 import ResetPassword from "../containers/auth/ResetPassword";
 import CheckInSurvey from "../containers/CheckInSurvey/CheckInSurvey";
+import InTakeForm from "../containers/InTakeForm/InTakeForm";
 import ConfirmVerificationLink from "../containers/auth/ConfirmVerificationLink";
 
 import { ROUTES } from "./types";
@@ -41,6 +42,9 @@ export function AuthorizedRoutes() {
           </Route>
           <Route path={ROUTES.PROGRESS} exact>
             <Progress />
+          </Route>
+          <Route path={ROUTES.INTAKE_FORM} exact>
+            <InTakeForm />
           </Route>
           <Redirect to={ROUTES.DASHBOARD} />
         </Switch>

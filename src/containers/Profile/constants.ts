@@ -95,4 +95,19 @@ export const UPDATE_PROFILE_DIALOGS = {
       },
     ],
   },
+  [EditableField.RESET_PASSWORD]: {
+    title: "Reset your password",
+    rows: [
+      {
+        row: "Password",
+        fields: [{ label: "Password", path: "password", xs: 12 }],
+      },
+      {
+        row: "Confirm Password",
+        fields: [
+          { label: "Confirm Password", path: "confirmPassword", xs: 12 },
+        ],
+      },
+    ],
+  },
 };

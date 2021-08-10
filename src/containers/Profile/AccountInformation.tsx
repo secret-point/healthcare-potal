@@ -44,8 +44,6 @@ const AccountInformation: FC<AccountInformationProps> = ({
 }) => {
   const classes = useStyles();
 
-  const handleResetPasswordClick = () => {};
-
   const fields: TCustomField[] = [
     { label: "First Name", path: "firstName" },
     { label: "Last Name", path: "lastName" },
@@ -71,7 +69,10 @@ const AccountInformation: FC<AccountInformationProps> = ({
       label: "Password",
       path: "password",
       render: () => (
-        <EditButton title="Reset Password" onClick={handleResetPasswordClick} />
+        <EditButton
+          title="Reset Password"
+          onClick={() => onClickEdit(EditableField.RESET_PASSWORD)}
+        />
       ),
     },
     {

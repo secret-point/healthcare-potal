@@ -5,7 +5,8 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
 
-import { EditButton } from "../Button";
+import { ROUTES } from "../../app/types";
+import { ButtonLink } from "../Link";
 import {
   useCardStyles,
   useColorStyles,
@@ -28,7 +29,11 @@ const SymptomsReport = () => {
         </Typography>
       </CardContent>
       <CardActions className={layoutClasses.noPadding}>
-        <EditButton title="Report your symptoms" />
+        <ButtonLink
+          text="Report your symptoms"
+          to={ROUTES.CHECKIN}
+          align="left"
+        />
       </CardActions>
     </Card>
   );

@@ -4,4 +4,5 @@ export enum EditableField {
   PHONE_NUMBER = "phoneNumber",
   EMERGENCY_CONTACT = "emergencyContact",
   ADDRESS = "address",
+  RESET_PASSWORD = "resetPassword",
 }
