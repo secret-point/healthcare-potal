@@ -7,8 +7,7 @@ import {
 } from "../../components/useCommonStyles";
 import PrairieScoreHistory from "./components/PrairieScoreHistory";
 import PrairieStatusCardSlices from "./components/PrairieStatusCardSlices";
-
-import { mockScoreHistory } from "./constants";
+import { mockScoreHistory } from "./mockScores";
 
 const ProgressHistory = () => {
   const fontClasses = useFontStyles();
@@ -35,10 +34,10 @@ const ProgressHistory = () => {
         alignItems="stretch"
         className={layoutClasses.mb3}
       >
-        <Grid item xs={8}>
+        <Grid item xs={12} md={8}>
           <PrairieScoreHistory scoreHistory={mockScoreHistory} />
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={12} md={4}>
           <PrairieStatusCardSlices scores={mockScoreHistory} />
         </Grid>
       </Grid>

@@ -81,6 +81,11 @@ export type TScoreItem = {
 
 export type TScoreHistory = TScoreItem[];
 
+export type TProgressSummary = {
+  title: string;
+  summary: string;
+};
+
 export type TLabelCode = {
   code: string;
   label: string;
@@ -98,3 +103,16 @@ export type TMenuItem = {
   title: string;
   link: string;
 };
+
+export enum ProgressTypes {
+  NO_CASE = "0",
+  CASE_1_1_1 = "1-1-1",
+  CASE_1_1_2 = "1-1-2",
+  CASE_1_2_1 = "1-2-1",
+  CASE_1_2_2 = "1-2-2",
+  CASE_1_3_1 = "1-3-1",
+  CASE_1_3_2 = "1-3-2",
+  CASE_2_1 = "2-1",
+  CASE_2_2 = "2-2",
+  CASE_2_3 = "2-3",
+}

@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 
@@ -8,17 +9,22 @@ import {
   useLayoutStyles,
 } from "../../components/useCommonStyles";
 
-import GreatStrides from "./components/GreatStrides";
+import ProgressSummary from "./components/ProgressSummary";
 import CheckInNotice from "./components/CheckInNotice";
 import LatestPrairieScore from "./components/LatestPrairieScore";
-import { mockScoreHistory } from "./constants";
+import { mockScoreHistory } from "./mockScores";
 
 const LatestProgress = () => {
   const fontClasses = useFontStyles();
   const layoutClasses = useLayoutStyles();
 
-  const previousItem = mockScoreHistory[mockScoreHistory.length - 2];
   const latestItem = mockScoreHistory[mockScoreHistory.length - 1];
+  const previousItem = mockScoreHistory[mockScoreHistory.length - 2];
+  const requireCheckIn =
+    (latestItem.score > 10 &&
+      dayjs(latestItem.date).diff(previousItem.date, "day") > 5) ||
+    (latestItem.score <= 10 &&
+      dayjs(latestItem.date).diff(previousItem.date, "day") > 14);
 
   return (
     <Grid container>
@@ -33,7 +39,9 @@ const LatestProgress = () => {
         <Typography variant="h2" className={fontClasses.font500}>
           Your Latest Progress
         </Typography>
-        <ButtonLink text="Update my score" to={ROUTES.CHECKIN} align="left" />
+        {!requireCheckIn && (
+          <ButtonLink text="Update my score" to={ROUTES.CHECKIN} align="left" />
+        )}
       </Grid>
 
       <Grid
@@ -42,22 +50,24 @@ const LatestProgress = () => {
         alignItems="stretch"
         className={layoutClasses.mb3}
       >
-        <Grid item xs={6}>
+        <Grid item xs={12} md={6}>
           <LatestPrairieScore
             previousItem={previousItem}
             latestItem={latestItem}
           />
         </Grid>
-        <Grid item xs={6}>
-          <GreatStrides previousItem={previousItem} latestItem={latestItem} />
+        <Grid item xs={12} md={6}>
+          <ProgressSummary history={mockScoreHistory} />
         </Grid>
       </Grid>
 
-      <Grid item xs={12}>
-        <CheckInNotice
-          latestItem={mockScoreHistory[mockScoreHistory.length - 1]}
-        />
-      </Grid>
+      {requireCheckIn && (
+        <Grid item xs={12}>
+          <CheckInNotice
+            latestItem={mockScoreHistory[mockScoreHistory.length - 1]}
+          />
+        </Grid>
+      )}
     </Grid>
   );
 };

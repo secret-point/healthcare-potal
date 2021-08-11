@@ -98,5 +98,6 @@ module.exports = {
     // disable this in root repo
     "@typescript-eslint/no-empty-interface": "off",
     "react/jsx-wrap-multilines": "off",
+    "no-plusplus": "off",
   },
 };
