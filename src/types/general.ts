@@ -105,6 +105,7 @@ export type TMenuItem = {
 };
 
 export enum ProgressTypes {
+  NO_CASE = "0",
   CASE_1_1_1 = "1-1-1",
   CASE_1_1_2 = "1-1-2",
   CASE_1_2_1 = "1-2-1",

@@ -5,7 +5,7 @@ import PrairieScore from "../../components/Progress/PrairieScore";
 import SurveyProgress from "../../components/Progress/SurveyProgress";
 import SymptomsReport from "../../components/Progress/SymptomsReport";
 import { useLayoutStyles } from "../../components/useCommonStyles";
-import { mockScoreHistory } from "../Progress/constants";
+import { mockScoreHistory } from "../Progress/mockScores";
 
 const ActivityProgress = () => {
   const layoutClasses = useLayoutStyles();
