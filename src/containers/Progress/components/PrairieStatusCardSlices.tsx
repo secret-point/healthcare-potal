@@ -1,32 +1,35 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import { TScoreHistory } from "../../../types";
 import PriaireStatusCard from "./PrairieStatusCard";
 
 interface PrairieStatusCardSlicesProps {
+  active: number;
   scores: TScoreHistory;
+  onUpdateActive: (active: number) => void;
 }
 
 const PrairieStatusCardSlices: FC<PrairieStatusCardSlicesProps> = ({
+  active,
   scores,
+  onUpdateActive,
 }) => {
-  const [index, setIndex] = useState(0);
-  const disabledNext = index + 1 >= scores.length;
-  const disabledPrevious = index < 1;
+  const disabledNext = active + 1 >= scores.length;
+  const disabledPrevious = active < 1;
 
   const handleClickNext = () => {
     if (disabledNext) return;
-    setIndex(index + 1);
+    onUpdateActive(active + 1);
   };
 
   const handleClickPrevious = () => {
     if (disabledPrevious) return;
-    setIndex(index - 1);
+    onUpdateActive(active - 1);
   };
 
   return (
     <PriaireStatusCard
-      previousScore={scores[index - 1]}
-      currentScore={scores[index]}
+      previousScore={scores[active - 1]}
+      currentScore={scores[active]}
       disabledNext={disabledNext}
       disabledPrevious={disabledPrevious}
       onClickNext={handleClickNext}

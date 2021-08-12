@@ -27,10 +27,14 @@ const useStyles = makeStyles(() =>
 );
 
 interface PrairieScoreHistoryProps {
+  active: number;
   scoreHistory: TScoreHistory;
 }
 
-const PrairieScoreHistory = ({ scoreHistory }: PrairieScoreHistoryProps) => {
+const PrairieScoreHistory = ({
+  active,
+  scoreHistory,
+}: PrairieScoreHistoryProps) => {
   const classes = useStyles();
   const cardClasses = useCardStyles();
   const fontClasses = useFontStyles();
@@ -47,8 +51,15 @@ const PrairieScoreHistory = ({ scoreHistory }: PrairieScoreHistoryProps) => {
           y: history.score,
         })),
       },
+      {
+        id: "Current Score",
+        data: scoreHistory.slice(active, active + 1).map((history) => ({
+          x: dayjs(history.date).format("MM/DD/YYYY"),
+          y: history.score,
+        })),
+      },
     ] as any;
-  }, [scoreHistory]);
+  }, [active, scoreHistory]);
 
   if (!scoreHistory.length) return null;
 
@@ -83,11 +94,11 @@ const PrairieScoreHistory = ({ scoreHistory }: PrairieScoreHistoryProps) => {
         )}
       >
         <ResponsiveLine
-          margin={{ top: 4, bottom: 30, left: 30 }}
           enableSlices="x"
           enableArea
           curve="natural"
           colors={{ scheme: "set2" }}
+          margin={{ top: 4, bottom: 30, left: 30 }}
           data={data}
           lineWidth={1}
           defs={[
