@@ -1,4 +1,4 @@
-import useApiFetch from "./useApiFetch";
+import { useApiFetch } from "./useApiFetch";
 import { AuthorizedUser } from "../types/user";
 
 export const useFetchCurrentUser = () => {

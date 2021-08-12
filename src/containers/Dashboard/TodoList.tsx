@@ -54,10 +54,12 @@ const todoList = [
 ] as TTodoItem[];
 
 interface TodoListProps {
+  userId: string;
   onClickItem?: (item: TTodoItem) => void;
 }
 
-const TodoList: React.FC<TodoListProps> = ({ onClickItem }) => {
+const TodoList: React.FC<TodoListProps> = ({ userId, onClickItem }) => {
+  console.log(userId);
   const handleClickItem = (item: TTodoItem) => {
     onClickItem?.(item);
   };

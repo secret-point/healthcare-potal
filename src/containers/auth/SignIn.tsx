@@ -8,7 +8,6 @@ import Container from "../../components/Container";
 import ErrorText from "../../components/ErrorText";
 import Link from "../../components/Link";
 import PlainModal from "../../components/PlainModal";
-import { Nullable } from "../../types/general";
 import useAuth from "../../hooks/useAuth";
 
 import SignInForm from "./SignInForm";

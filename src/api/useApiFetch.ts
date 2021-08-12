@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig } from "axios";
 import config from "../utils/config";
 import { getToken } from "./authApi";
 
-function useApiFetch() {
+export function useApiFetch() {
   return async function apiFetch(path: string, opts?: AxiosRequestConfig) {
     if (path && path.length && path[0] !== "/") {
       path = `/${path}`;
@@ -16,5 +16,3 @@ function useApiFetch() {
     return axios(`${config.apiUrl}${path}`, opts);
   };
 }
-
-export default useApiFetch;
