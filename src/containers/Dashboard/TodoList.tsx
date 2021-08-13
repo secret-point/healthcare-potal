@@ -1,6 +1,7 @@
+import { useGetMemberTodos } from "../../api";
 import Carousel from "../../components/Carousel";
 import TodoItem from "../../components/TodoItem";
-import { TodoItemType, TTodoItem } from "../../types";
+import { TTodoItem } from "../../types";
 
 const responsive = {
   desktop: {
@@ -20,45 +21,14 @@ const responsive = {
   },
 };
 
-const todoList = [
-  {
-    title: "Complete your profile",
-    dueDate: new Date(2021, 6, 19),
-    type: TodoItemType.COMPLETE_INTAKE_FORM,
-  },
-  {
-    title: "Verify your ID",
-    dueDate: new Date(2021, 6, 20),
-    type: TodoItemType.VERIFY_ID,
-  },
-  {
-    title: "Check your progress",
-    dueDate: new Date(2021, 6, 19),
-    type: TodoItemType.CHECK_YOUR_PROGRESS,
-  },
-  {
-    title: "Complete your profile",
-    dueDate: new Date(2021, 6, 19),
-    type: TodoItemType.COMPLETE_INTAKE_FORM,
-  },
-  {
-    title: "Verify your ID",
-    dueDate: new Date(2021, 6, 20),
-    type: TodoItemType.VERIFY_ID,
-  },
-  {
-    title: "Check your progress",
-    dueDate: new Date(2021, 6, 19),
-    type: TodoItemType.CHECK_YOUR_PROGRESS,
-  },
-] as TTodoItem[];
-
 interface TodoListProps {
   userId: string;
   onClickItem?: (item: TTodoItem) => void;
 }
 
-const TodoList: React.FC<TodoListProps> = ({ onClickItem }) => {
+const TodoList: React.FC<TodoListProps> = ({ userId, onClickItem }) => {
+  const { data: todoList = [] } = useGetMemberTodos(userId);
+
   const handleClickItem = (item: TTodoItem) => {
     onClickItem?.(item);
   };
@@ -70,11 +40,11 @@ const TodoList: React.FC<TodoListProps> = ({ onClickItem }) => {
       missingCount={todoList.length}
       responsive={responsive}
     >
-      {todoList.map((item, index) => (
+      {todoList?.map((todoItem) => (
         <TodoItem
-          key={index}
-          item={item}
-          onClick={() => handleClickItem(item)}
+          key={todoItem._id}
+          item={todoItem}
+          onClick={() => handleClickItem(todoItem)}
         />
       ))}
     </Carousel>

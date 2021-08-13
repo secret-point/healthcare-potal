@@ -55,9 +55,16 @@ export enum TodoItemType {
 }
 
 export type TTodoItem = {
-  title: string;
-  dueDate: Date;
-  type: TodoItemType;
+  _id: string;
+  todoItemType: TodoItemType;
+  CTA: string;
+  completed: boolean;
+  completedDate: string | Date;
+  createdBy: string;
+  createdDate: string | Date;
+  description: string;
+  dueDate: string | Date;
+  memberID: string;
 };
 
 export enum SeverityTypes {

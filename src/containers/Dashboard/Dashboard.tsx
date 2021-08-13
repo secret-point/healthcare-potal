@@ -38,7 +38,7 @@ export default function Dashboard() {
   };
 
   const handleClickTodoItem = (item: TTodoItem) => {
-    switch (item.type) {
+    switch (item.todoItemType) {
       case TodoItemType.COMPLETE_INTAKE_FORM:
         history.push(ROUTES.INTAKE_FORM);
         break;

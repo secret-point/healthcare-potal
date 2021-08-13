@@ -2,7 +2,7 @@ import { useMutation, useQuery } from "react-query";
 
 import { useApiFetch } from "./useApiFetch";
 import { QUERY_KEYS } from "./constants";
-import { TProgress } from "../types";
+import { TProgress, TTodoItem } from "../types";
 
 export type CheckTriggerBody = {
   memberID: string;
@@ -12,16 +12,21 @@ export type CheckTriggerBody = {
 export const useGetMemberTodos = (memberId: string) => {
   const apiFetch = useApiFetch();
 
-  return useQuery([QUERY_KEYS.FETCH_MEMBER_TODOS, memberId], async () => {
-    await apiFetch(`/cp/memberTodo/${memberId}`);
-  });
+  return useQuery(
+    [QUERY_KEYS.FETCH_MEMBER_TODOS, memberId],
+    async (): Promise<TTodoItem[]> => {
+      const { data } = await apiFetch(`/cp/memberTodo/${memberId}`);
+      return data;
+    }
+  );
 };
 
 export const useGetMember = (memberId: string) => {
   const apiFetch = useApiFetch();
 
   return useQuery([QUERY_KEYS.FETCH_MEMBER, memberId], async () => {
-    await apiFetch(`/cp/member/${memberId}`);
+    const { data } = await apiFetch(`/cp/member/${memberId}`);
+    return data;
   });
 };
 

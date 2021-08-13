@@ -24,8 +24,8 @@ const TodoItem: FC<TodoItemProps> = ({ item, onClick }) => {
   const fontClasses = useFontStyles();
   const layoutClasses = useLayoutStyles();
 
-  const itemActionTitle = (() => {
-    switch (item.type) {
+  const buttonText = (() => {
+    switch (item.todoItemType) {
       case TodoItemType.COMPLETE_INTAKE_FORM:
         return "Complete intake form";
       case TodoItemType.VERIFY_ID:
@@ -37,7 +37,20 @@ const TodoItem: FC<TodoItemProps> = ({ item, onClick }) => {
     }
   })();
 
-  if (!itemActionTitle) return null;
+  const headerText = (() => {
+    switch (item.todoItemType) {
+      case TodoItemType.COMPLETE_INTAKE_FORM:
+        return "Complete your profile";
+      case TodoItemType.VERIFY_ID:
+        return "Verify your ID";
+      case TodoItemType.CHECK_YOUR_PROGRESS:
+        return "Check your progress";
+      default:
+        return null;
+    }
+  })();
+
+  if (!buttonText) return null;
 
   return (
     <Card variant="outlined" className={cardClasses.card}>
@@ -46,14 +59,14 @@ const TodoItem: FC<TodoItemProps> = ({ item, onClick }) => {
           variant="h3"
           className={clsx(fontClasses.fontNormal, layoutClasses.mb1)}
         >
-          {item.title}
+          {headerText}
         </Typography>
         <Typography variant="subtitle2" className={fontClasses.fontNormal}>
           {["By", formatFullDay(item.dueDate)].join(" ")}
         </Typography>
       </CardContent>
       <CardActions className={layoutClasses.noPadding}>
-        <EditButton title={itemActionTitle} onClick={onClick} />
+        <EditButton title={buttonText} onClick={onClick} />
       </CardActions>
     </Card>
   );
