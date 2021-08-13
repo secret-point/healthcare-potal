@@ -58,10 +58,7 @@ export default function Dashboard() {
       <Grid container spacing={6} className={classes.container}>
         <Grid item xs={12} className={classes.todoListWrapper}>
           {user && (
-            <TodoList
-              userId={user.memberID}
-              onClickItem={handleClickTodoItem}
-            />
+            <TodoList userId={user._id} onClickItem={handleClickTodoItem} />
           )}
         </Grid>
 

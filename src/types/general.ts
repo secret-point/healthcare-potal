@@ -85,6 +85,7 @@ export type TProgressSummary = {
 export type TLabelCode = {
   code: string;
   label: string;
+  value?: number;
 };
 
 export type TQuestion = {

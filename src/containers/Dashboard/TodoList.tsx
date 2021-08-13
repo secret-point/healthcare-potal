@@ -58,8 +58,7 @@ interface TodoListProps {
   onClickItem?: (item: TTodoItem) => void;
 }
 
-const TodoList: React.FC<TodoListProps> = ({ userId, onClickItem }) => {
-  console.log(userId);
+const TodoList: React.FC<TodoListProps> = ({ onClickItem }) => {
   const handleClickItem = (item: TTodoItem) => {
     onClickItem?.(item);
   };

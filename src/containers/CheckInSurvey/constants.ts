@@ -7,10 +7,10 @@ export enum CheckInSurveySteps {
 }
 
 export const FREQUENCY_OPTIONS: TLabelCode[] = [
-  { code: "EVERYDAY", label: "Nearly every day" },
-  { code: "MORETHANHALFDAYS", label: "More than half of the days" },
-  { code: "SEVERALDAYS", label: "Several days" },
-  { code: "NOTATALL", label: "Not at all" },
+  { value: 3, code: "EVERYDAY", label: "Nearly every day" },
+  { value: 2, code: "MORETHANHALFDAYS", label: "More than half of the days" },
+  { value: 1, code: "SEVERALDAYS", label: "Several days" },
+  { value: 0, code: "NOTATALL", label: "Not at all" },
 ];
 
 export const SIDE_EFFECTS: TLabelCode[] = [

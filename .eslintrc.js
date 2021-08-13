@@ -99,5 +99,6 @@ module.exports = {
     "@typescript-eslint/no-empty-interface": "off",
     "react/jsx-wrap-multilines": "off",
     "no-plusplus": "off",
+    "no-underscore-dangle": "off",
   },
 };
