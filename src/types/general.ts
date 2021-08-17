@@ -32,6 +32,7 @@ export type SelectOption = { code: string; display: string };
 export enum FieldType {
   SELECT = "SELECT",
   TEXT = "TEXT",
+  DATE = "DATE",
 }
 
 export type TCustomField = {
