@@ -23,8 +23,10 @@ interface DropdownProps {
   validator?: any;
   options: TDropDownItem[];
   disabled?: boolean;
-  onChange?: (name: string, value: string) => void;
+  variant?: "standard" | "outlined";
   default?: any;
+  multiple?: boolean;
+  onChange?: (name: string, value: string) => void;
   [key: string]: any;
 }
 
@@ -34,8 +36,11 @@ const Dropdown: FC<DropdownProps> = ({
   validator,
   options,
   disabled,
-  onChange,
+  variant,
+  multiple,
   default: defaultValue,
+  onChange,
+  ...rest
 }) => {
   const classes = useStyles();
 
@@ -67,7 +72,10 @@ const Dropdown: FC<DropdownProps> = ({
 
   return (
     <div className={classes.dropdown} ref={myRef}>
-      <FormControl variant="standard" className={classes.formControl}>
+      <FormControl
+        variant={variant || "standard"}
+        className={classes.formControl}
+      >
         <InputLabel>{displayLabel}</InputLabel>
         <Select
           name={name}
@@ -76,6 +84,8 @@ const Dropdown: FC<DropdownProps> = ({
           onChange={handleMUIChange}
           onOpen={() => setValue(name, value)}
           disabled={disabled}
+          multiple={multiple}
+          {...rest}
         >
           {options.map((option, i) => (
             <MenuItem key={i} value={option.code}>

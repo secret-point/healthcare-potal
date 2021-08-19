@@ -218,6 +218,9 @@ export const useLayoutStyles = makeStyles((theme: Theme) =>
     mt3: {
       marginTop: theme.spacing(3),
     },
+    mt6: {
+      marginTop: theme.spacing(6),
+    },
     pl1: {
       paddingLeft: theme.spacing(1),
     },

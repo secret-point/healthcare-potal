@@ -54,9 +54,10 @@ export type TCustomField = {
   placeholder?: string;
   options?: TDropDownItem[];
   required?: boolean;
-  xs?: number;
+  variant?: "standard" | "outlined";
   properties?: TCustomFieldProperty[];
   addButton?: string;
+  xs?: any;
   render?: (value: any) => any;
 };
 
