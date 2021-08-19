@@ -8,8 +8,10 @@ import Typography from "@material-ui/core/Typography";
 import useAuth from "../../hooks/useAuth";
 import Container from "../../components/Container";
 import { InTakeFormSteps } from "./constants";
+import CompleteInTakeForm from "./CompleteInTakeForm";
 import StartInTake from "./StartInTake";
 import SelfInformation from "./SelfInformation";
+import { ROUTES } from "../../app/types";
 
 const InTakeForm = () => {
   const { user } = useAuth();
@@ -23,8 +25,18 @@ const InTakeForm = () => {
   const getNextStep = () => {
     switch (currentStep) {
       case InTakeFormSteps.START:
-      default:
         return InTakeFormSteps.SELF_INFORMATION;
+      case InTakeFormSteps.SELF_INFORMATION:
+        return InTakeFormSteps.ADDITIONAL_INFORMATION;
+      case InTakeFormSteps.ADDITIONAL_INFORMATION:
+        return InTakeFormSteps.FEELING_INFORMATION;
+      case InTakeFormSteps.FEELING_INFORMATION:
+        return InTakeFormSteps.MEDICAL_HISTORY;
+      case InTakeFormSteps.MEDICAL_HISTORY:
+        return InTakeFormSteps.PHARMACY;
+      case InTakeFormSteps.PHARMACY:
+      default:
+        return InTakeFormSteps.COMPLETE;
     }
   };
 
@@ -36,8 +48,15 @@ const InTakeForm = () => {
     history.goBack();
   };
 
-  const progress = 10;
+  const handleReturnHome = () => {
+    history.push(ROUTES.DASHBOARD);
+  };
 
+  const progress = 10;
+  const showProgress = ![
+    InTakeFormSteps.START,
+    InTakeFormSteps.COMPLETE,
+  ].includes(currentStep);
   const title = `${user?.firstName}, let’s get started! Tell us a little bit about yourself.`;
 
   return (
@@ -45,12 +64,7 @@ const InTakeForm = () => {
       <Grid container justify="center">
         <FormProvider {...methods}>
           <Grid item xs={12} sm={10} md={8} lg={6}>
-            {currentStep === InTakeFormSteps.START ? (
-              <StartInTake
-                onStart={handleGoToNextStep}
-                onCancel={handleCancel}
-              />
-            ) : (
+            {showProgress && (
               <>
                 <Grid item xs={12}>
                   <Typography>{title}</Typography>
@@ -63,6 +77,17 @@ const InTakeForm = () => {
                   />
                 </Grid>
               </>
+            )}
+
+            {currentStep === InTakeFormSteps.START && (
+              <StartInTake
+                onStart={handleGoToNextStep}
+                onCancel={handleCancel}
+              />
+            )}
+
+            {currentStep === InTakeFormSteps.COMPLETE && (
+              <CompleteInTakeForm onReturn={handleReturnHome} />
             )}
 
             {currentStep === InTakeFormSteps.SELF_INFORMATION && (

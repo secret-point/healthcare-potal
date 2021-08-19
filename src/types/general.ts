@@ -33,6 +33,10 @@ export enum FieldType {
   SELECT = "SELECT",
   TEXT = "TEXT",
   DATE = "DATE",
+  RADIO_GROUP = "RADIO_GROUP",
+  MULTI_SELECT = "MULTI_SELECT",
+  MULTI_INSTANCE = "MULTI_INSTANCE",
+  SINGLE_INSTANCE = "SINGLE_INSTANCE",
 }
 
 export type TCustomField = {
