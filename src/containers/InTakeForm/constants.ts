@@ -19,6 +19,7 @@ import {
   CARE_PROVIDER_TYPES,
 } from "../../constants/identity";
 import { usStates } from "../../constants/usStates";
+import { TInTakeFormDef } from "./types";
 
 export enum InTakeFormSteps {
   START = "START",
@@ -30,7 +31,7 @@ export enum InTakeFormSteps {
   COMPLETE = "COMPLETE",
 }
 
-export const IN_TAKE_FORM_STEPS = {
+export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
   [InTakeFormSteps.SELF_INFORMATION]: {
     title: (data: any) =>
       `${data.firstName}, let’s get started! Tell us a little bit about yourself.`,

@@ -1,4 +1,6 @@
-export const EMERGENCY_RELATIONSHIPS = [
+import { TDropDownItem } from "../types/general";
+
+export const EMERGENCY_RELATIONSHIPS: TDropDownItem[] = [
   { code: "FATHER", display: "Father" },
   { code: "HUSBAND", display: "Husband" },
   { code: "MOTHER", display: "Mother" },
@@ -7,7 +9,7 @@ export const EMERGENCY_RELATIONSHIPS = [
   { code: "FRIEND", display: "Friend" },
 ];
 
-export const ETHNICITIES = [
+export const ETHNICITIES: TDropDownItem[] = [
   { code: "WHITE", display: "White" },
   { code: "AFRICAN", display: "African American" },
   { code: "NATIVE", display: "Natie American" },
@@ -16,25 +18,25 @@ export const ETHNICITIES = [
   { code: "HAWAIIAN", display: "Native Hawaiian" },
 ];
 
-export const PRONOUNS = [
+export const PRONOUNS: TDropDownItem[] = [
   { code: "HE", display: "He/Him" },
   { code: "SHE", display: "She/Her" },
   { code: "THEY", display: "They/Them" },
 ];
 
-export const BIOLOGICAL_SEXES = [
+export const BIOLOGICAL_SEXES: TDropDownItem[] = [
   { code: "MALE", display: "Male" },
   { code: "FEMALE", display: "Female" },
 ];
 
-export const EDUCATIONAL_DEGREES = [
+export const EDUCATIONAL_DEGREES: TDropDownItem[] = [
   { code: "ASSOCIATE", display: "Associate degree" },
   { code: "BACHELOR", display: "Bachelor's degree" },
   { code: "MASTER", display: "Master's degree" },
   { code: "DOCTOR", display: "Doctoral degree" },
 ];
 
-export const MARITAL_STATUS = [
+export const MARITAL_STATUS: TDropDownItem[] = [
   { code: "SINGLE", display: "Single" },
   { code: "MARRIED", display: "Married" },
   { code: "WIDOWED", display: "Widowed" },
@@ -42,13 +44,13 @@ export const MARITAL_STATUS = [
   { code: "DOMESTIC", display: "Domestic Partnership" },
 ];
 
-export const EMPLOYMENT_STATUS = [
+export const EMPLOYMENT_STATUS: TDropDownItem[] = [
   { code: "WORKER", display: "Worker" },
   { code: "EMPLOYEE", display: "Employee" },
   { code: "SELF_EMPLOYED", display: "Self-Employed" },
 ];
 
-export const LIVING_ARRANGEMENT_TYPES = [
+export const LIVING_ARRANGEMENT_TYPES: TDropDownItem[] = [
   { code: "BUYING", display: "Buying" },
   { code: "RENTING", display: "Renting" },
   { code: "GROUP_HOMES", display: "Group Homes" },
@@ -58,7 +60,7 @@ export const LIVING_ARRANGEMENT_TYPES = [
   { code: "INDEPENDENT_LIVING", display: "Independent Living" },
 ];
 
-export const PEOPLE_LIVING_WITH = [
+export const PEOPLE_LIVING_WITH: TDropDownItem[] = [
   { code: "GRAND_PARENTS", display: "Grand Parents" },
   { code: "FATHER", display: "Father" },
   { code: "MOTHER", display: "Mother" },
@@ -70,7 +72,7 @@ export const PEOPLE_LIVING_WITH = [
   { code: "FRIEND", display: "Friend" },
 ];
 
-export const FAMILY_MEMBERS = [
+export const FAMILY_MEMBERS: TDropDownItem[] = [
   { code: "GRAND FATHER", display: "Grand Father" },
   { code: "GRAND MOTHER", display: "Grand Mother" },
   { code: "FATHER", display: "Father" },
@@ -79,24 +81,24 @@ export const FAMILY_MEMBERS = [
   { code: "SISTER", display: "Sister" },
 ];
 
-export const SUBTANCE_TYPES = [
+export const SUBTANCE_TYPES: TDropDownItem[] = [
   { code: "ELEMENT", display: "Element" },
   { code: "COMPOUND", display: "Compound" },
   { code: "MIXTURE", display: "Mixture" },
 ];
 
-export const CONFIRMATION_TYPES = [
+export const CONFIRMATION_TYPES: TDropDownItem[] = [
   { code: "YES", display: "Yes" },
   { code: "NO", display: "No" },
 ];
 
-export const SYMPTOM_TYPES = [
+export const SYMPTOM_TYPES: TDropDownItem[] = [
   { code: "REMITTING", display: "Remitting" },
   { code: "CHRONIC", display: "Chronic" },
   { code: "RELAPSING", display: "Relapsing" },
 ];
 
-export const MEDICATION_TYPES = [
+export const MEDICATION_TYPES: TDropDownItem[] = [
   { code: "LIQUID", display: "Liquid" },
   { code: "TABLET", display: "Tablet" },
   { code: "CAPSULES", display: "Capsules" },
@@ -108,7 +110,7 @@ export const MEDICATION_TYPES = [
   { code: "IMPLANTS", display: "Implants or patches" },
 ];
 
-export const TREATMENT_TYPES = [
+export const TREATMENT_TYPES: TDropDownItem[] = [
   { code: "TARGETED", display: "Targeted Therapies" },
   { code: "CHEMOTHERAPY", display: "Chemotherapy" },
   { code: "SURGEY", display: "Surgery" },
@@ -117,7 +119,7 @@ export const TREATMENT_TYPES = [
   { code: "HORMONAL", display: "Hormonal Therapy" },
 ];
 
-export const MEDICATION_DELIVER_TYPES = [
+export const MEDICATION_DELIVER_TYPES: TDropDownItem[] = [
   {
     code: "YES",
     display:
@@ -129,7 +131,7 @@ export const MEDICATION_DELIVER_TYPES = [
   },
 ];
 
-export const CARE_PROVIDER_TYPES = [
+export const CARE_PROVIDER_TYPES: TDropDownItem[] = [
   { code: "PRIMARY", display: "Primary Care" },
   { code: "NURSING", display: "Nursing Care" },
   { code: "SPECIALITY", display: "Speciality Care" },

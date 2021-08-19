@@ -7,7 +7,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 
-import { SelectOption } from "../types/general";
+import { TDropDownItem } from "../types/general";
 
 const useStyles = makeStyles(() => ({
   dropdown: {},
@@ -21,7 +21,7 @@ interface DropdownProps {
   label: string;
   placeholder?: string;
   validator?: any;
-  options: SelectOption[];
+  options: TDropDownItem[];
   disabled?: boolean;
   onChange?: (name: string, value: string) => void;
   default?: any;

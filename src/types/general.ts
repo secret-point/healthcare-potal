@@ -27,8 +27,6 @@ export enum ONBOARDING {
   FINAL = "Great! You're all set up.",
 }
 
-export type SelectOption = { code: string; display: string };
-
 export enum FieldType {
   SELECT = "SELECT",
   TEXT = "TEXT",
@@ -39,12 +37,26 @@ export enum FieldType {
   SINGLE_INSTANCE = "SINGLE_INSTANCE",
 }
 
+export type TDropDownItem = { code: string; display: string };
+
+export type TCustomFieldProperty = {
+  path: string;
+  placeholder: string;
+  type?: FieldType;
+  options?: TDropDownItem[];
+};
+
 export type TCustomField = {
   label: string;
+  helperText?: string;
   path: string;
   type?: FieldType;
-  options?: SelectOption[];
+  placeholder?: string;
+  options?: TDropDownItem[];
+  required?: boolean;
   xs?: number;
+  properties?: TCustomFieldProperty[];
+  addButton?: string;
   render?: (value: any) => any;
 };
 
