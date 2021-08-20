@@ -41,7 +41,7 @@ const MCQQuestion: FC<MCQQuestionProps> = ({ question }) => {
         <Grid item key={option.code} xs={12} sm={6}>
           <CheckboxField
             name={option.code}
-            label={option.label}
+            label={option.display}
             color="secondary"
             className={classes.checkbox}
           />

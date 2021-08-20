@@ -1,6 +1,9 @@
 import { FC } from "react";
 
 import Dropdown from "./Dropdown";
+import RadioField from "./RadioField";
+import SingleInstance from "./SingleInstance";
+import MultiInstance from "./MultiInstance";
 import TextInput from "./TextInput";
 import { FieldType, TCustomField } from "../types/general";
 
@@ -25,13 +28,34 @@ const FieldComponent: FC<FieldComponentProps> = ({ field, variant }) => {
       );
 
     case FieldType.RADIO_GROUP:
-      return null;
-
-    case FieldType.MULTI_INSTANCE:
-      return null;
+      return (
+        <RadioField
+          layout={{ xs: 12 }}
+          name={field.path}
+          label={field.label}
+          options={field.options || []}
+        />
+      );
 
     case FieldType.SINGLE_INSTANCE:
-      return null;
+      return (
+        <SingleInstance
+          label={field.label}
+          path={field.path}
+          variant={variant}
+          properties={field.properties || []}
+        />
+      );
+
+    case FieldType.MULTI_INSTANCE:
+      return (
+        <MultiInstance
+          label={field.label}
+          path={field.path}
+          variant={variant}
+          properties={field.properties || []}
+        />
+      );
 
     case FieldType.TEXT:
     default:

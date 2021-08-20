@@ -10,7 +10,7 @@ import Radio from "@material-ui/core/Radio";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
-import { TLabelCode } from "../types";
+import { TDropItem } from "../types";
 import { Theme } from "../theme/types/createPalette";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme: Theme) =>
 type RadioFieldProps = {
   name: string;
   label?: string;
-  options: TLabelCode[];
+  options: TDropItem[];
   layout: {
     xs?: GridSize;
     sm?: GridSize;
@@ -101,7 +101,7 @@ const RadioField: FC<RadioFieldProps> = ({ label, name, options, layout }) => {
                 <FormControlLabel
                   value={option.code}
                   control={<Radio color="secondary" />}
-                  label={option.label}
+                  label={option.display}
                   className={clsx(
                     classes.formControlLabel,
                     option.code === muiValue && classes.selectedFormControlLabel

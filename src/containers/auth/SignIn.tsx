@@ -31,7 +31,8 @@ export default function SignIn() {
     mode: "onBlur",
   });
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     try {
       await logIn(methods.getValues("email"), methods.getValues("password"));
     } catch (error) {

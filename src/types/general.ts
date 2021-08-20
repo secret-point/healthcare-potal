@@ -37,13 +37,18 @@ export enum FieldType {
   SINGLE_INSTANCE = "SINGLE_INSTANCE",
 }
 
-export type TDropDownItem = { code: string; display: string };
+export type TDropItem = {
+  code: string;
+  display: string;
+  value?: number;
+};
 
 export type TCustomFieldProperty = {
   path: string;
   placeholder: string;
   type?: FieldType;
-  options?: TDropDownItem[];
+  options?: TDropItem[];
+  xs?: any;
 };
 
 export type TCustomField = {
@@ -52,7 +57,7 @@ export type TCustomField = {
   path: string;
   type?: FieldType;
   placeholder?: string;
-  options?: TDropDownItem[];
+  options?: TDropItem[];
   required?: boolean;
   variant?: "standard" | "outlined";
   properties?: TCustomFieldProperty[];
@@ -107,18 +112,12 @@ export type TProgressSummary = {
   summary: string;
 };
 
-export type TLabelCode = {
-  code: string;
-  label: string;
-  value?: number;
-};
-
 export type TQuestion = {
   code: string;
   type: "GAD" | "PHQ" | "MCQ" | "FRQ";
   header?: string;
   question: string;
-  options?: TLabelCode[];
+  options?: TDropItem[];
 };
 
 export type TMenuItem = {

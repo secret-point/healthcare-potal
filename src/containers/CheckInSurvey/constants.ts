@@ -1,4 +1,4 @@
-import { TLabelCode, TQuestion } from "../../types";
+import { TDropItem, TQuestion } from "../../types";
 
 export enum CheckInSurveySteps {
   WELCOME = "WELCOME",
@@ -6,21 +6,21 @@ export enum CheckInSurveySteps {
   COMPLETE = "COMPLETE",
 }
 
-export const FREQUENCY_OPTIONS: TLabelCode[] = [
-  { value: 3, code: "EVERYDAY", label: "Nearly every day" },
-  { value: 2, code: "MORETHANHALFDAYS", label: "More than half of the days" },
-  { value: 1, code: "SEVERALDAYS", label: "Several days" },
-  { value: 0, code: "NOTATALL", label: "Not at all" },
+export const FREQUENCY_OPTIONS: TDropItem[] = [
+  { value: 3, code: "EVERYDAY", display: "Nearly every day" },
+  { value: 2, code: "MORETHANHALFDAYS", display: "More than half of the days" },
+  { value: 1, code: "SEVERALDAYS", display: "Several days" },
+  { value: 0, code: "NOTATALL", display: "Not at all" },
 ];
 
-export const SIDE_EFFECTS: TLabelCode[] = [
-  { code: "MCQ_HEADACHE", label: "Headache" },
-  { code: "MCQ_SLEEPING", label: "Trouble Sleeping" },
-  { code: "MCQ_DIZZINESS", label: "Nausea or dizziness" },
-  { code: "MCQ_CONSTIPATION", label: "Diarrhea or constipation" },
-  { code: "MCQ_SEXUAL", label: "Sexual Problems" },
-  { code: "MCQ_FATIGUE", label: "Weakness or fatigue" },
-  { code: "MCQ_WEIGHTGAIN", label: "Weight Gain" },
+export const SIDE_EFFECTS: TDropItem[] = [
+  { code: "MCQ_HEADACHE", display: "Headache" },
+  { code: "MCQ_SLEEPING", display: "Trouble Sleeping" },
+  { code: "MCQ_DIZZINESS", display: "Nausea or dizziness" },
+  { code: "MCQ_CONSTIPATION", display: "Diarrhea or constipation" },
+  { code: "MCQ_SEXUAL", display: "Sexual Problems" },
+  { code: "MCQ_FATIGUE", display: "Weakness or fatigue" },
+  { code: "MCQ_WEIGHTGAIN", display: "Weight Gain" },
 ];
 
 const GAD_PHQ_COMMON_HEADER =

@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface SignInFormProps {
-  onSubmit: () => void;
+  onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
 }
 
 const SignInForm = ({ onSubmit }: SignInFormProps) => {
@@ -45,68 +45,71 @@ const SignInForm = ({ onSubmit }: SignInFormProps) => {
   };
 
   return (
-    <Grid container spacing={1}>
-      <Grid item xs={12}>
-        <TextInput
-          name="email"
-          label="Email"
-          variant="outlined"
-          placeholder="Email"
-          validator={{
-            required: "Your email is required.",
-            pattern: {
-              value: emailPattern,
-              message: "Please enter your email address in the correct format.",
-            },
-          }}
-        />
-      </Grid>
-
-      <Grid item xs={12}>
-        <TextInput
-          name="password"
-          type={showPassword ? "text" : "password"}
-          label="Password"
-          variant="outlined"
-          placeholder="Password"
-          validator={{ required: "Your password is required." }}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="toggle password visibility"
-                  className={classes.iconButton}
-                  onClick={handleTogglePassword}
-                >
-                  {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
-                </IconButton>
-              </InputAdornment>
-            ),
-          }}
-        />
-      </Grid>
-
-      <Grid item xs={12} className={classes.mt3}>
-        <Button
-          text="SIGN IN"
-          color="primary"
-          variant="contained"
-          disabled={
-            Boolean(inputErrors.length) ||
-            editedFields.length !== requiredFields.length
-          }
-          onClick={onSubmit}
-        />
-      </Grid>
-
-      {Boolean(inputErrors.length) && (
-        <Grid item xs={12} className={classes.errorTextWrapper}>
-          {inputErrors.map((errorText, index) => (
-            <ErrorText key={index} errorText={errorText} />
-          ))}
+    <form onSubmit={onSubmit}>
+      <Grid container spacing={1}>
+        <Grid item xs={12}>
+          <TextInput
+            name="email"
+            label="Email"
+            variant="outlined"
+            placeholder="Email"
+            validator={{
+              required: "Your email is required.",
+              pattern: {
+                value: emailPattern,
+                message:
+                  "Please enter your email address in the correct format.",
+              },
+            }}
+          />
         </Grid>
-      )}
-    </Grid>
+
+        <Grid item xs={12}>
+          <TextInput
+            name="password"
+            type={showPassword ? "text" : "password"}
+            label="Password"
+            variant="outlined"
+            placeholder="Password"
+            validator={{ required: "Your password is required." }}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    className={classes.iconButton}
+                    onClick={handleTogglePassword}
+                  >
+                    {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+          />
+        </Grid>
+
+        <Grid item xs={12} className={classes.mt3}>
+          <Button
+            text="SIGN IN"
+            type="submit"
+            color="primary"
+            variant="contained"
+            disabled={
+              Boolean(inputErrors.length) ||
+              editedFields.length !== requiredFields.length
+            }
+          />
+        </Grid>
+
+        {Boolean(inputErrors.length) && (
+          <Grid item xs={12} className={classes.errorTextWrapper}>
+            {inputErrors.map((errorText, index) => (
+              <ErrorText key={index} errorText={errorText} />
+            ))}
+          </Grid>
+        )}
+      </Grid>
+    </form>
   );
 };
 
