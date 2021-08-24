@@ -5,7 +5,7 @@ import { makeStyles, createStyles } from "@material-ui/core/styles";
 
 import { TCareTeamMember } from "../../types";
 import CareTeamMemberCard from "../../components/CareTeamMemberCard";
-import { EditButton } from "../../components/Button";
+import { TextButton } from "../../components/Button";
 import { useLayoutStyles } from "../../components/useCommonStyles";
 import { useViewport } from "../../hooks/useViewport";
 
@@ -71,7 +71,7 @@ const CareTeam = () => {
       </Typography>
 
       {isMobile && !showCareTeam && (
-        <EditButton
+        <TextButton
           title="▾ View your care team"
           onClick={handleToggleShowCareTeam}
         />
@@ -96,7 +96,7 @@ const CareTeam = () => {
       )}
 
       {isMobile && showCareTeam && (
-        <EditButton
+        <TextButton
           title="▴ Hide your care team"
           className={layoutClasses.mt1}
           onClick={handleToggleShowCareTeam}

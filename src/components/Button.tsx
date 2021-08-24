@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: theme.spacing(0),
     },
 
-    editButton: {
+    TextButton: {
       minWidth: 40,
       padding: theme.spacing(0),
 
@@ -98,7 +98,7 @@ const Button: FC<ButtonProps> = ({
   );
 };
 
-export const EditButton: FC<MuiButtonProps> = ({
+export const TextButton: FC<MuiButtonProps> = ({
   onClick,
   title = "Edit",
   className,
@@ -110,7 +110,7 @@ export const EditButton: FC<MuiButtonProps> = ({
     <MuiButton
       variant="text"
       onClick={onClick}
-      className={clsx(classes.button, classes.editButton, className)}
+      className={clsx(classes.button, classes.TextButton, className)}
       {...props}
     >
       <Typography

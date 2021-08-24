@@ -6,7 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
 import { TCareTeamMember } from "../types";
-import { EditButton } from "./Button";
+import { TextButton } from "./Button";
 import { useFontStyles, useLayoutStyles } from "./useCommonStyles";
 
 const useStyles = makeStyles((theme) =>
@@ -53,7 +53,7 @@ const CareTeamMemberCard = ({ member }: CareTeamMemberCardProps) => {
         </Typography>
       </CardContent>
       <CardActions className={layoutClasses.noPadding}>
-        <EditButton title={member.contact} />
+        <TextButton title={member.contact} />
       </CardActions>
     </Card>
   );

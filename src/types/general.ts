@@ -46,6 +46,8 @@ export type TDropItem = {
 export type TCustomFieldProperty = {
   path: string;
   placeholder: string;
+  variant?: "standard" | "outlined";
+  shrink?: boolean;
   type?: FieldType;
   options?: TDropItem[];
   xs?: any;
@@ -57,6 +59,7 @@ export type TCustomField = {
   path: string;
   type?: FieldType;
   placeholder?: string;
+  shrink?: boolean;
   options?: TDropItem[];
   required?: boolean;
   variant?: "standard" | "outlined";

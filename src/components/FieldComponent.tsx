@@ -53,11 +53,13 @@ const FieldComponent: FC<FieldComponentProps> = ({ field, variant }) => {
           label={field.label}
           path={field.path}
           variant={variant}
+          addButton={field.addButton}
           properties={field.properties || []}
         />
       );
 
     case FieldType.TEXT:
+    case FieldType.DATE:
     default:
       return (
         <TextInput
@@ -68,7 +70,7 @@ const FieldComponent: FC<FieldComponentProps> = ({ field, variant }) => {
           placeholder={field.placeholder}
           type={field.type === FieldType.DATE ? "date" : "text"}
           InputLabelProps={{
-            shrink: field.type === FieldType.DATE,
+            shrink: field.shrink || false || field.type === FieldType.DATE,
           }}
         />
       );
