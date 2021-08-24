@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 
+import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import InputLabel from "@material-ui/core/InputLabel";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
+import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 
 import { Theme } from "../theme/types/createPalette";
 import { TCustomFieldProperty } from "../types";
 import FieldComponent from "./FieldComponent";
 import { TextButton } from "./Button";
+import { useColorStyles } from "./useCommonStyles";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -27,19 +30,22 @@ const useStyles = makeStyles((theme: Theme) =>
 interface MultiInstanceProps {
   label: string;
   path: string;
+  required?: boolean;
   addButton?: string;
   variant?: "standard" | "outlined";
   properties: TCustomFieldProperty[];
 }
 
 const MultiInstance: React.FC<MultiInstanceProps> = ({
-  addButton,
   label,
   path,
+  required,
   variant,
+  addButton,
   properties,
 }) => {
   const classes = useStyles();
+  const colorClasses = useColorStyles();
   const [instances, setInstances] = useState<number[]>([0]);
 
   const handleClickAddMoreInstance = () => {
@@ -51,6 +57,7 @@ const MultiInstance: React.FC<MultiInstanceProps> = ({
       <Grid item xs={12}>
         <InputLabel htmlFor={path} className={classes.inputLabel}>
           {label}
+          {required && <b className={colorClasses.accentRed}>*</b>}
         </InputLabel>
       </Grid>
 
@@ -77,7 +84,16 @@ const MultiInstance: React.FC<MultiInstanceProps> = ({
       </Grid>
 
       <Grid container justify="flex-end">
-        <TextButton title={addButton} onClick={handleClickAddMoreInstance} />
+        <TextButton
+          text={
+            <Box display="flex" alignItems="center">
+              <AddCircleOutlineIcon />
+              &nbsp;
+              {addButton}
+            </Box>
+          }
+          onClick={handleClickAddMoreInstance}
+        />
       </Grid>
     </Grid>
   );

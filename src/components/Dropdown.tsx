@@ -9,6 +9,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 
 import { Theme } from "../theme/types/createPalette";
 import { TDropItem } from "../types/general";
+import { useColorStyles } from "./useCommonStyles";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -45,6 +46,7 @@ interface DropdownProps {
   options: TDropItem[];
   disabled?: boolean;
   variant?: "standard" | "outlined";
+  required?: boolean;
   default?: any;
   multiple?: boolean;
   onChange?: (name: string, value: string) => void;
@@ -58,6 +60,7 @@ const Dropdown: FC<DropdownProps> = ({
   options,
   disabled,
   variant,
+  required,
   multiple,
   placeholder,
   default: defaultValue,
@@ -65,6 +68,7 @@ const Dropdown: FC<DropdownProps> = ({
   ...rest
 }) => {
   const classes = useStyles();
+  const colorClasses = useColorStyles();
 
   const myRef = useRef<HTMLInputElement>(null);
 
@@ -113,6 +117,7 @@ const Dropdown: FC<DropdownProps> = ({
       <FormControl variant={variant} className={classes.formControl}>
         <InputLabel id={name} shrink className={classes.inputLabel}>
           {displayLabel}
+          {required && <b className={colorClasses.accentRed}>*</b>}
         </InputLabel>
         <Select
           name={name}

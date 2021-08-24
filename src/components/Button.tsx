@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface ButtonProps extends MuiButtonProps {
-  text: string;
+  text: React.ReactNode;
   fullWidth?: boolean;
   noPadding?: boolean;
   className?: string;
@@ -98,9 +98,13 @@ const Button: FC<ButtonProps> = ({
   );
 };
 
-export const TextButton: FC<MuiButtonProps> = ({
+interface TextButtonProps extends MuiButtonProps {
+  text?: React.ReactNode;
+}
+
+export const TextButton: FC<TextButtonProps> = ({
   onClick,
-  title = "Edit",
+  text = "Edit",
   className,
   ...props
 }) => {
@@ -119,7 +123,7 @@ export const TextButton: FC<MuiButtonProps> = ({
         variant="subtitle1"
         className={classes.buttonText}
       >
-        {title}
+        {text}
       </Typography>
     </MuiButton>
   );

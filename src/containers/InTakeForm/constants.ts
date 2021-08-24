@@ -76,20 +76,19 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
             label: "What's your height?",
             path: "height",
             type: FieldType.SINGLE_INSTANCE,
+            required: true,
             properties: [
               {
                 path: "feet",
                 placeholder: "Feet",
-                type: FieldType.TEXT,
                 xs: 6,
               },
               {
-                path: "inche",
+                path: "inches",
                 placeholder: "Inches",
                 xs: 6,
               },
             ],
-            addButton: "Add more substances",
             xs: 6,
           },
           {
@@ -250,9 +249,10 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
             xs: 12,
           },
           {
-            label: "Do you currently possess a weapon/firearm",
+            label: "Do you currently possess a weapon/firearm?",
             path: "weaponPossess",
             type: FieldType.SINGLE_INSTANCE,
+            required: true,
             properties: [
               {
                 path: "type",
@@ -284,6 +284,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
             label: "Which symptoms are you currently experiencing?",
             path: "currentSymptoms",
             type: FieldType.MULTI_INSTANCE,
+            required: true,
             properties: [
               {
                 path: "type",

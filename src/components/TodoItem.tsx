@@ -66,7 +66,7 @@ const TodoItem: FC<TodoItemProps> = ({ item, onClick }) => {
         </Typography>
       </CardContent>
       <CardActions className={layoutClasses.noPadding}>
-        <TextButton title={buttonText} onClick={onClick} />
+        <TextButton text={buttonText} onClick={onClick} />
       </CardActions>
     </Card>
   );

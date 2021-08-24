@@ -70,7 +70,7 @@ const AccountInformation: FC<AccountInformationProps> = ({
       path: "password",
       render: () => (
         <TextButton
-          title="Reset Password"
+          text="Reset Password"
           onClick={() => onClickEdit(EditableField.RESET_PASSWORD)}
         />
       ),
@@ -84,7 +84,7 @@ const AccountInformation: FC<AccountInformationProps> = ({
             {value || "Unverified"}
           </Typography>
           {shouldVerifyId(value) && (
-            <TextButton title="Verify ID" onClick={onShowVerifyIDDialog} />
+            <TextButton text="Verify ID" onClick={onShowVerifyIDDialog} />
           )}
         </Box>
       ),

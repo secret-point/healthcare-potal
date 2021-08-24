@@ -3,9 +3,11 @@ import clsx from "clsx";
 import dotProp from "dot-prop";
 
 import TextField, { TextFieldProps } from "@material-ui/core/TextField";
+import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
 import { Theme } from "../theme/types/createPalette";
+import { useColorStyles } from "./useCommonStyles";
 
 export const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -79,6 +81,7 @@ export default function TextInput({
   ...props
 }: TextInputProps) {
   const classes = useStyles();
+  const colorClasses = useColorStyles();
   const {
     control,
     register,
@@ -97,7 +100,14 @@ export default function TextInput({
         <TextField
           id={name}
           type={type}
-          label={label}
+          label={
+            label ? (
+              <Typography>
+                {label}
+                {required && <b className={colorClasses.accentRed}>*</b>}
+              </Typography>
+            ) : null
+          }
           variant={variant}
           error={Boolean(error)}
           className={clsx(className, classes.textField)}

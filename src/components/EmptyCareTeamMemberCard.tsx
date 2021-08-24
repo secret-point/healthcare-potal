@@ -42,7 +42,7 @@ const EmptyCareTeamMemberCard = ({
       </CardContent>
       <CardActions className={layoutClasses.noPadding}>
         <TextButton
-          title="Set up care coordination"
+          text="Set up care coordination"
           onClick={onSetupCareCoordination}
         />
       </CardActions>

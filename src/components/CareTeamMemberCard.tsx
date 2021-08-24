@@ -53,7 +53,7 @@ const CareTeamMemberCard = ({ member }: CareTeamMemberCardProps) => {
         </Typography>
       </CardContent>
       <CardActions className={layoutClasses.noPadding}>
-        <TextButton title={member.contact} />
+        <TextButton text={member.contact} />
       </CardActions>
     </Card>
   );

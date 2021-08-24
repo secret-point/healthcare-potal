@@ -97,7 +97,7 @@ const CareTeam = () => {
 
       {isMobile && showCareTeam && (
         <TextButton
-          title="▴ Hide your care team"
+          text="▴ Hide your care team"
           className={layoutClasses.mt1}
           onClick={handleToggleShowCareTeam}
         />

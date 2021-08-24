@@ -20,6 +20,7 @@ const FieldComponent: FC<FieldComponentProps> = ({ field, variant }) => {
         <Dropdown
           name={field.path}
           label={field.label}
+          required={field.required}
           options={field.options || []}
           variant={field.variant || variant || "standard"}
           placeholder={field.placeholder}
@@ -33,6 +34,7 @@ const FieldComponent: FC<FieldComponentProps> = ({ field, variant }) => {
           layout={{ xs: 12 }}
           name={field.path}
           label={field.label}
+          required={field.required}
           options={field.options || []}
         />
       );
@@ -42,6 +44,7 @@ const FieldComponent: FC<FieldComponentProps> = ({ field, variant }) => {
         <SingleInstance
           label={field.label}
           path={field.path}
+          required={field.required}
           variant={variant}
           properties={field.properties || []}
         />
@@ -53,6 +56,7 @@ const FieldComponent: FC<FieldComponentProps> = ({ field, variant }) => {
           label={field.label}
           path={field.path}
           variant={variant}
+          required={field.required}
           addButton={field.addButton}
           properties={field.properties || []}
         />
