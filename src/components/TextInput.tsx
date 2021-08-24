@@ -3,20 +3,35 @@ import clsx from "clsx";
 import dotProp from "dot-prop";
 
 import TextField, { TextFieldProps } from "@material-ui/core/TextField";
+import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
 import { Theme } from "../theme/types/createPalette";
+import { useColorStyles } from "./useCommonStyles";
 
 export const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     textField: {
       width: "100%",
 
+      "& .MuiInputLabel-outlined.MuiInputLabel-shrink": {
+        fontSize: 16,
+        transform: "translate(0px, -24px)",
+      },
+      "& .MuiOutlinedInput-root fieldset.MuiOutlinedInput-notchedOutline ": {
+        top: 0,
+        "& legend": {
+          height: 0,
+          "& span": {
+            display: "none",
+          },
+        },
+      },
       "& .MuiOutlinedInput-multiline": {
         padding: theme.spacing(3),
       },
       "& .MuiInputBase-root": {
-        borderRadius: theme.spacing(2),
+        borderRadius: theme.spacing(1),
       },
       "& .MuiInputBase-input": {
         fontFamily: "DM Sans",
@@ -26,7 +41,7 @@ export const useStyles = makeStyles((theme: Theme) =>
         color: theme.palette.secondaryNavy2.main,
       },
       "& .MuiOutlinedInput-input:not(.MuiOutlinedInput-inputMultiline)": {
-        padding: theme.spacing(2, 3),
+        padding: theme.spacing(2),
       },
       "& .MuiOutlinedInput-notchedOutline": {
         borderColor: theme.palette.distinctiveGray.main,
@@ -66,6 +81,7 @@ export default function TextInput({
   ...props
 }: TextInputProps) {
   const classes = useStyles();
+  const colorClasses = useColorStyles();
   const {
     control,
     register,
@@ -84,7 +100,14 @@ export default function TextInput({
         <TextField
           id={name}
           type={type}
-          label={label}
+          label={
+            label ? (
+              <Typography>
+                {label}
+                {required && <b className={colorClasses.accentRed}>*</b>}
+              </Typography>
+            ) : null
+          }
           variant={variant}
           error={Boolean(error)}
           className={clsx(className, classes.textField)}

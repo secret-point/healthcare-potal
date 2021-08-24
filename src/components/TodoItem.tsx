@@ -7,7 +7,7 @@ import Typography from "@material-ui/core/Typography";
 
 import { TodoItemType, TTodoItem } from "../types";
 import { formatFullDay } from "../utils/date";
-import { EditButton } from "./Button";
+import { TextButton } from "./Button";
 import {
   useCardStyles,
   useFontStyles,
@@ -66,7 +66,7 @@ const TodoItem: FC<TodoItemProps> = ({ item, onClick }) => {
         </Typography>
       </CardContent>
       <CardActions className={layoutClasses.noPadding}>
-        <EditButton title={buttonText} onClick={onClick} />
+        <TextButton text={buttonText} onClick={onClick} />
       </CardActions>
     </Card>
   );

@@ -8,7 +8,7 @@ import { Theme } from "../../theme/types/createPalette";
 import { TCustomField, User } from "../../types";
 import { shouldVerifyId } from "../../utils/string";
 import CustomList from "../../components/CustomList";
-import { EditButton } from "../../components/Button";
+import { TextButton } from "../../components/Button";
 import { EditableField } from "./types";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -55,7 +55,7 @@ const AccountInformation: FC<AccountInformationProps> = ({
           <Typography variant="subtitle1" className={classes.listValue}>
             {value}
           </Typography>
-          <EditButton
+          <TextButton
             onClick={() => onClickEdit(EditableField.PREFERRED_NAME)}
           />
         </Box>
@@ -69,8 +69,8 @@ const AccountInformation: FC<AccountInformationProps> = ({
       label: "Password",
       path: "password",
       render: () => (
-        <EditButton
-          title="Reset Password"
+        <TextButton
+          text="Reset Password"
           onClick={() => onClickEdit(EditableField.RESET_PASSWORD)}
         />
       ),
@@ -84,7 +84,7 @@ const AccountInformation: FC<AccountInformationProps> = ({
             {value || "Unverified"}
           </Typography>
           {shouldVerifyId(value) && (
-            <EditButton title="Verify ID" onClick={onShowVerifyIDDialog} />
+            <TextButton text="Verify ID" onClick={onShowVerifyIDDialog} />
           )}
         </Box>
       ),

@@ -10,8 +10,9 @@ import Radio from "@material-ui/core/Radio";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
-import { TLabelCode } from "../types";
+import { TDropItem } from "../types";
 import { Theme } from "../theme/types/createPalette";
+import { useColorStyles } from "./useCommonStyles";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -40,7 +41,8 @@ const useStyles = makeStyles((theme: Theme) =>
 type RadioFieldProps = {
   name: string;
   label?: string;
-  options: TLabelCode[];
+  required?: boolean;
+  options: TDropItem[];
   layout: {
     xs?: GridSize;
     sm?: GridSize;
@@ -49,8 +51,15 @@ type RadioFieldProps = {
   };
 };
 
-const RadioField: FC<RadioFieldProps> = ({ label, name, options, layout }) => {
+const RadioField: FC<RadioFieldProps> = ({
+  label,
+  name,
+  required,
+  options,
+  layout,
+}) => {
   const classes = useStyles();
+  const colorClasses = useColorStyles();
 
   const { getValues, register, setValue } = useFormContext();
   const value = getValues(name);
@@ -79,7 +88,10 @@ const RadioField: FC<RadioFieldProps> = ({ label, name, options, layout }) => {
       <FormControl className={classes.formControl}>
         {label && (
           <FormLabel component="legend">
-            <Typography>{label}</Typography>
+            <Typography>
+              {label}
+              {required && <b className={colorClasses.accentRed}>*</b>}
+            </Typography>
           </FormLabel>
         )}
         <RadioGroup
@@ -101,7 +113,7 @@ const RadioField: FC<RadioFieldProps> = ({ label, name, options, layout }) => {
                 <FormControlLabel
                   value={option.code}
                   control={<Radio color="secondary" />}
-                  label={option.label}
+                  label={option.display}
                   className={clsx(
                     classes.formControlLabel,
                     option.code === muiValue && classes.selectedFormControlLabel

@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: theme.spacing(0),
     },
 
-    editButton: {
+    TextButton: {
       minWidth: 40,
       padding: theme.spacing(0),
 
@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface ButtonProps extends MuiButtonProps {
-  text: string;
+  text: React.ReactNode;
   fullWidth?: boolean;
   noPadding?: boolean;
   className?: string;
@@ -98,9 +98,13 @@ const Button: FC<ButtonProps> = ({
   );
 };
 
-export const EditButton: FC<MuiButtonProps> = ({
+interface TextButtonProps extends MuiButtonProps {
+  text?: React.ReactNode;
+}
+
+export const TextButton: FC<TextButtonProps> = ({
   onClick,
-  title = "Edit",
+  text = "Edit",
   className,
   ...props
 }) => {
@@ -110,7 +114,7 @@ export const EditButton: FC<MuiButtonProps> = ({
     <MuiButton
       variant="text"
       onClick={onClick}
-      className={clsx(classes.button, classes.editButton, className)}
+      className={clsx(classes.button, classes.TextButton, className)}
       {...props}
     >
       <Typography
@@ -119,7 +123,7 @@ export const EditButton: FC<MuiButtonProps> = ({
         variant="subtitle1"
         className={classes.buttonText}
       >
-        {title}
+        {text}
       </Typography>
     </MuiButton>
   );

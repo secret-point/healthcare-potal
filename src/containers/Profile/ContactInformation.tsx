@@ -4,7 +4,7 @@ import Typography from "@material-ui/core/Typography";
 
 import useAuth from "../../hooks/useAuth";
 import CustomList from "../../components/CustomList";
-import { EditButton } from "../../components/Button";
+import { TextButton } from "../../components/Button";
 import { EditableField } from "./types";
 
 interface ContactInformationProps {
@@ -19,21 +19,21 @@ const ContactInformation: FC<ContactInformationProps> = ({ onClickEdit }) => {
       label: "Email",
       path: "email",
       render: () => (
-        <EditButton onClick={() => onClickEdit(EditableField.EMAIL)} />
+        <TextButton onClick={() => onClickEdit(EditableField.EMAIL)} />
       ),
     },
     {
       label: "Phone Number",
       path: "phoneNumber",
       render: () => (
-        <EditButton onClick={() => onClickEdit(EditableField.PHONE_NUMBER)} />
+        <TextButton onClick={() => onClickEdit(EditableField.PHONE_NUMBER)} />
       ),
     },
     {
       label: "Emergency Contact",
       path: "emergencyContact",
       render: () => (
-        <EditButton
+        <TextButton
           onClick={() => onClickEdit(EditableField.EMERGENCY_CONTACT)}
         />
       ),
@@ -42,7 +42,7 @@ const ContactInformation: FC<ContactInformationProps> = ({ onClickEdit }) => {
       label: "Address",
       path: "address",
       render: () => (
-        <EditButton onClick={() => onClickEdit(EditableField.ADDRESS)} />
+        <TextButton onClick={() => onClickEdit(EditableField.ADDRESS)} />
       ),
     },
   ];

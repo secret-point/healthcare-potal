@@ -5,7 +5,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
-import { EditButton } from "./Button";
+import { TextButton } from "./Button";
 import { useLayoutStyles } from "./useCommonStyles";
 
 const useStyles = makeStyles((theme) =>
@@ -41,8 +41,8 @@ const EmptyCareTeamMemberCard = ({
         </Typography>
       </CardContent>
       <CardActions className={layoutClasses.noPadding}>
-        <EditButton
-          title="Set up care coordination"
+        <TextButton
+          text="Set up care coordination"
           onClick={onSetupCareCoordination}
         />
       </CardActions>

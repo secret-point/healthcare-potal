@@ -36,7 +36,21 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-const FeedbackForm = () => {
+interface FeedbackLocaleProp {
+  yourExperience?: string;
+}
+
+const DEFAULT_FEEDBACK_LOCALE: FeedbackLocaleProp = {
+  yourExperience: "How was your experience with this survey?",
+};
+
+interface FeedbackFormProps {
+  locale?: FeedbackLocaleProp;
+}
+
+const FeedbackForm = ({
+  locale = DEFAULT_FEEDBACK_LOCALE,
+}: FeedbackFormProps) => {
   const classes = useStyles();
   const colorClasses = useColorStyles();
   const layoutClasses = useLayoutStyles();
@@ -80,7 +94,7 @@ const FeedbackForm = () => {
         variant="h6"
         className={clsx(colorClasses.white, layoutClasses.mb2)}
       >
-        How was your experience with this survey?
+        {locale?.yourExperience}
       </Typography>
       {feedbackScore === null ? (
         <Rating

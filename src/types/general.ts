@@ -27,19 +27,45 @@ export enum ONBOARDING {
   FINAL = "Great! You're all set up.",
 }
 
-export type SelectOption = { code: string; display: string };
-
 export enum FieldType {
   SELECT = "SELECT",
   TEXT = "TEXT",
+  DATE = "DATE",
+  RADIO_GROUP = "RADIO_GROUP",
+  MULTI_SELECT = "MULTI_SELECT",
+  MULTI_INSTANCE = "MULTI_INSTANCE",
+  SINGLE_INSTANCE = "SINGLE_INSTANCE",
 }
+
+export type TDropItem = {
+  code: string;
+  display: string;
+  value?: number;
+};
+
+export type TCustomFieldProperty = {
+  path: string;
+  placeholder: string;
+  variant?: "standard" | "outlined";
+  shrink?: boolean;
+  type?: FieldType;
+  options?: TDropItem[];
+  xs?: any;
+};
 
 export type TCustomField = {
   label: string;
+  helperText?: string;
   path: string;
   type?: FieldType;
-  options?: SelectOption[];
-  xs?: number;
+  placeholder?: string;
+  shrink?: boolean;
+  options?: TDropItem[];
+  required?: boolean;
+  variant?: "standard" | "outlined";
+  properties?: TCustomFieldProperty[];
+  addButton?: string;
+  xs?: any;
   render?: (value: any) => any;
 };
 
@@ -89,18 +115,12 @@ export type TProgressSummary = {
   summary: string;
 };
 
-export type TLabelCode = {
-  code: string;
-  label: string;
-  value?: number;
-};
-
 export type TQuestion = {
   code: string;
   type: "GAD" | "PHQ" | "MCQ" | "FRQ";
   header?: string;
   question: string;
-  options?: TLabelCode[];
+  options?: TDropItem[];
 };
 
 export type TMenuItem = {
