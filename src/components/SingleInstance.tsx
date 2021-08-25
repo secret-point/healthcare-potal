@@ -1,24 +1,27 @@
+import clsx from "clsx";
 import React from "react";
 
 import Grid from "@material-ui/core/Grid";
-import InputLabel from "@material-ui/core/InputLabel";
+import FormLabel from "@material-ui/core/FormLabel";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
 import { Theme } from "../theme/types/createPalette";
 import { TCustomFieldProperty } from "../types";
 import FieldComponent from "./FieldComponent";
-import { useColorStyles } from "./useCommonStyles";
+import { useColorStyles, useLayoutStyles } from "./useCommonStyles";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
-      transform: "translateY(-16px)",
+      transform: "translateY(-32px)",
     },
     inputLabel: {
-      "&.MuiInputLabel-root": {
+      "&.MuiFormLabel-root": {
         fontSize: 16,
         color: theme.palette.secondaryNavy2.main,
-        transform: "translateY(-8px)",
+        height: 32,
+        display: "flex",
+        alignItems: "center",
       },
     },
   })
@@ -41,18 +44,23 @@ const SingleInstance: React.FC<SingleInstanceProps> = ({
 }) => {
   const classes = useStyles();
   const colorClasses = useColorStyles();
+  const layoutClasses = useLayoutStyles();
 
   return (
     <Grid container className={classes.container}>
       <Grid item xs={12}>
-        <InputLabel htmlFor={path} className={classes.inputLabel}>
+        <FormLabel htmlFor={path} className={classes.inputLabel}>
           {label}
-          {required && <b className={colorClasses.accentRed}>*</b>}
-        </InputLabel>
+          {required && (
+            <b className={clsx(colorClasses.accentRed, layoutClasses.ml05)}>
+              *
+            </b>
+          )}
+        </FormLabel>
       </Grid>
       <Grid container spacing={2}>
         {properties.map((property) => (
-          <Grid key={property.path} item xs={property.xs || 6}>
+          <Grid key={property.path} item xs={property.xs} lg={property.lg}>
             <FieldComponent
               key={property.path}
               field={{

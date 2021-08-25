@@ -1,4 +1,5 @@
-import React, { FC, useEffect, useMemo, useRef } from "react";
+import clsx from "clsx";
+import { FC, useEffect, useMemo, useRef } from "react";
 import { useFormContext } from "react-hook-form";
 
 import { makeStyles, createStyles } from "@material-ui/core/styles";
@@ -9,7 +10,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 
 import { Theme } from "../theme/types/createPalette";
 import { TDropItem } from "../types/general";
-import { useColorStyles } from "./useCommonStyles";
+import { useColorStyles, useLayoutStyles } from "./useCommonStyles";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -19,14 +20,20 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     inputLabel: {
       "&.MuiInputLabel-outlined.MuiInputLabel-shrink": {
+        height: 32,
         fontSize: 16,
-        transform: "translate(0px, -24px)",
+        display: "flex",
+        transform: "translate(0px, -32px)",
+        alignItems: "center",
       },
       "&.MuiFormLabel-root.Mui-focused": {
         color: theme.palette.secondaryNavy2.main,
       },
     },
     select: {
+      "& .MuiOutlinedInput-root": {
+        borderRadius: theme.spacing(1),
+      },
       "& .MuiSelect-select.MuiSelect-select": {
         display: "flex",
         alignItems: "center",
@@ -69,6 +76,7 @@ const Dropdown: FC<DropdownProps> = ({
 }) => {
   const classes = useStyles();
   const colorClasses = useColorStyles();
+  const layoutClasses = useLayoutStyles();
 
   const myRef = useRef<HTMLInputElement>(null);
 
@@ -117,7 +125,11 @@ const Dropdown: FC<DropdownProps> = ({
       <FormControl variant={variant} className={classes.formControl}>
         <InputLabel id={name} shrink className={classes.inputLabel}>
           {displayLabel}
-          {required && <b className={colorClasses.accentRed}>*</b>}
+          {required && (
+            <b className={clsx(colorClasses.accentRed, layoutClasses.ml05)}>
+              *
+            </b>
+          )}
         </InputLabel>
         <Select
           name={name}

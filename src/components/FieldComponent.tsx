@@ -35,6 +35,7 @@ const FieldComponent: FC<FieldComponentProps> = ({ field, variant }) => {
           name={field.path}
           label={field.label}
           required={field.required}
+          isTopLabel={field.isTopLabel}
           options={field.options || []}
         />
       );
@@ -58,6 +59,7 @@ const FieldComponent: FC<FieldComponentProps> = ({ field, variant }) => {
           variant={variant}
           required={field.required}
           addButton={field.addButton}
+          instanceLabel={field.instanceLabel}
           properties={field.properties || []}
         />
       );
