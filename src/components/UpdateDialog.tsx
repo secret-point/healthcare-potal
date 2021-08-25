@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) =>
       },
 
       "& .MuiDialogContent-root": {
-        padding: theme.spacing(0, 4),
+        padding: theme.spacing(3, 4, 0),
       },
 
       "& .MuiDialogActions-root": {
@@ -54,22 +54,31 @@ const UpdateDialog: FC<UpdateDialogProps> = ({
   const handleSave = () => {};
 
   return (
-    <Dialog open={open} maxWidth="lg" className={classes.dialog}>
+    <Dialog
+      open={open}
+      maxWidth="lg"
+      className={classes.dialog}
+      onClose={onClose}
+    >
       <Typography variant="h2" className={classes.dialogTitle}>
         {title}
       </Typography>
 
       <DialogContent>
         <FormProvider {...methods}>
-          {rows.map((row) => (
-            <Grid container key={row.row} spacing={3}>
-              {row.fields.map((field) => (
-                <Grid item key={field.path} xs={(field.xs || 12) as any}>
-                  <FieldComponent field={field} />
+          <Grid container spacing={4}>
+            {rows.map((row) => (
+              <Grid item key={row.row} xs={12}>
+                <Grid container spacing={3}>
+                  {row.fields.map((field) => (
+                    <Grid item key={field.path} xs={(field.xs || 12) as any}>
+                      <FieldComponent field={field} variant="outlined" />
+                    </Grid>
+                  ))}
                 </Grid>
-              ))}
-            </Grid>
-          ))}
+              </Grid>
+            ))}
+          </Grid>
         </FormProvider>
       </DialogContent>
       <DialogActions>
