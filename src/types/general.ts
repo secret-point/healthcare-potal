@@ -49,6 +49,7 @@ export type TCustomFieldProperty = {
   variant?: "standard" | "outlined";
   shrink?: boolean;
   type?: FieldType;
+  isTopLabel?: boolean;
   options?: TDropItem[];
   xs?: any;
 };
@@ -56,6 +57,7 @@ export type TCustomFieldProperty = {
 export type TCustomField = {
   label: string;
   helperText?: string;
+  isTopLabel?: boolean;
   path: string;
   type?: FieldType;
   placeholder?: string;

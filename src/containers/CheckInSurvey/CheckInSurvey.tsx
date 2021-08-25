@@ -9,6 +9,7 @@ import Welcome from "./Welcome";
 import ExperienceSurvey from "./ExperienceSurvey";
 import CompleteSurvey from "./CompleteSurvey";
 import { CheckInSurveySteps, QUESTIONS } from "./constants";
+import { ROUTES } from "../../app/types";
 
 const CheckInSurvey = () => {
   const history = useHistory();
@@ -33,7 +34,11 @@ const CheckInSurvey = () => {
   };
 
   const handleGoToHome = () => {
-    history.push("/dashboard");
+    history.push(ROUTES.DASHBOARD);
+  };
+
+  const handleGoToProgress = () => {
+    history.push(ROUTES.PROGRESS);
   };
 
   return (
@@ -51,7 +56,7 @@ const CheckInSurvey = () => {
               />
             )}
             {surveyStep === CheckInSurveySteps.COMPLETE && (
-              <CompleteSurvey onNext={handleGoToNextStep} />
+              <CompleteSurvey onNext={handleGoToProgress} />
             )}
           </Grid>
         </FormProvider>
