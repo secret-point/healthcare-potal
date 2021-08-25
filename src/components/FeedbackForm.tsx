@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import clsx from "clsx";
 import { useForm, FormProvider } from "react-hook-form";
 import Box from "@material-ui/core/Box";
@@ -72,6 +72,11 @@ const FeedbackForm = ({
     setFeedbackSent(true);
   };
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    handleSendFeedback();
+  };
+
   if (feedbackSent) {
     return (
       <Box
@@ -105,28 +110,30 @@ const FeedbackForm = ({
           onChange={handleChangeFeedbackScore}
         />
       ) : (
-        <FormProvider {...methods}>
-          <TextInput
-            name="feedback"
-            className={classes.textInput}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton
-                    disableRipple
-                    className={clsx(
-                      colorClasses.secondaryGreen1,
-                      layoutClasses.noPadding
-                    )}
-                    onClick={handleSendFeedback}
-                  >
-                    <SendIcon />
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-          />
-        </FormProvider>
+        <form onSubmit={handleSubmit}>
+          <FormProvider {...methods}>
+            <TextInput
+              name="feedback"
+              className={classes.textInput}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      disableRipple
+                      className={clsx(
+                        colorClasses.secondaryGreen1,
+                        layoutClasses.noPadding
+                      )}
+                      onClick={handleSendFeedback}
+                    >
+                      <SendIcon />
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
+          </FormProvider>
+        </form>
       )}
     </Box>
   );

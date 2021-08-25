@@ -8,7 +8,15 @@ export const UPDATE_PROFILE_DIALOGS = {
     rows: [
       {
         row: "Name",
-        fields: [{ label: "Preferred Name", path: "preferredName", xs: 12 }],
+        fields: [
+          {
+            label: "Preferred Name",
+            path: "preferredName",
+            isTopLabel: true,
+            shrink: true,
+            xs: 12,
+          },
+        ],
       },
     ],
   },
@@ -17,7 +25,15 @@ export const UPDATE_PROFILE_DIALOGS = {
     rows: [
       {
         row: "Email",
-        fields: [{ label: "Email Address", path: "email", xs: 12 }],
+        fields: [
+          {
+            label: "Email Address",
+            path: "email",
+            isTopLabel: true,
+            shrink: true,
+            xs: 12,
+          },
+        ],
       },
     ],
   },
@@ -26,7 +42,15 @@ export const UPDATE_PROFILE_DIALOGS = {
     rows: [
       {
         row: "Phone Number",
-        fields: [{ label: "Phone Number", path: "phoneNumber", xs: 12 }],
+        fields: [
+          {
+            label: "Phone Number",
+            path: "phoneNumber",
+            isTopLabel: true,
+            shrink: true,
+            xs: 12,
+          },
+        ],
       },
     ],
   },
@@ -39,6 +63,8 @@ export const UPDATE_PROFILE_DIALOGS = {
           {
             label: "Emergency Contact Name",
             path: "emergencyContact.name",
+            isTopLabel: true,
+            shrink: true,
             xs: 12,
           },
         ],
@@ -49,6 +75,8 @@ export const UPDATE_PROFILE_DIALOGS = {
           {
             label: "Emergency Contact Relationship",
             path: "emergencyContact.relationship",
+            isTopLabel: true,
+            shrink: true,
             xs: 12,
           },
         ],
@@ -59,6 +87,8 @@ export const UPDATE_PROFILE_DIALOGS = {
           {
             label: "Emergency Contact Phone Number",
             path: "emergencyContact.phoneNumber",
+            isTopLabel: true,
+            shrink: true,
             xs: 12,
           },
         ],
@@ -70,15 +100,39 @@ export const UPDATE_PROFILE_DIALOGS = {
     rows: [
       {
         row: "Line 1",
-        fields: [{ label: "Address Line 1", path: "address.line1", xs: 12 }],
+        fields: [
+          {
+            label: "Address Line 1",
+            path: "address.line1",
+            isTopLabel: true,
+            shrink: true,
+            xs: 12,
+          },
+        ],
       },
       {
         row: "Line 2",
-        fields: [{ label: "Address Line 2", path: "address.line2", xs: 12 }],
+        fields: [
+          {
+            label: "Address Line 2",
+            path: "address.line2",
+            isTopLabel: true,
+            shrink: true,
+            xs: 12,
+          },
+        ],
       },
       {
         row: "City",
-        fields: [{ label: "City", path: "address.city", xs: 12 }],
+        fields: [
+          {
+            label: "City",
+            path: "address.city",
+            isTopLabel: true,
+            shrink: true,
+            xs: 12,
+          },
+        ],
       },
       {
         row: "State & Zip",
@@ -90,7 +144,13 @@ export const UPDATE_PROFILE_DIALOGS = {
             options: usStates,
             xs: 6,
           },
-          { label: "Zip Code", path: "address.zipCode", xs: 6 },
+          {
+            label: "Zip Code",
+            path: "address.zipCode",
+            isTopLabel: true,
+            shrink: true,
+            xs: 6,
+          },
         ],
       },
     ],
@@ -100,12 +160,26 @@ export const UPDATE_PROFILE_DIALOGS = {
     rows: [
       {
         row: "Password",
-        fields: [{ label: "Password", path: "password", xs: 12 }],
+        fields: [
+          {
+            label: "Password",
+            path: "password",
+            isTopLabel: true,
+            shrink: true,
+            xs: 12,
+          },
+        ],
       },
       {
         row: "Confirm Password",
         fields: [
-          { label: "Confirm Password", path: "confirmPassword", xs: 12 },
+          {
+            label: "Confirm Password",
+            path: "confirmPassword",
+            isTopLabel: true,
+            shrink: true,
+            xs: 12,
+          },
         ],
       },
     ],

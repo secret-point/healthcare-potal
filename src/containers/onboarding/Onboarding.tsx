@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useHistory } from "react-router";
 import { useForm, FormProvider } from "react-hook-form";
 
 import Container from "../../components/Container";
@@ -13,12 +14,15 @@ import OnboardingProgress from "./OnboardingProgress";
 import AllSetup from "./AllSetup";
 
 export default function Onboarding() {
+  const history = useHistory();
   const [currentStep, setCurrentStep] = useState(ONBOARDING.NAME);
   const methods = useForm({
     mode: "onBlur",
   });
 
-  const handleLogIn = () => {};
+  const handleLogIn = () => {
+    history.push("/login");
+  };
 
   return (
     <Container>

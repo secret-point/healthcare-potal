@@ -76,6 +76,7 @@ const FieldComponent: FC<FieldComponentProps> = ({ field, variant }) => {
           InputLabelProps={{
             shrink: field.shrink || false || field.type === FieldType.DATE,
           }}
+          isTopLabel={field.isTopLabel}
         />
       );
   }
