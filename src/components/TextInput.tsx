@@ -3,11 +3,10 @@ import clsx from "clsx";
 import dotProp from "dot-prop";
 
 import TextField, { TextFieldProps } from "@material-ui/core/TextField";
-import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
 import { Theme } from "../theme/types/createPalette";
-import { useColorStyles } from "./useCommonStyles";
+import { useColorStyles, useLayoutStyles } from "./useCommonStyles";
 
 export const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -26,12 +25,14 @@ export const useStyles = makeStyles((theme: Theme) =>
         lineHeight: 1.3,
         fontWeight: "normal",
         color: theme.palette.secondaryNavy2.main,
+
+        "&::placeholder": {
+          color: theme.palette.secondaryNavy2.main,
+          opacity: 1,
+        },
       },
       "& .MuiOutlinedInput-input:not(.MuiOutlinedInput-inputMultiline)": {
         padding: theme.spacing(2),
-      },
-      "& .MuiOutlinedInput-notchedOutline": {
-        borderColor: theme.palette.distinctiveGray.main,
       },
       "& .MuiFormLabel-root.Mui-focused": {
         color: theme.palette.secondaryNavy2.main,
@@ -51,8 +52,11 @@ export const useStyles = makeStyles((theme: Theme) =>
 
     topLabelField: {
       "& .MuiInputLabel-outlined.MuiInputLabel-shrink": {
+        height: 32,
         fontSize: 16,
-        transform: "translate(0px, -24px)",
+        display: "flex",
+        transform: "translate(0px, -32px)",
+        alignItems: "center",
       },
       "& .MuiOutlinedInput-root fieldset.MuiOutlinedInput-notchedOutline ": {
         top: 0,
@@ -87,6 +91,7 @@ export default function TextInput({
 }: TextInputProps) {
   const classes = useStyles();
   const colorClasses = useColorStyles();
+  const layoutClasses = useLayoutStyles();
   const {
     control,
     register,
@@ -107,10 +112,16 @@ export default function TextInput({
           type={type}
           label={
             label ? (
-              <Typography>
+              <>
                 {label}
-                {required && <b className={colorClasses.accentRed}>*</b>}
-              </Typography>
+                {required && (
+                  <b
+                    className={clsx(colorClasses.accentRed, layoutClasses.ml1)}
+                  >
+                    *
+                  </b>
+                )}
+              </>
             ) : null
           }
           variant={variant}

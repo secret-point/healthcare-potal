@@ -188,6 +188,9 @@ export const useLayoutStyles = makeStyles((theme: Theme) =>
     mb8: {
       marginBottom: theme.spacing(8),
     },
+    ml05: {
+      marginLeft: theme.spacing(0.5),
+    },
     ml1: {
       marginLeft: theme.spacing(1),
     },

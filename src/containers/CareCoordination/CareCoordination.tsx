@@ -1,14 +1,32 @@
+import clsx from "clsx";
 import { useForm, FormProvider } from "react-hook-form";
 
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
+import { makeStyles, createStyles } from "@material-ui/core/styles";
 
+import { Theme } from "../../theme/types/createPalette";
 import { FieldType } from "../../types/general";
-import { CARE_PROVIDER_TYPES } from "../../constants/identity";
+import {
+  CARE_PROVIDER_TYPES,
+  INFORMATION_TYPES,
+} from "../../constants/identity";
 import { usStates } from "../../constants/usStates";
+import Button from "../../components/Button";
 import Container from "../../components/Container";
 import { useLayoutStyles } from "../../components/useCommonStyles";
 import MultiInstance from "../../components/MultiInstance";
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    inputLabelClass: {
+      fontSize: 16,
+      fontWeight: 500,
+      color: `${theme.palette.primaryNavy.main} !important`,
+      marginBottom: theme.spacing(3),
+    },
+  })
+);
 
 const PROVIDER = {
   label: "Who would you like us to coordinate your care with?",
@@ -64,7 +82,7 @@ const PROVIDER = {
     },
     {
       path: "state",
-      placeholder: "Zipcode",
+      placeholder: "State",
       type: FieldType.SELECT,
       options: usStates,
       xs: 6,
@@ -93,47 +111,73 @@ const PROVIDER = {
       shrink: true,
       xs: 6,
     },
+    {
+      path: "sharedInformationType",
+      placeholder: "Types of information shared",
+      type: FieldType.SELECT,
+      options: INFORMATION_TYPES,
+      xs: 6,
+    },
   ],
   addButton: "Add another provider",
+  instanceLabel: "Provider",
   required: true,
 };
 
 const CareCoordination = () => {
+  const classes = useStyles();
   const layoutClasses = useLayoutStyles();
   const methods = useForm({
     mode: "onBlur",
   });
 
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+  };
+
   return (
     <Container>
       <Grid container>
         <FormProvider {...methods}>
-          <Grid item xs={12}>
-            <Typography variant="h3">Coordination of Care</Typography>
-          </Grid>
-          <Grid item xs={12} className={layoutClasses.mt1}>
-            <Typography variant="subtitle1">
-              Coordination of Care allows for your Prairie team to provide
-              updates on your care with an outside provider like a therapist or
-              your primary care provider. This leads to better outcomes on
-              average, since everyone has the latest information about your care
-              from your psychiatrist here at Prairie Health.
-            </Typography>
-            <Typography variant="subtitle1" className={layoutClasses.mt2}>
-              Your care team at Prairie Health will share relevant medical
-              information with the people with whom you&apos;d like us to
-              coordinate care via mail, fax or any other secure methods.
-            </Typography>
-          </Grid>
-          <Grid item xs={12}>
-            <MultiInstance
-              label={PROVIDER.label}
-              path=""
-              properties={PROVIDER.properties}
-              variant="outlined"
-              addButton="Add another provider"
-            />
-          </Grid>
+          <form onSubmit={handleSubmit}>
+            <Grid item xs={12}>
+              <Typography variant="h3">Coordination of Care</Typography>
+            </Grid>
+            <Grid item xs={12} className={layoutClasses.mt1}>
+              <Typography variant="subtitle1">
+                Coordination of Care allows for your Prairie team to provide
+                updates on your care with an outside provider like a therapist
+                or your primary care provider. This leads to better outcomes on
+                average, since everyone has the latest information about your
+                care from your psychiatrist here at Prairie Health.
+              </Typography>
+              <Typography variant="subtitle1" className={layoutClasses.mt2}>
+                Your care team at Prairie Health will share relevant medical
+                information with the people with whom you&apos;d like us to
+                coordinate care via mail, fax or any other secure methods.
+              </Typography>
+            </Grid>
+            <Grid item xs={12} className={layoutClasses.mt3}>
+              <MultiInstance
+                label={PROVIDER.label}
+                path=""
+                limit={2}
+                properties={PROVIDER.properties}
+                variant="outlined"
+                addButton={PROVIDER.addButton}
+                instanceLabel={PROVIDER.instanceLabel}
+                inputLabelClass={clsx(classes.inputLabelClass)}
+              />
+            </Grid>
+            <Grid item xs={12} className={layoutClasses.mt6}>
+              <Button
+                text="Submit"
+                color="primary"
+                variant="contained"
+                type="submit"
+              />
+            </Grid>
+          </form>
         </FormProvider>
       </Grid>
     </Container>

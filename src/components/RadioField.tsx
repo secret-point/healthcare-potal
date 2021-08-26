@@ -7,12 +7,11 @@ import FormLabel from "@material-ui/core/FormLabel";
 import Grid, { GridSize } from "@material-ui/core/Grid";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import Radio from "@material-ui/core/Radio";
-import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
 import { TDropItem } from "../types";
 import { Theme } from "../theme/types/createPalette";
-import { useColorStyles } from "./useCommonStyles";
+import { useColorStyles, useLayoutStyles } from "./useCommonStyles";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -35,6 +34,10 @@ const useStyles = makeStyles((theme: Theme) =>
         color: theme.palette.secondaryGreen1.main,
       },
     },
+    topLabel: {
+      fontSize: 16,
+      marginBottom: theme.spacing(0.5),
+    },
   })
 );
 
@@ -42,6 +45,7 @@ type RadioFieldProps = {
   name: string;
   label?: string;
   required?: boolean;
+  isTopLabel?: boolean;
   options: TDropItem[];
   layout: {
     xs?: GridSize;
@@ -55,11 +59,13 @@ const RadioField: FC<RadioFieldProps> = ({
   label,
   name,
   required,
+  isTopLabel,
   options,
   layout,
 }) => {
   const classes = useStyles();
   const colorClasses = useColorStyles();
+  const layoutClasses = useLayoutStyles();
 
   const { getValues, register, setValue } = useFormContext();
   const value = getValues(name);
@@ -87,11 +93,16 @@ const RadioField: FC<RadioFieldProps> = ({
     <div className={classes.root}>
       <FormControl className={classes.formControl}>
         {label && (
-          <FormLabel component="legend">
-            <Typography>
-              {label}
-              {required && <b className={colorClasses.accentRed}>*</b>}
-            </Typography>
+          <FormLabel
+            component="legend"
+            className={clsx(isTopLabel && classes.topLabel)}
+          >
+            {label}
+            {required && (
+              <b className={clsx(colorClasses.accentRed, layoutClasses.ml05)}>
+                *
+              </b>
+            )}
           </FormLabel>
         )}
         <RadioGroup

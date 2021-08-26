@@ -136,3 +136,9 @@ export const CARE_PROVIDER_TYPES: TDropItem[] = [
   { code: "NURSING", display: "Nursing Care" },
   { code: "SPECIALITY", display: "Speciality Care" },
 ];
+
+export const INFORMATION_TYPES: TDropItem[] = [
+  { code: "PRIMARY", display: "Primary" },
+  { code: "SECONDARY", display: "Secondary" },
+  { code: "TERITARY", display: "Teritary" },
+];
