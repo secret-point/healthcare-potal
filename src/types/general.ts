@@ -52,6 +52,7 @@ export type TCustomFieldProperty = {
   isTopLabel?: boolean;
   options?: TDropItem[];
   xs?: any;
+  lg?: any;
 };
 
 export type TCustomField = {
@@ -67,7 +68,9 @@ export type TCustomField = {
   variant?: "standard" | "outlined";
   properties?: TCustomFieldProperty[];
   addButton?: string;
+  instanceLabel?: string;
   xs?: any;
+  lg?: any;
   render?: (value: any) => any;
 };
 

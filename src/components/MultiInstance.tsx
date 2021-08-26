@@ -1,8 +1,10 @@
+import clsx from "clsx";
 import React, { useState } from "react";
 
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
-import InputLabel from "@material-ui/core/InputLabel";
+import FormLabel from "@material-ui/core/FormLabel";
+import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 
@@ -10,18 +12,20 @@ import { Theme } from "../theme/types/createPalette";
 import { TCustomFieldProperty } from "../types";
 import FieldComponent from "./FieldComponent";
 import { TextButton } from "./Button";
-import { useColorStyles } from "./useCommonStyles";
+import { useColorStyles, useLayoutStyles } from "./useCommonStyles";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
-      transform: "translateY(-16px)",
+      transform: "translateY(-32px)",
     },
     inputLabel: {
-      "&.MuiInputLabel-root": {
+      "&.MuiFormLabel-root": {
         fontSize: 16,
         color: theme.palette.secondaryNavy2.main,
-        transform: "translateY(-8px)",
+        height: 32,
+        display: "flex",
+        alignItems: "center",
       },
     },
   })
@@ -32,6 +36,7 @@ interface MultiInstanceProps {
   path: string;
   required?: boolean;
   addButton?: string;
+  instanceLabel?: string;
   variant?: "standard" | "outlined";
   properties: TCustomFieldProperty[];
 }
@@ -42,10 +47,12 @@ const MultiInstance: React.FC<MultiInstanceProps> = ({
   required,
   variant,
   addButton,
+  instanceLabel,
   properties,
 }) => {
   const classes = useStyles();
   const colorClasses = useColorStyles();
+  const layoutClasses = useLayoutStyles();
   const [instances, setInstances] = useState<number[]>([0]);
 
   const handleClickAddMoreInstance = () => {
@@ -55,18 +62,34 @@ const MultiInstance: React.FC<MultiInstanceProps> = ({
   return (
     <Grid container>
       <Grid item xs={12}>
-        <InputLabel htmlFor={path} className={classes.inputLabel}>
+        <FormLabel htmlFor={path} className={classes.inputLabel}>
           {label}
-          {required && <b className={colorClasses.accentRed}>*</b>}
-        </InputLabel>
+          {required && (
+            <b className={clsx(colorClasses.accentRed, layoutClasses.ml05)}>
+              *
+            </b>
+          )}
+        </FormLabel>
       </Grid>
 
       <Grid container spacing={2}>
         {instances.map((index) => (
           <Grid key={index} item xs={12}>
             <Grid container spacing={2}>
+              {instanceLabel && (
+                <Grid item xs={12}>
+                  <Typography variant="h5">
+                    {`${instanceLabel} ${index + 1}`}
+                  </Typography>
+                </Grid>
+              )}
               {properties.map((property) => (
-                <Grid key={property.path} item xs={property.xs || 6}>
+                <Grid
+                  key={property.path}
+                  item
+                  xs={property.xs}
+                  lg={property.lg}
+                >
                   <FieldComponent
                     key={property.path}
                     field={{
