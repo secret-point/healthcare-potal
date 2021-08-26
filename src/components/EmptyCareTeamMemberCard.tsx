@@ -5,8 +5,9 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
-import { TextButton } from "./Button";
+import { ButtonLink } from "./Link";
 import { useLayoutStyles } from "./useCommonStyles";
+import { ROUTES } from "../app/types";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -22,13 +23,7 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-interface EmptyCareTeamMemberCardProps {
-  onSetupCareCoordination?: VoidFunction;
-}
-
-const EmptyCareTeamMemberCard = ({
-  onSetupCareCoordination,
-}: EmptyCareTeamMemberCardProps) => {
+const EmptyCareTeamMemberCard = () => {
   const classes = useStyles();
   const layoutClasses = useLayoutStyles();
 
@@ -41,9 +36,9 @@ const EmptyCareTeamMemberCard = ({
         </Typography>
       </CardContent>
       <CardActions className={layoutClasses.noPadding}>
-        <TextButton
+        <ButtonLink
           text="Set up care coordination"
-          onClick={onSetupCareCoordination}
+          to={ROUTES.CARE_COORDINATION}
         />
       </CardActions>
     </Card>

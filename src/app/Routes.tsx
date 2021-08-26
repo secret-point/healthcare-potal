@@ -9,6 +9,7 @@ import Onboarding from "../containers/onboarding/Onboarding";
 import ResetPassword from "../containers/auth/ResetPassword";
 import CheckInSurvey from "../containers/CheckInSurvey/CheckInSurvey";
 import InTakeForm from "../containers/InTakeForm/InTakeForm";
+import CareCoordination from "../containers/CareCoordination/CareCoordination";
 import ConfirmVerificationLink from "../containers/auth/ConfirmVerificationLink";
 
 import { ROUTES } from "./types";
@@ -45,6 +46,9 @@ export function AuthorizedRoutes() {
           </Route>
           <Route path={ROUTES.INTAKE_FORM} exact>
             <InTakeForm />
+          </Route>
+          <Route path={ROUTES.CARE_COORDINATION} exact>
+            <CareCoordination />
           </Route>
           <Redirect to={ROUTES.DASHBOARD} />
         </Switch>

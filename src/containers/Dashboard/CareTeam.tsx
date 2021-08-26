@@ -8,6 +8,7 @@ import CareTeamMemberCard from "../../components/CareTeamMemberCard";
 import { TextButton } from "../../components/Button";
 import { useLayoutStyles } from "../../components/useCommonStyles";
 import { useViewport } from "../../hooks/useViewport";
+import EmptyCareTeamMemberCard from "../../components/EmptyCareTeamMemberCard";
 
 const teamMembers: TCareTeamMember[] = [
   {
@@ -92,6 +93,16 @@ const CareTeam = () => {
               <CareTeamMemberCard member={teamMember} />
             </Grid>
           ))}
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            md={4}
+            lg={3}
+            className={classes.teamMemberItem}
+          >
+            <EmptyCareTeamMemberCard />
+          </Grid>
         </Grid>
       )}
 

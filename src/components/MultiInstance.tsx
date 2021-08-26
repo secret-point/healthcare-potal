@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import React, { useState } from "react";
 
 import Box from "@material-ui/core/Box";
@@ -34,6 +35,7 @@ interface MultiInstanceProps {
   addButton?: string;
   variant?: "standard" | "outlined";
   properties: TCustomFieldProperty[];
+  inputLabelClass?: string;
 }
 
 const MultiInstance: React.FC<MultiInstanceProps> = ({
@@ -43,6 +45,7 @@ const MultiInstance: React.FC<MultiInstanceProps> = ({
   variant,
   addButton,
   properties,
+  inputLabelClass,
 }) => {
   const classes = useStyles();
   const colorClasses = useColorStyles();
@@ -55,7 +58,10 @@ const MultiInstance: React.FC<MultiInstanceProps> = ({
   return (
     <Grid container>
       <Grid item xs={12}>
-        <InputLabel htmlFor={path} className={classes.inputLabel}>
+        <InputLabel
+          htmlFor={path}
+          className={clsx(classes.inputLabel, inputLabelClass)}
+        >
           {label}
           {required && <b className={colorClasses.accentRed}>*</b>}
         </InputLabel>

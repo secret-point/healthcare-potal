@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface LinkProps {
-  align: "left" | "center" | "right";
+  align?: "left" | "center" | "right";
   to: string;
   text: string;
 }
@@ -40,7 +40,7 @@ const Link = ({ align, to, text }: LinkProps) => {
   );
 };
 
-export const ButtonLink = ({ align, to, text }: LinkProps) => {
+export const ButtonLink = ({ align = "left", to, text }: LinkProps) => {
   const classes = useStyles();
   const fontClasses = useFontStyles();
 

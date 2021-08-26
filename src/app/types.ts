@@ -8,4 +8,5 @@ export enum ROUTES {
   CHECKIN = "/check-in",
   PROGRESS = "/progress",
   INTAKE_FORM = "/intake-form",
+  CARE_COORDINATION = "/care-coordination",
 }
