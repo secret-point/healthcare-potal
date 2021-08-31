@@ -138,7 +138,11 @@ export const CARE_PROVIDER_TYPES: TDropItem[] = [
 ];
 
 export const INFORMATION_TYPES: TDropItem[] = [
-  { code: "PRIMARY", display: "Primary" },
-  { code: "SECONDARY", display: "Secondary" },
-  { code: "TERITARY", display: "Teritary" },
+  { code: "ALL", display: "Select all" },
+  { code: "DIAGNOSIS", display: "Diagnosis" },
+  { code: "PRESCRIPTION", display: "Prescription" },
+  { code: "CONSULTATION", display: "Consultation" },
+  { code: "GENETIC_TEST", display: "Genetic test" },
+  { code: "ASSESSMENT_RECORD", display: "Assessment record" },
+  { code: "DISCHARGE_SUMMARY", display: "Discharge summary" },
 ];

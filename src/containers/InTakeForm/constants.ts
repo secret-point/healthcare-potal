@@ -643,6 +643,29 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
         fields: [
           {
             label:
+              "Have you been diagnosed of any other medication conditions not related to mental health?",
+            path: "otherMedicationConditionsDiagnosis",
+            type: FieldType.MULTI_INSTANCE,
+            properties: [
+              {
+                path: "date",
+                placeholder: "Date",
+                type: FieldType.DATE,
+                lg: 6,
+                xs: 12,
+              },
+              {
+                path: "diagnosis",
+                placeholder: "What was the diagnosis?",
+                type: FieldType.TEXT,
+                lg: 6,
+                xs: 12,
+              },
+            ],
+            addButton: "Add more diagnosis",
+          },
+          {
+            label:
               "Is there a history of other medical conditions in your family?",
             path: "familyMedicalConditions",
             type: FieldType.MULTI_INSTANCE,
