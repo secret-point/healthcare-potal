@@ -41,21 +41,19 @@ const InTakeFormInput: FC<InTakeFormInputProps> = ({
   const layoutClasses = useLayoutStyles();
 
   const [error, setError] = useState<Nullable<string>>(null);
-  const {
-    formState: { errors },
-  } = useFormContext();
+  const { trigger } = useFormContext();
 
   const form = IN_TAKE_FORM_STEPS[currentStep];
   const progress = IN_TAKE_FORM_PROGRESS[currentStep];
   const title = typeof form.title === "string" ? form.title : form.title(user);
 
-  const handleClickNext = () => {
-    if (Object.keys(errors).length) {
-      setError("Please fill out the required fields");
-      onNext();
-    } else {
+  const handleClickNext = async () => {
+    const result = await trigger();
+    if (result) {
       setError(null);
       onNext();
+    } else {
+      setError("Please fill out the required fields");
     }
   };
 
