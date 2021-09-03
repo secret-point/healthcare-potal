@@ -48,14 +48,7 @@ const CheckboxField: FC<CheckboxFieldProps> = ({
       control={
         <Controller
           defaultValue={false}
-          render={({ field: { onChange, onBlur, value, ref } }) => (
-            <Checkbox
-              onBlur={onBlur}
-              onChange={onChange}
-              checked={value}
-              inputRef={ref}
-            />
-          )}
+          as={<Checkbox />}
           control={control}
           name={name}
         />

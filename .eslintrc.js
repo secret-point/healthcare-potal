@@ -100,5 +100,6 @@ module.exports = {
     "react/jsx-wrap-multilines": "off",
     "no-plusplus": "off",
     "no-underscore-dangle": "off",
+    "no-confusing-arrow": "off",
   },
 };

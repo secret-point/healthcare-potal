@@ -1,5 +1,7 @@
 import clsx from "clsx";
+import dotProp from "dot-prop";
 import React, { useState } from "react";
+import { useFormContext } from "react-hook-form";
 
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
@@ -14,6 +16,10 @@ import FieldComponent from "./FieldComponent";
 import { TextButton } from "./Button";
 import { useColorStyles, useLayoutStyles } from "./useCommonStyles";
 
+interface StyleProps {
+  hasError: boolean;
+}
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
@@ -22,7 +28,10 @@ const useStyles = makeStyles((theme: Theme) =>
     inputLabel: {
       "&.MuiFormLabel-root": {
         fontSize: 16,
-        color: theme.palette.secondaryNavy2.main,
+        color: (props: StyleProps) =>
+          props.hasError
+            ? theme.palette.accentRed.main
+            : theme.palette.secondaryNavy2.main,
         height: 32,
         display: "flex",
         alignItems: "center",
@@ -54,7 +63,13 @@ const MultiInstance: React.FC<MultiInstanceProps> = ({
   properties,
   inputLabelClass,
 }) => {
-  const classes = useStyles();
+  const {
+    formState: { errors },
+  } = useFormContext();
+
+  const hasError = Boolean(dotProp.get(errors, path));
+
+  const classes = useStyles({ hasError });
   const colorClasses = useColorStyles();
   const layoutClasses = useLayoutStyles();
   const [instances, setInstances] = useState<number[]>([0]);
@@ -101,8 +116,9 @@ const MultiInstance: React.FC<MultiInstanceProps> = ({
                     key={property.path}
                     field={{
                       ...property,
+                      required,
                       label: "",
-                      path: [`[${index}]`, path, property.path].join("."),
+                      path: [path, index, property.path].join("."),
                     }}
                     variant={variant}
                   />

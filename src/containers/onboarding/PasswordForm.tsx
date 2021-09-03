@@ -12,6 +12,7 @@ import Button from "../../components/Button";
 import TextInput from "../../components/TextInput";
 import GreenCheckIcon from "../../icons/GreenCheckIcon";
 import RedCrossIcon from "../../icons/RedCrossIcon";
+import dotProp from "dot-prop";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -44,7 +45,9 @@ const PasswordForm: React.FC<PasswordFormProps> = ({ onNext }) => {
     watch,
     formState: { errors },
   } = useFormContext();
-  const [password, confirmPassword] = getValues(["password", "confirm"]);
+  const values = getValues();
+  const password = dotProp.get(values, "password");
+  const confirmPassword = dotProp.get(values, "confirmPassword");
 
   const handleTogglePassword = () => setShowPassword((show) => !show);
   const handleToggleConfirmPassword = () =>

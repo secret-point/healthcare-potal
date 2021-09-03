@@ -1,5 +1,7 @@
 import clsx from "clsx";
+import dotProp from "dot-prop";
 import React from "react";
+import { useFormContext } from "react-hook-form";
 
 import Grid from "@material-ui/core/Grid";
 import FormLabel from "@material-ui/core/FormLabel";
@@ -10,6 +12,10 @@ import { TCustomFieldProperty } from "../types";
 import FieldComponent from "./FieldComponent";
 import { useColorStyles, useLayoutStyles } from "./useCommonStyles";
 
+interface StyleProps {
+  hasError: boolean;
+}
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
@@ -18,7 +24,10 @@ const useStyles = makeStyles((theme: Theme) =>
     inputLabel: {
       "&.MuiFormLabel-root": {
         fontSize: 16,
-        color: theme.palette.secondaryNavy2.main,
+        color: (props: StyleProps) =>
+          props.hasError
+            ? theme.palette.accentRed.main
+            : theme.palette.secondaryNavy2.main,
         height: 32,
         display: "flex",
         alignItems: "center",
@@ -42,7 +51,13 @@ const SingleInstance: React.FC<SingleInstanceProps> = ({
   variant,
   properties,
 }) => {
-  const classes = useStyles();
+  const {
+    formState: { errors },
+  } = useFormContext();
+
+  const hasError = Boolean(dotProp.get(errors, path));
+
+  const classes = useStyles({ hasError });
   const colorClasses = useColorStyles();
   const layoutClasses = useLayoutStyles();
 
@@ -65,6 +80,7 @@ const SingleInstance: React.FC<SingleInstanceProps> = ({
               key={property.path}
               field={{
                 ...property,
+                required,
                 label: "",
                 path: [path, property.path].join("."),
               }}

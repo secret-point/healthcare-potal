@@ -1,5 +1,6 @@
 import clsx from "clsx";
-import { FC } from "react";
+import { FC, useState } from "react";
+import { useFormContext } from "react-hook-form";
 
 import Grid from "@material-ui/core/Grid";
 import LinearProgress from "@material-ui/core/LinearProgress";
@@ -39,9 +40,24 @@ const InTakeFormInput: FC<InTakeFormInputProps> = ({
   const colorClasses = useColorStyles();
   const layoutClasses = useLayoutStyles();
 
+  const [error, setError] = useState<Nullable<string>>(null);
+  const {
+    formState: { errors },
+  } = useFormContext();
+
   const form = IN_TAKE_FORM_STEPS[currentStep];
   const progress = IN_TAKE_FORM_PROGRESS[currentStep];
   const title = typeof form.title === "string" ? form.title : form.title(user);
+
+  const handleClickNext = () => {
+    if (Object.keys(errors).length) {
+      setError("Please fill out the required fields");
+      onNext();
+    } else {
+      setError(null);
+      onNext();
+    }
+  };
 
   return (
     <Grid container>
@@ -70,12 +86,20 @@ const InTakeFormInput: FC<InTakeFormInputProps> = ({
         ))}
       </Grid>
 
+      {error && (
+        <Grid container className={layoutClasses.mt2}>
+          <Typography variant="h4" className={colorClasses.accentRed}>
+            {error}
+          </Typography>
+        </Grid>
+      )}
+
       <Grid item xs={12} className={layoutClasses.mt6}>
         <Button
           text="Next"
           color="primary"
           variant="contained"
-          onClick={onNext}
+          onClick={handleClickNext}
         />
       </Grid>
 

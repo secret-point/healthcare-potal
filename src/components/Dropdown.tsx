@@ -1,6 +1,7 @@
 import clsx from "clsx";
+import dotProp from "dot-prop";
 import { FC, useEffect, useMemo, useRef } from "react";
-import { useFormContext } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import Select from "@material-ui/core/Select";
@@ -54,10 +55,9 @@ interface DropdownProps {
   disabled?: boolean;
   variant?: "standard" | "outlined";
   required?: boolean;
-  default?: any;
+  defaultValue?: any;
   multiple?: boolean;
   onChange?: (name: string, value: string) => void;
-  [key: string]: any;
 }
 
 const Dropdown: FC<DropdownProps> = ({
@@ -70,9 +70,8 @@ const Dropdown: FC<DropdownProps> = ({
   required,
   multiple,
   placeholder,
-  default: defaultValue,
+  defaultValue,
   onChange,
-  ...rest
 }) => {
   const classes = useStyles();
   const colorClasses = useColorStyles();
@@ -80,7 +79,13 @@ const Dropdown: FC<DropdownProps> = ({
 
   const myRef = useRef<HTMLInputElement>(null);
 
-  const { watch, register, setValue } = useFormContext();
+  const {
+    control,
+    watch,
+    register,
+    formState: { errors },
+    setValue,
+  } = useFormContext();
   const value = watch(name);
 
   useEffect(() => {
@@ -118,55 +123,74 @@ const Dropdown: FC<DropdownProps> = ({
 
   const getOption = (code: string): TDropItem => optionsByCode[code];
 
-  const displayLabel = validator?.required ? `${label} (*required)` : label;
+  const hasError = Boolean(dotProp.get(errors, name));
 
   return (
     <div className={classes.dropdown} ref={myRef}>
       <FormControl variant={variant} className={classes.formControl}>
-        <InputLabel id={name} shrink className={classes.inputLabel}>
-          {displayLabel}
-          {required && (
-            <b className={clsx(colorClasses.accentRed, layoutClasses.ml05)}>
-              *
-            </b>
-          )}
-        </InputLabel>
-        <Select
+        {label && (
+          <InputLabel
+            id={name}
+            shrink
+            className={clsx(
+              classes.inputLabel,
+              hasError && colorClasses.accentRed
+            )}
+          >
+            {label}
+            {required && (
+              <b className={clsx(colorClasses.accentRed, layoutClasses.ml05)}>
+                *
+              </b>
+            )}
+          </InputLabel>
+        )}
+        <Controller
+          control={control}
+          defaultValue={defaultValue}
+          error={hasError}
           name={name}
-          labelId={displayLabel}
-          value={getValue()}
-          displayEmpty
-          disabled={disabled}
-          multiple={multiple}
-          renderValue={(selected) => {
-            if (!multiple) {
-              if (selected) return getOption(selected as string)?.display;
-              return placeholder;
-            }
-            if ((selected as string[]).length === 0) {
-              return placeholder;
-            }
-            return (selected as string[])
-              .map(getOption)
-              .map((option) => option?.display || "")
-              .join(", ");
-          }}
-          onOpen={() => setValue(name, value)}
-          onChange={handleMUIChange}
-          className={classes.select}
-          {...rest}
-        >
-          {placeholder && (
-            <MenuItem value="" disabled>
-              {placeholder}
-            </MenuItem>
-          )}
-          {options.map((option, i) => (
-            <MenuItem key={i} value={option.code}>
-              {option.display}
-            </MenuItem>
-          ))}
-        </Select>
+          rules={validator}
+          as={
+            <Select
+              name={name}
+              labelId={label}
+              value={getValue()}
+              displayEmpty
+              disabled={disabled}
+              multiple={multiple}
+              renderValue={(selected) => {
+                if (!multiple) {
+                  if (selected) return getOption(selected as string)?.display;
+                  return placeholder;
+                }
+                if (!selected) return [];
+                if ((selected as string[]).length === 0) {
+                  return placeholder;
+                }
+                return (selected as string[])
+                  .map(getOption)
+                  .map((option) => option?.display || "")
+                  .join(", ");
+              }}
+              required={required}
+              onOpen={() => setValue(name, value)}
+              onChange={handleMUIChange}
+              className={classes.select}
+            >
+              {placeholder && (
+                <MenuItem value="" disabled>
+                  {placeholder}
+                </MenuItem>
+              )}
+              {options.map((option, i) => (
+                <MenuItem key={i} value={option.code}>
+                  {option.display}
+                </MenuItem>
+              ))}
+            </Select>
+          }
+        />
       </FormControl>
     </div>
   );

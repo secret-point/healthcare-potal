@@ -1,6 +1,6 @@
-import { Controller, useFormContext } from "react-hook-form";
 import clsx from "clsx";
 import dotProp from "dot-prop";
+import { Controller, useFormContext } from "react-hook-form";
 
 import TextField, { TextFieldProps } from "@material-ui/core/TextField";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
@@ -100,13 +100,13 @@ export default function TextInput({
   } = useFormContext();
 
   const values = getValues();
-  const started = values[name];
-  const error = dotProp.get(errors, name);
+  const started = dotProp.get(values, name);
+  const hasError = Boolean(dotProp.get(errors, name));
 
   return (
     <Controller
       defaultValue={started || ""}
-      render={({ field }) => (
+      as={
         <TextField
           id={name}
           type={type}
@@ -125,17 +125,16 @@ export default function TextInput({
             ) : null
           }
           variant={variant}
-          error={Boolean(error)}
+          error={hasError}
           className={clsx(
             className,
             classes.textField,
             isTopLabel && classes.topLabelField
           )}
           {...register(name, validator)}
-          {...field}
           {...props}
         />
-      )}
+      }
       name={name}
       control={control}
     />

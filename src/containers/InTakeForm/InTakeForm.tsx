@@ -69,16 +69,16 @@ const InTakeForm = () => {
               />
             )}
 
-            {currentStep === InTakeFormSteps.COMPLETE && (
-              <CompleteInTakeForm onReturn={handleReturnHome} />
-            )}
-
             {showProgress && (
               <InTakeFormInput
                 currentStep={currentStep}
                 onNext={handleGoToNextStep}
                 onLeave={handleLeaveForm}
               />
+            )}
+
+            {currentStep === InTakeFormSteps.COMPLETE && (
+              <CompleteInTakeForm onReturn={handleReturnHome} />
             )}
           </Grid>
         </FormProvider>

@@ -1,6 +1,7 @@
 import clsx from "clsx";
-import { FC, useState, useEffect } from "react";
-import { useFormContext } from "react-hook-form";
+import dotProp from "dot-prop";
+import { FC } from "react";
+import { Controller, useFormContext } from "react-hook-form";
 import FormControl from "@material-ui/core/FormControl";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormLabel from "@material-ui/core/FormLabel";
@@ -47,6 +48,7 @@ type RadioFieldProps = {
   required?: boolean;
   isTopLabel?: boolean;
   options: TDropItem[];
+  validator?: any;
   layout: {
     xs?: GridSize;
     sm?: GridSize;
@@ -62,32 +64,21 @@ const RadioField: FC<RadioFieldProps> = ({
   isTopLabel,
   options,
   layout,
+  validator,
 }) => {
   const classes = useStyles();
   const colorClasses = useColorStyles();
   const layoutClasses = useLayoutStyles();
 
-  const { getValues, register, setValue } = useFormContext();
+  const {
+    control,
+    getValues,
+    register,
+    formState: { errors },
+  } = useFormContext();
+
   const value = getValues(name);
-
-  const [muiValue, setMuiValue] = useState(value);
-
-  const handleMUIChange = (event: any) => {
-    const value = event.target.value;
-    setMuiValue(value);
-    setValue(name, value);
-  };
-
-  useEffect(() => {
-    register(name);
-  }, [register, name]);
-
-  useEffect(() => {
-    setMuiValue(value);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [name]);
-
-  if (!options.length) return <div />;
+  const hasError = Boolean(dotProp.get(errors, name));
 
   return (
     <div className={classes.root}>
@@ -95,7 +86,10 @@ const RadioField: FC<RadioFieldProps> = ({
         {label && (
           <FormLabel
             component="legend"
-            className={clsx(isTopLabel && classes.topLabel)}
+            className={clsx(
+              isTopLabel && classes.topLabel,
+              hasError && colorClasses.accentRed
+            )}
           >
             {label}
             {required && (
@@ -105,35 +99,38 @@ const RadioField: FC<RadioFieldProps> = ({
             )}
           </FormLabel>
         )}
-        <RadioGroup
-          aria-label={name}
-          onChange={handleMUIChange}
+        <Controller
           name={name}
-          value={muiValue || null}
-        >
-          <Grid container spacing={3}>
-            {options.map((option) => (
-              <Grid
-                item
-                key={option.code}
-                xs={layout.xs}
-                sm={layout.sm}
-                md={layout.md}
-                lg={layout.lg}
-              >
-                <FormControlLabel
-                  value={option.code}
-                  control={<Radio color="secondary" />}
-                  label={option.display}
-                  className={clsx(
-                    classes.formControlLabel,
-                    option.code === muiValue && classes.selectedFormControlLabel
-                  )}
-                />
+          control={control}
+          as={
+            <RadioGroup aria-label={name} value={value}>
+              <Grid container spacing={3}>
+                {options.map((option) => (
+                  <Grid
+                    item
+                    key={option.code}
+                    xs={layout.xs}
+                    sm={layout.sm}
+                    md={layout.md}
+                    lg={layout.lg}
+                  >
+                    <FormControlLabel
+                      value={option.code}
+                      control={<Radio color="secondary" />}
+                      label={option.display}
+                      className={clsx(
+                        classes.formControlLabel,
+                        option.code === value &&
+                          classes.selectedFormControlLabel
+                      )}
+                    />
+                  </Grid>
+                ))}
               </Grid>
-            ))}
-          </Grid>
-        </RadioGroup>
+            </RadioGroup>
+          }
+          {...register(name, validator)}
+        />
       </FormControl>
     </div>
   );

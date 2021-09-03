@@ -25,6 +25,8 @@ const FieldComponent: FC<FieldComponentProps> = ({ field, variant }) => {
           variant={field.variant || variant || "standard"}
           placeholder={field.placeholder}
           multiple={field.type === FieldType.MULTI_SELECT}
+          defaultValue={field.type === FieldType.MULTI_SELECT ? [] : ""}
+          validator={{ required: field.required }}
         />
       );
 
@@ -37,6 +39,7 @@ const FieldComponent: FC<FieldComponentProps> = ({ field, variant }) => {
           required={field.required}
           isTopLabel={field.isTopLabel}
           options={field.options || []}
+          validator={{ required: field.required }}
         />
       );
 
@@ -80,6 +83,7 @@ const FieldComponent: FC<FieldComponentProps> = ({ field, variant }) => {
             shrink: field.shrink || false || field.type === FieldType.DATE,
           }}
           isTopLabel={field.isTopLabel}
+          validator={{ required: field.required }}
         />
       );
   }
