@@ -54,4 +54,4 @@ export type TCareTeamMember = {
   contact: string;
 };
 
-export interface UpdateProfileForm {}
+export interface UpdateProfileFormRequest {}

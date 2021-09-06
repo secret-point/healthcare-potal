@@ -20,10 +20,9 @@ const useStyles = makeStyles(() =>
 
 interface WelcomeProps {
   onCancel: VoidFunction;
-  onNext: VoidFunction;
 }
 
-const Welcome: React.FC<WelcomeProps> = ({ onCancel, onNext }) => {
+const Welcome: React.FC<WelcomeProps> = ({ onCancel }) => {
   const classes = useStyles();
   const fontClasses = useFontStyles();
   const layoutClasses = useLayoutStyles();
@@ -70,8 +69,8 @@ const Welcome: React.FC<WelcomeProps> = ({ onCancel, onNext }) => {
         <Button
           text="Start"
           color="primary"
+          type="submit"
           variant="contained"
-          onClick={onNext}
         />
       </Grid>
       <Grid item xs={12}>

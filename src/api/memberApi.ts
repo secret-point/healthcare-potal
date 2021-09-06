@@ -4,9 +4,12 @@ import { QUERY_KEYS } from "./constants";
 import { useApiFetch } from "./useApiFetch";
 import {
   TCareTeamMember,
-  TProgress,
+  TCheckInFormRequest,
+  TInTakeFormRequest,
+  TProgressRequest,
   TTodoItem,
-  UpdateProfileForm,
+  TUploadFileRequest,
+  UpdateProfileFormRequest,
 } from "../types";
 
 export type CheckTriggerBody = {
@@ -60,12 +63,13 @@ export const useFetchCareTeamList = () => {
   );
 };
 
-export const useUploadMemberAvatar = () => {
+export const useUploadFile = () => {
   const apiFetch = useApiFetch();
 
   return useMutation(
-    (data: FormData) => apiFetch("/uploadAvatar", { method: "POST", data }),
-    { mutationKey: QUERY_KEYS.UPLOAD_MEMBER_AVATAR }
+    (data: TUploadFileRequest) =>
+      apiFetch("/files/upload", { method: "POST", data }),
+    { mutationKey: QUERY_KEYS.UPLOAD_FILE }
   );
 };
 
@@ -73,7 +77,7 @@ export const useUpdateProfile = () => {
   const apiFetch = useApiFetch();
 
   return useMutation(
-    (data: UpdateProfileForm) =>
+    (data: UpdateProfileFormRequest) =>
       apiFetch("/user/profile", { method: "PUT", data }),
     { mutationKey: QUERY_KEYS.UPDATE_PROFILE_FORM }
   );
@@ -83,7 +87,29 @@ export const useCreateProgress = () => {
   const apiFetch = useApiFetch();
 
   return useMutation(
-    (data: TProgress) => apiFetch("/progress", { method: "POST", data }),
+    (data: TProgressRequest) => apiFetch("/progress", { method: "POST", data }),
     { mutationKey: QUERY_KEYS.UPLOAD_MEMBER_AVATAR }
+  );
+};
+
+export const useUpdateCheckIn = () => {
+  const apiFetch = useApiFetch();
+
+  return useMutation(
+    (data: TCheckInFormRequest) =>
+      apiFetch("/check-in", { method: "PUT", data }),
+    { mutationKey: QUERY_KEYS.UPDATE_CHECKIN_FORM }
+  );
+};
+
+export const useUpdateInTakeForm = () => {
+  const apiFetch = useApiFetch();
+
+  return useMutation(
+    (data: TInTakeFormRequest) =>
+      apiFetch("/in-take-form", { method: "PUT", data }),
+    {
+      mutationKey: QUERY_KEYS.UPDATE_INTAKE_FORM,
+    }
   );
 };

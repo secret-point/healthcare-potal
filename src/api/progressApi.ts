@@ -1,7 +1,7 @@
 import { useQuery } from "react-query";
 
 import { TCareTeamMember } from "../types";
-import { TProgress } from "../types/progress";
+import { TProgressRequest } from "../types/progress";
 
 import { QUERY_KEYS } from "./constants";
 import { useApiFetch } from "./useApiFetch";
@@ -9,7 +9,7 @@ import { useApiFetch } from "./useApiFetch";
 export const useGenerateProgress = () => {
   const apiFetch = useApiFetch();
 
-  return async (progress: TProgress): Promise<any> => {
+  return async (progress: TProgressRequest): Promise<any> => {
     const { data } = await apiFetch("/progress", {
       method: "POST",
       data: progress,

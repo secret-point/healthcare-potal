@@ -1,4 +1,4 @@
-export type TProgress = {
+export type TProgressRequest = {
   memberID: string;
   PHQ1: number;
   PHQ2: number;
@@ -26,3 +26,7 @@ export type TProgress = {
   deltaTotalPHQ: Nullable<number>;
   deltaTotalGAD: Nullable<number>;
 };
+
+export type TCheckInFormRequest = any;
+
+export type TInTakeFormRequest = any;

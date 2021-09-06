@@ -21,11 +21,7 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-interface CompleteSurveyProps {
-  onNext: VoidFunction;
-}
-
-const CompleteSurvey: React.FC<CompleteSurveyProps> = ({ onNext }) => {
+const CompleteSurvey = () => {
   const classes = useStyles();
   const fontClasses = useFontStyles();
   const layoutClasses = useLayoutStyles();
@@ -66,8 +62,8 @@ const CompleteSurvey: React.FC<CompleteSurveyProps> = ({ onNext }) => {
         <Button
           text="View My Progress"
           color="primary"
+          type="submit"
           variant="contained"
-          onClick={onNext}
         />
       </Grid>
       <Grid

@@ -11,7 +11,7 @@ import AccountInformation from "./AccountInformation";
 import ContactInformation from "./ContactInformation";
 import PhotoInformation from "./PhotoInformation";
 import { useUpdateProfile } from "../../api";
-import { UpdateProfileForm } from "../../types";
+import { UpdateProfileFormRequest } from "../../types";
 
 export default function Profile() {
   const { user } = useAuth();
@@ -38,7 +38,7 @@ export default function Profile() {
   };
 
   const handleUpdateProfile = (form: unknown) => {
-    updateProfile.mutate(form as UpdateProfileForm);
+    updateProfile.mutate(form as UpdateProfileFormRequest);
   };
 
   return (

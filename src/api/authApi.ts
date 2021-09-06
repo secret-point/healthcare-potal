@@ -56,7 +56,7 @@ export const useRegister = () => {
 export const useSendResetPasswordLink = () => {
   const apiFetch = useApiFetch();
 
-  return async (form: ResetPasswordLinkForm): Promise<void> => {
+  return async (form: ResetPasswordLinkForm): Promise<unknown> => {
     const { data } = await apiFetch("/send-reset-password-link", {
       method: "POST",
       data: form,
@@ -68,7 +68,7 @@ export const useSendResetPasswordLink = () => {
 export const useVerifyResetPasswordCode = () => {
   const apiFetch = useApiFetch();
 
-  return async (form: VerifyResetPasswordCodeForm): Promise<void> => {
+  return async (form: VerifyResetPasswordCodeForm): Promise<unknown> => {
     const { data } = await apiFetch("/verify-reset-password-code", {
       method: "POST",
       data: form,
@@ -80,10 +80,22 @@ export const useVerifyResetPasswordCode = () => {
 export const useChangePasswordCode = () => {
   const apiFetch = useApiFetch();
 
-  return async (form: ChangePasswordCodeForm): Promise<void> => {
+  return async (form: ChangePasswordCodeForm): Promise<unknown> => {
     const { data } = await apiFetch("/verify-reset-password-code", {
       method: "POST",
       data: form,
+    });
+    return data;
+  };
+};
+
+export const useVerifyID = () => {
+  const apiFetch = useApiFetch();
+
+  return async (fileID: string): Promise<unknown> => {
+    const { data } = await apiFetch("/verify-id", {
+      method: "PUT",
+      data: { fileID },
     });
     return data;
   };

@@ -1,66 +1,68 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useForm, FormProvider } from "react-hook-form";
 import Grid from "@material-ui/core/Grid";
 
+import { ROUTES } from "../../app/types";
+import { useUpdateCheckIn } from "../../api";
 import Container from "../../components/Container";
 
 import Welcome from "./Welcome";
 import ExperienceSurvey from "./ExperienceSurvey";
 import CompleteSurvey from "./CompleteSurvey";
 import { CheckInSurveySteps, QUESTIONS } from "./constants";
-import { ROUTES } from "../../app/types";
 
 const CheckInSurvey = () => {
   const history = useHistory();
+  const updateCheckIn = useUpdateCheckIn();
   const [surveyStep, setSurveyStep] = useState(CheckInSurveySteps.WELCOME);
 
   const methods = useForm({
     mode: "onBlur",
   });
 
-  const getNextStep = () => {
-    switch (surveyStep) {
-      case CheckInSurveySteps.WELCOME:
-        return CheckInSurveySteps.QUESTIONS;
-      case CheckInSurveySteps.QUESTIONS:
-      default:
-        return CheckInSurveySteps.COMPLETE;
-    }
-  };
-
-  const handleGoToNextStep = () => {
-    setSurveyStep(getNextStep());
-  };
-
   const handleGoToHome = () => {
     history.push(ROUTES.DASHBOARD);
   };
 
-  const handleGoToProgress = () => {
+  const handleCompleteCheckIn = async () => {
+    const values = methods.getValues();
+    await updateCheckIn.mutate(values);
     history.push(ROUTES.PROGRESS);
+  };
+
+  const handleNext = (e?: FormEvent) => {
+    e?.preventDefault();
+    switch (surveyStep) {
+      case CheckInSurveySteps.WELCOME:
+        setSurveyStep(CheckInSurveySteps.QUESTIONS);
+        break;
+      case CheckInSurveySteps.QUESTIONS:
+        setSurveyStep(CheckInSurveySteps.COMPLETE);
+        break;
+      default:
+        handleCompleteCheckIn();
+        break;
+    }
   };
 
   return (
     <Container>
-      <Grid container justify="center">
-        <FormProvider {...methods}>
-          <Grid item xs={12} sm={10} md={8} lg={6}>
-            {surveyStep === CheckInSurveySteps.WELCOME && (
-              <Welcome onNext={handleGoToNextStep} onCancel={handleGoToHome} />
-            )}
-            {surveyStep === CheckInSurveySteps.QUESTIONS && (
-              <ExperienceSurvey
-                questions={QUESTIONS}
-                onNext={handleGoToNextStep}
-              />
-            )}
-            {surveyStep === CheckInSurveySteps.COMPLETE && (
-              <CompleteSurvey onNext={handleGoToProgress} />
-            )}
+      <FormProvider {...methods}>
+        <form onSubmit={handleNext}>
+          <Grid container justify="center">
+            <Grid item xs={12} sm={10} md={8} lg={6}>
+              {surveyStep === CheckInSurveySteps.WELCOME && (
+                <Welcome onCancel={handleGoToHome} />
+              )}
+              {surveyStep === CheckInSurveySteps.QUESTIONS && (
+                <ExperienceSurvey questions={QUESTIONS} onNext={handleNext} />
+              )}
+              {surveyStep === CheckInSurveySteps.COMPLETE && <CompleteSurvey />}
+            </Grid>
           </Grid>
-        </FormProvider>
-      </Grid>
+        </form>
+      </FormProvider>
     </Container>
   );
 };
