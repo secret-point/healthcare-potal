@@ -22,11 +22,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface ContactFormProps {
-  onNext: () => void;
-}
-
-const ContactForm: React.FC<ContactFormProps> = ({ onNext }) => {
+const ContactForm = () => {
   const classes = useStyles();
 
   const requiredFields = ["email", "phoneNumber"];
@@ -72,13 +68,13 @@ const ContactForm: React.FC<ContactFormProps> = ({ onNext }) => {
       <Grid item xs={12} className={classes.buttonWrapper}>
         <Button
           text="NEXT"
+          type="submit"
           color="primary"
           variant="contained"
           disabled={
             Boolean(inputErrors.length) ||
             editedFields.length !== requiredFields.length
           }
-          onClick={onNext}
         />
       </Grid>
 

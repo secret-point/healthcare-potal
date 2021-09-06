@@ -1,5 +1,5 @@
 import { useApiFetch } from "./useApiFetch";
-import { AuthorizedUser } from "../types/user";
+import { AuthorizedUser, RegisterForm } from "../types/user";
 
 export const useFetchCurrentUser = () => {
   const apiFetch = useApiFetch();
@@ -38,16 +38,10 @@ export const useSignIn = () => {
 export const useRegister = () => {
   const apiFetch = useApiFetch();
 
-  return async ({
-    email,
-    password,
-  }: {
-    email: string;
-    password: string;
-  }): Promise<AuthorizedUser> => {
+  return async (form: RegisterForm): Promise<AuthorizedUser> => {
     const { data } = await apiFetch("/register", {
       method: "POST",
-      data: { email, password },
+      data: form,
     });
     return data;
   };

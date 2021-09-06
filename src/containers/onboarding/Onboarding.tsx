@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { useHistory } from "react-router";
 import { useForm, FormProvider } from "react-hook-form";
 
+import { useRegister } from "../../api";
 import Container from "../../components/Container";
 import PlainModal from "../../components/PlainModal";
 import { ONBOARDING } from "../../types";
@@ -15,13 +16,40 @@ import AllSetup from "./AllSetup";
 
 export default function Onboarding() {
   const history = useHistory();
+  const register = useRegister();
   const [currentStep, setCurrentStep] = useState(ONBOARDING.NAME);
+
   const methods = useForm({
     mode: "onBlur",
   });
 
   const handleLogIn = () => {
     history.push("/login");
+  };
+
+  const handleRegister = async () => {
+    const values = methods.getValues();
+    console.log(register, values);
+    // await register(values as any);
+    setCurrentStep(ONBOARDING.FINAL);
+  };
+
+  const handleNext = (e: FormEvent) => {
+    e.preventDefault();
+    switch (currentStep) {
+      case ONBOARDING.NAME:
+        setCurrentStep(ONBOARDING.CONTACT);
+        break;
+      case ONBOARDING.CONTACT:
+        setCurrentStep(ONBOARDING.ADDRESS);
+        break;
+      case ONBOARDING.ADDRESS:
+        setCurrentStep(ONBOARDING.PASSWORD);
+        break;
+      default:
+        handleRegister();
+        break;
+    }
   };
 
   return (
@@ -34,18 +62,12 @@ export default function Onboarding() {
         )}
 
         <FormProvider {...methods}>
-          {currentStep === ONBOARDING.NAME && (
-            <NameInputForm onNext={() => setCurrentStep(ONBOARDING.CONTACT)} />
-          )}
-          {currentStep === ONBOARDING.CONTACT && (
-            <ContactForm onNext={() => setCurrentStep(ONBOARDING.ADDRESS)} />
-          )}
-          {currentStep === ONBOARDING.ADDRESS && (
-            <AddressForm onNext={() => setCurrentStep(ONBOARDING.PASSWORD)} />
-          )}
-          {currentStep === ONBOARDING.PASSWORD && (
-            <PasswordForm onNext={() => setCurrentStep(ONBOARDING.FINAL)} />
-          )}
+          <form onSubmit={handleNext}>
+            {currentStep === ONBOARDING.NAME && <NameInputForm />}
+            {currentStep === ONBOARDING.CONTACT && <ContactForm />}
+            {currentStep === ONBOARDING.ADDRESS && <AddressForm />}
+            {currentStep === ONBOARDING.PASSWORD && <PasswordForm />}
+          </form>
         </FormProvider>
       </PlainModal>
     </Container>

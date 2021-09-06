@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import { useHistory } from "react-router";
 import { useSnackbar } from "notistack";
@@ -27,7 +27,8 @@ const ConfirmVerificationLink = () => {
     mode: "onBlur",
   });
 
-  const handleChangePassword = () => {
+  const handleChangePassword = (e: FormEvent) => {
+    e.preventDefault();
     setPasswordChanged(true);
   };
 
@@ -48,7 +49,9 @@ const ConfirmVerificationLink = () => {
 
             <Grid item xs={12}>
               <FormProvider {...methods}>
-                <PasswordForm onNext={handleChangePassword} />
+                <form onSubmit={handleChangePassword}>
+                  <PasswordForm />
+                </form>
               </FormProvider>
             </Grid>
           </Grid>

@@ -31,32 +31,24 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-interface PasswordFormProps {
-  onNext: () => void;
-}
-
-const PasswordForm: React.FC<PasswordFormProps> = ({ onNext }) => {
+const PasswordForm = () => {
   const classes = useStyles();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const {
-    getValues,
-    watch,
-    formState: { errors },
-  } = useFormContext();
+  const { getValues, watch } = useFormContext();
   const values = getValues();
-  const password = dotProp.get(values, "password");
-  const confirmPassword = dotProp.get(values, "confirmPassword");
+  const password = dotProp.get(values, "password") as string;
+  const confirmPassword = dotProp.get(values, "confirmPassword") as string;
 
   const handleTogglePassword = () => setShowPassword((show) => !show);
   const handleToggleConfirmPassword = () =>
     setShowConfirmPassword((show) => !show);
 
   const showResult = Boolean(password || confirmPassword);
-  const doesPasswordMatch =
-    password && confirmPassword && errors.confirm?.type !== "validate";
-  const shouldLongerThan8 = password && errors.password?.type !== "minLength";
+  const shouldPasswordMatch =
+    password && confirmPassword && password === confirmPassword;
+  const shouldLongerThan8 = password && password.length >= 8;
 
   return (
     <Grid container spacing={1}>
@@ -89,7 +81,7 @@ const PasswordForm: React.FC<PasswordFormProps> = ({ onNext }) => {
 
       <Grid item xs={12}>
         <TextInput
-          name="confirm"
+          name="confirmPassword"
           label="Confirm Password"
           variant="outlined"
           placeholder="Confirm Password"
@@ -121,7 +113,7 @@ const PasswordForm: React.FC<PasswordFormProps> = ({ onNext }) => {
       {showResult && (
         <Grid item xs={12} className={classes.mt2}>
           <Grid container item xs={12} alignItems="center">
-            {doesPasswordMatch ? <GreenCheckIcon /> : <RedCrossIcon />}
+            {shouldPasswordMatch ? <GreenCheckIcon /> : <RedCrossIcon />}
             <Typography className={classes.ml2}>Password matches</Typography>
           </Grid>
           <Grid container item xs={12} alignItems="center">
@@ -137,9 +129,9 @@ const PasswordForm: React.FC<PasswordFormProps> = ({ onNext }) => {
         <Button
           text="NEXT"
           color="primary"
+          type="submit"
           variant="contained"
-          disabled={!doesPasswordMatch || !shouldLongerThan8}
-          onClick={onNext}
+          disabled={!shouldPasswordMatch || !shouldLongerThan8}
         />
       </Grid>
     </Grid>

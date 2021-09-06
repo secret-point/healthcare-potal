@@ -21,11 +21,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface NameInputformProps {
-  onNext: () => void;
-}
-
-const NameInputForm: React.FC<NameInputformProps> = ({ onNext }) => {
+const NameInputForm = () => {
   const classes = useStyles();
 
   const requiredFields = ["firstName", "lastName"];
@@ -59,12 +55,12 @@ const NameInputForm: React.FC<NameInputformProps> = ({ onNext }) => {
         <Button
           text="NEXT"
           color="primary"
+          type="submit"
           variant="contained"
           disabled={
             Boolean(inputErrors.length) ||
             editedFields.length !== requiredFields.length
           }
-          onClick={onNext}
         />
       </Grid>
 

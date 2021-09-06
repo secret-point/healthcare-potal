@@ -21,11 +21,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface AddressFormProps {
-  onNext: () => void;
-}
-
-const AddressForm: React.FC<AddressFormProps> = ({ onNext }) => {
+const AddressForm = () => {
   const classes = useStyles();
 
   const requiredFields = ["addressLine1", "city", "state", "zipcode"];
@@ -91,12 +87,12 @@ const AddressForm: React.FC<AddressFormProps> = ({ onNext }) => {
         <Button
           text="NEXT"
           color="primary"
+          type="submit"
           variant="contained"
           disabled={
             Boolean(inputErrors.length) ||
             editedFields.length !== requiredFields.length
           }
-          onClick={onNext}
         />
       </Grid>
 

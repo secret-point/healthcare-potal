@@ -20,7 +20,7 @@ export enum DEVICE {
 }
 
 export enum ONBOARDING {
-  NAME = "What’s your name?",
+  NAME = "What's your name?",
   CONTACT = "How can we best contact you?",
   ADDRESS = "What is your address?",
   PASSWORD = "Finally, let’s set up your password.",
