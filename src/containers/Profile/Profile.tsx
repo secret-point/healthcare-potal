@@ -10,9 +10,12 @@ import { UPDATE_PROFILE_DIALOGS } from "./constants";
 import AccountInformation from "./AccountInformation";
 import ContactInformation from "./ContactInformation";
 import PhotoInformation from "./PhotoInformation";
+import { useUpdateProfile } from "../../api";
+import { UpdateProfileForm } from "../../types";
 
 export default function Profile() {
   const { user } = useAuth();
+  const updateProfile = useUpdateProfile();
   const [editingField, setEditingField] = useState<EditableField>();
   const [showVerifyIDDialog, setShowVerifyIDDialog] = useState(false);
 
@@ -32,6 +35,10 @@ export default function Profile() {
 
   const handleCloseVerifyIDDialog = () => {
     setShowVerifyIDDialog(false);
+  };
+
+  const handleUpdateProfile = (form: unknown) => {
+    updateProfile.mutate(form as UpdateProfileForm);
   };
 
   return (
@@ -60,6 +67,7 @@ export default function Profile() {
           title={UPDATE_PROFILE_DIALOGS[editingField].title}
           rows={UPDATE_PROFILE_DIALOGS[editingField].rows}
           onClose={handleCloseUpdateDialog}
+          onSave={handleUpdateProfile}
         />
       )}
 

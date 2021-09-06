@@ -1,8 +1,13 @@
 import { useMutation, useQuery } from "react-query";
 
-import { useApiFetch } from "./useApiFetch";
 import { QUERY_KEYS } from "./constants";
-import { TProgress, TTodoItem } from "../types";
+import { useApiFetch } from "./useApiFetch";
+import {
+  TCareTeamMember,
+  TProgress,
+  TTodoItem,
+  UpdateProfileForm,
+} from "../types";
 
 export type CheckTriggerBody = {
   memberID: string;
@@ -43,12 +48,34 @@ export const useCheckTriggerByRequest = () => {
   );
 };
 
+export const useFetchCareTeamList = () => {
+  const apiFetch = useApiFetch();
+
+  return useQuery(
+    [QUERY_KEYS.FETCH_CARE_TEAM_LIST],
+    async (): Promise<TCareTeamMember[]> => {
+      const { data } = await apiFetch(`/cp/careTeamList`);
+      return data;
+    }
+  );
+};
+
 export const useUploadMemberAvatar = () => {
   const apiFetch = useApiFetch();
 
   return useMutation(
     (data: FormData) => apiFetch("/uploadAvatar", { method: "POST", data }),
     { mutationKey: QUERY_KEYS.UPLOAD_MEMBER_AVATAR }
+  );
+};
+
+export const useUpdateProfile = () => {
+  const apiFetch = useApiFetch();
+
+  return useMutation(
+    (data: UpdateProfileForm) =>
+      apiFetch("/user/profile", { method: "PUT", data }),
+    { mutationKey: QUERY_KEYS.UPDATE_PROFILE_FORM }
   );
 };
 

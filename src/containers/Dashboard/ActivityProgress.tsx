@@ -1,6 +1,7 @@
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 
+import { useFetchScoreHistory } from "../../api/progressApi";
 import PrairieScore from "../../components/Progress/PrairieScore";
 import SurveyProgress from "../../components/Progress/SurveyProgress";
 import SymptomsReport from "../../components/Progress/SymptomsReport";
@@ -9,6 +10,9 @@ import { mockScoreHistory } from "../Progress/mockScores";
 
 const ActivityProgress = () => {
   const layoutClasses = useLayoutStyles();
+  const { data: scoreHistory = [] } = useFetchScoreHistory();
+
+  console.log(scoreHistory);
 
   return (
     <>

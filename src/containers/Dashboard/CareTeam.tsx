@@ -9,6 +9,7 @@ import { TextButton } from "../../components/Button";
 import { useLayoutStyles } from "../../components/useCommonStyles";
 import { useViewport } from "../../hooks/useViewport";
 import EmptyCareTeamMemberCard from "../../components/EmptyCareTeamMemberCard";
+import { useFetchCareTeamList } from "../../api";
 
 const teamMembers: TCareTeamMember[] = [
   {
@@ -53,9 +54,12 @@ const useStyles = makeStyles((theme) =>
 
 const CareTeam = () => {
   const classes = useStyles();
-  const layoutClasses = useLayoutStyles();
   const { isMobile } = useViewport();
+  const layoutClasses = useLayoutStyles();
   const [showCareTeam, setShowCareTeam] = useState(false);
+  const { data: careTeamList = [] } = useFetchCareTeamList();
+
+  console.log(careTeamList);
 
   const handleToggleShowCareTeam = () => {
     setShowCareTeam(!showCareTeam);
@@ -66,6 +70,7 @@ const CareTeam = () => {
       <Typography variant="h2" className={layoutClasses.mb1}>
         Your Care Team
       </Typography>
+
       <Typography variant="subtitle2" className={layoutClasses.mb3}>
         Meet your personal team of providers. Your Care Coordinator is available
         to answer your questions Mon-Fri, 9AM to 5PM.

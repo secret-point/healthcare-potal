@@ -53,3 +53,5 @@ export type TCareTeamMember = {
   job: string;
   contact: string;
 };
+
+export interface UpdateProfileForm {}

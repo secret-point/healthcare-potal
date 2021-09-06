@@ -1,5 +1,9 @@
+import { useQuery } from "react-query";
+
+import { TCareTeamMember } from "../types";
 import { TProgress } from "../types/progress";
 
+import { QUERY_KEYS } from "./constants";
 import { useApiFetch } from "./useApiFetch";
 
 export const useGenerateProgress = () => {
@@ -12,4 +16,16 @@ export const useGenerateProgress = () => {
     });
     return data;
   };
+};
+
+export const useFetchScoreHistory = () => {
+  const apiFetch = useApiFetch();
+
+  return useQuery(
+    [QUERY_KEYS.FETCH_SCORE_PROGRESS_HISTORY],
+    async (): Promise<TCareTeamMember[]> => {
+      const { data } = await apiFetch(`/cp/progress`);
+      return data;
+    }
+  );
 };

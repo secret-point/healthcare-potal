@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, FormEvent } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -38,6 +38,7 @@ interface UpdateDialogProps {
   title: string;
   rows: TFieldRow[];
   onClose: VoidFunction;
+  onSave: (form: unknown) => void;
 }
 
 const UpdateDialog: FC<UpdateDialogProps> = ({
@@ -45,13 +46,19 @@ const UpdateDialog: FC<UpdateDialogProps> = ({
   title,
   rows,
   onClose,
+  onSave,
 }) => {
   const classes = useStyles();
   const methods = useForm({
     mode: "onBlur",
   });
 
-  const handleSave = () => {};
+  const handleSave = (e: FormEvent) => {
+    e.preventDefault();
+
+    const values = methods.getValues();
+    onSave(values);
+  };
 
   return (
     <Dialog
@@ -66,24 +73,26 @@ const UpdateDialog: FC<UpdateDialogProps> = ({
 
       <DialogContent>
         <FormProvider {...methods}>
-          <Grid container spacing={4}>
-            {rows.map((row) => (
-              <Grid item key={row.row} xs={12}>
-                <Grid container spacing={3}>
-                  {row.fields.map((field) => (
-                    <Grid item key={field.path} xs={(field.xs || 12) as any}>
-                      <FieldComponent field={field} variant="outlined" />
-                    </Grid>
-                  ))}
+          <form onSubmit={handleSave}>
+            <Grid container spacing={4}>
+              {rows.map((row) => (
+                <Grid item key={row.row} xs={12}>
+                  <Grid container spacing={3}>
+                    {row.fields.map((field) => (
+                      <Grid item key={field.path} xs={(field.xs || 12) as any}>
+                        <FieldComponent field={field} variant="outlined" />
+                      </Grid>
+                    ))}
+                  </Grid>
                 </Grid>
-              </Grid>
-            ))}
-          </Grid>
+              ))}
+            </Grid>
+          </form>
         </FormProvider>
       </DialogContent>
       <DialogActions>
         <Button text="Cancel" fullWidth={false} onClick={onClose} />
-        <Button text="Save" fullWidth={false} onClick={handleSave} />
+        <Button text="Save" type="submit" fullWidth={false} />
       </DialogActions>
     </Dialog>
   );
