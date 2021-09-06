@@ -1,6 +1,7 @@
 import { useApiFetch } from "./useApiFetch";
 import {
   AuthorizedUser,
+  ChangePasswordCodeForm,
   RegisterForm,
   ResetPasswordLinkForm,
   VerifyResetPasswordCodeForm,
@@ -68,6 +69,18 @@ export const useVerifyResetPasswordCode = () => {
   const apiFetch = useApiFetch();
 
   return async (form: VerifyResetPasswordCodeForm): Promise<void> => {
+    const { data } = await apiFetch("/verify-reset-password-code", {
+      method: "POST",
+      data: form,
+    });
+    return data;
+  };
+};
+
+export const useChangePasswordCode = () => {
+  const apiFetch = useApiFetch();
+
+  return async (form: ChangePasswordCodeForm): Promise<void> => {
     const { data } = await apiFetch("/verify-reset-password-code", {
       method: "POST",
       data: form,

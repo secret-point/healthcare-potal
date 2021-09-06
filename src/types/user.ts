@@ -32,6 +32,13 @@ export interface VerifyResetPasswordCodeForm {
   email: string;
 }
 
+export interface ChangePasswordCodeForm {
+  email: string;
+  code: string;
+  password: string;
+  confirmPassword: string;
+}
+
 export enum VerificationStatus {
   VERIFIED = "Verified",
   SKIPPED = "Skipped",

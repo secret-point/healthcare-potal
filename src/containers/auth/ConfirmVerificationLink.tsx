@@ -5,19 +5,21 @@ import { useSnackbar } from "notistack";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 
-import { useVerifyResetPasswordCode } from "../../api";
+import { useChangePasswordCode, useVerifyResetPasswordCode } from "../../api";
 import { useQueryParams } from "../../api/useQueryParams";
 import Button from "../../components/Button";
 import Container from "../../components/Container";
 import PlainModal from "../../components/PlainModal";
 import PasswordForm from "../onboarding/PasswordForm";
 import { useLayoutStyles } from "../../components/useCommonStyles";
+import { ChangePasswordCodeForm } from "../../types";
 
 const ConfirmVerificationLink = () => {
   const history = useHistory();
   const queryParams = useQueryParams();
   const layoutClasses = useLayoutStyles();
   const { enqueueSnackbar } = useSnackbar();
+  const changePasswordCode = useChangePasswordCode();
   const verifyResetPasswordCode = useVerifyResetPasswordCode();
   const [passwordChanged, setPasswordChanged] = useState(false);
 
@@ -42,6 +44,10 @@ const ConfirmVerificationLink = () => {
 
   const handleChangePassword = (e: FormEvent) => {
     e.preventDefault();
+
+    const values = methods.getValues();
+    changePasswordCode({ ...values, email, code } as ChangePasswordCodeForm);
+
     setPasswordChanged(true);
   };
 
