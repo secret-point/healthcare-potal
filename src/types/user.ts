@@ -23,6 +23,15 @@ export interface RegisterForm {
   confirmPassword: string;
 }
 
+export interface ResetPasswordLinkForm {
+  email: string;
+}
+
+export interface VerifyResetPasswordCodeForm {
+  code: string;
+  email: string;
+}
+
 export enum VerificationStatus {
   VERIFIED = "Verified",
   SKIPPED = "Skipped",

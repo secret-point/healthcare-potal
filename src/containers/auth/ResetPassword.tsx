@@ -1,26 +1,34 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import { useHistory } from "react-router";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 
+import { useSendResetPasswordLink } from "../../api";
 import Button from "../../components/Button";
 import Container from "../../components/Container";
 import PlainModal from "../../components/PlainModal";
+import { useLayoutStyles } from "../../components/useCommonStyles";
+import { ResetPasswordLinkForm } from "../../types";
 
 import ResetPasswordForm from "./ResetPasswordForm";
-import { useLayoutStyles } from "../../components/useCommonStyles";
 
 export default function ResetPassword() {
-  const layoutClasses = useLayoutStyles();
   const history = useHistory();
+  const layoutClasses = useLayoutStyles();
   const [linkSent, setLinkSent] = useState(false);
+
+  const sendResetPasswordLink = useSendResetPasswordLink();
 
   const methods = useForm({
     mode: "onBlur",
   });
 
-  const handleResetPassword = () => {
+  const handleResetPassword = async (e: FormEvent) => {
+    e.preventDefault();
+    const resetPasswordForm = methods.getValues() as ResetPasswordLinkForm;
+    // await sendResetPasswordLink(resetPasswordForm as ResetPasswordLinkForm);
+    console.log(resetPasswordForm, sendResetPasswordLink);
     setLinkSent(true);
   };
 
@@ -47,7 +55,9 @@ export default function ResetPassword() {
 
             <Grid item xs={12}>
               <FormProvider {...methods}>
-                <ResetPasswordForm onReset={handleResetPassword} />
+                <form onSubmit={handleResetPassword}>
+                  <ResetPasswordForm />
+                </form>
               </FormProvider>
             </Grid>
           </Grid>

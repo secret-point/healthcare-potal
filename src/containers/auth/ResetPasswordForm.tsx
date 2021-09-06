@@ -16,11 +16,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface ResetPasswordFormProps {
-  onReset: () => void;
-}
-
-const ResetPasswordForm = ({ onReset }: ResetPasswordFormProps) => {
+const ResetPasswordForm = () => {
   const classes = useStyles();
 
   const requiredFields = ["email"];
@@ -50,12 +46,12 @@ const ResetPasswordForm = ({ onReset }: ResetPasswordFormProps) => {
         <Button
           text="RESET PASSWORD"
           color="primary"
+          type="submit"
           variant="contained"
           disabled={
             Boolean(inputErrors.length) ||
             editedFields.length !== requiredFields.length
           }
-          onClick={onReset}
         />
       </Grid>
 
