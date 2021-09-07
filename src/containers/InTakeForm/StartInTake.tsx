@@ -10,11 +10,10 @@ import {
 } from "../../components/useCommonStyles";
 
 interface StartInTakeProps {
-  onStart: VoidFunction;
   onCancel: VoidFunction;
 }
 
-const StartInTake: FC<StartInTakeProps> = ({ onStart, onCancel }) => {
+const StartInTake: FC<StartInTakeProps> = ({ onCancel }) => {
   const fontClasses = useFontStyles();
   const layoutClasses = useLayoutStyles();
 
@@ -57,8 +56,8 @@ const StartInTake: FC<StartInTakeProps> = ({ onStart, onCancel }) => {
         <Button
           text="Start"
           color="primary"
+          type="submit"
           variant="contained"
-          onClick={onStart}
         />
       </Grid>
       <Grid item xs={12}>

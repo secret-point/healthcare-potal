@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { FC, useState } from "react";
+import { MouseEvent, FC, useState } from "react";
 import { useFormContext } from "react-hook-form";
 
 import Grid from "@material-ui/core/Grid";
@@ -47,7 +47,10 @@ const InTakeFormInput: FC<InTakeFormInputProps> = ({
   const progress = IN_TAKE_FORM_PROGRESS[currentStep];
   const title = typeof form.title === "string" ? form.title : form.title(user);
 
-  const handleClickNext = async () => {
+  const handleClickNext = async (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+
     const result = await trigger();
     if (result) {
       setError(null);
@@ -95,6 +98,7 @@ const InTakeFormInput: FC<InTakeFormInputProps> = ({
       <Grid item xs={12} className={layoutClasses.mt6}>
         <Button
           text="Next"
+          type="submit"
           color="primary"
           variant="contained"
           onClick={handleClickNext}

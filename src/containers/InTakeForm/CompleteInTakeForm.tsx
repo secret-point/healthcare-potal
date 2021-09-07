@@ -21,13 +21,7 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-interface CompleteInTakeFormProps {
-  onReturn: VoidFunction;
-}
-
-const CompleteInTakeForm: React.FC<CompleteInTakeFormProps> = ({
-  onReturn,
-}) => {
+const CompleteInTakeForm = () => {
   const classes = useStyles();
   const fontClasses = useFontStyles();
   const layoutClasses = useLayoutStyles();
@@ -69,7 +63,7 @@ const CompleteInTakeForm: React.FC<CompleteInTakeFormProps> = ({
           text="RETURN HOME"
           color="primary"
           variant="contained"
-          onClick={onReturn}
+          type="submit"
         />
       </Grid>
       <Grid
