@@ -19,7 +19,7 @@ import { useViewport } from "../../hooks/useViewport";
 
 interface ExperienceSurveyProps {
   questions: TQuestion[];
-  onNext: VoidFunction;
+  onNext: (form: any) => void;
 }
 
 const ExperienceSurvey: FC<ExperienceSurveyProps> = ({ questions, onNext }) => {
@@ -28,7 +28,8 @@ const ExperienceSurvey: FC<ExperienceSurveyProps> = ({ questions, onNext }) => {
   const [number, setNumber] = useState(0);
   const { isMobile } = useViewport();
 
-  const { watch } = useFormContext();
+  const [form, setForm] = useState<any>({});
+  const { watch, getValues } = useFormContext();
 
   const question = questions[number];
   const answer = watch(question.code);
@@ -36,8 +37,10 @@ const ExperienceSurvey: FC<ExperienceSurveyProps> = ({ questions, onNext }) => {
   const isRadioQuestion = ["GAD", "PHQ"].includes(question.type);
 
   const handleClickNext = () => {
+    const newForm = { ...form, ...getValues() };
+    setForm(newForm);
     if (number + 1 >= questions.length) {
-      onNext();
+      onNext(newForm);
     } else {
       setNumber(number + 1);
     }
@@ -86,7 +89,7 @@ const ExperienceSurvey: FC<ExperienceSurveyProps> = ({ questions, onNext }) => {
         xs={12}
         className={isMobile ? layoutClasses.mb4 : layoutClasses.mb6}
       >
-        {["GAD", "PHQ"].includes(question.type) && question.options && (
+        {isRadioQuestion && question.options && (
           <RadioField
             layout={{ xs: 12, sm: 6 }}
             name={question.code}

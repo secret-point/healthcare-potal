@@ -30,3 +30,5 @@ export type TProgressRequest = {
 export type TCheckInFormRequest = any;
 
 export type TInTakeFormRequest = any;
+
+export type TFeedbackRequest = any;

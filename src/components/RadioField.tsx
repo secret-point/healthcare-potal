@@ -97,8 +97,6 @@ const RadioField: FC<RadioFieldProps> = ({
 
   const hasError = Boolean(dotProp.get(errors, name));
 
-  console.log(getValues());
-
   return (
     <div className={classes.root}>
       <FormControl className={classes.formControl}>

@@ -6,6 +6,7 @@ import {
   TCareTeamMember,
   TCheckInFormRequest,
   TInTakeFormRequest,
+  TFeedbackRequest,
   TProgressRequest,
   TTodoItem,
   TUploadFileRequest,
@@ -110,6 +111,18 @@ export const useUpdateInTakeForm = () => {
       apiFetch("/in-take-form", { method: "PUT", data }),
     {
       mutationKey: QUERY_KEYS.UPDATE_INTAKE_FORM,
+    }
+  );
+};
+
+export const useSubmitFeedback = () => {
+  const apiFetch = useApiFetch();
+
+  return useMutation(
+    (data: TFeedbackRequest) =>
+      apiFetch("/mp/user/feedback", { method: "POST", data }),
+    {
+      mutationKey: QUERY_KEYS.SUBMIT_FEEDBACK,
     }
   );
 };

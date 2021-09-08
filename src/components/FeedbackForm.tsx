@@ -15,6 +15,7 @@ import {
   useBackgroundColorStyles,
 } from "./useCommonStyles";
 import TextInput from "./TextInput";
+import { useSubmitFeedback } from "../api";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -55,6 +56,7 @@ const FeedbackForm = ({
   const colorClasses = useColorStyles();
   const layoutClasses = useLayoutStyles();
   const bkColorClasses = useBackgroundColorStyles();
+  const submitFeedback = useSubmitFeedback();
 
   const [feedbackSent, setFeedbackSent] = useState(false);
   const [feedbackScore, setFeedbackScore] = useState<number | null>(null);
@@ -68,7 +70,8 @@ const FeedbackForm = ({
     setFeedbackScore(value);
   };
 
-  const handleSendFeedback = () => {
+  const handleSendFeedback = async () => {
+    await submitFeedback.mutate(methods.getValues());
     setFeedbackSent(true);
   };
 

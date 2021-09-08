@@ -25,9 +25,8 @@ const CheckInSurvey = () => {
     history.push(ROUTES.DASHBOARD);
   };
 
-  const handleCompleteCheckIn = async () => {
-    const values = methods.getValues();
-    await updateCheckIn.mutate(values);
+  const handleCompleteCheckIn = async (form: any) => {
+    await updateCheckIn.mutate(form);
     setSurveyStep(CheckInSurveySteps.COMPLETE);
   };
 
@@ -36,9 +35,6 @@ const CheckInSurvey = () => {
     switch (surveyStep) {
       case CheckInSurveySteps.WELCOME:
         setSurveyStep(CheckInSurveySteps.QUESTIONS);
-        break;
-      case CheckInSurveySteps.QUESTIONS:
-        handleCompleteCheckIn();
         break;
       default:
         history.push(ROUTES.PROGRESS);
@@ -56,7 +52,10 @@ const CheckInSurvey = () => {
                 <Welcome onCancel={handleGoToHome} />
               )}
               {surveyStep === CheckInSurveySteps.QUESTIONS && (
-                <ExperienceSurvey questions={QUESTIONS} onNext={handleNext} />
+                <ExperienceSurvey
+                  questions={QUESTIONS}
+                  onNext={handleCompleteCheckIn}
+                />
               )}
               {surveyStep === CheckInSurveySteps.COMPLETE && <CompleteSurvey />}
             </Grid>

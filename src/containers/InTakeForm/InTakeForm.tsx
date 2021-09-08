@@ -15,15 +15,15 @@ const InTakeForm = () => {
   const history = useHistory();
   const updateInTakeForm = useUpdateInTakeForm();
   const [currentStep, setCurrentStep] = useState(InTakeFormSteps.START);
+  const [form, setForm] = useState<any>({});
 
   const methods = useForm({
     mode: "onBlur",
   });
 
   const handleCompleteInTake = async () => {
-    const values = methods.getValues();
-    await updateInTakeForm.mutate(values);
-    history.push(ROUTES.DASHBOARD);
+    await updateInTakeForm.mutate(form);
+    setCurrentStep(InTakeFormSteps.COMPLETE);
   };
 
   const handleGoToNextStep = (e?: FormEvent) => {
@@ -33,6 +33,18 @@ const InTakeForm = () => {
       case InTakeFormSteps.START:
         setCurrentStep(InTakeFormSteps.SELF_INFORMATION);
         break;
+      case InTakeFormSteps.COMPLETE:
+      default:
+        history.push(ROUTES.DASHBOARD);
+        break;
+    }
+  };
+
+  const handleNextForm = () => {
+    const newForm = { ...form, ...methods.getValues() };
+    setForm(newForm);
+
+    switch (currentStep) {
       case InTakeFormSteps.SELF_INFORMATION:
         setCurrentStep(InTakeFormSteps.ADDITIONAL_INFORMATION);
         break;
@@ -46,8 +58,6 @@ const InTakeForm = () => {
         setCurrentStep(InTakeFormSteps.PHARMACY);
         break;
       case InTakeFormSteps.PHARMACY:
-        setCurrentStep(InTakeFormSteps.COMPLETE);
-        break;
       default:
         handleCompleteInTake();
         break;
@@ -80,7 +90,7 @@ const InTakeForm = () => {
               {showProgress && (
                 <InTakeFormInput
                   currentStep={currentStep}
-                  onNext={handleGoToNextStep}
+                  onNext={handleNextForm}
                   onLeave={handleLeaveForm}
                 />
               )}
