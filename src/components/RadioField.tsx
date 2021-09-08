@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import dotProp from "dot-prop";
-import { FC } from "react";
-import { Controller, useFormContext } from "react-hook-form";
+import { ChangeEvent, FC, useEffect, useState } from "react";
+import { useFormContext } from "react-hook-form";
 import FormControl from "@material-ui/core/FormControl";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormLabel from "@material-ui/core/FormLabel";
@@ -71,13 +71,30 @@ const RadioField: FC<RadioFieldProps> = ({
   const layoutClasses = useLayoutStyles();
 
   const {
-    control,
     getValues,
+    setValue,
     register,
     formState: { errors },
   } = useFormContext();
 
   const value = getValues(name);
+  const [muiValue, setMuiValue] = useState(value);
+
+  const handleMUIChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    setMuiValue(value);
+    setValue(name, value);
+  };
+
+  useEffect(() => {
+    register(name, validator);
+  }, [register, name, validator]);
+
+  useEffect(() => {
+    setMuiValue(value);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [name]);
+
   const hasError = Boolean(dotProp.get(errors, name));
 
   return (
@@ -99,38 +116,35 @@ const RadioField: FC<RadioFieldProps> = ({
             )}
           </FormLabel>
         )}
-        <Controller
+        <RadioGroup
+          aria-label={name}
           name={name}
-          control={control}
-          as={
-            <RadioGroup aria-label={name} value={value}>
-              <Grid container spacing={3}>
-                {options.map((option) => (
-                  <Grid
-                    item
-                    key={option.code}
-                    xs={layout.xs}
-                    sm={layout.sm}
-                    md={layout.md}
-                    lg={layout.lg}
-                  >
-                    <FormControlLabel
-                      value={option.code}
-                      control={<Radio color="secondary" />}
-                      label={option.display}
-                      className={clsx(
-                        classes.formControlLabel,
-                        option.code === value &&
-                          classes.selectedFormControlLabel
-                      )}
-                    />
-                  </Grid>
-                ))}
+          value={muiValue || null}
+          onChange={handleMUIChange}
+        >
+          <Grid container spacing={3}>
+            {options.map((option) => (
+              <Grid
+                item
+                key={option.code}
+                xs={layout.xs}
+                sm={layout.sm}
+                md={layout.md}
+                lg={layout.lg}
+              >
+                <FormControlLabel
+                  value={option.code}
+                  control={<Radio color="secondary" />}
+                  label={option.display}
+                  className={clsx(
+                    classes.formControlLabel,
+                    option.code === value && classes.selectedFormControlLabel
+                  )}
+                />
               </Grid>
-            </RadioGroup>
-          }
-          {...register(name, validator)}
-        />
+            ))}
+          </Grid>
+        </RadioGroup>
       </FormControl>
     </div>
   );

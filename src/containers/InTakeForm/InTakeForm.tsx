@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { useHistory } from "react-router";
 import { useForm, FormProvider } from "react-hook-form";
 import Grid from "@material-ui/core/Grid";
@@ -26,7 +26,9 @@ const InTakeForm = () => {
     history.push(ROUTES.DASHBOARD);
   };
 
-  const handleGoToNextStep = () => {
+  const handleGoToNextStep = (e?: FormEvent) => {
+    e?.preventDefault();
+
     switch (currentStep) {
       case InTakeFormSteps.START:
         setCurrentStep(InTakeFormSteps.SELF_INFORMATION);
