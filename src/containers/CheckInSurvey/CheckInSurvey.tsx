@@ -28,7 +28,7 @@ const CheckInSurvey = () => {
   const handleCompleteCheckIn = async () => {
     const values = methods.getValues();
     await updateCheckIn.mutate(values);
-    history.push(ROUTES.PROGRESS);
+    setSurveyStep(CheckInSurveySteps.COMPLETE);
   };
 
   const handleNext = (e?: FormEvent) => {
@@ -38,10 +38,10 @@ const CheckInSurvey = () => {
         setSurveyStep(CheckInSurveySteps.QUESTIONS);
         break;
       case CheckInSurveySteps.QUESTIONS:
-        setSurveyStep(CheckInSurveySteps.COMPLETE);
+        handleCompleteCheckIn();
         break;
       default:
-        handleCompleteCheckIn();
+        history.push(ROUTES.PROGRESS);
         break;
     }
   };

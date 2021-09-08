@@ -39,20 +39,24 @@ const CheckboxField: FC<CheckboxFieldProps> = ({
 
   return (
     <FormControlLabel
-      id={name}
-      label={label}
-      className={className}
-      classes={{
-        label: clsx(classes.label, isChecked && classes.selectedLabel),
-      }}
       control={
         <Controller
-          defaultValue={false}
-          as={<Checkbox />}
-          control={control}
           name={name}
+          control={control}
+          render={(props) => (
+            <Checkbox
+              {...props}
+              checked={props.value || false}
+              onChange={(e) => props.onChange(e.target.checked)}
+            />
+          )}
+          className={className}
+          classes={{
+            label: clsx(classes.label, isChecked && classes.selectedLabel),
+          }}
         />
       }
+      label={label}
     />
   );
 };

@@ -28,6 +28,14 @@ const GAD_PHQ_COMMON_HEADER =
 
 export const QUESTIONS: TQuestion[] = [
   {
+    type: "MCQ",
+    code: "MCQ_QUESTION",
+    question:
+      "Are you experiencing any side effects? Please select all that apply.",
+    options: SIDE_EFFECTS,
+  },
+
+  {
     type: "GAD",
     code: "GAD_QUESTION_1",
     header: GAD_PHQ_COMMON_HEADER,
@@ -140,13 +148,6 @@ export const QUESTIONS: TQuestion[] = [
     question:
       "Thoughts that you’d be better off dead or of hurting yourself in some way.",
     options: FREQUENCY_OPTIONS,
-  },
-  {
-    type: "MCQ",
-    code: "MCQ_QUESTION",
-    question:
-      "Are you experiencing any side effects? Please select all that apply.",
-    options: SIDE_EFFECTS,
   },
   {
     type: "FRQ",
