@@ -9,7 +9,6 @@ import {
   TFeedbackRequest,
   TProgressRequest,
   TTodoItem,
-  TUploadFileRequest,
   UpdateProfileFormRequest,
 } from "../types";
 
@@ -18,37 +17,15 @@ export type CheckTriggerBody = {
   progressID: string;
 };
 
-export const useGetMemberTodos = (memberId: string) => {
+export const useGetMemberTodos = () => {
   const apiFetch = useApiFetch();
 
   return useQuery(
-    [QUERY_KEYS.FETCH_MEMBER_TODOS, memberId],
+    [QUERY_KEYS.FETCH_MEMBER_TODOS],
     async (): Promise<TTodoItem[]> => {
-      const { data } = await apiFetch(`/cp/memberTodo/${memberId}`);
+      const { data } = await apiFetch(`/mp/todos`);
       return data;
     }
-  );
-};
-
-export const useGetMember = (memberId: string) => {
-  const apiFetch = useApiFetch();
-
-  return useQuery([QUERY_KEYS.FETCH_MEMBER, memberId], async () => {
-    const { data } = await apiFetch(`/cp/member/${memberId}`);
-    return data;
-  });
-};
-
-export const useCheckTriggerByRequest = () => {
-  const apiFetch = useApiFetch();
-
-  return useMutation(
-    ({ memberID, progressID }: CheckTriggerBody) =>
-      apiFetch("/uploadAvatar", {
-        method: "POST",
-        data: { memberID, progressID },
-      }),
-    { mutationKey: QUERY_KEYS.CHECK_TRIGGER_REQUEST }
   );
 };
 
@@ -58,7 +35,7 @@ export const useFetchCareTeamList = () => {
   return useQuery(
     [QUERY_KEYS.FETCH_CARE_TEAM_LIST],
     async (): Promise<TCareTeamMember[]> => {
-      const { data } = await apiFetch(`/cp/careTeamList`);
+      const { data } = await apiFetch("/mp/care-team");
       return data;
     }
   );
@@ -68,8 +45,7 @@ export const useUploadFile = () => {
   const apiFetch = useApiFetch();
 
   return useMutation(
-    (data: TUploadFileRequest) =>
-      apiFetch("/files/upload", { method: "POST", data }),
+    (file: File) => apiFetch("/mp/file", { method: "POST", data: { file } }),
     { mutationKey: QUERY_KEYS.UPLOAD_FILE }
   );
 };
@@ -79,7 +55,7 @@ export const useUpdateProfile = () => {
 
   return useMutation(
     (data: UpdateProfileFormRequest) =>
-      apiFetch("/user/profile", { method: "PUT", data }),
+      apiFetch("/mp/profile", { method: "PUT", data }),
     { mutationKey: QUERY_KEYS.UPDATE_PROFILE_FORM }
   );
 };
@@ -88,17 +64,30 @@ export const useCreateProgress = () => {
   const apiFetch = useApiFetch();
 
   return useMutation(
-    (data: TProgressRequest) => apiFetch("/progress", { method: "POST", data }),
+    (data: TProgressRequest) =>
+      apiFetch("/mp/progress", { method: "POST", data }),
     { mutationKey: QUERY_KEYS.UPLOAD_MEMBER_AVATAR }
   );
 };
 
-export const useUpdateCheckIn = () => {
+export const useFetchProgressHistory = () => {
+  const apiFetch = useApiFetch();
+
+  return useQuery(
+    [QUERY_KEYS.FETCH_SCORE_PROGRESS_HISTORY],
+    async (): Promise<TCareTeamMember[]> => {
+      const { data } = await apiFetch(`/mp/progress`);
+      return data;
+    }
+  );
+};
+
+export const useUpdateCheckInForm = () => {
   const apiFetch = useApiFetch();
 
   return useMutation(
     (data: TCheckInFormRequest) =>
-      apiFetch("/check-in", { method: "PUT", data }),
+      apiFetch("/mp/checkin-form", { method: "PUT", data }),
     { mutationKey: QUERY_KEYS.UPDATE_CHECKIN_FORM }
   );
 };
@@ -108,7 +97,7 @@ export const useUpdateInTakeForm = () => {
 
   return useMutation(
     (data: TInTakeFormRequest) =>
-      apiFetch("/in-take-form", { method: "PUT", data }),
+      apiFetch("/mp/intake-form", { method: "PUT", data }),
     {
       mutationKey: QUERY_KEYS.UPDATE_INTAKE_FORM,
     }
@@ -120,7 +109,19 @@ export const useSubmitFeedback = () => {
 
   return useMutation(
     (data: TFeedbackRequest) =>
-      apiFetch("/mp/user/feedback", { method: "POST", data }),
+      apiFetch("/mp/feedback", { method: "POST", data }),
+    {
+      mutationKey: QUERY_KEYS.SUBMIT_FEEDBACK,
+    }
+  );
+};
+
+export const useVerifyID = () => {
+  const apiFetch = useApiFetch();
+
+  return useMutation(
+    (fileID: string) =>
+      apiFetch("/mp/verify-id", { method: "PUT", data: { fileID } }),
     {
       mutationKey: QUERY_KEYS.SUBMIT_FEEDBACK,
     }

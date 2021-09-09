@@ -12,6 +12,7 @@ import Button from "../Button";
 import UploadID from "./UploadID";
 import InitialStep from "./InitialStep";
 import { VerifySteps } from "./constants";
+import { useUploadFile, useVerifyID } from "../../api";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -54,8 +55,31 @@ interface VerifyIDDialogProps {
 
 const VerifyIDDialog: FC<VerifyIDDialogProps> = ({ open, onClose }) => {
   const classes = useStyles();
+  const uploadFile = useUploadFile();
+  const veirfyID = useVerifyID();
   const [file, setFile] = useState<File>();
+  const [fileID, setFileID] = useState<string>();
   const [step, setStep] = useState(VerifySteps.INTIAL_STEP);
+
+  const handleUploadFile = async (file: File) => {
+    setFile(file);
+    await uploadFile.mutate(file, {
+      onSuccess: ({ data: { fileID } }) => {
+        setFileID(fileID);
+      },
+    });
+  };
+
+  const handleVerifyID = async () => {
+    if (!fileID) return;
+    try {
+      await veirfyID.mutate(fileID);
+    } catch (error) {
+      // console.error(error);
+    } finally {
+      setStep(VerifySteps.FINAL);
+    }
+  };
 
   const handleNextStep = () => {
     switch (step) {
@@ -63,10 +87,8 @@ const VerifyIDDialog: FC<VerifyIDDialogProps> = ({ open, onClose }) => {
         setStep(VerifySteps.UPLOAD_ID);
         break;
       case VerifySteps.UPLOAD_ID:
-        setStep(VerifySteps.FINAL);
-        break;
       default:
-        setStep(VerifySteps.UPLOAD_ID);
+        handleVerifyID();
         break;
     }
   };
@@ -92,7 +114,7 @@ const VerifyIDDialog: FC<VerifyIDDialogProps> = ({ open, onClose }) => {
           />
         )}
         {step === VerifySteps.UPLOAD_ID && (
-          <UploadID file={file} onSelectFile={setFile} />
+          <UploadID file={file} onSelectFile={handleUploadFile} />
         )}
         {step === VerifySteps.FINAL && (
           <Grid item xs={12}>

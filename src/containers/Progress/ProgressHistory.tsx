@@ -2,6 +2,7 @@ import { useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 
+// import { useFetchProgressHistory } from "../../api";
 import {
   useFontStyles,
   useLayoutStyles,
@@ -13,6 +14,7 @@ import { mockScoreHistory } from "./mockScores";
 const ProgressHistory = () => {
   const fontClasses = useFontStyles();
   const layoutClasses = useLayoutStyles();
+  // const { progressHistory } = useFetchProgressHistory();
   const [active, setActive] = useState(mockScoreHistory.length - 1);
 
   return (

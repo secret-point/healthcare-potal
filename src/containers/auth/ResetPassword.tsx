@@ -27,8 +27,7 @@ export default function ResetPassword() {
   const handleResetPassword = async (e: FormEvent) => {
     e.preventDefault();
     const resetPasswordForm = methods.getValues() as ResetPasswordLinkForm;
-    // await sendResetPasswordLink(resetPasswordForm as ResetPasswordLinkForm);
-    console.log(resetPasswordForm, sendResetPasswordLink);
+    await sendResetPasswordLink(resetPasswordForm as ResetPasswordLinkForm);
     setLinkSent(true);
   };
 

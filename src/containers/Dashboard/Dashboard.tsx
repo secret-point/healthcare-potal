@@ -6,7 +6,6 @@ import { Theme } from "../../theme/types/createPalette";
 
 import { ROUTES } from "../../app/types";
 import { TodoItemType, TTodoItem } from "../../types";
-import useAuth from "../../hooks/useAuth";
 import Container from "../../components/Container";
 import VerifyIDDialog from "../../components/VerifyID/VerifyIDDialog";
 
@@ -30,7 +29,6 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function Dashboard() {
   const classes = useStyles();
   const history = useHistory();
-  const { user } = useAuth();
   const [showVerifyIDDialog, setShowVerifyIDDialog] = useState(false);
 
   const handleCloseVerifyIDDialog = () => {
@@ -57,9 +55,7 @@ export default function Dashboard() {
     <Container>
       <Grid container spacing={6} className={classes.container}>
         <Grid item xs={12} className={classes.todoListWrapper}>
-          {user && (
-            <TodoList userId={user._id} onClickItem={handleClickTodoItem} />
-          )}
+          <TodoList onClickItem={handleClickTodoItem} />
         </Grid>
 
         <Grid item xs={12}>

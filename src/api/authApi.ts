@@ -89,18 +89,6 @@ export const useChangePasswordCode = () => {
   };
 };
 
-export const useVerifyID = () => {
-  const apiFetch = useApiFetch();
-
-  return async (fileID: string): Promise<unknown> => {
-    const { data } = await apiFetch("/verify-id", {
-      method: "PUT",
-      data: { fileID },
-    });
-    return data;
-  };
-};
-
 export const setToken = (token: string) => {
   sessionStorage.setItem("token", token);
 };

@@ -17,6 +17,7 @@ import AllSetup from "./AllSetup";
 export default function Onboarding() {
   const history = useHistory();
   const register = useRegister();
+  const [form, setForm] = useState<any>({});
   const [currentStep, setCurrentStep] = useState(ONBOARDING.NAME);
 
   const methods = useForm({
@@ -27,15 +28,17 @@ export default function Onboarding() {
     history.push("/login");
   };
 
-  const handleRegister = async () => {
-    const values = methods.getValues();
-    console.log(register, values);
-    // await register(values as any);
+  const handleRegister = async (form: any) => {
+    await register(form);
     setCurrentStep(ONBOARDING.FINAL);
   };
 
   const handleNext = (e: FormEvent) => {
     e.preventDefault();
+
+    const newForm = { ...form, ...methods.getValues() };
+    setForm(newForm);
+
     switch (currentStep) {
       case ONBOARDING.NAME:
         setCurrentStep(ONBOARDING.CONTACT);
@@ -47,7 +50,7 @@ export default function Onboarding() {
         setCurrentStep(ONBOARDING.PASSWORD);
         break;
       default:
-        handleRegister();
+        handleRegister(newForm);
         break;
     }
   };

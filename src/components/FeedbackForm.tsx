@@ -37,20 +37,14 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-interface FeedbackLocaleProp {
-  yourExperience?: string;
-}
-
-const DEFAULT_FEEDBACK_LOCALE: FeedbackLocaleProp = {
-  yourExperience: "How was your experience with this survey?",
-};
+const DEFAULT_FEEDBACK_TITLE = "How was your experience with this survey?";
 
 interface FeedbackFormProps {
-  locale?: FeedbackLocaleProp;
+  title?: string;
 }
 
 const FeedbackForm = ({
-  locale = DEFAULT_FEEDBACK_LOCALE,
+  title = DEFAULT_FEEDBACK_TITLE,
 }: FeedbackFormProps) => {
   const classes = useStyles();
   const colorClasses = useColorStyles();
@@ -71,7 +65,10 @@ const FeedbackForm = ({
   };
 
   const handleSendFeedback = async () => {
-    await submitFeedback.mutate(methods.getValues());
+    await submitFeedback.mutate({
+      ...methods.getValues(),
+      score: feedbackScore,
+    });
     setFeedbackSent(true);
   };
 
@@ -102,7 +99,7 @@ const FeedbackForm = ({
         variant="h6"
         className={clsx(colorClasses.white, layoutClasses.mb2)}
       >
-        {locale?.yourExperience}
+        {title}
       </Typography>
       {feedbackScore === null ? (
         <Rating

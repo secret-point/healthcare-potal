@@ -73,9 +73,7 @@ const CompleteInTakeForm = () => {
         xs={12}
         className={classes.feedbackFormWrapper}
       >
-        <FeedbackForm
-          locale={{ yourExperience: "How was your experience with this form?" }}
-        />
+        <FeedbackForm title="How was your experience with this form?" />
       </Grid>
     </Grid>
   );

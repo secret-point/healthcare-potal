@@ -4,7 +4,7 @@ import { useForm, FormProvider } from "react-hook-form";
 import Grid from "@material-ui/core/Grid";
 
 import { ROUTES } from "../../app/types";
-import { useUpdateCheckIn } from "../../api";
+import { useUpdateCheckInForm } from "../../api";
 import Container from "../../components/Container";
 
 import Welcome from "./Welcome";
@@ -14,7 +14,7 @@ import { CheckInSurveySteps, QUESTIONS } from "./constants";
 
 const CheckInSurvey = () => {
   const history = useHistory();
-  const updateCheckIn = useUpdateCheckIn();
+  const updateCheckInForm = useUpdateCheckInForm();
   const [surveyStep, setSurveyStep] = useState(CheckInSurveySteps.WELCOME);
 
   const methods = useForm({
@@ -26,7 +26,7 @@ const CheckInSurvey = () => {
   };
 
   const handleCompleteCheckIn = async (form: any) => {
-    await updateCheckIn.mutate(form);
+    await updateCheckInForm.mutate(form);
     setSurveyStep(CheckInSurveySteps.COMPLETE);
   };
 

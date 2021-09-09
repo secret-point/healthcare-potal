@@ -3,13 +3,13 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
+// import { useFetchCareTeamList } from "../../api";
 import { TCareTeamMember } from "../../types";
 import CareTeamMemberCard from "../../components/CareTeamMemberCard";
 import { TextButton } from "../../components/Button";
 import { useLayoutStyles } from "../../components/useCommonStyles";
 import { useViewport } from "../../hooks/useViewport";
 import EmptyCareTeamMemberCard from "../../components/EmptyCareTeamMemberCard";
-import { useFetchCareTeamList } from "../../api";
 
 const teamMembers: TCareTeamMember[] = [
   {
@@ -57,9 +57,7 @@ const CareTeam = () => {
   const { isMobile } = useViewport();
   const layoutClasses = useLayoutStyles();
   const [showCareTeam, setShowCareTeam] = useState(false);
-  const { data: careTeamList = [] } = useFetchCareTeamList();
-
-  console.log(careTeamList);
+  // const { data: careTeamList = [] } = useFetchCareTeamList();
 
   const handleToggleShowCareTeam = () => {
     setShowCareTeam(!showCareTeam);

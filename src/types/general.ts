@@ -146,9 +146,3 @@ export enum ProgressTypes {
   CASE_2_2 = "2-2",
   CASE_2_3 = "2-3",
 }
-
-export type TUploadFileRequest = {
-  upload: File;
-  memberID: string;
-  documentType: string;
-};

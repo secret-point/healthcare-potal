@@ -22,12 +22,11 @@ const responsive = {
 };
 
 interface TodoListProps {
-  userId: string;
   onClickItem?: (item: TTodoItem) => void;
 }
 
-const TodoList: React.FC<TodoListProps> = ({ userId, onClickItem }) => {
-  const { data: todoList = [] } = useGetMemberTodos(userId);
+const TodoList: React.FC<TodoListProps> = ({ onClickItem }) => {
+  const { data: todoList = [] } = useGetMemberTodos();
 
   const handleClickItem = (item: TTodoItem) => {
     onClickItem?.(item);
