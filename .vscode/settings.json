@@ -1,3 +1,4 @@
 {
-	"editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "typescript.tsdk": "/Volumes/Work/Prairie/member-portal/node_modules/typescript/lib"
 }

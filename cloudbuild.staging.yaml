@@ -1,0 +1,13 @@
+steps:
+  - name: node:14
+    entrypoint: yarn
+    args: ['install']
+
+  - name: node:14
+    entrypoint: yarn
+    args: ['build:staging']
+
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: ['app', 'deploy', 'app.staging.yaml']
+
+timeout: '1600s'
