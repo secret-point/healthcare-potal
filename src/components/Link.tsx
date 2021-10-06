@@ -42,7 +42,7 @@ const Link = ({ align, to, text }: LinkProps) => {
 
 export const ButtonLink = ({ align = "left", to, text }: LinkProps) => {
   const classes = useStyles();
-  const fontClasses = useFontStyles();
+  const fontClasses = useFontStyles()();
 
   return (
     <RouterLink to={to} className={classes.link}>

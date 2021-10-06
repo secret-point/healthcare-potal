@@ -67,8 +67,8 @@ const RadioField: FC<RadioFieldProps> = ({
   validator,
 }) => {
   const classes = useStyles();
-  const colorClasses = useColorStyles();
-  const layoutClasses = useLayoutStyles();
+  const colorClasses = useColorStyles()();
+  const layoutClasses = useLayoutStyles()();
 
   const {
     getValues,

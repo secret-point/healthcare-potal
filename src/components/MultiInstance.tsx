@@ -70,8 +70,8 @@ const MultiInstance: React.FC<MultiInstanceProps> = ({
   const hasError = Boolean(dotProp.get(errors, path));
 
   const classes = useStyles({ hasError });
-  const colorClasses = useColorStyles();
-  const layoutClasses = useLayoutStyles();
+  const colorClasses = useColorStyles()();
+  const layoutClasses = useLayoutStyles()();
   const [instances, setInstances] = useState<number[]>([0]);
 
   const handleClickAddMoreInstance = () => {

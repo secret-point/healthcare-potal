@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) =>
 
 const EmptyCareTeamMemberCard = () => {
   const classes = useStyles();
-  const layoutClasses = useLayoutStyles();
+  const layoutClasses = useLayoutStyles()();
 
   return (
     <Card variant="outlined" className={classes.teamMemberCard}>

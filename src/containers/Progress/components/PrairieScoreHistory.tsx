@@ -36,10 +36,10 @@ const PrairieScoreHistory = ({
   scoreHistory,
 }: PrairieScoreHistoryProps) => {
   const classes = useStyles();
-  const cardClasses = useCardStyles();
-  const fontClasses = useFontStyles();
-  const colorClasses = useColorStyles();
-  const layoutClasses = useLayoutStyles();
+  const cardClasses = useCardStyles()();
+  const fontClasses = useFontStyles()();
+  const colorClasses = useColorStyles()();
+  const layoutClasses = useLayoutStyles()();
 
   const data = useMemo(() => {
     if (!scoreHistory.length) return { id: "Score", data: [] };

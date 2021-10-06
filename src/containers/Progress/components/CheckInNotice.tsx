@@ -26,7 +26,7 @@ interface CheckInNoticeProps {
 
 const CheckInNotice: FC<CheckInNoticeProps> = ({ latestItem }) => {
   const classes = useStyles();
-  const backgroundClasses = useBackgroundColorStyles();
+  const backgroundClasses = useBackgroundColorStyles()();
 
   const diffInDays = dayjs().diff(latestItem.date, "day");
 

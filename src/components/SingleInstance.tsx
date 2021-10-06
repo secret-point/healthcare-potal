@@ -58,8 +58,8 @@ const SingleInstance: React.FC<SingleInstanceProps> = ({
   const hasError = Boolean(dotProp.get(errors, path));
 
   const classes = useStyles({ hasError });
-  const colorClasses = useColorStyles();
-  const layoutClasses = useLayoutStyles();
+  const colorClasses = useColorStyles()();
+  const layoutClasses = useLayoutStyles()();
 
   return (
     <Grid container className={classes.container}>

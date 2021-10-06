@@ -25,7 +25,7 @@ interface UploadIDProps {
 
 const UploadID: FC<UploadIDProps> = ({ file, onSelectFile }) => {
   const classes = useStyles();
-  const layoutClasses = useLayoutStyles();
+  const layoutClasses = useLayoutStyles()();
 
   const handleChangeFile = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target?.files?.[0];

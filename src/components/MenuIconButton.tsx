@@ -45,8 +45,8 @@ interface MenuIconButtonProps extends ButtonProps {}
 const MenuIconButton: FC<MenuIconButtonProps> = ({ onClick }) => {
   const classes = useStyles();
   const { isMobile } = useViewport();
-  const layoutClasses = useLayoutStyles();
-  const backgroundClasses = useBackgroundColorStyles();
+  const layoutClasses = useLayoutStyles()();
+  const backgroundClasses = useBackgroundColorStyles()();
 
   return (
     <Button

@@ -14,7 +14,7 @@ interface ProgressSummaryProps {
 }
 
 const ProgressSummary: FC<ProgressSummaryProps> = ({ history }) => {
-  const layoutClasses = useLayoutStyles();
+  const layoutClasses = useLayoutStyles()();
   const progressSummary = new ScoreHistorySummary(history).getSummary();
 
   return (

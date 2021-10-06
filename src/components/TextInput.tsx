@@ -90,8 +90,8 @@ export default function TextInput({
   ...props
 }: TextInputProps) {
   const classes = useStyles();
-  const colorClasses = useColorStyles();
-  const layoutClasses = useLayoutStyles();
+  const colorClasses = useColorStyles()();
+  const layoutClasses = useLayoutStyles()();
   const {
     control,
     register,

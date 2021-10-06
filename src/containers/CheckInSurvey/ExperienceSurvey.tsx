@@ -23,8 +23,8 @@ interface ExperienceSurveyProps {
 }
 
 const ExperienceSurvey: FC<ExperienceSurveyProps> = ({ questions, onNext }) => {
-  const fontClasses = useFontStyles();
-  const layoutClasses = useLayoutStyles();
+  const fontClasses = useFontStyles()();
+  const layoutClasses = useLayoutStyles()();
   const [number, setNumber] = useState(0);
   const { isMobile } = useViewport();
 

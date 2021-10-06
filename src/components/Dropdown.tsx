@@ -74,8 +74,8 @@ const Dropdown: FC<DropdownProps> = ({
   onChange,
 }) => {
   const classes = useStyles();
-  const colorClasses = useColorStyles();
-  const layoutClasses = useLayoutStyles();
+  const colorClasses = useColorStyles()();
+  const layoutClasses = useLayoutStyles()();
 
   const myRef = useRef<HTMLInputElement>(null);
 

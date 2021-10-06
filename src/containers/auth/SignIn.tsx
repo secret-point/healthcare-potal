@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) =>
 export default function SignIn() {
   const { logIn } = useAuth();
   const classes = useStyles();
-  const layoutClasses = useLayoutStyles();
+  const layoutClasses = useLayoutStyles()();
   const [errorText, setErrorText] = useState<Nullable<string>>(null);
 
   const methods = useForm({

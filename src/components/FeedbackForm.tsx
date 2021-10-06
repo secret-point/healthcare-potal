@@ -47,9 +47,9 @@ const FeedbackForm = ({
   title = DEFAULT_FEEDBACK_TITLE,
 }: FeedbackFormProps) => {
   const classes = useStyles();
-  const colorClasses = useColorStyles();
-  const layoutClasses = useLayoutStyles();
-  const bkColorClasses = useBackgroundColorStyles();
+  const colorClasses = useColorStyles()();
+  const layoutClasses = useLayoutStyles()();
+  const bkColorClasses = useBackgroundColorStyles()();
   const submitFeedback = useSubmitFeedback();
 
   const [feedbackSent, setFeedbackSent] = useState(false);

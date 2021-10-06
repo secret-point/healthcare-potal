@@ -35,9 +35,9 @@ interface PrairieScoreProps {
 
 const PrairieScore = ({ scoreHistory }: PrairieScoreProps) => {
   const classes = useStyles();
-  const cardClasses = useCardStyles();
-  const colorClasses = useColorStyles();
-  const layoutClasses = useLayoutStyles();
+  const cardClasses = useCardStyles()();
+  const colorClasses = useColorStyles()();
+  const layoutClasses = useLayoutStyles()();
 
   const data = useMemo(() => {
     if (!scoreHistory.length) return { id: "Score", data: [] };
