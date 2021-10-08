@@ -1,4 +1,5 @@
 import { FC } from "react";
+import dayjs from "dayjs";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
@@ -61,7 +62,11 @@ const AccountInformation: FC<AccountInformationProps> = ({
         </Box>
       ),
     },
-    { label: "Date of Birth", path: "dob" },
+    {
+      label: "Date of Birth",
+      path: "dob",
+      render: (value) => dayjs(value).format("MM/DD/YYYY"),
+    },
     { label: "Preferred Pronoun", path: "pronouns" },
     { label: "Biological Sex", path: "gender" },
     { label: "Ethnicity", path: "race" },

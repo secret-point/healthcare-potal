@@ -100,7 +100,7 @@ const ExperienceSurvey: FC<ExperienceSurveyProps> = ({ questions, onNext }) => {
         {question.type === "FRQ" && (
           <TextInput
             name={question.code}
-            placeholder="Some placeholder text TBD"
+            placeholder="Enter your comment here"
             multiline
             rows={4}
           />

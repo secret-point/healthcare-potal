@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { FC } from "react";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -7,6 +8,7 @@ import { get as _get } from "lodash";
 
 import { TCustomField } from "../types/general";
 import { Theme } from "../theme/types/createPalette";
+import { useViewport } from "../hooks/useViewport";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -25,6 +27,13 @@ const useStyles = makeStyles((theme: Theme) =>
 
     listValue: {
       color: theme.palette.secondaryNavy2.main,
+      textOverflow: "ellipsis",
+      overflow: "hidden",
+      whiteSpace: "nowrap",
+    },
+
+    mobileValue: {
+      maxWidth: 200,
     },
   })
 );
@@ -36,6 +45,7 @@ interface CustomListProps {
 
 const CustomList: FC<CustomListProps> = ({ value, fields }) => {
   const classes = useStyles();
+  const { isMobile } = useViewport();
 
   return (
     <List className={classes.list}>
@@ -45,7 +55,13 @@ const CustomList: FC<CustomListProps> = ({ value, fields }) => {
           {field.render ? (
             field.render(_get(value, field.path))
           ) : (
-            <Typography variant="subtitle1" className={classes.listValue}>
+            <Typography
+              variant="subtitle1"
+              className={clsx(
+                classes.listValue,
+                isMobile && classes.mobileValue
+              )}
+            >
               {_get(value, field.path)}
             </Typography>
           )}
