@@ -13,6 +13,11 @@ export const useStyles = makeStyles((theme: Theme) =>
     textField: {
       width: "100%",
 
+      "& .MuiInputLabel-root": {
+        fontSize: 16,
+        color: theme.palette.primaryNavy.main,
+      },
+
       "& .MuiOutlinedInput-multiline": {
         padding: theme.spacing(3),
       },
@@ -21,13 +26,13 @@ export const useStyles = makeStyles((theme: Theme) =>
       },
       "& .MuiInputBase-input": {
         fontFamily: "DM Sans",
-        fontSize: 18,
+        fontSize: 16,
         lineHeight: 1.3,
         fontWeight: "normal",
-        color: theme.palette.secondaryNavy2.main,
+        color: theme.palette.primaryNavy.main,
 
         "&::placeholder": {
-          color: theme.palette.secondaryNavy2.main,
+          color: theme.palette.primaryNavy.main,
           opacity: 1,
         },
       },
@@ -48,9 +53,6 @@ export const useStyles = makeStyles((theme: Theme) =>
           borderColor: theme.palette.accentRed.main,
         },
       },
-    },
-
-    topLabelField: {
       "& .MuiInputLabel-outlined.MuiInputLabel-shrink": {
         height: 32,
         fontSize: 16,
@@ -86,7 +88,7 @@ export default function TextInput({
   className,
   type,
   required,
-  isTopLabel,
+  InputLabelProps = { shrink: true },
   ...props
 }: TextInputProps) {
   const classes = useStyles();
@@ -126,11 +128,8 @@ export default function TextInput({
           }
           variant={variant}
           error={hasError}
-          className={clsx(
-            className,
-            classes.textField,
-            isTopLabel && classes.topLabelField
-          )}
+          className={clsx(className, classes.textField)}
+          InputLabelProps={InputLabelProps}
           {...register(name, validator)}
           {...props}
         />

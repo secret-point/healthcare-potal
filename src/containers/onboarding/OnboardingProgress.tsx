@@ -85,6 +85,9 @@ const useStyles = makeStyles((theme) =>
         paddingRight: 0,
       },
     },
+    title: {
+      fontWeight: 500,
+    },
   })
 );
 interface OnboardingProgressProps {
@@ -123,7 +126,7 @@ const OnboardingProgress: React.FC<OnboardingProgressProps> = ({
       </Grid>
 
       <Grid item xs={12}>
-        <Typography align="center" variant="h2">
+        <Typography align="center" variant="h2" className={classes.title}>
           {currentStep}
         </Typography>
       </Grid>

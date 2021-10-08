@@ -3,6 +3,7 @@ import { useForm, FormProvider } from "react-hook-form";
 import { useHistory } from "react-router";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
+import { makeStyles, createStyles } from "@material-ui/core/styles";
 
 import { useSendResetPasswordLink } from "../../api";
 import Button from "../../components/Button";
@@ -13,8 +14,17 @@ import { ResetPasswordLinkForm } from "../../types";
 
 import ResetPasswordForm from "./ResetPasswordForm";
 
+const useStyles = makeStyles(() =>
+  createStyles({
+    title: {
+      fontWeight: 500,
+    },
+  })
+);
+
 export default function ResetPassword() {
   const history = useHistory();
+  const classes = useStyles();
   const layoutClasses = useLayoutStyles()();
   const [linkSent, setLinkSent] = useState(false);
 
@@ -41,7 +51,7 @@ export default function ResetPassword() {
         {!linkSent ? (
           <Grid container>
             <Grid item xs={12} className={layoutClasses.mb2}>
-              <Typography variant="h2" align="center">
+              <Typography variant="h2" align="center" className={classes.title}>
                 Reset my password
               </Typography>
             </Grid>

@@ -1,10 +1,10 @@
 import { useState } from "react";
+import dotProp from "dot-prop";
 import { useFormContext } from "react-hook-form";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Typography from "@material-ui/core/Typography";
-import { makeStyles, createStyles } from "@material-ui/core/styles";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 
@@ -12,27 +12,10 @@ import Button from "../../components/Button";
 import TextInput from "../../components/TextInput";
 import GreenCheckIcon from "../../icons/GreenCheckIcon";
 import RedCrossIcon from "../../icons/RedCrossIcon";
-import dotProp from "dot-prop";
-
-const useStyles = makeStyles((theme) =>
-  createStyles({
-    mt3: {
-      marginTop: theme.spacing(3),
-    },
-    iconButton: {
-      padding: theme.spacing(0),
-    },
-    mt2: {
-      marginTop: theme.spacing(2),
-    },
-    ml2: {
-      marginLeft: theme.spacing(2),
-    },
-  })
-);
+import { useLayoutStyles } from "../../components/useCommonStyles";
 
 const PasswordForm = () => {
-  const classes = useStyles();
+  const layoutClasses = useLayoutStyles()();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
@@ -68,7 +51,7 @@ const PasswordForm = () => {
               <InputAdornment position="end">
                 <IconButton
                   aria-label="toggle password visibility"
-                  className={classes.iconButton}
+                  className={layoutClasses.noPadding}
                   onClick={handleTogglePassword}
                 >
                   {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
@@ -79,7 +62,7 @@ const PasswordForm = () => {
         />
       </Grid>
 
-      <Grid item xs={12}>
+      <Grid item xs={12} className={layoutClasses.mt3}>
         <TextInput
           name="confirmPassword"
           label="Confirm Password"
@@ -95,7 +78,7 @@ const PasswordForm = () => {
               <InputAdornment position="end">
                 <IconButton
                   aria-label="toggle confirm password visibility"
-                  className={classes.iconButton}
+                  className={layoutClasses.noPadding}
                   onClick={handleToggleConfirmPassword}
                 >
                   {showConfirmPassword ? (
@@ -111,21 +94,23 @@ const PasswordForm = () => {
       </Grid>
 
       {showResult && (
-        <Grid item xs={12} className={classes.mt2}>
+        <Grid item xs={12} className={layoutClasses.mt2}>
           <Grid container item xs={12} alignItems="center">
             {shouldPasswordMatch ? <GreenCheckIcon /> : <RedCrossIcon />}
-            <Typography className={classes.ml2}>Password matches</Typography>
+            <Typography className={layoutClasses.ml2}>
+              Password matches
+            </Typography>
           </Grid>
           <Grid container item xs={12} alignItems="center">
             {shouldLongerThan8 ? <GreenCheckIcon /> : <RedCrossIcon />}
-            <Typography className={classes.ml2}>
+            <Typography className={layoutClasses.ml2}>
               Minimum of 8 characters
             </Typography>
           </Grid>
         </Grid>
       )}
 
-      <Grid item xs={12} className={classes.mt3}>
+      <Grid item xs={12} className={layoutClasses.mt3}>
         <Button
           text="NEXT"
           color="primary"

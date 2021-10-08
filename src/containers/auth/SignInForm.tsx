@@ -12,12 +12,10 @@ import TextInput from "../../components/TextInput";
 import { Theme } from "../../theme/types/createPalette";
 import { emailPattern } from "../../utils/string";
 import { useInputDetails } from "../../hooks/useInputDetails";
+import { useLayoutStyles } from "../../components/useCommonStyles";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    mt3: {
-      marginTop: theme.spacing(3),
-    },
     iconButton: {
       padding: theme.spacing(0),
     },
@@ -33,6 +31,7 @@ interface SignInFormProps {
 
 const SignInForm = ({ onSubmit }: SignInFormProps) => {
   const classes = useStyles();
+  const layoutClasses = useLayoutStyles()();
   const [showPassword, setShowPassword] = useState(false);
 
   const requiredFields = ["email", "password"];
@@ -64,7 +63,7 @@ const SignInForm = ({ onSubmit }: SignInFormProps) => {
           />
         </Grid>
 
-        <Grid item xs={12}>
+        <Grid item xs={12} className={layoutClasses.mt3}>
           <TextInput
             name="password"
             type={showPassword ? "text" : "password"}
@@ -88,7 +87,7 @@ const SignInForm = ({ onSubmit }: SignInFormProps) => {
           />
         </Grid>
 
-        <Grid item xs={12} className={classes.mt3}>
+        <Grid item xs={12} className={layoutClasses.mt3}>
           <Button
             text="SIGN IN"
             type="submit"

@@ -18,6 +18,9 @@ const useStyles = makeStyles((theme) =>
     errorTextWrapper: {
       marginTop: theme.spacing(1.5),
     },
+    title: {
+      fontWeight: 500,
+    },
   })
 );
 
@@ -45,7 +48,7 @@ export default function SignIn() {
       <PlainModal>
         <Grid container>
           <Grid item xs={12} className={layoutClasses.mb6}>
-            <Typography variant="h1" align="center">
+            <Typography variant="h2" align="center" className={classes.title}>
               Sign In
             </Typography>
           </Grid>
@@ -63,7 +66,7 @@ export default function SignIn() {
           </Grid>
 
           <Grid container item xs={12} justify="center">
-            <Link align="center" to="/register" text="Don't have an account?" />
+            <Link align="center" to="/register" text="Create an account" />
           </Grid>
 
           <Grid container item xs={12} justify="center">

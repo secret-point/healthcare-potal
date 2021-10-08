@@ -1,10 +1,19 @@
 import Box from "@material-ui/core/Box";
 import { makeStyles, createStyles } from "@material-ui/core";
 
+import { ReactComponent as PrairieIcon } from "../assets/PrairieIcon.svg";
 import { useViewport } from "../hooks/useViewport";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
+    modalWrapper: {
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+    },
+    icon: {
+      marginBottom: theme.spacing(9),
+    },
     main: {
       width: 560,
       background: "white",
@@ -24,7 +33,10 @@ const PlainModal: React.FC = ({ children }) => {
   const { isMobile } = useViewport();
 
   return (
-    <Box className={isMobile ? classes.mobile : classes.main}>{children}</Box>
+    <Box className={classes.modalWrapper}>
+      <PrairieIcon className={classes.icon} />
+      <Box className={isMobile ? classes.mobile : classes.main}>{children}</Box>
+    </Box>
   );
 };
 
