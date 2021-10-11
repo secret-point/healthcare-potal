@@ -16,7 +16,6 @@ import { useColorStyles, useLayoutStyles } from "./useCommonStyles";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    root: {},
     dropdown: {
       position: "relative",
     },
@@ -28,12 +27,13 @@ const useStyles = makeStyles((theme: Theme) =>
       margin: theme.spacing(0),
       padding: theme.spacing(1),
       borderRadius: theme.spacing(1),
-      border: `1px solid ${theme.palette.distinctiveGray.main}`,
+      border: `1px solid rgba(0, 0, 0, 0.23)`,
     },
     selectedFormControlLabel: {
       "& .MuiFormControlLabel-label": {
         color: theme.palette.secondaryGreen1.main,
       },
+      border: `1px solid ${theme.palette.secondaryGreen1.main}`,
     },
     topLabel: {
       fontSize: 16,
@@ -98,55 +98,53 @@ const RadioField: FC<RadioFieldProps> = ({
   const hasError = Boolean(dotProp.get(errors, name));
 
   return (
-    <div className={classes.root}>
-      <FormControl className={classes.formControl}>
-        {label && (
-          <FormLabel
-            component="legend"
-            className={clsx(
-              isTopLabel && classes.topLabel,
-              hasError && colorClasses.accentRed
-            )}
-          >
-            {label}
-            {required && (
-              <b className={clsx(colorClasses.accentRed, layoutClasses.ml05)}>
-                *
-              </b>
-            )}
-          </FormLabel>
-        )}
-        <RadioGroup
-          aria-label={name}
-          name={name}
-          value={muiValue || null}
-          onChange={handleMUIChange}
+    <FormControl className={classes.formControl}>
+      {label && (
+        <FormLabel
+          component="legend"
+          className={clsx(
+            isTopLabel && classes.topLabel,
+            hasError && colorClasses.accentRed
+          )}
         >
-          <Grid container spacing={3}>
-            {options.map((option) => (
-              <Grid
-                item
-                key={option.code}
-                xs={layout.xs}
-                sm={layout.sm}
-                md={layout.md}
-                lg={layout.lg}
-              >
-                <FormControlLabel
-                  value={option.code}
-                  control={<Radio color="secondary" />}
-                  label={option.display}
-                  className={clsx(
-                    classes.formControlLabel,
-                    option.code === value && classes.selectedFormControlLabel
-                  )}
-                />
-              </Grid>
-            ))}
-          </Grid>
-        </RadioGroup>
-      </FormControl>
-    </div>
+          {label}
+          {required && (
+            <b className={clsx(colorClasses.accentRed, layoutClasses.ml05)}>
+              *
+            </b>
+          )}
+        </FormLabel>
+      )}
+      <RadioGroup
+        aria-label={name}
+        name={name}
+        value={muiValue || null}
+        onChange={handleMUIChange}
+      >
+        <Grid container spacing={3}>
+          {options.map((option) => (
+            <Grid
+              item
+              key={option.code}
+              xs={layout.xs}
+              sm={layout.sm}
+              md={layout.md}
+              lg={layout.lg}
+            >
+              <FormControlLabel
+                value={option.code}
+                control={<Radio color="secondary" />}
+                label={option.display}
+                className={clsx(
+                  classes.formControlLabel,
+                  option.code === value && classes.selectedFormControlLabel
+                )}
+              />
+            </Grid>
+          ))}
+        </Grid>
+      </RadioGroup>
+    </FormControl>
   );
 };
 

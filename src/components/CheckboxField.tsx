@@ -12,6 +12,19 @@ type StyleProps = {
 };
 
 const useStyles = makeStyles((theme: Theme) => ({
+  controlLabel: {
+    margin: 0,
+    width: "100%",
+    padding: theme.spacing(0.5),
+    borderRadius: theme.spacing(1),
+    border: `1px solid rgba(0, 0, 0, 0.23)`,
+  },
+  selectedControlLabel: {
+    border: `1px solid ${theme.palette.secondaryGreen1.main}`,
+    "& .MuiTypography-root": {
+      color: theme.palette.secondaryGreen1.main,
+    },
+  },
   label: {
     fontSize: 16,
   },
@@ -57,6 +70,10 @@ const CheckboxField: FC<CheckboxFieldProps> = ({
         />
       }
       label={label}
+      className={clsx(
+        classes.controlLabel,
+        isChecked && classes.selectedControlLabel
+      )}
     />
   );
 };

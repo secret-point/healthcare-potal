@@ -34,6 +34,9 @@ export const useFontStyles = () =>
       noneTextDecoration: {
         textDecoration: "none",
       },
+      lineHeight15: {
+        lineHeight: 1.5,
+      },
     })
   );
 

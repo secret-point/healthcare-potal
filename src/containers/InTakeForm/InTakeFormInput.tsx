@@ -5,6 +5,7 @@ import { useFormContext } from "react-hook-form";
 import Grid from "@material-ui/core/Grid";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import Typography from "@material-ui/core/Typography";
+import { makeStyles, createStyles } from "@material-ui/core/styles";
 
 import useAuth from "../../hooks/useAuth";
 import Button from "../../components/Button";
@@ -15,6 +16,14 @@ import {
 } from "../../components/useCommonStyles";
 import { InTakeFormSteps, IN_TAKE_FORM_STEPS } from "./constants";
 import InTakeFormGroupInput from "./InTakeFormGroupInput";
+
+const useStyles = makeStyles(() =>
+  createStyles({
+    linearProgress: {
+      borderRadius: 2,
+    },
+  })
+);
 
 const IN_TAKE_FORM_PROGRESS: Data<number> = {
   [InTakeFormSteps.SELF_INFORMATION]: 10,
@@ -36,6 +45,7 @@ const InTakeFormInput: FC<InTakeFormInputProps> = ({
   onLeave,
 }) => {
   const { user } = useAuth();
+  const classes = useStyles();
   const fontClasses = useFontStyles()();
   const colorClasses = useColorStyles()();
   const layoutClasses = useLayoutStyles()();
@@ -76,6 +86,7 @@ const InTakeFormInput: FC<InTakeFormInputProps> = ({
           variant="determinate"
           color="secondary"
           value={progress}
+          className={classes.linearProgress}
         />
       </Grid>
 

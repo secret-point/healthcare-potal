@@ -4,6 +4,7 @@ import { useFormContext } from "react-hook-form";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import LinearProgress from "@material-ui/core/LinearProgress";
+import { makeStyles, createStyles } from "@material-ui/core/styles";
 
 import Button from "../../components/Button";
 import RadioField from "../../components/RadioField";
@@ -17,16 +18,28 @@ import { TQuestion } from "../../types";
 import MCQQuestion from "./MCQQuestion";
 import { useViewport } from "../../hooks/useViewport";
 
+const useStyles = makeStyles(() =>
+  createStyles({
+    linearProgress: {
+      borderRadius: 2,
+    },
+    questionTitle: {
+      letterSpacing: "1px",
+    },
+  })
+);
+
 interface ExperienceSurveyProps {
   questions: TQuestion[];
   onNext: (form: any) => void;
 }
 
 const ExperienceSurvey: FC<ExperienceSurveyProps> = ({ questions, onNext }) => {
+  const classes = useStyles();
+  const { isMobile } = useViewport();
   const fontClasses = useFontStyles()();
   const layoutClasses = useLayoutStyles()();
   const [number, setNumber] = useState(0);
-  const { isMobile } = useViewport();
 
   const [form, setForm] = useState<any>({});
   const { watch, getValues } = useFormContext();
@@ -62,6 +75,7 @@ const ExperienceSurvey: FC<ExperienceSurveyProps> = ({ questions, onNext }) => {
           variant="determinate"
           color="secondary"
           value={progress}
+          className={classes.linearProgress}
         />
       </Grid>
 
@@ -72,16 +86,25 @@ const ExperienceSurvey: FC<ExperienceSurveyProps> = ({ questions, onNext }) => {
       >
         <Typography
           variant="subtitle2"
-          className={clsx(fontClasses.fontBolder, layoutClasses.mb1)}
+          className={clsx(
+            fontClasses.fontBolder,
+            layoutClasses.mb1,
+            classes.questionTitle
+          )}
         >
           {["QUESTION", number + 1].join(" ")}
         </Typography>
         {question.header && (
-          <Typography variant="h3" className={fontClasses.fontNormal}>
+          <Typography
+            variant="h3"
+            className={clsx(fontClasses.fontNormal, fontClasses.lineHeight15)}
+          >
             {question.header}
           </Typography>
         )}
-        <Typography variant="h3">{question.question}</Typography>
+        <Typography variant="h3" className={fontClasses.lineHeight15}>
+          {question.question}
+        </Typography>
       </Grid>
 
       <Grid
