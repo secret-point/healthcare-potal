@@ -22,6 +22,12 @@ const useStyles = makeStyles((theme: Theme) =>
 
       "&:hover": {
         boxShadow: "none",
+        "&.MuiButton-text": {
+          background: "transparent",
+          "& .MuiTypography-root": {
+            color: theme.palette.primaryNavy.main,
+          },
+        },
       },
 
       "&.MuiButton-containedPrimary": {
@@ -32,6 +38,10 @@ const useStyles = makeStyles((theme: Theme) =>
 
       "&.Mui-disabled": {
         backgroundColor: theme.palette.distinctiveGray.main,
+      },
+
+      "&.MuiButton-text .MuiTypography-root": {
+        color: theme.palette.secondaryNavy2.main,
       },
     },
 
