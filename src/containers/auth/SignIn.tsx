@@ -31,7 +31,7 @@ export default function SignIn() {
   const [errorText, setErrorText] = useState<Nullable<string>>(null);
 
   const methods = useForm({
-    mode: "onBlur",
+    mode: "onChange",
   });
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {

@@ -21,7 +21,7 @@ export default function Onboarding() {
   const [currentStep, setCurrentStep] = useState(ONBOARDING.NAME);
 
   const methods = useForm({
-    mode: "onBlur",
+    mode: "onChange",
   });
 
   const handleLogIn = () => {

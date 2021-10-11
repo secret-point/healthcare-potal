@@ -18,7 +18,7 @@ const CheckInSurvey = () => {
   const [surveyStep, setSurveyStep] = useState(CheckInSurveySteps.WELCOME);
 
   const methods = useForm({
-    mode: "onBlur",
+    mode: "onChange",
   });
 
   const handleGoToHome = () => {

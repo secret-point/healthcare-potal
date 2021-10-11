@@ -128,7 +128,7 @@ const CareCoordination = () => {
   const classes = useStyles();
   const layoutClasses = useLayoutStyles()();
   const methods = useForm({
-    mode: "onBlur",
+    mode: "onChange",
   });
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {

@@ -56,7 +56,7 @@ const FeedbackForm = ({
   const [feedbackScore, setFeedbackScore] = useState<number | null>(null);
 
   const methods = useForm({
-    mode: "onBlur",
+    mode: "onChange",
   });
 
   const handleChangeFeedbackScore = (_: any, value: number | null) => {

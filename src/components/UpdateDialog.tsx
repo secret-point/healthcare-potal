@@ -50,7 +50,7 @@ const UpdateDialog: FC<UpdateDialogProps> = ({
 }) => {
   const classes = useStyles();
   const methods = useForm({
-    mode: "onBlur",
+    mode: "onChange",
   });
 
   const handleSave = (e: FormEvent) => {

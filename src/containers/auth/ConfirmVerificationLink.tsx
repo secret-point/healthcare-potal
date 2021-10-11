@@ -39,7 +39,7 @@ const ConfirmVerificationLink = () => {
   }, [handleVerifyLink]);
 
   const methods = useForm({
-    mode: "onBlur",
+    mode: "onChange",
   });
 
   const handleChangePassword = (e: FormEvent) => {

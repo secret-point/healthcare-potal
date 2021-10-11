@@ -31,7 +31,7 @@ export default function ResetPassword() {
   const sendResetPasswordLink = useSendResetPasswordLink();
 
   const methods = useForm({
-    mode: "onBlur",
+    mode: "onChange",
   });
 
   const handleResetPassword = async (e: FormEvent) => {

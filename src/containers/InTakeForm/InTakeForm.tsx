@@ -19,7 +19,7 @@ const InTakeForm = () => {
   const [form, setForm] = useState<any>({});
 
   const methods = useForm({
-    mode: "onBlur",
+    mode: "onChange",
   });
 
   const handleCompleteInTake = async () => {
