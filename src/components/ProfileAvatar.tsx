@@ -25,6 +25,10 @@ const useStyles = makeStyles((theme: Theme) =>
       alignItems: "center",
       justifyContent: "center",
     },
+
+    avatarLetter: {
+      fontWeight: 400,
+    },
   })
 );
 
@@ -51,7 +55,7 @@ export default function ProfileAvatar({
       className={classes.avatar}
       onClick={handleClickAvatar}
     >
-      <Typography variant="h3">
+      <Typography variant="h3" className={classes.avatarLetter}>
         {getCapitalizedFirstLetters([user.firstName, user.lastName]).join("")}
       </Typography>
     </div>

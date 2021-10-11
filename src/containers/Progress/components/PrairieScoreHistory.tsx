@@ -66,7 +66,7 @@ const PrairieScoreHistory = ({
   return (
     <Card
       variant="outlined"
-      className={clsx(cardClasses.card, layoutClasses.pb0)}
+      className={clsx(cardClasses.card, layoutClasses.pb3)}
     >
       <Grid item xs={12}>
         <Typography
@@ -88,10 +88,7 @@ const PrairieScoreHistory = ({
         spacing={1}
         item
         xs={12}
-        className={clsx(
-          layoutClasses.fullHeight,
-          classes.responsiveLineWrapper
-        )}
+        className={classes.responsiveLineWrapper}
       >
         <ResponsiveLine
           enableSlices="x"

@@ -76,7 +76,7 @@ const CareTeam = () => {
 
       {isMobile && !showCareTeam && (
         <TextButton
-          title="▾ View your care team"
+          text="▾ View your care team"
           onClick={handleToggleShowCareTeam}
         />
       )}

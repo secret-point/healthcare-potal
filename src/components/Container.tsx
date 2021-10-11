@@ -3,15 +3,18 @@ import { useState } from "react";
 import { useHistory } from "react-router";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
+import IconButton from "@material-ui/core/IconButton";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 
 import useAuth from "../hooks/useAuth";
-import PrairieIcon from "../icons/PrairieIcon";
+import { ReactComponent as PrairieIcon } from "../icons/PrairieIcon.svg";
 import { Theme } from "../theme/types/createPalette";
 import { useViewport } from "../hooks/useViewport";
+import { ROUTES } from "../app/types";
 import ProfileAvatar from "./ProfileAvatar";
 import MenuIconButton from "./MenuIconButton";
 import LeftSidebar from "./LeftSidebar";
+import { useLayoutStyles } from "./useCommonStyles";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -54,6 +57,12 @@ const useStyles = makeStyles((theme: Theme) =>
       justifyContent: "flex-start",
       gap: theme.spacing(2),
     },
+
+    iconButton: {
+      "&:hover": {
+        background: "transparent",
+      },
+    },
   })
 );
 
@@ -65,6 +74,7 @@ const Container: React.FC<ContainerProps> = ({ children, className }) => {
   const classes = useStyles();
   const history = useHistory();
   const { isMobile } = useViewport();
+  const layoutClasses = useLayoutStyles()();
   const { user, fullName, logOut } = useAuth();
   const [showMenu, setShowMenu] = useState(false);
 
@@ -79,6 +89,10 @@ const Container: React.FC<ContainerProps> = ({ children, className }) => {
   const handleLogOut = () => {
     logOut();
     history.push("/login");
+  };
+
+  const handleGoHome = () => {
+    history.push(ROUTES.DASHBOARD);
   };
 
   return (
@@ -96,7 +110,13 @@ const Container: React.FC<ContainerProps> = ({ children, className }) => {
             <MenuIconButton onClick={handleClickMenuButton} />
             {!isMobile && <ProfileAvatar user={user} />}
           </Box>
-          <PrairieIcon />
+          <IconButton
+            disableTouchRipple
+            className={clsx(classes.iconButton, layoutClasses.noPadding)}
+            onClick={handleGoHome}
+          >
+            <PrairieIcon />
+          </IconButton>
         </Grid>
       )}
 

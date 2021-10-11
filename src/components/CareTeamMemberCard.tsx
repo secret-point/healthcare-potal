@@ -20,6 +20,16 @@ const useStyles = makeStyles((theme) =>
       flexDirection: "column",
       justifyContent: "space-between",
     },
+
+    roundImage: {
+      borderRadius: 20,
+    },
+
+    textButton: {
+      "& .MuiTypography-root": {
+        textAlign: "left",
+      },
+    },
   })
 );
 
@@ -40,7 +50,7 @@ const CareTeamMemberCard = ({ member }: CareTeamMemberCardProps) => {
           height={40}
           alt="User Profile"
           src="https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg"
-          className={layoutClasses.mb2}
+          className={clsx(classes.roundImage, layoutClasses.mb2)}
         />
         <Typography variant="subtitle2" className={layoutClasses.mb05}>
           {member.job}
@@ -53,7 +63,7 @@ const CareTeamMemberCard = ({ member }: CareTeamMemberCardProps) => {
         </Typography>
       </CardContent>
       <CardActions className={layoutClasses.noPadding}>
-        <TextButton text={member.contact} />
+        <TextButton text={member.contact} className={classes.textButton} />
       </CardActions>
     </Card>
   );

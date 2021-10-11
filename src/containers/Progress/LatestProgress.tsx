@@ -34,7 +34,7 @@ const LatestProgress = () => {
         xs={12}
         justify="space-between"
         alignItems="center"
-        className={layoutClasses.mb2}
+        className={layoutClasses.mb3}
       >
         <Typography variant="h2" className={fontClasses.font500}>
           Your Latest Progress

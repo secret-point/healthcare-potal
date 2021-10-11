@@ -82,7 +82,7 @@ const Carousel: React.FC<CarouselProps> = ({
         {children}
       </MCarousel>
       {!itemCount && (
-        <Typography className={layoutClasses.ml15}>
+        <Typography variant="subtitle2" className={layoutClasses.ml15}>
           You have no outstanding to-do items.
         </Typography>
       )}

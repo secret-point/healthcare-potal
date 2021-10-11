@@ -12,6 +12,7 @@ const useStyles = makeStyles((theme: Theme) =>
     selectedLink: {
       color: theme.palette.secondaryGreen1.main,
       textDecoration: "underline",
+      textUnderlineOffset: "4px",
     },
   })
 );

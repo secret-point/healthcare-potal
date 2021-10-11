@@ -71,19 +71,11 @@ const LeftSidebar: FC<LeftSidebarProps> = ({
   const subMenus = [
     {
       main: "My Care",
-      links: [
-        { title: "Progress", link: "/progress" },
-        { title: "Appointments", link: "/appointments" },
-        { title: "Prescriptions", link: "/prescriptions" },
-      ],
+      links: [{ title: "Progress", link: ROUTES.PROGRESS }],
     },
     {
       main: "My Account",
-      links: [
-        { title: "Profile", link: "/profile" },
-        { title: "Billing", link: "/billing" },
-        { title: "Documents", link: "/documents" },
-      ],
+      links: [{ title: "Profile", link: ROUTES.PROFILE }],
     },
   ];
 

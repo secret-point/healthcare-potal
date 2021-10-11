@@ -14,7 +14,7 @@ const ActivityProgress = () => {
 
   return (
     <>
-      <Typography variant="h2" className={layoutClasses.mb1}>
+      <Typography variant="h2" className={layoutClasses.mb3}>
         Your Progress
       </Typography>
       <Grid container spacing={3}>

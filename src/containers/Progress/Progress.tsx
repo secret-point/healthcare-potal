@@ -11,7 +11,7 @@ const Progress = () => {
 
   return (
     <Container>
-      <Grid item xs={12} className={layoutClasses.mb4}>
+      <Grid item xs={12} className={layoutClasses.mb5}>
         <LatestProgress />
       </Grid>
 

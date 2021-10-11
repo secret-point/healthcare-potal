@@ -4,25 +4,44 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
+import { makeStyles, createStyles } from "@material-ui/core/styles";
 
-import { useLayoutStyles } from "../../../components/useCommonStyles";
+import {
+  useFontStyles,
+  useLayoutStyles,
+} from "../../../components/useCommonStyles";
 import { TScoreHistory } from "../../../types";
 import { ScoreHistorySummary } from "../../../models/ScoreHistorySummary";
+
+const useStyles = makeStyles((theme) =>
+  createStyles({
+    card: {
+      borderRadius: theme.spacing(2),
+    },
+  })
+);
 
 interface ProgressSummaryProps {
   history: TScoreHistory;
 }
 
 const ProgressSummary: FC<ProgressSummaryProps> = ({ history }) => {
+  const classes = useStyles();
+  const fontClasses = useFontStyles()();
   const layoutClasses = useLayoutStyles()();
   const progressSummary = new ScoreHistorySummary(history).getSummary();
 
   return (
-    <Card variant="outlined" className={layoutClasses.fullHeight}>
+    <Card
+      variant="outlined"
+      className={clsx(layoutClasses.fullHeight, classes.card)}
+    >
       <CardContent className={clsx(layoutClasses.padding3, layoutClasses.mb1)}>
         <Grid container>
           <Grid item xs={12} className={layoutClasses.mb2}>
-            <Typography variant="h3">{progressSummary.title}</Typography>
+            <Typography variant="h3" className={fontClasses.fontNormal}>
+              {progressSummary.title}
+            </Typography>
           </Grid>
           <Grid item xs={12}>
             <Typography

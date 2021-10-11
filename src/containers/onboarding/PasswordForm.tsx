@@ -10,8 +10,8 @@ import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 
 import Button from "../../components/Button";
 import TextInput from "../../components/TextInput";
-import GreenCheckIcon from "../../icons/GreenCheckIcon";
-import RedCrossIcon from "../../icons/RedCrossIcon";
+import { ReactComponent as GreenCheckIcon } from "../../icons/GreenCheckIcon.svg";
+import { ReactComponent as RedCrossIcon } from "../../icons/RedCrossIcon.svg";
 import { useLayoutStyles } from "../../components/useCommonStyles";
 
 const PasswordForm = () => {

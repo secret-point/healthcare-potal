@@ -187,6 +187,9 @@ export const useLayoutStyles = () =>
       mb4: {
         marginBottom: theme.spacing(4),
       },
+      mb5: {
+        marginBottom: theme.spacing(5),
+      },
       mb6: {
         marginBottom: theme.spacing(6),
       },

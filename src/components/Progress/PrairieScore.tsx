@@ -16,6 +16,7 @@ import { formatFullDay } from "../../utils/date";
 import {
   useCardStyles,
   useColorStyles,
+  useFontStyles,
   useLayoutStyles,
 } from "../useCommonStyles";
 import { ROUTES } from "../../app/types";
@@ -37,14 +38,15 @@ const PrairieScore = ({ scoreHistory }: PrairieScoreProps) => {
   const classes = useStyles();
   const cardClasses = useCardStyles()();
   const colorClasses = useColorStyles()();
+  const fontClasses = useFontStyles()();
   const layoutClasses = useLayoutStyles()();
 
   const data = useMemo(() => {
-    if (!scoreHistory.length) return { id: "Score", data: [] };
+    if (!scoreHistory.length) return { id: "PrairieScore", data: [] };
     const firstDate = scoreHistory[0].date;
     return [
       {
-        id: "Score",
+        id: "PrairieScore",
         data: scoreHistory.map((history) => ({
           x: dayjs(firstDate).diff(history.date, "day"),
           y: history.score,
@@ -62,7 +64,7 @@ const PrairieScore = ({ scoreHistory }: PrairieScoreProps) => {
       variant="outlined"
       className={clsx(cardClasses.card, layoutClasses.pb0)}
     >
-      <Grid container spacing={1} className={layoutClasses.fullHeight}>
+      <Grid container spacing={4} className={layoutClasses.fullHeight}>
         <Grid item xs={12} sm={7}>
           <Box className={classes.responsiveLineWrapper}>
             <ResponsiveLine
@@ -91,12 +93,18 @@ const PrairieScore = ({ scoreHistory }: PrairieScoreProps) => {
                 Prairie Score
               </Typography>
               <Box width={1} display="flex">
-                <Typography variant="h2">{lastScoreItem.score}</Typography>
+                <Typography variant="h2">
+                  {lastScoreItem.score}
+                  &nbsp;
+                </Typography>
                 <Typography
                   variant="h2"
-                  className={colorClasses.secondaryGreen1}
+                  className={clsx(
+                    colorClasses.secondaryGreen1,
+                    fontClasses.fontNormal
+                  )}
                 >
-                  {` (${lastScoreItem.score - firstScoreItem.score})`}
+                  {`(${lastScoreItem.score - firstScoreItem.score})`}
                 </Typography>
               </Box>
               <Typography variant="subtitle2" className={layoutClasses.mb15}>
