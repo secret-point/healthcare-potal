@@ -11,9 +11,14 @@ import { ButtonLink } from "../../../components/Link";
 import { useBackgroundColorStyles } from "../../../components/useCommonStyles";
 import { ROUTES } from "../../../app/types";
 import { TScoreItem } from "../../../types";
+import { Theme } from "../../../theme/types/createPalette";
 
-const useStyles = makeStyles((theme) =>
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    card: {
+      boxShadow: "none",
+      border: `1px solid ${theme.palette.yellow.main}`,
+    },
     content: {
       padding: `${theme.spacing(2, 2, 2, 4)} !important`,
     },
@@ -31,7 +36,7 @@ const CheckInNotice: FC<CheckInNoticeProps> = ({ latestItem }) => {
   const diffInDays = dayjs().diff(latestItem.date, "day");
 
   return (
-    <Card>
+    <Card className={classes.card}>
       <CardContent
         className={clsx(classes.content, backgroundClasses.backgroundYellow)}
       >

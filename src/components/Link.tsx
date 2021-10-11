@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import { FC } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
@@ -22,13 +23,14 @@ interface LinkProps {
   align?: "left" | "center" | "right";
   to: string;
   text: string;
+  className?: string;
 }
 
-const Link = ({ align, to, text }: LinkProps) => {
+const Link = ({ align, className, to, text }: LinkProps) => {
   const classes = useStyles();
 
   return (
-    <RouterLink to={to} className={classes.link}>
+    <RouterLink to={to} className={clsx(classes.link, className)}>
       <Typography
         align={align}
         variant="subtitle1"
@@ -40,12 +42,17 @@ const Link = ({ align, to, text }: LinkProps) => {
   );
 };
 
-export const ButtonLink = ({ align = "left", to, text }: LinkProps) => {
+export const ButtonLink: FC<LinkProps> = ({
+  align = "left",
+  className,
+  to,
+  text,
+}) => {
   const classes = useStyles();
   const fontClasses = useFontStyles()();
 
   return (
-    <RouterLink to={to} className={classes.link}>
+    <RouterLink to={to} className={clsx(classes.link, className)}>
       <Typography
         align={align}
         variant="subtitle1"

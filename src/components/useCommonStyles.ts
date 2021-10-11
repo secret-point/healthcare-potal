@@ -256,6 +256,9 @@ export const useLayoutStyles = () =>
       pt3: {
         paddingTop: theme.spacing(3),
       },
+      pt4: {
+        paddingTop: theme.spacing(4),
+      },
       pb0: {
         paddingBottom: theme.spacing(0),
       },
@@ -267,6 +270,9 @@ export const useLayoutStyles = () =>
       },
       pb3: {
         paddingBotom: theme.spacing(3),
+      },
+      pb4: {
+        paddingBotom: theme.spacing(4),
       },
       padding1: {
         padding: theme.spacing(3),

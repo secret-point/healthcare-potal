@@ -74,7 +74,12 @@ const Welcome: React.FC<WelcomeProps> = ({ onCancel }) => {
         />
       </Grid>
       <Grid item xs={12}>
-        <Button text="Go Back Home" variant="text" onClick={onCancel} />
+        <Button
+          color="secondary"
+          text="Go Back Home"
+          variant="text"
+          onClick={onCancel}
+        />
       </Grid>
     </Grid>
   );

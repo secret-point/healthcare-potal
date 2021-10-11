@@ -24,9 +24,6 @@ const useStyles = makeStyles((theme: Theme) =>
         boxShadow: "none",
         "&.MuiButton-text": {
           background: "transparent",
-          "& .MuiTypography-root": {
-            color: theme.palette.primaryNavy.main,
-          },
         },
       },
 
@@ -38,6 +35,14 @@ const useStyles = makeStyles((theme: Theme) =>
 
       "&.Mui-disabled": {
         backgroundColor: theme.palette.distinctiveGray.main,
+      },
+    },
+
+    secondaryButton: {
+      "&:hover": {
+        "&.MuiButton-text .MuiTypography-root": {
+          color: theme.palette.primaryNavy.main,
+        },
       },
 
       "&.MuiButton-text .MuiTypography-root": {
@@ -82,6 +87,7 @@ const Button: FC<ButtonProps> = ({
   text,
   fullWidth = true,
   noPadding = false,
+  color,
   className,
   textClassName,
   onClick,
@@ -96,8 +102,10 @@ const Button: FC<ButtonProps> = ({
         classes.button,
         fullWidth && classes.fullWidth,
         noPadding && layoutClasses.noPadding,
+        color === "secondary" && classes.secondaryButton,
         className
       )}
+      disableRipple
       onClick={onClick}
       {...props}
     >
@@ -124,6 +132,7 @@ export const TextButton: FC<TextButtonProps> = ({
     <MuiButton
       variant="text"
       onClick={onClick}
+      disableRipple
       className={clsx(classes.button, classes.TextButton, className)}
       {...props}
     >

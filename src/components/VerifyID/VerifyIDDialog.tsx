@@ -128,6 +128,7 @@ const VerifyIDDialog: FC<VerifyIDDialogProps> = ({ open, onClose }) => {
       </DialogContent>
       <DialogActions>
         <Button
+          color="secondary"
           text={step === VerifySteps.FINAL ? "Close" : "Cancel"}
           fullWidth={false}
           textClassName={classes.button}

@@ -61,7 +61,12 @@ const StartInTake: FC<StartInTakeProps> = ({ onCancel }) => {
         />
       </Grid>
       <Grid item xs={12}>
-        <Button text="Go Back Home" variant="text" onClick={onCancel} />
+        <Button
+          text="Go Back Home"
+          variant="text"
+          color="secondary"
+          onClick={onCancel}
+        />
       </Grid>
     </Grid>
   );

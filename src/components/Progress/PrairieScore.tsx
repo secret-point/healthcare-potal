@@ -27,6 +27,9 @@ const useStyles = makeStyles(() =>
       height: 180,
       maxWidth: 300,
     },
+    viewMyProgress: {
+      alignSelf: "flex-end",
+    },
   })
 );
 
@@ -62,9 +65,9 @@ const PrairieScore = ({ scoreHistory }: PrairieScoreProps) => {
   return (
     <Card
       variant="outlined"
-      className={clsx(cardClasses.card, layoutClasses.pb0)}
+      className={clsx(cardClasses.card, layoutClasses.pb0, layoutClasses.pt4)}
     >
-      <Grid container spacing={4} className={layoutClasses.fullHeight}>
+      <Grid container spacing={4}>
         <Grid item xs={12} sm={7}>
           <Box className={classes.responsiveLineWrapper}>
             <ResponsiveLine
@@ -86,7 +89,7 @@ const PrairieScore = ({ scoreHistory }: PrairieScoreProps) => {
             />
           </Box>
         </Grid>
-        <Grid item xs={12} sm={5} className={layoutClasses.fullHeight}>
+        <Grid item xs={12} sm={5}>
           <Grid container className={layoutClasses.fullHeight}>
             <Box width={1}>
               <Typography variant="subtitle2" className={layoutClasses.mb1}>
@@ -116,6 +119,7 @@ const PrairieScore = ({ scoreHistory }: PrairieScoreProps) => {
               text="View my progress"
               to={ROUTES.PROGRESS}
               align="left"
+              className={classes.viewMyProgress}
             />
           </Grid>
         </Grid>

@@ -30,6 +30,10 @@ const useStyles = makeStyles((theme) =>
     dialogTitle: {
       padding: theme.spacing(4, 4, 2),
     },
+
+    dialogContent: {
+      overflow: "hidden",
+    },
   })
 );
 
@@ -71,7 +75,7 @@ const UpdateDialog: FC<UpdateDialogProps> = ({
         {title}
       </Typography>
 
-      <DialogContent>
+      <DialogContent className={classes.dialogContent}>
         <FormProvider {...methods}>
           <form onSubmit={handleSave}>
             <Grid container spacing={4}>
