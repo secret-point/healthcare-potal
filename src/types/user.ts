@@ -47,11 +47,10 @@ export enum VerificationStatus {
   PENDING = "Pending",
 }
 
-export type TCareTeamMember = {
-  id: string | number;
-  name: string;
-  job: string;
+export interface TCareTeamMember extends User {
+  type: string;
   contact: string;
-};
+  picture?: string;
+}
 
 export interface UpdateProfileFormRequest {}

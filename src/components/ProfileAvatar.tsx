@@ -1,3 +1,5 @@
+import clsx from "clsx";
+import { FC } from "react";
 import { useHistory } from "react-router";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
@@ -33,14 +35,16 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface ProfileAvatarProps extends StyleProps {
+  className?: string;
   user: User;
 }
 
-export default function ProfileAvatar({
-  width = 40,
+const ProfileAvatar: FC<ProfileAvatarProps> = ({
+  className,
   height = 40,
+  width = 40,
   user,
-}: ProfileAvatarProps) {
+}) => {
   const history = useHistory();
   const classes = useStyles({ width, height });
 
@@ -52,7 +56,7 @@ export default function ProfileAvatar({
     <div
       role="button"
       tabIndex={-1}
-      className={classes.avatar}
+      className={clsx(classes.avatar, className)}
       onClick={handleClickAvatar}
     >
       <Typography variant="h3" className={classes.avatarLetter}>
@@ -60,4 +64,6 @@ export default function ProfileAvatar({
       </Typography>
     </div>
   );
-}
+};
+
+export default ProfileAvatar;

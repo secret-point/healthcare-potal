@@ -4,33 +4,12 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
 // import { useFetchCareTeamList } from "../../api";
-import { TCareTeamMember } from "../../types";
 import CareTeamMemberCard from "../../components/CareTeamMemberCard";
 import { TextButton } from "../../components/Button";
 import { useLayoutStyles } from "../../components/useCommonStyles";
 import { useViewport } from "../../hooks/useViewport";
 import EmptyCareTeamMemberCard from "../../components/EmptyCareTeamMemberCard";
-
-const teamMembers: TCareTeamMember[] = [
-  {
-    id: 1,
-    name: "Amy Tran",
-    job: "Care Coordinator",
-    contact: "Text (650)-200-0179",
-  },
-  {
-    id: 2,
-    name: "Dave Ravi",
-    job: "Psychiatrist",
-    contact: "Book an appointment",
-  },
-  {
-    id: 3,
-    name: "Amanda Lee",
-    job: "Primary Care Physician",
-    contact: "(650)-200-0171",
-  },
-];
+import { teamMembers } from "./mock";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -90,7 +69,7 @@ const CareTeam = () => {
               sm={6}
               md={4}
               lg={3}
-              key={teamMember.id}
+              key={teamMember._id}
               className={classes.teamMemberItem}
             >
               <CareTeamMemberCard member={teamMember} />

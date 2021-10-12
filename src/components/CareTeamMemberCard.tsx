@@ -8,6 +8,7 @@ import { makeStyles, createStyles } from "@material-ui/core/styles";
 import { TCareTeamMember } from "../types";
 import { TextButton } from "./Button";
 import { useFontStyles, useLayoutStyles } from "./useCommonStyles";
+import ProfileAvatar from "./ProfileAvatar";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -46,21 +47,25 @@ const CareTeamMemberCard = ({ member }: CareTeamMemberCardProps) => {
   return (
     <Card variant="outlined" className={classes.teamMemberCard}>
       <CardContent className={clsx(layoutClasses.noPadding, layoutClasses.mb1)}>
-        <img
-          width={40}
-          height={40}
-          alt="User Profile"
-          src="https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg"
-          className={clsx(classes.roundImage, layoutClasses.mb2)}
-        />
+        {member.picture ? (
+          <img
+            width={40}
+            height={40}
+            alt="User Profile"
+            src={member.picture}
+            className={clsx(classes.roundImage, layoutClasses.mb2)}
+          />
+        ) : (
+          <ProfileAvatar user={member} className={layoutClasses.mb2} />
+        )}
         <Typography variant="subtitle2" className={layoutClasses.mb05}>
-          {member.job}
+          {member.type}
         </Typography>
         <Typography
           variant="h3"
           className={clsx(fontClasses.fontNormal, layoutClasses.mb1)}
         >
-          {member.name}
+          {[member.firstName, member.lastName].join(" ")}
         </Typography>
       </CardContent>
       <CardActions className={layoutClasses.noPadding}>
