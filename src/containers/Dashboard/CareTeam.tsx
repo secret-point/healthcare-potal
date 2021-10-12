@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) =>
 const CareTeam = () => {
   const classes = useStyles();
   const { isMobile } = useViewport();
-  const layoutClasses = useLayoutStyles()();
+  const layoutClasses = useLayoutStyles();
   const [showCareTeam, setShowCareTeam] = useState(false);
   // const { data: careTeamList = [] } = useFetchCareTeamList();
 

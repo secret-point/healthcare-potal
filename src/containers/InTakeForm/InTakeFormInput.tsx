@@ -46,9 +46,9 @@ const InTakeFormInput: FC<InTakeFormInputProps> = ({
 }) => {
   const { user } = useAuth();
   const classes = useStyles();
-  const fontClasses = useFontStyles()();
-  const colorClasses = useColorStyles()();
-  const layoutClasses = useLayoutStyles()();
+  const fontClasses = useFontStyles();
+  const colorClasses = useColorStyles();
+  const layoutClasses = useLayoutStyles();
 
   const [error, setError] = useState<Nullable<string>>(null);
   const { trigger } = useFormContext();

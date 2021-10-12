@@ -15,8 +15,8 @@ import LatestPrairieScore from "./components/LatestPrairieScore";
 import { mockScoreHistory } from "./mockScores";
 
 const LatestProgress = () => {
-  const fontClasses = useFontStyles()();
-  const layoutClasses = useLayoutStyles()();
+  const fontClasses = useFontStyles();
+  const layoutClasses = useLayoutStyles();
 
   const latestItem = mockScoreHistory[mockScoreHistory.length - 1];
   const previousItem = mockScoreHistory[mockScoreHistory.length - 2];

@@ -29,7 +29,7 @@ interface AllSetupProps {
 
 const AllSetup: React.FC<AllSetupProps> = ({ onSignIn }) => {
   const classes = useStyles();
-  const layoutClasses = useLayoutStyles()();
+  const layoutClasses = useLayoutStyles();
 
   return (
     <Grid container>

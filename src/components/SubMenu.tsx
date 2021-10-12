@@ -29,7 +29,7 @@ const SubMenu: FC<SubMenuProps> = ({
   className,
 }) => {
   const classes = useStyles();
-  const layoutClasses = useLayoutStyles()();
+  const layoutClasses = useLayoutStyles();
 
   return (
     <Box width={1} className={className}>

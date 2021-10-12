@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const NameInputForm = () => {
   const classes = useStyles();
-  const layoutClasses = useLayoutStyles()();
+  const layoutClasses = useLayoutStyles();
 
   const requiredFields = ["firstName", "lastName"];
   const { inputErrors, editedFields } = useInputDetails({

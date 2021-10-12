@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const AddressForm = () => {
   const classes = useStyles();
-  const layoutClasses = useLayoutStyles()();
+  const layoutClasses = useLayoutStyles();
 
   const requiredFields = ["addressLine1", "city", "state", "zipcode"];
   const { inputErrors, editedFields } = useInputDetails({

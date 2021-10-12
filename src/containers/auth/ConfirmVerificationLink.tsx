@@ -17,7 +17,7 @@ import { ChangePasswordCodeForm } from "../../types";
 const ConfirmVerificationLink = () => {
   const history = useHistory();
   const queryParams = useQueryParams();
-  const layoutClasses = useLayoutStyles()();
+  const layoutClasses = useLayoutStyles();
   const { enqueueSnackbar } = useSnackbar();
   const changePasswordCode = useChangePasswordCode();
   const verifyResetPasswordCode = useVerifyResetPasswordCode();

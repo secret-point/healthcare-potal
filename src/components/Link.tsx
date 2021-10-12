@@ -49,7 +49,7 @@ export const ButtonLink: FC<LinkProps> = ({
   text,
 }) => {
   const classes = useStyles();
-  const fontClasses = useFontStyles()();
+  const fontClasses = useFontStyles();
 
   return (
     <RouterLink to={to} className={clsx(classes.link, className)}>

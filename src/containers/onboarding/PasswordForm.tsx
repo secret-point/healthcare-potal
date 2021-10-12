@@ -15,7 +15,7 @@ import { ReactComponent as RedCrossIcon } from "../../icons/RedCrossIcon.svg";
 import { useLayoutStyles } from "../../components/useCommonStyles";
 
 const PasswordForm = () => {
-  const layoutClasses = useLayoutStyles()();
+  const layoutClasses = useLayoutStyles();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 

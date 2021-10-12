@@ -126,7 +126,7 @@ const PROVIDER = {
 
 const CareCoordination = () => {
   const classes = useStyles();
-  const layoutClasses = useLayoutStyles()();
+  const layoutClasses = useLayoutStyles();
   const methods = useForm({
     mode: "onChange",
   });

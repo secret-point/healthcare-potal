@@ -25,7 +25,7 @@ const useStyles = makeStyles(() =>
 export default function ResetPassword() {
   const history = useHistory();
   const classes = useStyles();
-  const layoutClasses = useLayoutStyles()();
+  const layoutClasses = useLayoutStyles();
   const [linkSent, setLinkSent] = useState(false);
 
   const sendResetPasswordLink = useSendResetPasswordLink();

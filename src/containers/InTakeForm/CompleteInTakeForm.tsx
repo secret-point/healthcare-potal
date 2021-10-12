@@ -23,8 +23,8 @@ const useStyles = makeStyles((theme) =>
 
 const CompleteInTakeForm = () => {
   const classes = useStyles();
-  const fontClasses = useFontStyles()();
-  const layoutClasses = useLayoutStyles()();
+  const fontClasses = useFontStyles();
+  const layoutClasses = useLayoutStyles();
   const { isMobile } = useViewport();
 
   return (

@@ -35,7 +35,7 @@ const MenuLink: FC<LinkProps> = ({
   variant = "subtitle2",
 }) => {
   const classes = useStyles();
-  const fontClasses = useFontStyles()();
+  const fontClasses = useFontStyles();
 
   return (
     <Link

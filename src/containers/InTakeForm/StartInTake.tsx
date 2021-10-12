@@ -14,8 +14,8 @@ interface StartInTakeProps {
 }
 
 const StartInTake: FC<StartInTakeProps> = ({ onCancel }) => {
-  const fontClasses = useFontStyles()();
-  const layoutClasses = useLayoutStyles()();
+  const fontClasses = useFontStyles();
+  const layoutClasses = useLayoutStyles();
 
   /* eslint-disable react/jsx-one-expression-per-line */
   return (

@@ -16,8 +16,8 @@ interface InTakeFormGroupInputProps {
 }
 
 const InTakeFormGroupInput: FC<InTakeFormGroupInputProps> = ({ group }) => {
-  const fontClasses = useFontStyles()();
-  const layoutClasses = useLayoutStyles()();
+  const fontClasses = useFontStyles();
+  const layoutClasses = useLayoutStyles();
 
   return (
     <Grid container>

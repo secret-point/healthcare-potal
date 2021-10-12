@@ -12,8 +12,8 @@ import PrairieStatusCardSlices from "./components/PrairieStatusCardSlices";
 import { mockScoreHistory } from "./mockScores";
 
 const ProgressHistory = () => {
-  const fontClasses = useFontStyles()();
-  const layoutClasses = useLayoutStyles()();
+  const fontClasses = useFontStyles();
+  const layoutClasses = useLayoutStyles();
   // const { progressHistory } = useFetchProgressHistory();
   const [active, setActive] = useState(mockScoreHistory.length - 1);
 

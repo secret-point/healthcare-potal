@@ -34,9 +34,9 @@ const LatestPrairieScore: FC<LatestPrairieScoreProps> = ({
   latestItem,
 }) => {
   const classes = useStyles();
-  const fontClasses = useFontStyles()();
-  const colorClasses = useColorStyles()();
-  const layoutClasses = useLayoutStyles()();
+  const fontClasses = useFontStyles();
+  const colorClasses = useColorStyles();
+  const layoutClasses = useLayoutStyles();
   const diffInDays = dayjs().diff(latestItem.date, "day");
 
   return (

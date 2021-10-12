@@ -9,7 +9,7 @@ import { useLayoutStyles } from "../../components/useCommonStyles";
 import { mockScoreHistory } from "../Progress/mockScores";
 
 const ActivityProgress = () => {
-  const layoutClasses = useLayoutStyles()();
+  const layoutClasses = useLayoutStyles();
   // const { data: scoreHistory = [] } = useFetchScoreHistory();
 
   return (

@@ -1,8 +1,8 @@
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import { Theme } from "../theme/types/createPalette";
 
-export const useCardStyles = () =>
-  makeStyles((theme: Theme) =>
+export const useCardStyles = makeStyles(
+  (theme: Theme) =>
     createStyles({
       card: {
         height: "100%",
@@ -13,11 +13,12 @@ export const useCardStyles = () =>
         flexDirection: "column",
         justifyContent: "space-between",
       },
-    })
-  );
+    }),
+  { index: 1 }
+);
 
-export const useFontStyles = () =>
-  makeStyles(() =>
+export const useFontStyles = makeStyles(
+  () =>
     createStyles({
       fontBolder: {
         fontWeight: 700,
@@ -37,11 +38,12 @@ export const useFontStyles = () =>
       lineHeight15: {
         lineHeight: 1.5,
       },
-    })
-  );
+    }),
+  { index: 1 }
+);
 
-export const useColorStyles = () =>
-  makeStyles((theme: Theme) =>
+export const useColorStyles = makeStyles(
+  (theme: Theme) =>
     createStyles({
       white: {
         color: "#ffffff",
@@ -100,11 +102,12 @@ export const useColorStyles = () =>
       backgroundRed: {
         color: theme.palette.backgroundRed.main,
       },
-    })
-  );
+    }),
+  { index: 1 }
+);
 
-export const useBackgroundColorStyles = () =>
-  makeStyles((theme: Theme) =>
+export const useBackgroundColorStyles = makeStyles(
+  (theme: Theme) =>
     createStyles({
       white: {
         backgroundColor: "#ffffff",
@@ -166,11 +169,12 @@ export const useBackgroundColorStyles = () =>
       backgroundYellow: {
         backgroundColor: theme.palette.backgroundYellow.main,
       },
-    })
-  );
+    }),
+  { index: 1 }
+);
 
-export const useLayoutStyles = () =>
-  makeStyles((theme: Theme) =>
+export const useLayoutStyles = makeStyles(
+  (theme: Theme) =>
     createStyles({
       mb05: {
         marginBottom: theme.spacing(0.5),
@@ -296,5 +300,6 @@ export const useLayoutStyles = () =>
         alignItems: "center",
         justifyContent: "center",
       },
-    })
-  );
+    }),
+  { index: 1 }
+);

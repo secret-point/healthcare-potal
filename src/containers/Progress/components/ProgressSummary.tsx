@@ -27,8 +27,8 @@ interface ProgressSummaryProps {
 
 const ProgressSummary: FC<ProgressSummaryProps> = ({ history }) => {
   const classes = useStyles();
-  const fontClasses = useFontStyles()();
-  const layoutClasses = useLayoutStyles()();
+  const fontClasses = useFontStyles();
+  const layoutClasses = useLayoutStyles();
   const progressSummary = new ScoreHistorySummary(history).getSummary();
 
   return (

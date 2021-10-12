@@ -42,9 +42,9 @@ const PrairieStatusCard: FC<PrairieStatusCardProps> = ({
   onClickPrevious,
 }) => {
   const classes = useStyles();
-  const cardClasses = useCardStyles()();
-  const colorClasses = useColorStyles()();
-  const layoutClasses = useLayoutStyles()();
+  const cardClasses = useCardStyles();
+  const colorClasses = useColorStyles();
+  const layoutClasses = useLayoutStyles();
   const scoreDifference = currentScore.score - (previousScore?.score || 0);
 
   return (

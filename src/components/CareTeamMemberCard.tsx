@@ -39,8 +39,8 @@ interface CareTeamMemberCardProps {
 
 const CareTeamMemberCard = ({ member }: CareTeamMemberCardProps) => {
   const classes = useStyles();
-  const layoutClasses = useLayoutStyles()();
-  const fontClasses = useFontStyles()();
+  const layoutClasses = useLayoutStyles();
+  const fontClasses = useFontStyles();
 
   return (
     <Card variant="outlined" className={classes.teamMemberCard}>

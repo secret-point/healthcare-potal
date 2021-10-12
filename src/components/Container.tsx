@@ -74,7 +74,7 @@ const Container: React.FC<ContainerProps> = ({ children, className }) => {
   const classes = useStyles();
   const history = useHistory();
   const { isMobile } = useViewport();
-  const layoutClasses = useLayoutStyles()();
+  const layoutClasses = useLayoutStyles();
   const { user, fullName, logOut } = useAuth();
   const [showMenu, setShowMenu] = useState(false);
 

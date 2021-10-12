@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const ContactForm = () => {
   const classes = useStyles();
-  const layoutClasses = useLayoutStyles()();
+  const layoutClasses = useLayoutStyles();
 
   const requiredFields = ["email", "phoneNumber"];
   const { inputErrors, editedFields } = useInputDetails({

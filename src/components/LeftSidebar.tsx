@@ -66,7 +66,7 @@ const LeftSidebar: FC<LeftSidebarProps> = ({
   const classes = useStyles();
   const { pathname: selectedPath } = useLocation();
   const { isMobile } = useViewport();
-  const colorClasses = useColorStyles()();
+  const colorClasses = useColorStyles();
 
   const subMenus = [
     {

@@ -94,7 +94,7 @@ const Button: FC<ButtonProps> = ({
   ...props
 }) => {
   const classes = useStyles();
-  const layoutClasses = useLayoutStyles()();
+  const layoutClasses = useLayoutStyles();
 
   return (
     <MuiButton

@@ -20,9 +20,9 @@ interface TodoItemProps {
 }
 
 const TodoItem: FC<TodoItemProps> = ({ item, onClick }) => {
-  const cardClasses = useCardStyles()();
-  const fontClasses = useFontStyles()();
-  const layoutClasses = useLayoutStyles()();
+  const cardClasses = useCardStyles();
+  const fontClasses = useFontStyles();
+  const layoutClasses = useLayoutStyles();
 
   const buttonText = (() => {
     switch (item.todoItemType) {

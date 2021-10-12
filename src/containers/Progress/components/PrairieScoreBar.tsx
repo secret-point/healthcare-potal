@@ -48,8 +48,8 @@ interface PrairieScoreBarProps {
 
 const PrairieScoreBar: FC<PrairieScoreBarProps> = ({ score }) => {
   const classes = useStyles({ percent: (score / MAX_PRAIRIE_SCORE) * 100 });
-  const fontClasses = useFontStyles()();
-  const backgroundClasses = useBackgroundColorStyles()();
+  const fontClasses = useFontStyles();
+  const backgroundClasses = useBackgroundColorStyles();
 
   return (
     <div>

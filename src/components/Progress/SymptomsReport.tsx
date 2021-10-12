@@ -14,9 +14,9 @@ import {
 } from "../useCommonStyles";
 
 const SymptomsReport = () => {
-  const cardClasses = useCardStyles()();
-  const colorClasses = useColorStyles()();
-  const layoutClasses = useLayoutStyles()();
+  const cardClasses = useCardStyles();
+  const colorClasses = useColorStyles();
+  const layoutClasses = useLayoutStyles();
 
   return (
     <Card variant="outlined" className={cardClasses.card}>

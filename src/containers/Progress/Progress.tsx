@@ -7,7 +7,7 @@ import LatestProgress from "./LatestProgress";
 import ProgressHistory from "./ProgressHistory";
 
 const Progress = () => {
-  const layoutClasses = useLayoutStyles()();
+  const layoutClasses = useLayoutStyles();
 
   return (
     <Container>

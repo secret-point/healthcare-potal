@@ -57,7 +57,7 @@ const Carousel: React.FC<CarouselProps> = ({
   containerClass,
 }) => {
   const classes = useStyles();
-  const layoutClasses = useLayoutStyles()();
+  const layoutClasses = useLayoutStyles();
   const { deviceType } = useViewport();
 
   return (

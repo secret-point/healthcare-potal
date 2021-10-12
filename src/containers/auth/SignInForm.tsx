@@ -31,7 +31,7 @@ interface SignInFormProps {
 
 const SignInForm = ({ onSubmit }: SignInFormProps) => {
   const classes = useStyles();
-  const layoutClasses = useLayoutStyles()();
+  const layoutClasses = useLayoutStyles();
   const [showPassword, setShowPassword] = useState(false);
 
   const requiredFields = ["email", "password"];

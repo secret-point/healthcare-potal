@@ -32,7 +32,7 @@ interface InitialStepProps {
 
 const InitialStep = ({ onSkipVerification, onUploadID }: InitialStepProps) => {
   const classes = useStyles();
-  const layoutClasses = useLayoutStyles()();
+  const layoutClasses = useLayoutStyles();
 
   return (
     <Grid container>
