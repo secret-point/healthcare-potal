@@ -107,6 +107,7 @@ const Button: FC<ButtonProps> = ({
       )}
       disableRipple
       onClick={onClick}
+      color={color}
       {...props}
     >
       <Typography variant="h5" className={clsx(classes.text, textClassName)}>
