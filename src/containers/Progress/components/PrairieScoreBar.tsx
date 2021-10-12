@@ -8,27 +8,29 @@ import {
   useFontStyles,
   useBackgroundColorStyles,
 } from "../../../components/useCommonStyles";
+import { Theme } from "../../../theme/types/createPalette";
 
 type StyleProps = {
   percent: number;
 };
 
-const useStyles = makeStyles((theme) =>
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     progressBar: {
       width: "100%",
       height: theme.spacing(1),
       borderRadius: theme.spacing(1),
       position: "relative",
+      background: theme.palette.distinctiveGray.main,
     },
     gradientProgress: {
+      position: "absolute",
+      top: 0,
       width: ({ percent }: StyleProps) => `${percent}%`,
       height: theme.spacing(1),
       borderRadius: theme.spacing(1),
-      background: "linear-gradient(45deg, #6D9147 0%, #EB5757 100%)",
-      position: "absolute",
-      left: 0,
-      top: 0,
+      background: ({ percent }: StyleProps) =>
+        `linear-gradient(45deg, #6D9147 0%, #EB5757 ${(100 * 100) / percent}%)`,
     },
     scoreLabel: {
       display: "inline-flex",

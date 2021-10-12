@@ -13,15 +13,25 @@ import { TScoreHistory } from "../../../types/general";
 import {
   useCardStyles,
   useFontStyles,
-  useColorStyles,
   useLayoutStyles,
 } from "../../../components/useCommonStyles";
+import { Theme } from "../../../theme/types/createPalette";
 
-const useStyles = makeStyles(() =>
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     responsiveLineWrapper: {
       height: 300,
       maxWidth: 1200,
+
+      "& circle": {
+        r: 4,
+        fill: theme.palette.secondaryGreen1.main,
+      },
+
+      '& [fill="#fc8d62"]': {
+        r: 6,
+        fill: theme.palette.primaryNavy.main,
+      },
     },
   })
 );
@@ -38,7 +48,6 @@ const PrairieScoreHistory = ({
   const classes = useStyles();
   const cardClasses = useCardStyles();
   const fontClasses = useFontStyles();
-  const colorClasses = useColorStyles();
   const layoutClasses = useLayoutStyles();
 
   const data = useMemo(() => {
@@ -75,12 +84,6 @@ const PrairieScoreHistory = ({
         >
           PrairieScore History
         </Typography>
-        <Typography
-          variant="subtitle2"
-          className={clsx(layoutClasses.mb1, colorClasses.secondaryNavy2)}
-        >
-          Select a dot on the graph to view your progress from that date
-        </Typography>
       </Grid>
 
       <Grid
@@ -93,6 +96,7 @@ const PrairieScoreHistory = ({
         <ResponsiveLine
           enableSlices="x"
           enableArea
+          isInteractive={false}
           curve="natural"
           colors={{ scheme: "set2" }}
           margin={{ top: 4, bottom: 30, left: 30 }}
