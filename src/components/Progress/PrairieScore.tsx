@@ -28,7 +28,7 @@ const useStyles = makeStyles(() =>
       maxWidth: 300,
     },
     viewMyProgress: {
-      alignSelf: "flex-end",
+      alignSelf: "flex-end !important",
     },
   })
 );

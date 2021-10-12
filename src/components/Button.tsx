@@ -59,12 +59,16 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: theme.spacing(0),
     },
 
-    TextButton: {
+    textButton: {
       minWidth: 40,
       padding: theme.spacing(0),
 
       "& .MuiButton-label": {
         textTransform: "none",
+      },
+
+      "&:hover .MuiTypography-root": {
+        color: theme.palette.secondaryGreen3.main,
       },
     },
 
@@ -134,7 +138,7 @@ export const TextButton: FC<TextButtonProps> = ({
       variant="text"
       onClick={onClick}
       disableRipple
-      className={clsx(classes.button, classes.TextButton, className)}
+      className={clsx(classes.button, classes.textButton, className)}
       {...props}
     >
       <Typography

@@ -42,9 +42,14 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     logOutButton: {
       width: 120,
+      paddingLeft: 0,
       "& .MuiTypography-root": {
         textTransform: "none",
+        letterSpacing: "0px",
         color: theme.palette.accentRed.main,
+      },
+      "&:hover .MuiTypography-root": {
+        color: theme.palette.accentRed2.main,
       },
     },
   })

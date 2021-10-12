@@ -76,6 +76,9 @@ export const theme = createMuiTheme({
     secondaryGreen2: {
       main: "#BBDC9C",
     },
+    secondaryGreen3: {
+      main: "#278C79",
+    },
     secondaryMint1: {
       main: "#278c79",
     },
@@ -99,6 +102,9 @@ export const theme = createMuiTheme({
     },
     accentRed1: {
       main: "#E5652E",
+    },
+    accentRed2: {
+      main: "#C93535",
     },
     accentYellow: {
       main: "#FFE68F",

@@ -6,6 +6,7 @@ declare module "@material-ui/core/styles/createPalette" {
     primaryGreen: PaletteColorOptions;
     secondaryGreen1: PaletteColorOptions;
     secondaryGreen2: PaletteColorOptions;
+    secondaryGreen3: PaletteColorOptions;
     secondaryMint1: PaletteColorOptions;
     secondaryMint2: PaletteColorOptions;
     secondaryNavy1: PaletteColorOptions;
@@ -14,6 +15,7 @@ declare module "@material-ui/core/styles/createPalette" {
     backgroundGray: PaletteColorOptions;
     accentRed: PaletteColorOptions;
     accentRed1: PaletteColorOptions;
+    accentRed2: PaletteColorOptions;
     accentYellow: PaletteColorOptions;
     yellow: PaletteColorOptions;
     distinctiveGray: PaletteColorOptions;

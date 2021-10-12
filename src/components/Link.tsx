@@ -12,9 +12,14 @@ const useStyles = makeStyles((theme: Theme) =>
     link: {
       textDecoration: "none",
       alignSelf: "center",
-    },
-    linkTypography: {
-      color: theme.palette.secondaryGreen1.main,
+
+      "& .MuiTypography-root": {
+        color: theme.palette.secondaryGreen1.main,
+      },
+
+      "&:hover .MuiTypography-root": {
+        color: theme.palette.secondaryGreen3.main,
+      },
     },
   })
 );
@@ -31,11 +36,7 @@ const Link = ({ align, className, to, text }: LinkProps) => {
 
   return (
     <RouterLink to={to} className={clsx(classes.link, className)}>
-      <Typography
-        align={align}
-        variant="subtitle1"
-        className={classes.linkTypography}
-      >
+      <Typography align={align} variant="subtitle1">
         {text}
       </Typography>
     </RouterLink>
@@ -56,7 +57,7 @@ export const ButtonLink: FC<LinkProps> = ({
       <Typography
         align={align}
         variant="subtitle1"
-        className={clsx(classes.linkTypography, fontClasses.fontBolder)}
+        className={fontClasses.fontBolder}
       >
         {text}
       </Typography>
