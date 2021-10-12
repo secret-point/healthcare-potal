@@ -18,6 +18,9 @@ const useStyles = makeStyles((theme) =>
     card: {
       borderRadius: theme.spacing(2),
     },
+    title: {
+      lineHeight: 1.5,
+    },
   })
 );
 
@@ -39,7 +42,10 @@ const ProgressSummary: FC<ProgressSummaryProps> = ({ history }) => {
       <CardContent className={clsx(layoutClasses.padding3, layoutClasses.mb1)}>
         <Grid container>
           <Grid item xs={12} className={layoutClasses.mb2}>
-            <Typography variant="h3" className={fontClasses.fontNormal}>
+            <Typography
+              variant="h3"
+              className={clsx(fontClasses.fontNormal, classes.title)}
+            >
               {progressSummary.title}
             </Typography>
           </Grid>

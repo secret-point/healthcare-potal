@@ -9,6 +9,7 @@ import {
   useBackgroundColorStyles,
 } from "../../../components/useCommonStyles";
 import { Theme } from "../../../theme/types/createPalette";
+import { useViewport } from "../../../hooks/useViewport";
 
 type StyleProps = {
   percent: number;
@@ -49,6 +50,7 @@ interface PrairieScoreBarProps {
 }
 
 const PrairieScoreBar: FC<PrairieScoreBarProps> = ({ score }) => {
+  const { isMobile } = useViewport();
   const classes = useStyles({ percent: (score / MAX_PRAIRIE_SCORE) * 100 });
   const fontClasses = useFontStyles();
   const backgroundClasses = useBackgroundColorStyles();
@@ -60,18 +62,20 @@ const PrairieScoreBar: FC<PrairieScoreBarProps> = ({ score }) => {
       >
         <div className={classes.gradientProgress} />
       </div>
-      <div className={classes.labelsContainer}>
-        {prairieScoreDefs.map((scoreDef) => (
-          <div key={scoreDef.type} className={classes.scoreLabel}>
-            <Typography variant="caption" className={fontClasses.fontBolder}>
-              {scoreDef.type}
-            </Typography>
-            <Typography variant="caption">
-              {`(${scoreDef.range.min}~${scoreDef.range.max})`}
-            </Typography>
-          </div>
-        ))}
-      </div>
+      {!isMobile && (
+        <div className={classes.labelsContainer}>
+          {prairieScoreDefs.map((scoreDef) => (
+            <div key={scoreDef.type} className={classes.scoreLabel}>
+              <Typography variant="caption" className={fontClasses.fontBolder}>
+                {scoreDef.type}
+              </Typography>
+              <Typography variant="caption">
+                {`(${scoreDef.range.min}~${scoreDef.range.max})`}
+              </Typography>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
