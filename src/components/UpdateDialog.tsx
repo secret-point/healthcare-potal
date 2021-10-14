@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) =>
       },
 
       "& .MuiDialogContent-root": {
-        padding: theme.spacing(3, 4, 0),
+        padding: theme.spacing(4, 4, 0),
       },
 
       "& .MuiDialogActions-root": {

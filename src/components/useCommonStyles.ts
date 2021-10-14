@@ -7,7 +7,7 @@ export const useCardStyles = makeStyles(
       card: {
         height: "100%",
         padding: theme.spacing(3),
-        borderRadius: theme.spacing(1),
+        borderRadius: theme.spacing(1.5),
         borderColor: theme.palette.secondaryGreen1.main,
         display: "flex",
         flexDirection: "column",

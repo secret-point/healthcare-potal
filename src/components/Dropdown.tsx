@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme: Theme) =>
         alignItems: "center",
       },
       "&.MuiFormLabel-root.Mui-focused": {
-        color: theme.palette.secondaryNavy2.main,
+        color: theme.palette.primaryNavy.main,
       },
     },
     select: {
@@ -38,10 +38,17 @@ const useStyles = makeStyles((theme: Theme) =>
       "& .MuiSelect-select.MuiSelect-select": {
         display: "flex",
         alignItems: "center",
-        fontSize: 18,
+        fontSize: 16,
         padding: theme.spacing(2),
-        color: theme.palette.secondaryNavy2.main,
+        color: theme.palette.primaryNavy.main,
       },
+      "& fieldset": {
+        borderRadius: theme.spacing(1),
+      },
+    },
+    menuItem: {
+      fontSize: 16,
+      color: theme.palette.primaryNavy.main,
     },
   })
 );
@@ -179,12 +186,16 @@ const Dropdown: FC<DropdownProps> = ({
               className={classes.select}
             >
               {placeholder && (
-                <MenuItem value="" disabled>
+                <MenuItem value="" disabled className={classes.menuItem}>
                   {placeholder}
                 </MenuItem>
               )}
               {options.map((option, i) => (
-                <MenuItem key={i} value={option.code}>
+                <MenuItem
+                  key={i}
+                  value={option.code}
+                  className={classes.menuItem}
+                >
                   {option.display}
                 </MenuItem>
               ))}
