@@ -45,7 +45,7 @@ export const useRegister = () => {
   const apiFetch = useApiFetch();
 
   return async (form: RegisterForm): Promise<AuthorizedUser> => {
-    const { data } = await apiFetch("/register", {
+    const { data } = await apiFetch("/mp/register", {
       method: "POST",
       data: form,
     });

@@ -27,7 +27,7 @@ const ContactForm = () => {
   const classes = useStyles();
   const layoutClasses = useLayoutStyles();
 
-  const requiredFields = ["email", "phoneNumber"];
+  const requiredFields = ["email", "phone"];
   const { inputErrors, editedFields } = useInputDetails({
     fields: requiredFields,
   });
@@ -52,7 +52,7 @@ const ContactForm = () => {
 
       <Grid item xs={12} className={layoutClasses.mt3}>
         <TextInput
-          name="phoneNumber"
+          name="phone"
           label="Phone Number"
           variant="outlined"
           placeholder="Phone Number"
@@ -61,7 +61,7 @@ const ContactForm = () => {
             pattern: {
               value: phoneNumberPattern,
               message:
-                "Please enter your phone number in the correct format (numbers only).",
+                "Please enter your phone number in the correct format (xxx-xxx-xxxx).",
             },
           }}
         />
