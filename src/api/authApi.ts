@@ -12,11 +12,11 @@ export const useFetchCurrentUser = () => {
 
   return async () => {
     const {
-      data: { user },
-    } = await apiFetch("/cp/current", {
+      data: { member },
+    } = await apiFetch("/mp/current", {
       method: "GET",
     });
-    return user;
+    return member;
   };
 };
 
@@ -30,7 +30,7 @@ export const useSignIn = () => {
     email: string;
     password: string;
   }): Promise<AuthorizedUser> => {
-    const { data } = await apiFetch("/cp/login", {
+    const { data } = await apiFetch("/mp/login", {
       method: "POST",
       data: { email, password },
     });
