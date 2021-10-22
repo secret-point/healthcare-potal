@@ -13,6 +13,7 @@ import { useLayoutStyles } from "../../components/useCommonStyles";
 import { ResetPasswordLinkForm } from "../../types";
 
 import ResetPasswordForm from "./ResetPasswordForm";
+import { ROUTES } from "../../app/types";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -37,7 +38,10 @@ export default function ResetPassword() {
   const handleResetPassword = async (e: FormEvent) => {
     e.preventDefault();
     const resetPasswordForm = methods.getValues() as ResetPasswordLinkForm;
-    await sendResetPasswordLink(resetPasswordForm as ResetPasswordLinkForm);
+    await sendResetPasswordLink({
+      ...resetPasswordForm,
+      verificationUrl: window.location.origin + ROUTES.VERIFICATION_LINK,
+    });
     setLinkSent(true);
   };
 

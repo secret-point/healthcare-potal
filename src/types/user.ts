@@ -25,6 +25,7 @@ export interface RegisterForm {
 
 export interface ResetPasswordLinkForm {
   email: string;
+  verificationUrl: string;
 }
 
 export interface VerifyResetPasswordCodeForm {

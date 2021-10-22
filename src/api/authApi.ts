@@ -57,7 +57,7 @@ export const useSendResetPasswordLink = () => {
   const apiFetch = useApiFetch();
 
   return async (form: ResetPasswordLinkForm): Promise<unknown> => {
-    const { data } = await apiFetch("/send-reset-password-link", {
+    const { data } = await apiFetch("/mp/send-reset-password-link", {
       method: "POST",
       data: form,
     });
@@ -69,7 +69,7 @@ export const useVerifyResetPasswordCode = () => {
   const apiFetch = useApiFetch();
 
   return async (form: VerifyResetPasswordCodeForm): Promise<unknown> => {
-    const { data } = await apiFetch("/verify-reset-password-code", {
+    const { data } = await apiFetch("/mp/verify-reset-password-code", {
       method: "POST",
       data: form,
     });
@@ -81,7 +81,7 @@ export const useChangePasswordCode = () => {
   const apiFetch = useApiFetch();
 
   return async (form: ChangePasswordCodeForm): Promise<unknown> => {
-    const { data } = await apiFetch("/verify-reset-password-code", {
+    const { data } = await apiFetch("/mp/reset-password", {
       method: "POST",
       data: form,
     });
