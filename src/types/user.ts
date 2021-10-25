@@ -15,7 +15,7 @@ export interface RegisterForm {
   email: string;
   firstName: string;
   lastName: string;
-  phoneNumber: string;
+  phone: string;
   addressLine1: string;
   addressLine2: string;
   city: string;

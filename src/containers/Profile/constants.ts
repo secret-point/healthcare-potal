@@ -45,7 +45,7 @@ export const UPDATE_PROFILE_DIALOGS = {
         fields: [
           {
             label: "Phone Number",
-            path: "phoneNumber",
+            path: "phone",
             isTopLabel: true,
             shrink: true,
             xs: 12,

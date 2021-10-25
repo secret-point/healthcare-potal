@@ -24,7 +24,7 @@ const ContactInformation: FC<ContactInformationProps> = ({ onClickEdit }) => {
     },
     {
       label: "Phone Number",
-      path: "phoneNumber",
+      path: "phone",
       render: () => (
         <TextButton onClick={() => onClickEdit(EditableField.PHONE_NUMBER)} />
       ),
