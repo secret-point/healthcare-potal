@@ -9,7 +9,7 @@ import { TodoItemType, TTodoItem } from "../../types";
 import Container from "../../components/Container";
 import VerifyIDDialog from "../../components/VerifyID/VerifyIDDialog";
 
-import CareTeam from "./CareTeam";
+import CareTeam from "./CareProviders";
 import TodoList from "./TodoList";
 import ActivityProgress from "./ActivityProgress";
 

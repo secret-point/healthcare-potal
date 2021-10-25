@@ -5,10 +5,11 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
-import { TCareTeamMember } from "../types";
+import { TCareMember } from "../types";
 import { TextButton } from "./Button";
 import { useFontStyles, useLayoutStyles } from "./useCommonStyles";
 import ProfileAvatar from "./ProfileAvatar";
+import { formatUserType } from "../utils/helper";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -36,10 +37,10 @@ const useStyles = makeStyles((theme) =>
 );
 
 interface CareTeamMemberCardProps {
-  member: TCareTeamMember;
+  member: TCareMember;
 }
 
-const CareTeamMemberCard = ({ member }: CareTeamMemberCardProps) => {
+const CareProviderCard = ({ member }: CareTeamMemberCardProps) => {
   const classes = useStyles();
   const layoutClasses = useLayoutStyles();
   const fontClasses = useFontStyles();
@@ -47,19 +48,19 @@ const CareTeamMemberCard = ({ member }: CareTeamMemberCardProps) => {
   return (
     <Card variant="outlined" className={classes.teamMemberCard}>
       <CardContent className={clsx(layoutClasses.noPadding, layoutClasses.mb1)}>
-        {member.picture ? (
+        {member.profilePic ? (
           <img
             width={40}
             height={40}
             alt="User Profile"
-            src={member.picture}
+            src={member.profilePic}
             className={clsx(classes.roundImage, layoutClasses.mb2)}
           />
         ) : (
-          <ProfileAvatar user={member} className={layoutClasses.mb2} />
+          <ProfileAvatar profile={member} className={layoutClasses.mb2} />
         )}
         <Typography variant="subtitle2" className={layoutClasses.mb05}>
-          {member.type}
+          {formatUserType(member.userType)}
         </Typography>
         <Typography
           variant="h3"
@@ -69,10 +70,13 @@ const CareTeamMemberCard = ({ member }: CareTeamMemberCardProps) => {
         </Typography>
       </CardContent>
       <CardActions className={layoutClasses.noPadding}>
-        <TextButton text={member.contact} className={classes.textButton} />
+        <TextButton
+          text={member.primaryContact || member.secondaryContact}
+          className={classes.textButton}
+        />
       </CardActions>
     </Card>
   );
 };
 
-export default CareTeamMemberCard;
+export default CareProviderCard;

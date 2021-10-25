@@ -3,13 +3,12 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
-// import { useFetchCareTeamList } from "../../api";
-import CareTeamMemberCard from "../../components/CareTeamMemberCard";
+import { useFetchCareProviders } from "../../api";
+import CareProviderCard from "../../components/CareProviderCard";
 import { TextButton } from "../../components/Button";
 import { useLayoutStyles } from "../../components/useCommonStyles";
 import { useViewport } from "../../hooks/useViewport";
 import EmptyCareTeamMemberCard from "../../components/EmptyCareTeamMemberCard";
-import { teamMembers } from "./mock";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -36,7 +35,7 @@ const CareTeam = () => {
   const { isMobile } = useViewport();
   const layoutClasses = useLayoutStyles();
   const [showCareTeam, setShowCareTeam] = useState(false);
-  // const { data: careTeamList = [] } = useFetchCareTeamList();
+  const { data: careProviders = [] } = useFetchCareProviders();
 
   const handleToggleShowCareTeam = () => {
     setShowCareTeam(!showCareTeam);
@@ -62,17 +61,17 @@ const CareTeam = () => {
 
       {(!isMobile || showCareTeam) && (
         <Grid container spacing={3} className={classes.teamMemberList}>
-          {teamMembers.map((teamMember) => (
+          {careProviders.map((careProvider) => (
             <Grid
               item
               xs={12}
               sm={6}
               md={4}
               lg={3}
-              key={teamMember._id}
+              key={careProvider._id}
               className={classes.teamMemberItem}
             >
-              <CareTeamMemberCard member={teamMember} />
+              <CareProviderCard member={careProvider} />
             </Grid>
           ))}
           <Grid

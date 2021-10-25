@@ -3,7 +3,7 @@ import { useMutation, useQuery } from "react-query";
 import { QUERY_KEYS } from "./constants";
 import { useApiFetch } from "./useApiFetch";
 import {
-  TCareTeamMember,
+  TCareMember,
   TCheckInFormRequest,
   TInTakeFormRequest,
   TFeedbackRequest,
@@ -29,13 +29,13 @@ export const useGetMemberTodos = () => {
   );
 };
 
-export const useFetchCareTeamList = () => {
+export const useFetchCareProviders = () => {
   const apiFetch = useApiFetch();
 
   return useQuery(
     [QUERY_KEYS.FETCH_CARE_TEAM_LIST],
-    async (): Promise<TCareTeamMember[]> => {
-      const { data } = await apiFetch("/mp/care-team");
+    async (): Promise<TCareMember[]> => {
+      const { data } = await apiFetch("/mp/care-providers");
       return data;
     }
   );
@@ -75,7 +75,7 @@ export const useFetchProgressHistory = () => {
 
   return useQuery(
     [QUERY_KEYS.FETCH_SCORE_PROGRESS_HISTORY],
-    async (): Promise<TCareTeamMember[]> => {
+    async (): Promise<TCareMember[]> => {
       const { data } = await apiFetch(`/mp/progress`);
       return data;
     }

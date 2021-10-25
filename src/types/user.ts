@@ -1,7 +1,9 @@
 export interface User {
   _id: string;
+  email: string;
   memberID: string;
   firstName: string;
+  middleName?: string;
   lastName: string;
 }
 
@@ -48,10 +50,14 @@ export enum VerificationStatus {
   PENDING = "Pending",
 }
 
-export interface TCareTeamMember extends User {
-  type: string;
-  contact: string;
-  picture?: string;
+export interface TCareMember
+  extends Pick<User, "_id" | "firstName" | "lastName"> {
+  profilePic: string;
+  primaryContact: string;
+  secondaryContact?: string;
+  since?: string;
+  status: string;
+  userType: "cc" | "psych" | "Care Partner";
 }
 
 export interface UpdateProfileFormRequest {}

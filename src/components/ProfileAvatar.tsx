@@ -5,7 +5,6 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
 import { Theme } from "../theme/types/createPalette";
-import { User } from "../types/user";
 import { getCapitalizedFirstLetters } from "../utils/string";
 import { ROUTES } from "../app/types";
 
@@ -36,14 +35,14 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface ProfileAvatarProps extends StyleProps {
   className?: string;
-  user: User;
+  profile: { firstName: string; lastName: string };
 }
 
 const ProfileAvatar: FC<ProfileAvatarProps> = ({
   className,
   height = 40,
   width = 40,
-  user,
+  profile: { firstName, lastName },
 }) => {
   const history = useHistory();
   const classes = useStyles({ width, height });
@@ -60,7 +59,7 @@ const ProfileAvatar: FC<ProfileAvatarProps> = ({
       onClick={handleClickAvatar}
     >
       <Typography variant="h3" className={classes.avatarLetter}>
-        {getCapitalizedFirstLetters([user.firstName, user.lastName]).join("")}
+        {getCapitalizedFirstLetters([firstName, lastName]).join("")}
       </Typography>
     </div>
   );
