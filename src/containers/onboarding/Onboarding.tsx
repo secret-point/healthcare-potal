@@ -72,7 +72,7 @@ export default function Onboarding() {
         setCurrentStep(ONBOARDING.PASSWORD);
         break;
       default:
-        handleRegister(convertToRegisterForm(form));
+        handleRegister(convertToRegisterForm(newForm));
         break;
     }
   };
