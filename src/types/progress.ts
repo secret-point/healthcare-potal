@@ -34,8 +34,9 @@ export type TProgress = TProgressRequest & {
   totalGAD: number;
   total: number;
   updatedAt: string;
+  // TODO: move this onto the schema
   severity: SeverityTypes;
-  symptoms: string[];
+  // symptoms: string[];
 };
 
 export type TCheckInFormRequest = any;

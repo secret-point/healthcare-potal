@@ -10,6 +10,7 @@ import { useLayoutStyles } from "../../components/useCommonStyles";
 const ActivityProgress = () => {
   const layoutClasses = useLayoutStyles();
   const { data: progressList = [] } = useFetchProgressList();
+  const lastProgress = progressList[progressList.length - 1];
 
   return (
     <>
@@ -23,7 +24,7 @@ const ActivityProgress = () => {
           </Grid>
         )}
         <Grid item xs={12} sm={6} lg={3}>
-          <SurveyProgress />
+          {lastProgress && <SurveyProgress lastProgress={lastProgress} />}
         </Grid>
         <Grid item xs={12} sm={6} lg={3}>
           <SymptomsReport />

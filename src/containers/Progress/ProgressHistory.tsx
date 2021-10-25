@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 
@@ -15,6 +15,10 @@ const ProgressHistory = () => {
   const layoutClasses = useLayoutStyles();
   const { data: progressList = [] } = useFetchProgressList();
   const [active, setActive] = useState(progressList.length - 1);
+
+  useEffect(() => {
+    setActive(progressList.length - 1);
+  }, [progressList]);
 
   return (
     <Grid container>

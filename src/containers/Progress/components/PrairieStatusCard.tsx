@@ -45,6 +45,11 @@ const PrairieStatusCard: FC<PrairieStatusCardProps> = ({
   const cardClasses = useCardStyles();
   const colorClasses = useColorStyles();
   const layoutClasses = useLayoutStyles();
+
+  if (!currentScore) {
+    return null;
+  }
+
   const scoreDifference = currentScore.total - (previousScore?.total || 0);
 
   return (
@@ -86,7 +91,7 @@ const PrairieStatusCard: FC<PrairieStatusCardProps> = ({
           <Grid item xs={12} className={layoutClasses.mb2}>
             <Typography variant="subtitle2">Symptoms</Typography>
             <Typography variant="subtitle1">
-              {currentScore.symptoms.join(", ") || "None reported"}
+              {currentScore.sideEffect || "None reported"}
             </Typography>
           </Grid>
         </Grid>
