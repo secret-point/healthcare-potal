@@ -107,15 +107,6 @@ export enum SeverityTypes {
   REMISSION = "Remission",
 }
 
-export type TScoreItem = {
-  score: number;
-  date: Date;
-  severity: SeverityTypes;
-  symptoms: string[];
-};
-
-export type TScoreHistory = TScoreItem[];
-
 export type TProgressSummary = {
   title: string;
   summary: string;

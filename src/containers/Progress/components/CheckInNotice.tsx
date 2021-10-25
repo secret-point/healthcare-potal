@@ -10,7 +10,7 @@ import { makeStyles, createStyles } from "@material-ui/core/styles";
 import { ButtonLink } from "../../../components/Link";
 import { useBackgroundColorStyles } from "../../../components/useCommonStyles";
 import { ROUTES } from "../../../app/types";
-import { TScoreItem } from "../../../types";
+import { TProgress } from "../../../types";
 import { Theme } from "../../../theme/types/createPalette";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -26,14 +26,14 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface CheckInNoticeProps {
-  latestItem: TScoreItem;
+  latestItem: TProgress;
 }
 
 const CheckInNotice: FC<CheckInNoticeProps> = ({ latestItem }) => {
   const classes = useStyles();
   const backgroundClasses = useBackgroundColorStyles();
 
-  const diffInDays = dayjs().diff(latestItem.date, "day");
+  const diffInDays = dayjs().diff(latestItem.updatedAt, "day");
 
   return (
     <Card className={classes.card}>

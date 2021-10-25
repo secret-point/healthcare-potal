@@ -2,20 +2,19 @@ import { useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 
-// import { useFetchProgressHistory } from "../../api";
+import { useFetchProgressList } from "../../api/memberApi";
 import {
   useFontStyles,
   useLayoutStyles,
 } from "../../components/useCommonStyles";
 import PrairieScoreHistory from "./components/PrairieScoreHistory";
 import PrairieStatusCardSlices from "./components/PrairieStatusCardSlices";
-import { mockScoreHistory } from "./mockScores";
 
 const ProgressHistory = () => {
   const fontClasses = useFontStyles();
   const layoutClasses = useLayoutStyles();
-  // const { progressHistory } = useFetchProgressHistory();
-  const [active, setActive] = useState(mockScoreHistory.length - 1);
+  const { data: progressList = [] } = useFetchProgressList();
+  const [active, setActive] = useState(progressList.length - 1);
 
   return (
     <Grid container>
@@ -39,15 +38,12 @@ const ProgressHistory = () => {
         className={layoutClasses.mb3}
       >
         <Grid item xs={12} md={8}>
-          <PrairieScoreHistory
-            active={active}
-            scoreHistory={mockScoreHistory}
-          />
+          <PrairieScoreHistory active={active} scoreHistory={progressList} />
         </Grid>
         <Grid item xs={12} md={4}>
           <PrairieStatusCardSlices
             active={active}
-            scores={mockScoreHistory}
+            scores={progressList}
             onUpdateActive={setActive}
           />
         </Grid>

@@ -1,10 +1,10 @@
 import { FC } from "react";
-import { TScoreHistory } from "../../../types";
+import { TProgress } from "../../../types";
 import PriaireStatusCard from "./PrairieStatusCard";
 
 interface PrairieStatusCardSlicesProps {
   active: number;
-  scores: TScoreHistory;
+  scores: TProgress[];
   onUpdateActive: (active: number) => void;
 }
 

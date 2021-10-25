@@ -7,7 +7,7 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
-import { TScoreItem } from "../../../types";
+import { TProgress } from "../../../types";
 import {
   useCardStyles,
   useColorStyles,
@@ -25,8 +25,8 @@ const useStyles = makeStyles(() =>
 );
 
 interface PrairieStatusCardProps {
-  previousScore?: TScoreItem;
-  currentScore: TScoreItem;
+  previousScore?: TProgress;
+  currentScore: TProgress;
   disabledNext: boolean;
   disabledPrevious: boolean;
   onClickNext: VoidFunction;
@@ -45,7 +45,7 @@ const PrairieStatusCard: FC<PrairieStatusCardProps> = ({
   const cardClasses = useCardStyles();
   const colorClasses = useColorStyles();
   const layoutClasses = useLayoutStyles();
-  const scoreDifference = currentScore.score - (previousScore?.score || 0);
+  const scoreDifference = currentScore.total - (previousScore?.total || 0);
 
   return (
     <Card variant="outlined" className={clsx(cardClasses.card)}>
@@ -53,7 +53,7 @@ const PrairieStatusCard: FC<PrairieStatusCardProps> = ({
         <Grid item xs={12}>
           <Grid item xs={12} className={layoutClasses.mb2}>
             <Typography variant="h3">
-              {dayjs(currentScore.date).format("MMM D, YYYY")}
+              {dayjs(currentScore.updatedAt).format("MMM D, YYYY")}
             </Typography>
           </Grid>
 
@@ -63,7 +63,7 @@ const PrairieStatusCard: FC<PrairieStatusCardProps> = ({
             </Typography>
 
             <Box width={1} display="flex" alignItems="flex-end">
-              <Typography variant="h2">{currentScore.score}</Typography>
+              <Typography variant="h2">{currentScore.total}</Typography>
               <Typography
                 variant="subtitle1"
                 className={clsx(

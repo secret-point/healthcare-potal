@@ -10,7 +10,7 @@ import {
   useFontStyles,
   useLayoutStyles,
 } from "../../../components/useCommonStyles";
-import { TScoreHistory } from "../../../types";
+import { TProgress } from "../../../types";
 import { ScoreHistorySummary } from "../../../models/ScoreHistorySummary";
 
 const useStyles = makeStyles((theme) =>
@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) =>
 );
 
 interface ProgressSummaryProps {
-  history: TScoreHistory;
+  history: TProgress[];
 }
 
 const ProgressSummary: FC<ProgressSummaryProps> = ({ history }) => {

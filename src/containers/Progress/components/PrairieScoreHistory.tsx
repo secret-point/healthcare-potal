@@ -9,7 +9,7 @@ import { ResponsiveLine } from "@nivo/line";
 // @ts-ignore
 import { linearGradientDef } from "@nivo/core";
 
-import { TScoreHistory } from "../../../types/general";
+import { TProgress } from "../../../types";
 import {
   useCardStyles,
   useFontStyles,
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface PrairieScoreHistoryProps {
   active: number;
-  scoreHistory: TScoreHistory;
+  scoreHistory: TProgress[];
 }
 
 const PrairieScoreHistory = ({
@@ -55,16 +55,16 @@ const PrairieScoreHistory = ({
     return [
       {
         id: "Score",
-        data: scoreHistory.map((history) => ({
-          x: dayjs(history.date).format("MM/DD/YYYY"),
-          y: history.score,
+        data: scoreHistory.map((score) => ({
+          x: dayjs(score.updatedAt).format("MM/DD/YYYY"),
+          y: score.total,
         })),
       },
       {
         id: "Current Score",
         data: scoreHistory.slice(active, active + 1).map((history) => ({
-          x: dayjs(history.date).format("MM/DD/YYYY"),
-          y: history.score,
+          x: dayjs(history.updatedAt).format("MM/DD/YYYY"),
+          y: history.total,
         })),
       },
     ] as any;

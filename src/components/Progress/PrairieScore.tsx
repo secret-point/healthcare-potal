@@ -11,7 +11,7 @@ import { ResponsiveLine } from "@nivo/line";
 import { linearGradientDef } from "@nivo/core";
 
 import { ButtonLink } from "../Link";
-import { TScoreHistory } from "../../types/general";
+import { TProgress } from "../../types";
 import { formatFullDay } from "../../utils/date";
 import {
   useCardStyles,
@@ -34,10 +34,10 @@ const useStyles = makeStyles(() =>
 );
 
 interface PrairieScoreProps {
-  scoreHistory: TScoreHistory;
+  progressList: TProgress[];
 }
 
-const PrairieScore = ({ scoreHistory }: PrairieScoreProps) => {
+const PrairieScore = ({ progressList }: PrairieScoreProps) => {
   const classes = useStyles();
   const cardClasses = useCardStyles();
   const colorClasses = useColorStyles();
@@ -45,22 +45,22 @@ const PrairieScore = ({ scoreHistory }: PrairieScoreProps) => {
   const layoutClasses = useLayoutStyles();
 
   const data = useMemo(() => {
-    if (!scoreHistory.length) return { id: "PrairieScore", data: [] };
-    const firstDate = scoreHistory[0].date;
+    if (!progressList.length) return { id: "PrairieScore", data: [] };
+    const firstDate = progressList[0].updatedAt;
     return [
       {
         id: "PrairieScore",
-        data: scoreHistory.map((history) => ({
-          x: dayjs(firstDate).diff(history.date, "day"),
-          y: history.score,
+        data: progressList.map((history) => ({
+          x: dayjs(firstDate).diff(history.updatedAt, "day"),
+          y: history.total,
         })),
       },
     ] as any;
-  }, [scoreHistory]);
+  }, [progressList]);
 
-  if (!scoreHistory.length) return null;
-  const firstScoreItem = scoreHistory[0];
-  const lastScoreItem = scoreHistory[scoreHistory.length - 1];
+  if (!progressList.length) return null;
+  const firstScoreItem = progressList[0];
+  const lastScoreItem = progressList[progressList.length - 1];
 
   return (
     <Card
@@ -97,7 +97,7 @@ const PrairieScore = ({ scoreHistory }: PrairieScoreProps) => {
               </Typography>
               <Box width={1} display="flex">
                 <Typography variant="h2">
-                  {lastScoreItem.score}
+                  {lastScoreItem.total}
                   &nbsp;
                 </Typography>
                 <Typography
@@ -107,11 +107,11 @@ const PrairieScore = ({ scoreHistory }: PrairieScoreProps) => {
                     fontClasses.fontNormal
                   )}
                 >
-                  {`(${lastScoreItem.score - firstScoreItem.score})`}
+                  {`(${lastScoreItem.total - firstScoreItem.total})`}
                 </Typography>
               </Box>
               <Typography variant="subtitle2" className={layoutClasses.mb15}>
-                {formatFullDay(lastScoreItem.date)}
+                {formatFullDay(lastScoreItem.updatedAt)}
               </Typography>
             </Box>
 

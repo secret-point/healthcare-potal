@@ -2,6 +2,7 @@ import dayjs from "dayjs";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 
+import { useFetchProgressList } from "../../api/memberApi";
 import { ROUTES } from "../../app/types";
 import { ButtonLink } from "../../components/Link";
 import {
@@ -12,19 +13,21 @@ import {
 import ProgressSummary from "./components/ProgressSummary";
 import CheckInNotice from "./components/CheckInNotice";
 import LatestPrairieScore from "./components/LatestPrairieScore";
-import { mockScoreHistory } from "./mockScores";
 
 const LatestProgress = () => {
   const fontClasses = useFontStyles();
   const layoutClasses = useLayoutStyles();
+  const { data: progressList = [] } = useFetchProgressList();
 
-  const latestItem = mockScoreHistory[mockScoreHistory.length - 1];
-  const previousItem = mockScoreHistory[mockScoreHistory.length - 2];
+  if (progressList.length < 1) return null;
+
+  const latestItem = progressList[progressList.length - 1];
+  const previousItem = progressList[progressList.length - 2] || latestItem;
   const requireCheckIn =
-    (latestItem.score > 10 &&
-      dayjs(latestItem.date).diff(previousItem.date, "day") > 5) ||
-    (latestItem.score <= 10 &&
-      dayjs(latestItem.date).diff(previousItem.date, "day") > 14);
+    (latestItem.total > 10 &&
+      dayjs(latestItem.updatedAt).diff(previousItem.updatedAt, "day") > 5) ||
+    (latestItem.total <= 10 &&
+      dayjs(latestItem.updatedAt).diff(previousItem.updatedAt, "day") > 14);
 
   return (
     <Grid container>
@@ -57,15 +60,13 @@ const LatestProgress = () => {
           />
         </Grid>
         <Grid item xs={12} md={6}>
-          <ProgressSummary history={mockScoreHistory} />
+          <ProgressSummary history={progressList} />
         </Grid>
       </Grid>
 
       {requireCheckIn && (
         <Grid item xs={12}>
-          <CheckInNotice
-            latestItem={mockScoreHistory[mockScoreHistory.length - 1]}
-          />
+          <CheckInNotice latestItem={progressList[progressList.length - 1]} />
         </Grid>
       )}
     </Grid>

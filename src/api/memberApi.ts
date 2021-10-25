@@ -8,6 +8,7 @@ import {
   TInTakeFormRequest,
   TFeedbackRequest,
   TProgressRequest,
+  TProgress,
   TTodoItem,
   UpdateProfileFormRequest,
 } from "../types";
@@ -65,18 +66,18 @@ export const useCreateProgress = () => {
 
   return useMutation(
     (data: TProgressRequest) =>
-      apiFetch("/mp/progress", { method: "POST", data }),
+      apiFetch("/mp/progresses", { method: "POST", data }),
     { mutationKey: QUERY_KEYS.UPLOAD_MEMBER_AVATAR }
   );
 };
 
-export const useFetchProgressHistory = () => {
+export const useFetchProgressList = () => {
   const apiFetch = useApiFetch();
 
   return useQuery(
     [QUERY_KEYS.FETCH_SCORE_PROGRESS_HISTORY],
-    async (): Promise<TCareMember[]> => {
-      const { data } = await apiFetch(`/mp/progress`);
+    async (): Promise<TProgress[]> => {
+      const { data } = await apiFetch(`/mp/progresses`);
       return data;
     }
   );

@@ -1,3 +1,5 @@
+import { SeverityTypes } from "./general";
+
 export type TProgressRequest = {
   memberID: string;
   PHQ1: number;
@@ -25,6 +27,15 @@ export type TProgressRequest = {
   triggerByRequest: boolean;
   deltaTotalPHQ: Nullable<number>;
   deltaTotalGAD: Nullable<number>;
+};
+
+export type TProgress = TProgressRequest & {
+  totalPHQ: number;
+  totalGAD: number;
+  total: number;
+  updatedAt: string;
+  severity: SeverityTypes;
+  symptoms: string[];
 };
 
 export type TCheckInFormRequest = any;

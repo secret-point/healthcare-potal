@@ -12,7 +12,7 @@ import {
   useFontStyles,
   useLayoutStyles,
 } from "../../../components/useCommonStyles";
-import { TScoreItem } from "../../../types";
+import { TProgress } from "../../../types";
 import { MAX_PRAIRIE_SCORE } from "../constants";
 import PrairieScoreBar from "./PrairieScoreBar";
 
@@ -25,8 +25,8 @@ const useStyles = makeStyles((theme) =>
 );
 
 interface LatestPrairieScoreProps {
-  previousItem?: TScoreItem;
-  latestItem: TScoreItem;
+  previousItem?: TProgress;
+  latestItem: TProgress;
 }
 
 const LatestPrairieScore: FC<LatestPrairieScoreProps> = ({
@@ -37,7 +37,7 @@ const LatestPrairieScore: FC<LatestPrairieScoreProps> = ({
   const fontClasses = useFontStyles();
   const colorClasses = useColorStyles();
   const layoutClasses = useLayoutStyles();
-  const diffInDays = dayjs().diff(latestItem.date, "day");
+  const diffInDays = dayjs().diff(latestItem.updatedAt, "day");
 
   return (
     <Card
@@ -69,7 +69,7 @@ const LatestPrairieScore: FC<LatestPrairieScoreProps> = ({
             alignItems="flex-end"
             className={layoutClasses.mb2}
           >
-            <Typography variant="h1">{latestItem.score}</Typography>
+            <Typography variant="h1">{latestItem.total}</Typography>
             <Typography variant="subtitle2">
               {["/", MAX_PRAIRIE_SCORE].join("")}
             </Typography>
@@ -77,12 +77,12 @@ const LatestPrairieScore: FC<LatestPrairieScoreProps> = ({
               variant="subtitle2"
               className={colorClasses.secondaryGreen1}
             >
-              {` (${latestItem.score - (previousItem?.score || 0)})`}
+              {` (${latestItem.total - (previousItem?.total || 0)})`}
             </Typography>
           </Grid>
 
           <Grid item xs={12}>
-            <PrairieScoreBar score={latestItem.score} />
+            <PrairieScoreBar score={latestItem.total} />
           </Grid>
         </Grid>
       </CardContent>
