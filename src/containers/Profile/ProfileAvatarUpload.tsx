@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, FC, useState } from "react";
 import Link from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
@@ -26,7 +26,13 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function ProfileAvatarUpload() {
+interface ProfileAvatarUploadProps {
+  onUploadFile: (file: File) => void;
+}
+
+const ProfileAvatarUpload: FC<ProfileAvatarUploadProps> = ({
+  onUploadFile,
+}) => {
   const classes = useStyles();
   const [file, setFile] = useState<File>();
 
@@ -34,6 +40,7 @@ export default function ProfileAvatarUpload() {
     const file = e.target?.files?.[0];
     if (!file) return null;
     setFile(file);
+    onUploadFile(file);
   };
 
   const handleDeleteFile = () => {
@@ -69,4 +76,6 @@ export default function ProfileAvatarUpload() {
       )}
     </div>
   );
-}
+};
+
+export default ProfileAvatarUpload;

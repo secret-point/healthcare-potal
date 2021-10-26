@@ -7,6 +7,7 @@ import { User } from "../../types";
 import { Theme } from "../../theme/types/createPalette";
 import ProfileAvatar from "../../components/ProfileAvatar";
 import ProfileAvatarUpload from "./ProfileAvatarUpload";
+import { useUploadFile } from "../../api";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -25,6 +26,16 @@ interface PhotoInformationProps {
 
 const PhotoInformation: FC<PhotoInformationProps> = ({ user }) => {
   const classes = useStyles();
+  const uploadFile = useUploadFile();
+
+  const handleUploadFile = async (file: File) => {
+    const formData = new FormData();
+    formData.append("upload", file);
+    formData.append("fileTitle", file.name);
+    formData.append("memberID", user.memberID);
+    formData.append("documentType", "Avatar");
+    await uploadFile.mutate(formData);
+  };
 
   return (
     <Grid container spacing={2}>
@@ -46,7 +57,7 @@ const PhotoInformation: FC<PhotoInformationProps> = ({ user }) => {
             width={64}
             height={64}
           />
-          <ProfileAvatarUpload />
+          <ProfileAvatarUpload onUploadFile={handleUploadFile} />
         </Grid>
       </Grid>
     </Grid>

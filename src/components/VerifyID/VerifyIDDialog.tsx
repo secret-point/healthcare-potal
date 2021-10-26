@@ -13,6 +13,7 @@ import UploadID from "./UploadID";
 import InitialStep from "./InitialStep";
 import { VerifySteps } from "./constants";
 import { useUploadFile, useVerifyID } from "../../api";
+import useAuth from "../../hooks/useAuth";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -57,13 +58,22 @@ const VerifyIDDialog: FC<VerifyIDDialogProps> = ({ open, onClose }) => {
   const classes = useStyles();
   const uploadFile = useUploadFile();
   const veirfyID = useVerifyID();
+  const { user } = useAuth();
   const [file, setFile] = useState<File>();
   const [fileID, setFileID] = useState<string>();
   const [step, setStep] = useState(VerifySteps.INTIAL_STEP);
 
   const handleUploadFile = async (file: File) => {
     setFile(file);
-    await uploadFile.mutate(file, {
+    if (!user) return;
+
+    const formData = new FormData();
+    formData.append("upload", file);
+    formData.append("fileTitle", file.name);
+    formData.append("memberID", user.memberID);
+    formData.append("documentType", "ID");
+
+    await uploadFile.mutate(formData, {
       onSuccess: ({ data: { fileID } }) => {
         setFileID(fileID);
       },

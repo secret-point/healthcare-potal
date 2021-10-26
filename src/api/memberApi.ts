@@ -42,15 +42,6 @@ export const useFetchCareProviders = () => {
   );
 };
 
-export const useUploadFile = () => {
-  const apiFetch = useApiFetch();
-
-  return useMutation(
-    (file: File) => apiFetch("/mp/file", { method: "POST", data: { file } }),
-    { mutationKey: QUERY_KEYS.UPLOAD_FILE }
-  );
-};
-
 export const useUpdateProfile = () => {
   const apiFetch = useApiFetch();
 
@@ -125,6 +116,24 @@ export const useVerifyID = () => {
       apiFetch("/mp/verify-id", { method: "PUT", data: { fileID } }),
     {
       mutationKey: QUERY_KEYS.SUBMIT_FEEDBACK,
+    }
+  );
+};
+
+export const useUploadFile = () => {
+  const apiFetch = useApiFetch();
+
+  return useMutation(
+    (formData: FormData) =>
+      apiFetch("/files/upload", {
+        method: "POST",
+        data: formData,
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      }),
+    {
+      mutationKey: QUERY_KEYS.UPLOAD_FILE,
     }
   );
 };
