@@ -39,7 +39,13 @@ const PhotoInformation: FC<PhotoInformationProps> = ({ user }) => {
           alignItems="center"
           className={classes.informationWrapper}
         >
-          <ProfileAvatar profile={user} width={64} height={64} />
+          <ProfileAvatar
+            firstName={user.firstName}
+            lastName={user.lastName}
+            picture={user.profilePicture}
+            width={64}
+            height={64}
+          />
           <ProfileAvatarUpload />
         </Grid>
       </Grid>

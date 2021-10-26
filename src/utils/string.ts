@@ -1,4 +1,4 @@
-import { VerificationStatus } from "../types";
+import { UserIDVerificationStatus } from "../types";
 
 export const emailPattern = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 
@@ -22,6 +22,5 @@ export const getCapitalizedFirstLetters = (values: string[]) =>
     return "";
   });
 
-export const shouldVerifyId = (status: any) =>
-  status !== VerificationStatus.VERIFIED &&
-  status !== VerificationStatus.PENDING;
+export const shouldVerifyId = (status: UserIDVerificationStatus) =>
+  status !== "Verified" && status !== "Pending";

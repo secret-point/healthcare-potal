@@ -108,7 +108,13 @@ const Container: React.FC<ContainerProps> = ({ children, className }) => {
         <Grid container justify="center" className={classes.topBarWrapper}>
           <Box className={classes.menuTriggerWrapper}>
             <MenuIconButton onClick={handleClickMenuButton} />
-            {!isMobile && <ProfileAvatar profile={user} />}
+            {!isMobile && (
+              <ProfileAvatar
+                firstName={user.firstName}
+                lastName={user.lastName}
+                picture={user.profilePicture}
+              />
+            )}
           </Box>
           <IconButton
             disableTouchRipple

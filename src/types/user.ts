@@ -1,3 +1,25 @@
+export interface UserContact {
+  name: string;
+  relationship: string;
+  phone: string;
+  email: string;
+}
+
+export interface UserAddress {
+  address1: string;
+  address2?: string;
+  city: string;
+  state: string;
+  zip: string | number;
+}
+
+export type UserIDVerificationStatus =
+  | "Verified"
+  | "Skipped"
+  | "Pending"
+  | "Expired"
+  | "Unverified";
+
 export interface User {
   _id: string;
   email: string;
@@ -5,6 +27,12 @@ export interface User {
   firstName: string;
   middleName?: string;
   lastName: string;
+  phone: string;
+  profilePicture: string;
+  emergencyContact: UserContact;
+  billingAddress: UserAddress;
+  shippingAddress: UserAddress;
+  IDStatus: UserIDVerificationStatus;
 }
 
 export interface AuthorizedUser extends User {
@@ -40,14 +68,6 @@ export interface ChangePasswordCodeForm {
   code: string;
   password: string;
   confirmPassword: string;
-}
-
-export enum VerificationStatus {
-  VERIFIED = "Verified",
-  SKIPPED = "Skipped",
-  EXPIRED = "Expired",
-  UNVERIFIED = "Unverified",
-  PENDING = "Pending",
 }
 
 export interface TCareMember

@@ -30,19 +30,28 @@ const useStyles = makeStyles((theme: Theme) =>
     avatarLetter: {
       fontWeight: 400,
     },
+
+    roundedImage: {
+      borderRadius: (props: StyleProps) =>
+        Math.max(props.width || 40, props.height || 40),
+    },
   })
 );
 
 interface ProfileAvatarProps extends StyleProps {
   className?: string;
-  profile: { firstName: string; lastName: string };
+  firstName: string;
+  lastName: string;
+  picture: string;
 }
 
 const ProfileAvatar: FC<ProfileAvatarProps> = ({
   className,
   height = 40,
   width = 40,
-  profile: { firstName, lastName },
+  firstName,
+  lastName,
+  picture,
 }) => {
   const history = useHistory();
   const classes = useStyles({ width, height });
@@ -58,9 +67,19 @@ const ProfileAvatar: FC<ProfileAvatarProps> = ({
       className={clsx(classes.avatar, className)}
       onClick={handleClickAvatar}
     >
-      <Typography variant="h3" className={classes.avatarLetter}>
-        {getCapitalizedFirstLetters([firstName, lastName]).join("")}
-      </Typography>
+      {picture ? (
+        <img
+          width={width}
+          height={height}
+          alt={[firstName, lastName].join(" ")}
+          src={picture}
+          className={classes.roundedImage}
+        />
+      ) : (
+        <Typography variant="h3" className={classes.avatarLetter}>
+          {getCapitalizedFirstLetters([firstName, lastName]).join("")}
+        </Typography>
+      )}
     </div>
   );
 };

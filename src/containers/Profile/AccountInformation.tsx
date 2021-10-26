@@ -6,7 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
 import { Theme } from "../../theme/types/createPalette";
-import { TCustomField, User } from "../../types";
+import { TCustomField, User, UserIDVerificationStatus } from "../../types";
 import { shouldVerifyId } from "../../utils/string";
 import CustomList from "../../components/CustomList";
 import { TextButton } from "../../components/Button";
@@ -82,13 +82,13 @@ const AccountInformation: FC<AccountInformationProps> = ({
     },
     {
       label: "ID",
-      path: "verificationStatus",
+      path: "IDStatus",
       render: (value: string) => (
         <Box className={classes.editableFieldWrapper}>
           <Typography variant="subtitle1" className={classes.listValue}>
-            {value || "Unverified"}
+            {value}
           </Typography>
-          {shouldVerifyId(value) && (
+          {shouldVerifyId(value as UserIDVerificationStatus) && (
             <TextButton text="Verify ID" onClick={onShowVerifyIDDialog} />
           )}
         </Box>

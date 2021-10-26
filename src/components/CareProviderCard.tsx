@@ -24,10 +24,6 @@ const useStyles = makeStyles((theme) =>
       justifyContent: "space-between",
     },
 
-    roundImage: {
-      borderRadius: 20,
-    },
-
     textButton: {
       "& .MuiTypography-root": {
         textAlign: "left",
@@ -48,17 +44,12 @@ const CareProviderCard = ({ member }: CareTeamMemberCardProps) => {
   return (
     <Card variant="outlined" className={classes.teamMemberCard}>
       <CardContent className={clsx(layoutClasses.noPadding, layoutClasses.mb1)}>
-        {member.profilePic ? (
-          <img
-            width={40}
-            height={40}
-            alt="User Profile"
-            src={member.profilePic}
-            className={clsx(classes.roundImage, layoutClasses.mb2)}
-          />
-        ) : (
-          <ProfileAvatar profile={member} className={layoutClasses.mb2} />
-        )}
+        <ProfileAvatar
+          firstName={member.firstName}
+          lastName={member.lastName}
+          picture={member.profilePic}
+          className={layoutClasses.mb2}
+        />
         <Typography variant="subtitle2" className={layoutClasses.mb05}>
           {formatUserType(member.userType)}
         </Typography>
