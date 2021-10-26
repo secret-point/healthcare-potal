@@ -1,5 +1,3 @@
-import { SeverityTypes } from "./general";
-
 export type TProgressRequest = {
   memberID: string;
   PHQ1: number;
@@ -19,7 +17,7 @@ export type TProgressRequest = {
   GAD6: number;
   GAD7: number;
   comment: string;
-  sideEffect: string;
+  sideEffects: string[];
   CSAT: number;
   markAsRead: boolean;
   archived: boolean;
@@ -34,9 +32,6 @@ export type TProgress = TProgressRequest & {
   totalGAD: number;
   total: number;
   updatedAt: string;
-  // TODO: move this onto the schema
-  severity: SeverityTypes;
-  // symptoms: string[];
 };
 
 export type TCheckInFormRequest = any;

@@ -100,6 +100,7 @@ export type TTodoItem = {
 };
 
 export enum SeverityTypes {
+  MINIMAL = "Minimal",
   SEVERE = "Severe",
   MODERATE_SEVERE = "Moderately Severe",
   MODERATE = "Moderate",

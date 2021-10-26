@@ -18,14 +18,16 @@ const ActivityProgress = () => {
         Your Progress
       </Typography>
       <Grid container spacing={3}>
-        {progressList.length && (
+        {Boolean(progressList.length) && (
           <Grid item xs={12} sm={12} lg={6}>
             <PrairieScore progressList={progressList} />
           </Grid>
         )}
-        <Grid item xs={12} sm={6} lg={3}>
-          {lastProgress && <SurveyProgress lastProgress={lastProgress} />}
-        </Grid>
+        {lastProgress && (
+          <Grid item xs={12} sm={6} lg={3}>
+            <SurveyProgress lastProgress={lastProgress} />
+          </Grid>
+        )}
         <Grid item xs={12} sm={6} lg={3}>
           <SymptomsReport />
         </Grid>

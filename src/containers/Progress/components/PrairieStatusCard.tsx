@@ -15,6 +15,7 @@ import {
 } from "../../../components/useCommonStyles";
 import PrairieStatus from "./PrairieStatus";
 import { ButtonGroup } from "../../../components/ArrowButtonGroup";
+import { getSeverityBasedOnScore } from "../../../utils/helper";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -85,13 +86,13 @@ const PrairieStatusCard: FC<PrairieStatusCardProps> = ({
             <Grid item xs={12} className={layoutClasses.mb1}>
               <Typography variant="subtitle2">Severity</Typography>
             </Grid>
-            <PrairieStatus current={currentScore.severity} />
+            <PrairieStatus current={getSeverityBasedOnScore(currentScore)} />
           </Grid>
 
           <Grid item xs={12} className={layoutClasses.mb2}>
             <Typography variant="subtitle2">Symptoms</Typography>
             <Typography variant="subtitle1">
-              {currentScore.sideEffect || "None reported"}
+              {currentScore.sideEffects.join(", ") || "None reported"}
             </Typography>
           </Grid>
         </Grid>

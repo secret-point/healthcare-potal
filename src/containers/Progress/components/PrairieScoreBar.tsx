@@ -51,7 +51,9 @@ interface PrairieScoreBarProps {
 
 const PrairieScoreBar: FC<PrairieScoreBarProps> = ({ score }) => {
   const { isMobile } = useViewport();
-  const classes = useStyles({ percent: (score / MAX_PRAIRIE_SCORE) * 100 });
+  const classes = useStyles({
+    percent: (Math.min(score, MAX_PRAIRIE_SCORE) / MAX_PRAIRIE_SCORE) * 100,
+  });
   const fontClasses = useFontStyles();
   const backgroundClasses = useBackgroundColorStyles();
 
