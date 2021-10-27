@@ -9,12 +9,13 @@ import { EditableField } from "./types";
 import { UPDATE_PROFILE_DIALOGS } from "./constants";
 import AccountInformation from "./AccountInformation";
 import ContactInformation from "./ContactInformation";
-import PhotoInformation from "./PhotoInformation";
-import { useUpdateProfile } from "../../api";
+import UserProfilePhoto from "./UserProfilePhoto";
+import { useUpdateProfile, useUploadFile } from "../../api";
 import { UpdateProfileFormRequest } from "../../types";
 
 export default function Profile() {
   const { user } = useAuth();
+  const uploadFile = useUploadFile();
   const updateProfile = useUpdateProfile();
   const [editingField, setEditingField] = useState<EditableField>();
   const [showVerifyIDDialog, setShowVerifyIDDialog] = useState(false);
@@ -37,15 +38,31 @@ export default function Profile() {
     setShowVerifyIDDialog(false);
   };
 
-  const handleUpdateProfile = (form: unknown) => {
-    updateProfile.mutate(form as UpdateProfileFormRequest);
+  const handleUploadFile = async (file: File) => {
+    const formData = new FormData();
+    formData.append("upload", file);
+    formData.append("fileTitle", file.name);
+    formData.append("memberID", user._id);
+    formData.append("documentType", "Avatar");
+
+    await uploadFile.mutate(formData, {
+      onSuccess: async ({ data }) => {
+        await updateProfile.mutate({
+          profilePicture: data.documentURL,
+        });
+      },
+    });
+  };
+
+  const handleUpdateProfile = async (form: unknown) => {
+    await updateProfile.mutate(form as UpdateProfileFormRequest);
   };
 
   return (
     <Container>
       <Grid container spacing={4}>
         <Grid item xs={12}>
-          <PhotoInformation user={user} />
+          <UserProfilePhoto user={user} onUploadFile={handleUploadFile} />
         </Grid>
 
         <Grid item xs={12}>

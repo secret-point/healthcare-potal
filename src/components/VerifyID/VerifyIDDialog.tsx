@@ -70,8 +70,8 @@ const VerifyIDDialog: FC<VerifyIDDialogProps> = ({ open, onClose }) => {
     const formData = new FormData();
     formData.append("upload", file);
     formData.append("fileTitle", file.name);
-    formData.append("memberID", user.memberID);
-    formData.append("documentType", "ID");
+    formData.append("memberID", user._id);
+    formData.append("documentType", "PhotoID");
 
     await uploadFile.mutate(formData, {
       onSuccess: ({ data: { fileID } }) => {

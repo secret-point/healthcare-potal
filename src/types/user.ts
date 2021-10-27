@@ -80,4 +80,4 @@ export interface TCareMember
   userType: "cc" | "psych" | "Care Partner";
 }
 
-export interface UpdateProfileFormRequest {}
+export type UpdateProfileFormRequest = AtLeastOne<User>;
