@@ -14,7 +14,7 @@ import { useUpdateProfile, useUploadFile } from "../../api";
 import { UpdateProfileFormRequest } from "../../types";
 
 export default function Profile() {
-  const { user } = useAuth();
+  const { user, loadUser } = useAuth();
   const uploadFile = useUploadFile();
   const updateProfile = useUpdateProfile();
   const [editingField, setEditingField] = useState<EditableField>();
@@ -47,9 +47,12 @@ export default function Profile() {
 
     await uploadFile.mutate(formData, {
       onSuccess: async ({ data }) => {
-        await updateProfile.mutate({
-          profilePicture: data.documentURL,
-        });
+        await updateProfile.mutate(
+          {
+            profilePicture: data.documentURL,
+          },
+          { onSuccess: loadUser }
+        );
       },
     });
   };

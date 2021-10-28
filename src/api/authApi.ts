@@ -11,12 +11,10 @@ export const useFetchCurrentUser = () => {
   const apiFetch = useApiFetch();
 
   return async () => {
-    const {
-      data: { member },
-    } = await apiFetch("/mp/current", {
+    const { data } = await apiFetch("/mp/current", {
       method: "GET",
     });
-    return member;
+    return data;
   };
 };
 
