@@ -112,8 +112,8 @@ export const useVerifyID = () => {
   const apiFetch = useApiFetch();
 
   return useMutation(
-    (fileID: string) =>
-      apiFetch("/mp/verify-id", { method: "PUT", data: { fileID } }),
+    (documentURL: string) =>
+      apiFetch("/mp/verify-id", { method: "PUT", data: { documentURL } }),
     {
       mutationKey: QUERY_KEYS.SUBMIT_FEEDBACK,
     }

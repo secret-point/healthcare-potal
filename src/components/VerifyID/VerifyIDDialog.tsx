@@ -60,7 +60,7 @@ const VerifyIDDialog: FC<VerifyIDDialogProps> = ({ open, onClose }) => {
   const veirfyID = useVerifyID();
   const { user } = useAuth();
   const [file, setFile] = useState<File>();
-  const [fileID, setFileID] = useState<string>();
+  const [IDDocumentURL, setIDDocumentURL] = useState<string>();
   const [step, setStep] = useState(VerifySteps.INTIAL_STEP);
 
   const handleUploadFile = async (file: File) => {
@@ -74,18 +74,16 @@ const VerifyIDDialog: FC<VerifyIDDialogProps> = ({ open, onClose }) => {
     formData.append("documentType", "PhotoID");
 
     await uploadFile.mutate(formData, {
-      onSuccess: ({ data: { fileID } }) => {
-        setFileID(fileID);
+      onSuccess: ({ data: { documentURL } }) => {
+        setIDDocumentURL(documentURL);
       },
     });
   };
 
   const handleVerifyID = async () => {
-    if (!fileID) return;
+    if (!IDDocumentURL) return;
     try {
-      await veirfyID.mutate(fileID);
-    } catch (error) {
-      // console.error(error);
+      await veirfyID.mutate(IDDocumentURL);
     } finally {
       setStep(VerifySteps.FINAL);
     }
