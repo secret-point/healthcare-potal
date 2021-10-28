@@ -1,9 +1,10 @@
-import { FC, FormEvent } from "react";
+import { FC, FormEvent, useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import Grid from "@material-ui/core/Grid";
+import LinearProgress from "@material-ui/core/LinearProgress";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
@@ -41,6 +42,7 @@ interface UpdateDialogProps {
   open: boolean;
   title: string;
   rows: TFieldRow[];
+  defaultValues: any;
   onClose: VoidFunction;
   onSave: (form: unknown) => void;
 }
@@ -49,19 +51,28 @@ const UpdateDialog: FC<UpdateDialogProps> = ({
   open,
   title,
   rows,
+  defaultValues,
   onClose,
   onSave,
 }) => {
+  const [isUpdating, setIsUpdating] = useState(false);
+
   const classes = useStyles();
   const methods = useForm({
     mode: "onChange",
+    defaultValues,
   });
 
-  const handleSave = (e: FormEvent) => {
+  const handleSave = async (e: FormEvent) => {
     e.preventDefault();
 
-    const values = methods.getValues();
-    onSave(values);
+    setIsUpdating(true);
+    try {
+      const values = methods.getValues();
+      await onSave(values);
+    } finally {
+      setIsUpdating(false);
+    }
   };
 
   return (
@@ -71,6 +82,8 @@ const UpdateDialog: FC<UpdateDialogProps> = ({
       className={classes.dialog}
       onClose={onClose}
     >
+      {isUpdating && <LinearProgress color="secondary" />}
+
       <Typography variant="h2" className={classes.dialogTitle}>
         {title}
       </Typography>
@@ -96,7 +109,12 @@ const UpdateDialog: FC<UpdateDialogProps> = ({
       </DialogContent>
       <DialogActions>
         <Button text="Cancel" fullWidth={false} onClick={onClose} />
-        <Button text="Save" type="submit" fullWidth={false} />
+        <Button
+          text="Save"
+          type="submit"
+          fullWidth={false}
+          onClick={handleSave}
+        />
       </DialogActions>
     </Dialog>
   );

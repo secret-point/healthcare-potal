@@ -58,7 +58,13 @@ export default function Profile() {
   };
 
   const handleUpdateProfile = async (form: unknown) => {
-    await updateProfile.mutate(form as UpdateProfileFormRequest);
+    try {
+      await updateProfile.mutate(form as UpdateProfileFormRequest, {
+        onSuccess: loadUser,
+      });
+    } finally {
+      handleCloseUpdateDialog();
+    }
   };
 
   return (
@@ -81,9 +87,10 @@ export default function Profile() {
         </Grid>
       </Grid>
 
-      {editingField && (
+      {editingField && user && (
         <UpdateDialog
           open
+          defaultValues={{ ...user, password: "" }}
           title={UPDATE_PROFILE_DIALOGS[editingField].title}
           rows={UPDATE_PROFILE_DIALOGS[editingField].rows}
           onClose={handleCloseUpdateDialog}

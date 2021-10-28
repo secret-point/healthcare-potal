@@ -103,7 +103,7 @@ export const UPDATE_PROFILE_DIALOGS = {
         fields: [
           {
             label: "Address Line 1",
-            path: "address.line1",
+            path: "billingAddress.address1",
             isTopLabel: true,
             shrink: true,
             xs: 12,
@@ -115,7 +115,7 @@ export const UPDATE_PROFILE_DIALOGS = {
         fields: [
           {
             label: "Address Line 2",
-            path: "address.line2",
+            path: "billingAddress.address2",
             isTopLabel: true,
             shrink: true,
             xs: 12,
@@ -127,7 +127,7 @@ export const UPDATE_PROFILE_DIALOGS = {
         fields: [
           {
             label: "City",
-            path: "address.city",
+            path: "billingAddress.city",
             isTopLabel: true,
             shrink: true,
             xs: 12,
@@ -139,14 +139,14 @@ export const UPDATE_PROFILE_DIALOGS = {
         fields: [
           {
             label: "State",
-            path: "address.state",
+            path: "billingAddress.state",
             type: FieldType.SELECT,
             options: usStates,
             xs: 6,
           },
           {
             label: "Zip Code",
-            path: "address.zipCode",
+            path: "billingAddress.zip",
             isTopLabel: true,
             shrink: true,
             xs: 6,

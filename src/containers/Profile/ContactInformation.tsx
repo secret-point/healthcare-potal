@@ -40,7 +40,7 @@ const ContactInformation: FC<ContactInformationProps> = ({ onClickEdit }) => {
       path: "emergencyContact",
       render: () => (
         <span>
-          {user?.emergencyContact.name}
+          {user?.emergencyContact?.name}
           <TextButton
             onClick={() => onClickEdit(EditableField.EMERGENCY_CONTACT)}
           />
@@ -52,7 +52,7 @@ const ContactInformation: FC<ContactInformationProps> = ({ onClickEdit }) => {
       path: "address",
       render: () => (
         <span>
-          {user?.billingAddress.address1}
+          {user?.billingAddress?.address1}
           <TextButton onClick={() => onClickEdit(EditableField.ADDRESS)} />
         </span>
       ),
