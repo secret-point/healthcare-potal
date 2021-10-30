@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 
@@ -11,6 +12,7 @@ const ActivityProgress = () => {
   const layoutClasses = useLayoutStyles();
   const { data: progressList = [] } = useFetchProgressList();
   const lastProgress = progressList[progressList.length - 1];
+  const diffInWeeks = dayjs().diff(lastProgress.updatedAt, "weeks");
 
   return (
     <>
@@ -23,7 +25,7 @@ const ActivityProgress = () => {
             <PrairieScore progressList={progressList} />
           </Grid>
         )}
-        {lastProgress && (
+        {lastProgress && diffInWeeks >= 2 && (
           <Grid item xs={12} sm={6} lg={3}>
             <SurveyProgress lastProgress={lastProgress} />
           </Grid>
