@@ -10,7 +10,11 @@ import Container from "../../components/Container";
 import Welcome from "./Welcome";
 import ExperienceSurvey from "./ExperienceSurvey";
 import CompleteSurvey from "./CompleteSurvey";
-import { CheckInSurveySteps, QUESTIONS } from "./constants";
+import {
+  CheckInSurveySteps,
+  CHECKIN_QUESTIONS,
+  frequencyOptionCodeToValue,
+} from "./constants";
 
 const CheckInSurvey = () => {
   const history = useHistory();
@@ -25,8 +29,28 @@ const CheckInSurvey = () => {
     history.push(ROUTES.DASHBOARD);
   };
 
+  const getTransformedForm = (form: any): Record<string, any> => {
+    const formResult: Record<string, any> = {};
+
+    CHECKIN_QUESTIONS.forEach((question) => {
+      if (question.type === "GAD" || question.type === "PHQ") {
+        formResult[question.code] = frequencyOptionCodeToValue(
+          form[question.code]
+        );
+      } else if (question.type === "MCQ") {
+        formResult.sideEffects = question.options
+          ?.filter((option) => form[option.code])
+          .map((option) => option.display);
+      } else {
+        formResult.comment = form.comment;
+      }
+    });
+
+    return formResult;
+  };
+
   const handleCompleteCheckIn = async (form: any) => {
-    await updateCheckInForm.mutate(form);
+    await updateCheckInForm.mutate(getTransformedForm(form));
     setSurveyStep(CheckInSurveySteps.COMPLETE);
   };
 
@@ -53,7 +77,7 @@ const CheckInSurvey = () => {
               )}
               {surveyStep === CheckInSurveySteps.QUESTIONS && (
                 <ExperienceSurvey
-                  questions={QUESTIONS}
+                  questions={CHECKIN_QUESTIONS}
                   onNext={handleCompleteCheckIn}
                 />
               )}
