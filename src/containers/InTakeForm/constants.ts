@@ -183,7 +183,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
         fields: [
           {
             label: "Where were you born?",
-            path: "birthPlace",
+            path: "born",
             placeholder: "City/state you were born",
             type: FieldType.TEXT,
             isTopLabel: true,
@@ -193,7 +193,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
           },
           {
             label: "What is your highest educational degree?",
-            path: "educationalDegree",
+            path: "econCondition",
             placeholder: "Select your highest degree",
             type: FieldType.SELECT,
             options: EDUCATIONAL_DEGREES,
@@ -202,7 +202,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
           },
           {
             label: "What is your marital status?",
-            path: "maritalStatus",
+            path: "maritialStatus",
             placeholder: "Select your marital status",
             type: FieldType.SELECT,
             options: MARITAL_STATUS,
@@ -211,7 +211,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
           },
           {
             label: "What is your employment status?",
-            path: "employmentStatus",
+            path: "employment",
             placeholder: "Select your emloyment status",
             type: FieldType.SELECT,
             options: EMPLOYMENT_STATUS,
@@ -220,7 +220,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
           },
           {
             label: "What is your current living arrangement?",
-            path: "livingArrangement",
+            path: "livingArr",
             placeholder: "Select your living arrangement",
             type: FieldType.SELECT,
             options: LIVING_ARRANGEMENT_TYPES,
@@ -229,7 +229,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
           },
           {
             label: "Who are you currently living with? Check all that apply",
-            path: "livingWithWhom",
+            path: "livingWith",
             placeholder: "Select all who you are living with",
             type: FieldType.MULTI_SELECT,
             options: PEOPLE_LIVING_WITH,
@@ -238,7 +238,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
           },
           {
             label: "How would you characterize your cultural background?",
-            path: "culturalBackground",
+            path: "cultureBackground",
             placeholder: "Cultural Background",
             type: FieldType.TEXT,
             isTopLabel: true,
@@ -248,7 +248,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
           },
           {
             label: "Are you currently using any substances?",
-            path: "substances",
+            path: "substanceList",
             type: FieldType.MULTI_INSTANCE,
             properties: [
               {
@@ -276,7 +276,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
           },
           {
             label: "How would you describe your level of physical activity?",
-            path: "physicalActivity",
+            path: "physicallyActive",
             placeholder: "Physical activity",
             type: FieldType.TEXT,
             isTopLabel: true,
@@ -286,7 +286,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
           },
           {
             label: "How would you describe your level of sexual activity?",
-            path: "sexualActivity",
+            path: "sexuallyActive",
             placeholder: "Sexual activity",
             type: FieldType.TEXT,
             isTopLabel: true,
@@ -296,12 +296,12 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
           },
           {
             label: "Do you currently possess a weapon/firearm?",
-            path: "weaponPossess",
+            path: "weapon",
             type: FieldType.SINGLE_INSTANCE,
             required: true,
             properties: [
               {
-                path: "type",
+                path: "hasAccess",
                 placeholder: "Select Yes/No",
                 type: FieldType.SELECT,
                 options: CONFIRMATION_TYPES,

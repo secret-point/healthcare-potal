@@ -30,18 +30,18 @@ export const BIOLOGICAL_SEXES: TDropItem[] = [
 ];
 
 export const EDUCATIONAL_DEGREES: TDropItem[] = [
-  { code: "ASSOCIATE", display: "Associate degree" },
-  { code: "BACHELOR", display: "Bachelor's degree" },
-  { code: "MASTER", display: "Master's degree" },
-  { code: "DOCTOR", display: "Doctoral degree" },
+  { code: "Associate degree", display: "Associate degree" },
+  { code: "Bachelor's degree", display: "Bachelor's degree" },
+  { code: "Master's degree", display: "Master's degree" },
+  { code: "Doctoral degree", display: "Doctoral degree" },
 ];
 
 export const MARITAL_STATUS: TDropItem[] = [
-  { code: "SINGLE", display: "Single" },
-  { code: "MARRIED", display: "Married" },
-  { code: "WIDOWED", display: "Widowed" },
-  { code: "DIVORCED", display: "Divorced" },
-  { code: "DOMESTIC", display: "Domestic Partnership" },
+  { code: "Single", display: "Single" },
+  { code: "Married", display: "Married" },
+  { code: "Widowed", display: "Widowed" },
+  { code: "Divorced", display: "Divorced" },
+  { code: "Domestic Partnership", display: "Domestic Partnership" },
 ];
 
 export const EMPLOYMENT_STATUS: TDropItem[] = [
@@ -88,8 +88,8 @@ export const SUBTANCE_TYPES: TDropItem[] = [
 ];
 
 export const CONFIRMATION_TYPES: TDropItem[] = [
-  { code: "YES", display: "Yes" },
-  { code: "NO", display: "No" },
+  { code: "Yes", display: "Yes" },
+  { code: "No", display: "No" },
 ];
 
 export const SYMPTOM_TYPES: TDropItem[] = [

@@ -18,8 +18,14 @@ const getInputUserForm = (user: any) => {
   const updated = {
     ...user,
     dob: dayjs(user.dob).format("YYYY-MM-DD"),
-    "height.feet": Math.floor(user.height / 12),
-    "height.inches": user.height % 12,
+    height: {
+      feet: Math.floor(user.height / 12),
+      inches: user.height % 12,
+    },
+    weapon: {
+      ...user.weapon,
+      hasAccess: user.weapon.hasAccess ? "Yes" : "No",
+    },
   };
   return updated;
 };
