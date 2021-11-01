@@ -1,32 +1,32 @@
 import { TDropItem } from "../types/general";
 
 export const EMERGENCY_RELATIONSHIPS: TDropItem[] = [
-  { code: "FATHER", display: "Father" },
-  { code: "HUSBAND", display: "Husband" },
-  { code: "MOTHER", display: "Mother" },
-  { code: "PARTNER", display: "Partner" },
-  { code: "WIFE", display: "Wife" },
-  { code: "FRIEND", display: "Friend" },
+  { code: "Father", display: "Father" },
+  { code: "Husband", display: "Husband" },
+  { code: "Mother", display: "Mother" },
+  { code: "Partner", display: "Partner" },
+  { code: "Wife", display: "Wife" },
+  { code: "Friend", display: "Friend" },
 ];
 
 export const ETHNICITIES: TDropItem[] = [
-  { code: "WHITE", display: "White" },
-  { code: "AFRICAN", display: "African American" },
-  { code: "NATIVE", display: "Natie American" },
-  { code: "PACIFIC", display: "Pacific Islander" },
-  { code: "ASIAN", display: "Asian" },
-  { code: "HAWAIIAN", display: "Native Hawaiian" },
+  { code: "White", display: "White" },
+  { code: "African American", display: "African American" },
+  { code: "Natie American", display: "Natie American" },
+  { code: "Pacific Islander", display: "Pacific Islander" },
+  { code: "Asian", display: "Asian" },
+  { code: "Native Hawaiian", display: "Native Hawaiian" },
 ];
 
 export const PRONOUNS: TDropItem[] = [
   { code: "HE", display: "He/Him" },
-  { code: "SHE", display: "She/Her" },
+  { code: "She/Her/Her", display: "She/Her/Her" },
   { code: "THEY", display: "They/Them" },
 ];
 
 export const BIOLOGICAL_SEXES: TDropItem[] = [
-  { code: "MALE", display: "Male" },
-  { code: "FEMALE", display: "Female" },
+  { code: "Male", display: "Male" },
+  { code: "Female", display: "Female" },
 ];
 
 export const EDUCATIONAL_DEGREES: TDropItem[] = [

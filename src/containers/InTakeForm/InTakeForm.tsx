@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { FormEvent, useState } from "react";
 import { useHistory } from "react-router";
 import { useForm, FormProvider } from "react-hook-form";
@@ -6,13 +7,25 @@ import Grid from "@material-ui/core/Grid";
 import { ROUTES } from "../../app/types";
 import { useUpdateInTakeForm } from "../../api";
 import Container from "../../components/Container";
+import useAuth from "../../hooks/useAuth";
 
 import { InTakeFormSteps } from "./constants";
 import CompleteInTakeForm from "./CompleteInTakeForm";
 import StartInTake from "./StartInTake";
 import InTakeFormInput from "./InTakeFormInput";
 
+const getInputUserForm = (user: any) => {
+  const updated = {
+    ...user,
+    dob: dayjs(user.dob).format("YYYY-MM-DD"),
+    "height.feet": Math.floor(user.height / 12),
+    "height.inches": user.height % 12,
+  };
+  return updated;
+};
+
 const InTakeForm = () => {
+  const { user } = useAuth();
   const history = useHistory();
   const updateInTakeForm = useUpdateInTakeForm();
   const [currentStep, setCurrentStep] = useState(InTakeFormSteps.START);
@@ -20,6 +33,7 @@ const InTakeForm = () => {
 
   const methods = useForm({
     mode: "onChange",
+    defaultValues: getInputUserForm(user),
   });
 
   const handleCompleteInTake = async () => {

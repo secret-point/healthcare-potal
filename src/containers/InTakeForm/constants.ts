@@ -61,7 +61,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
           },
           {
             label: "What is your biological sex?",
-            path: "sex",
+            path: "gender",
             type: FieldType.SELECT,
             options: BIOLOGICAL_SEXES,
             required: true,
@@ -71,7 +71,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
           },
           {
             label: "When's your birthday?",
-            path: "birthday",
+            path: "dob",
             type: FieldType.DATE,
             placeholder: "MM/DD/YYYY",
             required: true,
@@ -114,7 +114,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
           },
           {
             label: "How would you describe your ethnicity?",
-            path: "ethnicity",
+            path: "race",
             placeholder: "Select your ethnicity",
             type: FieldType.SELECT,
             options: ETHNICITIES,
@@ -129,7 +129,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
         fields: [
           {
             label: "What is the name of your emergency contact?",
-            path: "emergencyContact",
+            path: "emergencyContact.name",
             placeholder: "Name of emergency contact",
             type: FieldType.TEXT,
             isTopLabel: true,
@@ -140,7 +140,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
           },
           {
             label: "What is the relationship with your emergency contact?",
-            path: "emergencyRelationship",
+            path: "emergencyContact.relationship",
             placeholder: "Select relationship",
             type: FieldType.SELECT,
             options: EMERGENCY_RELATIONSHIPS,
@@ -150,7 +150,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
           },
           {
             label: "What is the phone number of your emergency contact?",
-            path: "emergencyPhoneNumber",
+            path: "emergencyContact.phone",
             placeholder: "Phone number of emergency contact",
             type: FieldType.TEXT,
             isTopLabel: true,
@@ -161,7 +161,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
           },
           {
             label: "What is the email address of your emergency contact?",
-            path: "emergencyEmailAddress",
+            path: "emergencyContact.email",
             placeholder: "Email address of emergency contact",
             type: FieldType.TEXT,
             isTopLabel: true,
