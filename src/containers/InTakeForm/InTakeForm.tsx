@@ -26,6 +26,14 @@ const getInputUserForm = (user: any) => {
       ...user.weapon,
       hasAccess: user.weapon.hasAccess ? "Yes" : "No",
     },
+    dangerToSelf: {
+      ...user.dangerToSelf,
+      danger: user.dangerToSelf.danger ? "Yes" : "No",
+    },
+    dangerToOthers: {
+      ...user.dangerToOthers,
+      danger: user.dangerToOthers.danger ? "Yes" : "No",
+    },
   };
   return updated;
 };

@@ -397,11 +397,11 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
           {
             label:
               "Have you recently (in the past 3 years) tried to harm yourself, or tried to take your life?",
-            path: "recentHarmYourself",
+            path: "dangerToSelf",
             type: FieldType.SINGLE_INSTANCE,
             properties: [
               {
-                path: "type",
+                path: "danger",
                 placeholder: "Select Yes/No",
                 type: FieldType.SELECT,
                 options: CONFIRMATION_TYPES,
@@ -427,11 +427,11 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
           {
             label:
               "Have you recently (in the past 3 years) tried to harm anyone else?",
-            path: "recentHarmAnyoneElse",
+            path: "dangerToOthers",
             type: FieldType.SINGLE_INSTANCE,
             properties: [
               {
-                path: "type",
+                path: "danger",
                 placeholder: "Select Yes/No",
                 type: FieldType.SELECT,
                 options: CONFIRMATION_TYPES,
@@ -461,7 +461,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
         fields: [
           {
             label: "Which medication(s) are you currently taking?",
-            path: "yourMedications",
+            path: "medList",
             type: FieldType.MULTI_INSTANCE,
             properties: [
               {
@@ -500,7 +500,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
           {
             label:
               "Are you currently receiving any mental health treatment? (Seeing a therapist, psychologist, psychiatrist...)",
-            path: "currentMentalHealthTreatments",
+            path: "psychTreatmentList",
             type: FieldType.MULTI_INSTANCE,
             properties: [
               {
