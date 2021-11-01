@@ -333,7 +333,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
         fields: [
           {
             label: "Which symptoms are you currently experiencing?",
-            path: "currentSymptoms",
+            path: "symptomList",
             type: FieldType.MULTI_INSTANCE,
             required: true,
             properties: [
@@ -362,7 +362,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
           },
           {
             label: "My symptoms improve when I...",
-            path: "symptomsImproveWhen",
+            path: "relievedBy",
             placeholder: "What has been helpful in improving your symptoms?",
             type: FieldType.TEXT,
             isTopLabel: true,
@@ -373,7 +373,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
           },
           {
             label: "My symptoms worsen when I...",
-            path: "symptomsWorsenWhen",
+            path: "worsenedBy",
             placeholder: "What can cause your symptoms worse?",
             required: true,
             type: FieldType.TEXT,
@@ -384,7 +384,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
           },
           {
             label: "Additional Comments",
-            path: "additionalComments",
+            path: "symptomRemark",
             placeholder:
               "Anything else your doctor should know about what you’re going through right now?",
             type: FieldType.TEXT,

@@ -1,27 +1,49 @@
 import { TDropItem } from "../types/general";
 
 export const EMERGENCY_RELATIONSHIPS: TDropItem[] = [
-  { code: "Father", display: "Father" },
-  { code: "Husband", display: "Husband" },
   { code: "Mother", display: "Mother" },
-  { code: "Partner", display: "Partner" },
-  { code: "Wife", display: "Wife" },
+  { code: "Father", display: "Father" },
+  { code: "Daughter", display: "Daughter" },
+  { code: "Son", display: "Son" },
+  { code: "Sister", display: "Sister" },
+  { code: "Brother", display: "Brother" },
+  { code: "Aunt", display: "Aunt" },
+  { code: "Uncle", display: "Uncle" },
   { code: "Friend", display: "Friend" },
+  { code: "Coworker", display: "Coworker" },
+  { code: "Other Family Member", display: "Other Family Member" },
+  { code: "Partner", display: "Partner" },
+  { code: "Husband", display: "Husband" },
+  { code: "Wife", display: "Wife" },
 ];
 
 export const ETHNICITIES: TDropItem[] = [
-  { code: "White", display: "White" },
-  { code: "African American", display: "African American" },
-  { code: "Natie American", display: "Natie American" },
-  { code: "Pacific Islander", display: "Pacific Islander" },
-  { code: "Asian", display: "Asian" },
-  { code: "Native Hawaiian", display: "Native Hawaiian" },
+  { code: "American Indian or Alask", display: "American Indian or Alask" },
+  { code: "Asian or Asian America", display: "Asian or Asian America" },
+  { code: "Black or African American", display: "Black or African American" },
+  { code: "Hispanic or Latinx", display: "Hispanic or Latinx" },
+  {
+    code: "Middle Eastern or North African",
+    display: "Middle Eastern or North African",
+  },
+  {
+    code: "Native Hawaiian or Pacific Islander",
+    display: "Native Hawaiian or Pacific Islander",
+  },
+  { code: "White(Non-Hispanic)", display: "White(Non-Hispanic)" },
+  { code: "Multiple", display: "Multiple" },
+  { code: "Some other race", display: "Some other race" },
+  { code: "Decline to respond", display: "Decline to respond" },
 ];
 
 export const PRONOUNS: TDropItem[] = [
-  { code: "HE", display: "He/Him" },
+  { code: "He/Him/His", display: "He/Him/His" },
   { code: "She/Her/Her", display: "She/Her/Her" },
-  { code: "THEY", display: "They/Them" },
+  { code: "They/Them/Their", display: "They/Them/Their" },
+  { code: "Ze/Zir/Zirsm", display: "Ze/Zir/Zirsm" },
+  { code: "Xe/Xem/Xyr", display: "Xe/Xem/Xyr" },
+  { code: "She/They", display: "She/They" },
+  { code: "He/They", display: "He/They" },
 ];
 
 export const BIOLOGICAL_SEXES: TDropItem[] = [
@@ -38,53 +60,76 @@ export const EDUCATIONAL_DEGREES: TDropItem[] = [
 
 export const MARITAL_STATUS: TDropItem[] = [
   { code: "Single", display: "Single" },
+  { code: "In a relationship", display: "In a relationship" },
+  { code: "Engaged", display: "Engaged" },
   { code: "Married", display: "Married" },
   { code: "Widowed", display: "Widowed" },
+  { code: "Separated", display: "Separated" },
   { code: "Divorced", display: "Divorced" },
+  { code: "Civil union", display: "Civil union" },
   { code: "Domestic Partnership", display: "Domestic Partnership" },
+  { code: "Open relatinoship", display: "Open relatinoship" },
+  { code: "Decline to respond", display: "Decline to respond" },
 ];
 
 export const EMPLOYMENT_STATUS: TDropItem[] = [
-  { code: "WORKER", display: "Worker" },
-  { code: "EMPLOYEE", display: "Employee" },
-  { code: "SELF_EMPLOYED", display: "Self-Employed" },
+  { code: "Employed", display: "Employed" },
+  { code: "Self-employed", display: "Self-employed" },
+  { code: "Out of work", display: "Out of work" },
+  { code: "Homemaker", display: "Homemaker" },
+  { code: "Student", display: "Student" },
+  { code: "Retired", display: "Retired" },
+  { code: "Unable to work", display: "Unable to work" },
 ];
 
 export const LIVING_ARRANGEMENT_TYPES: TDropItem[] = [
-  { code: "BUYING", display: "Buying" },
-  { code: "RENTING", display: "Renting" },
-  { code: "GROUP_HOMES", display: "Group Homes" },
-  { code: "SUPERVISED_APARTMENTS", display: "Supervised Apartments" },
-  { code: "SUPPORTED_LIVING", display: "Supported Living" },
-  { code: "FOSTER_SPONSOR_FAMILIES", display: "Foster or Sponsor Families" },
-  { code: "INDEPENDENT_LIVING", display: "Independent Living" },
+  { code: "Rent (Entire place)", display: "Rent (Entire place)" },
+  { code: "Rent (By room)", display: "Rent (By room)" },
+  { code: "Own", display: "Own" },
+  { code: "Supervised apartments", display: "Supervised apartments" },
+  {
+    code: "Does not have a stable address",
+    display: "Does not have a stable address",
+  },
 ];
 
 export const PEOPLE_LIVING_WITH: TDropItem[] = [
-  { code: "GRAND_PARENTS", display: "Grand Parents" },
-  { code: "FATHER", display: "Father" },
-  { code: "MOTHER", display: "Mother" },
-  { code: "HUSBAND", display: "Hubsband" },
-  { code: "WIFE", display: "Wife" },
-  { code: "BROTHER", display: "Brother" },
-  { code: "SISTER", display: "Sister" },
-  { code: "RELATIVE", display: "Relative" },
-  { code: "FRIEND", display: "Friend" },
+  { code: "Mother", display: "Mother" },
+  { code: "Father", display: "Father" },
+  { code: "Daughter", display: "Daughter" },
+  { code: "Son", display: "Son" },
+  { code: "Sister", display: "Sister" },
+  { code: "Brother", display: "Brother" },
+  { code: "Aunt", display: "Aunt" },
+  { code: "Uncle", display: "Uncle" },
+  { code: "Friend", display: "Friend" },
+  { code: "Coworker", display: "Coworker" },
+  { code: "Other Family Member", display: "Other Family Member" },
+  { code: "Partner", display: "Partner" },
+  { code: "Husband", display: "Husband" },
+  { code: "Wife", display: "Wife" },
 ];
 
 export const FAMILY_MEMBERS: TDropItem[] = [
-  { code: "GRAND FATHER", display: "Grand Father" },
-  { code: "GRAND MOTHER", display: "Grand Mother" },
-  { code: "FATHER", display: "Father" },
-  { code: "MOTHER", display: "Mother" },
-  { code: "BROTHER", display: "Brother" },
-  { code: "SISTER", display: "Sister" },
+  { code: "Mother", display: "Mother" },
+  { code: "Father", display: "Father" },
+  { code: "Daughter", display: "Daughter" },
+  { code: "Son", display: "Son" },
+  { code: "Sister", display: "Sister" },
+  { code: "Brother", display: "Brother" },
+  { code: "Aunt", display: "Aunt" },
+  { code: "Uncle", display: "Uncle" },
+  { code: "Niece", display: "Niece" },
+  { code: "Nephew", display: "Nephew" },
+  { code: "Cousin", display: "Cousin" },
+  { code: "Grandmother", display: "Grandmother" },
+  { code: "Grandfather", display: "Grandfather" },
 ];
 
 export const SUBTANCE_TYPES: TDropItem[] = [
-  { code: "ELEMENT", display: "Element" },
-  { code: "COMPOUND", display: "Compound" },
-  { code: "MIXTURE", display: "Mixture" },
+  { code: "Element", display: "Element" },
+  { code: "Compound", display: "Compound" },
+  { code: "Mixture", display: "Mixture" },
 ];
 
 export const CONFIRMATION_TYPES: TDropItem[] = [
@@ -93,48 +138,48 @@ export const CONFIRMATION_TYPES: TDropItem[] = [
 ];
 
 export const SYMPTOM_TYPES: TDropItem[] = [
-  { code: "REMITTING", display: "Remitting" },
-  { code: "CHRONIC", display: "Chronic" },
-  { code: "RELAPSING", display: "Relapsing" },
+  { code: "Remitting", display: "Remitting" },
+  { code: "Chronic", display: "Chronic" },
+  { code: "Relapsing", display: "Relapsing" },
 ];
 
 export const MEDICATION_TYPES: TDropItem[] = [
-  { code: "LIQUID", display: "Liquid" },
-  { code: "TABLET", display: "Tablet" },
-  { code: "CAPSULES", display: "Capsules" },
-  { code: "TOPICAL", display: "Topical medicines" },
-  { code: "SUPPOSITORIES", display: "Suppositories" },
-  { code: "DROPS", display: "Drops" },
-  { code: "INHALERS", display: "Inhalers" },
-  { code: "INJECTIONS", display: "Injections" },
-  { code: "IMPLANTS", display: "Implants or patches" },
+  { code: "Liquid", display: "Liquid" },
+  { code: "Tablet", display: "Tablet" },
+  { code: "Capsules", display: "Capsules" },
+  { code: "Topical medicines", display: "Topical medicines" },
+  { code: "Suppositories", display: "Suppositories" },
+  { code: "Drops", display: "Drops" },
+  { code: "Inhalers", display: "Inhalers" },
+  { code: "Injections", display: "Injections" },
+  { code: "Implants or patches", display: "Implants or patches" },
 ];
 
 export const TREATMENT_TYPES: TDropItem[] = [
-  { code: "TARGETED", display: "Targeted Therapies" },
-  { code: "CHEMOTHERAPY", display: "Chemotherapy" },
-  { code: "SURGEY", display: "Surgery" },
-  { code: "RADIATION", display: "Radiation Therapies" },
-  { code: "BIOLOGICAL", display: "Biological Therapy" },
-  { code: "HORMONAL", display: "Hormonal Therapy" },
+  { code: "Targeted Therapies", display: "Targeted Therapies" },
+  { code: "Chemotherapy", display: "Chemotherapy" },
+  { code: "Surgery", display: "Surgery" },
+  { code: "Radiation Therapies", display: "Radiation Therapies" },
+  { code: "Biological Therapy", display: "Biological Therapy" },
+  { code: "Hormonal Therapy", display: "Hormonal Therapy" },
 ];
 
 export const MEDICATION_DELIVER_TYPES: TDropItem[] = [
   {
-    code: "YES",
+    code: "Yes",
     display:
       "Yes, I would like to get it delivered through Prairie (Recommended)",
   },
   {
-    code: "NO",
+    code: "No",
     display: "No, I would like to pick up my medication at another pharmacy.",
   },
 ];
 
 export const CARE_PROVIDER_TYPES: TDropItem[] = [
-  { code: "PRIMARY", display: "Primary Care" },
-  { code: "NURSING", display: "Nursing Care" },
-  { code: "SPECIALITY", display: "Speciality Care" },
+  { code: "Primary Care", display: "Primary Care" },
+  { code: "Nursing Care", display: "Nursing Care" },
+  { code: "Speciality Care", display: "Speciality Care" },
 ];
 
 export const INFORMATION_TYPES: TDropItem[] = [
