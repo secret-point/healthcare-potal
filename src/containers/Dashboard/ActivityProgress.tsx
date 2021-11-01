@@ -12,7 +12,7 @@ const ActivityProgress = () => {
   const layoutClasses = useLayoutStyles();
   const { data: progressList = [] } = useFetchProgressList();
   const lastProgress = progressList[progressList.length - 1];
-  const diffInWeeks = dayjs().diff(lastProgress.updatedAt, "weeks");
+  const diffInWeeks = dayjs().diff(lastProgress?.updatedAt, "weeks");
 
   return (
     <>
