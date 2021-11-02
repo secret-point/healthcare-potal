@@ -1,6 +1,17 @@
-# Getting Started with Create React App
-
+# Member Portal
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Description
+The user can access the details of their upcoming
+video call appointments and respond to
+system-generated check-in questions.
+
+The user can also view reminders and messages
+from her physician and/or therapist.
+
+## Testing
+### Development Instance
+https://memportalreact-dot-cynomys-nonprod.df.r.appspot.com/login
 
 ## Available Scripts
 
