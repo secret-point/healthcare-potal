@@ -19,9 +19,9 @@ export const EMERGENCY_RELATIONSHIPS: TDropItem[] = [
 
 export const ETHNICITIES: TDropItem[] = [
   { code: "American Indian or Alask", display: "American Indian or Alask" },
-  { code: "Asian or Asian America", display: "Asian or Asian America" },
+  { code: "Asian or Asian American", display: "Asian or Asian American" },
   { code: "Black or African American", display: "Black or African American" },
-  { code: "Hispanic or Latinx", display: "Hispanic or Latinx" },
+  { code: "Hispanic or Latin", display: "Hispanic or Latin" },
   {
     code: "Middle Eastern or North African",
     display: "Middle Eastern or North African",
@@ -56,6 +56,7 @@ export const EDUCATIONAL_DEGREES: TDropItem[] = [
   { code: "Bachelor's degree", display: "Bachelor's degree" },
   { code: "Master's degree", display: "Master's degree" },
   { code: "Doctoral degree", display: "Doctoral degree" },
+  { code: "Decline to respond", display: "Decline to respond" },
 ];
 
 export const MARITAL_STATUS: TDropItem[] = [
@@ -156,12 +157,15 @@ export const MEDICATION_TYPES: TDropItem[] = [
 ];
 
 export const TREATMENT_TYPES: TDropItem[] = [
-  { code: "Targeted Therapies", display: "Targeted Therapies" },
-  { code: "Chemotherapy", display: "Chemotherapy" },
-  { code: "Surgery", display: "Surgery" },
-  { code: "Radiation Therapies", display: "Radiation Therapies" },
-  { code: "Biological Therapy", display: "Biological Therapy" },
-  { code: "Hormonal Therapy", display: "Hormonal Therapy" },
+  {
+    code: "Individual psychotherapy/counseling",
+    display: "Individual psychotherapy/counseling",
+  },
+  { code: "Group therapy", display: "Group therapy" },
+  { code: "Medication", display: "Medication" },
+  { code: "Medical supervision", display: "Medical supervision" },
+  { code: "Recreational therapies", display: "Recreational therapies" },
+  { code: "Complementary therapies", display: "Complementary therapies" },
 ];
 
 export const MEDICATION_DELIVER_TYPES: TDropItem[] = [
@@ -177,9 +181,54 @@ export const MEDICATION_DELIVER_TYPES: TDropItem[] = [
 ];
 
 export const CARE_PROVIDER_TYPES: TDropItem[] = [
-  { code: "Primary Care", display: "Primary Care" },
-  { code: "Nursing Care", display: "Nursing Care" },
-  { code: "Speciality Care", display: "Speciality Care" },
+  { code: "Immunologist", display: "Immunologist" },
+  { code: "Anesthesiologist", display: "Anesthesiologist" },
+  { code: "ColonAndRectalSurgeon", display: "ColonAndRectalSurgeon" },
+  {
+    code: "CricticalCareMedicineSpecialist",
+    display: "CricticalCareMedicineSpecialist",
+  },
+  { code: "Dermatologist", display: "Dermatologist" },
+  { code: "Endocrinologist", display: "Endocrinologist" },
+  {
+    code: "EmergencyMedicineSpecialist",
+    display: "EmergencyMedicineSpecialist",
+  },
+  { code: "FamilyPhysician", display: "FamilyPhysician" },
+  { code: "Gastroenterologist", display: "Gastroenterologist" },
+  {
+    code: "GeriatricMedicineSpecialist",
+    display: "GeriatricMedicineSpecialist",
+  },
+  { code: "Hematologist", display: "Hematologist" },
+  { code: "Hospice", display: "Hospice" },
+  { code: "InfectionDiseaseSpecialist", display: "InfectionDiseaseSpecialist" },
+  { code: "Internist", display: "Internist" },
+  { code: "MedicalGeneticist", display: "MedicalGeneticist" },
+  { code: "Nephrologist", display: "Nephrologist" },
+  { code: "Neurologist", display: "Neurologist" },
+  { code: "OB-GYN", display: "OB-GYN" },
+  { code: "Oncologist", display: "Oncologist" },
+  { code: "Ophthalmolgist", display: "Ophthalmolgist" },
+  { code: "Osteopath", display: "Osteopath" },
+  { code: "Otolaryngologist", display: "Otolaryngologist" },
+  { code: "Pathologist", display: "Pathologist" },
+  { code: "Pediatrician", display: "Pediatrician" },
+  { code: "Physiatrist", display: "Physiatrist" },
+  { code: "PlasticSurgeon", display: "PlasticSurgeon" },
+  { code: "Podiatrist", display: "Podiatrist" },
+  {
+    code: "PreventiveMedicineSpecialist",
+    display: "PreventiveMedicineSpecialist",
+  },
+  { code: "Psychiatrist", display: "Psychiatrist" },
+  { code: "Pulmonologist", display: "Pulmonologist" },
+  { code: "Radiologist", display: "Radiologist" },
+  { code: "Rheumatologist", display: "Rheumatologist" },
+  { code: "SleepMedicineSpecialist", display: "SleepMedicineSpecialist" },
+  { code: "SportsMedicineSpecialist", display: "SportsMedicineSpecialist" },
+  { code: "GeneralSurgeon", display: "GeneralSurgeon" },
+  { code: "Urologist", display: "Urologist" },
 ];
 
 export const INFORMATION_TYPES: TDropItem[] = [

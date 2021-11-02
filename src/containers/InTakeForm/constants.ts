@@ -15,10 +15,7 @@ import {
   MEDICATION_TYPES,
   TREATMENT_TYPES,
   FAMILY_MEMBERS,
-  MEDICATION_DELIVER_TYPES,
-  CARE_PROVIDER_TYPES,
 } from "../../constants/identity";
-import { usStates } from "../../constants/usStates";
 import { TInTakeFormDef } from "./types";
 
 export enum InTakeFormSteps {
@@ -193,7 +190,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
           },
           {
             label: "What is your highest educational degree?",
-            path: "econCondition",
+            path: "highestDegree",
             placeholder: "Select your highest degree",
             type: FieldType.SELECT,
             options: EDUCATIONAL_DEGREES,
@@ -202,7 +199,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
           },
           {
             label: "What is your marital status?",
-            path: "maritialStatus",
+            path: "maritalStatus",
             placeholder: "Select your marital status",
             type: FieldType.SELECT,
             options: MARITAL_STATUS,
@@ -467,7 +464,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
               {
                 path: "type",
                 placeholder: "Select medication",
-                type: FieldType.MULTI_SELECT,
+                type: FieldType.SELECT,
                 options: MEDICATION_TYPES,
                 lg: 6,
                 xs: 12,
@@ -541,11 +538,11 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
         fields: [
           {
             label: "Is there a history of mental illness in your family?",
-            path: "familyMentalIllness",
+            path: "psychFamilyHistory",
             type: FieldType.MULTI_INSTANCE,
             properties: [
               {
-                path: "member",
+                path: "relationship",
                 placeholder: "Select family member",
                 type: FieldType.SELECT,
                 options: FAMILY_MEMBERS,
@@ -553,7 +550,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
                 xs: 12,
               },
               {
-                path: "description",
+                path: "psychHistory",
                 placeholder: "Describe their experience with mental illness",
                 type: FieldType.TEXT,
                 isTopLabel: true,
@@ -569,7 +566,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
           {
             label:
               "Have you been hospitalized in the past due to mental illness?",
-            path: "mentalIllnessHospitalization",
+            path: "psychHospitalizationHistory",
             type: FieldType.MULTI_INSTANCE,
             properties: [
               {
@@ -594,39 +591,10 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
             xs: 12,
           },
           {
-            label:
-              "Have you had any surgery in the past due to mental illness?",
-            path: "mentalIllnessSurgeries",
-            type: FieldType.MULTI_INSTANCE,
-            properties: [
-              {
-                path: "date",
-                placeholder: "Date",
-                type: FieldType.DATE,
-                isTopLabel: true,
-                shrink: true,
-                lg: 6,
-                xs: 12,
-              },
-              {
-                path: "description",
-                placeholder: "What was the surgery for?",
-                type: FieldType.TEXT,
-                isTopLabel: true,
-                shrink: true,
-                lg: 6,
-                xs: 12,
-              },
-            ],
-            addButton: "Add more surgery history",
-            lg: 12,
-            xs: 12,
-          },
-          {
             label: "Do you have any traumatic experiences?",
             helperText:
               "You may also share this information directly with your doctor during your intake.",
-            path: "traumaticExperience",
+            path: "psychTrauma",
             placeholder: "Traumatic experience",
             type: FieldType.TEXT,
             isTopLabel: true,
@@ -644,7 +612,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
           {
             label:
               "Have you been diagnosed of any other medication conditions not related to mental health?",
-            path: "otherMedicationConditionsDiagnosis",
+            path: "medicalDiagnosisHistory",
             type: FieldType.MULTI_INSTANCE,
             properties: [
               {
@@ -655,7 +623,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
                 xs: 12,
               },
               {
-                path: "diagnosis",
+                path: "description",
                 placeholder: "What was the diagnosis?",
                 type: FieldType.TEXT,
                 lg: 6,
@@ -667,11 +635,11 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
           {
             label:
               "Is there a history of other medical conditions in your family?",
-            path: "familyMedicalConditions",
+            path: "medicalFamilyHistory",
             type: FieldType.MULTI_INSTANCE,
             properties: [
               {
-                path: "member",
+                path: "relationship",
                 placeholder: "Select family member",
                 type: FieldType.SELECT,
                 options: FAMILY_MEMBERS,
@@ -679,7 +647,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
                 xs: 12,
               },
               {
-                path: "description",
+                path: "medicalHistory",
                 placeholder: "Describe their medical conditions",
                 type: FieldType.TEXT,
                 isTopLabel: true,
@@ -695,7 +663,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
           {
             label:
               "Have you been hospitalized in the past due to other medical conditions?",
-            path: "medicalConditionsHospitalization",
+            path: "medicalHospitalizationHistory",
             type: FieldType.MULTI_INSTANCE,
             properties: [
               {
@@ -722,9 +690,8 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
             xs: 12,
           },
           {
-            label:
-              "Have you had any surgery in the past due to other medical conditions?",
-            path: "medicalConditionsSurgery",
+            label: "Have you had any surgery in the past?",
+            path: "medicalSurgeryHistory",
             type: FieldType.MULTI_INSTANCE,
             properties: [
               {
@@ -752,7 +719,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
           },
           {
             label: "Do you have any chronic conditions?",
-            path: "chronicConditions",
+            path: "medicalChronicCondition",
             placeholder: "Chronic condition",
             type: FieldType.TEXT,
             isTopLabel: true,
@@ -766,211 +733,6 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
   },
   [InTakeFormSteps.PHARMACY]: {
     title: "Alright, we’re almost done!",
-    groups: [
-      {
-        groupName: "Pharmacy Selection",
-        helperText: `If you use Prairie's Delivery Service, we'll deliver your monthly batch of medication for a flat rate of $15 (per medication).
-      While you may also pick up your medication at another pharmacy of your choice, the copay amount owed will differ from pharmacy to pharmacy, and be based on your insurance coverage.`,
-        fields: [
-          {
-            label: "Would you like to get your medication delivered?",
-            path: "pharmacyMedicationDeliverFrom",
-            type: FieldType.RADIO_GROUP,
-            options: MEDICATION_DELIVER_TYPES,
-            lg: 12,
-            xs: 12,
-            isTopLabel: true,
-            required: true,
-          },
-          {
-            label:
-              "Please provide the information of the pharmacy you wish to use.",
-            type: FieldType.SINGLE_INSTANCE,
-            path: "pharmacyInformation",
-            properties: [
-              {
-                path: "name",
-                placeholder: "Name of the pharmacy",
-                type: FieldType.TEXT,
-                isTopLabel: true,
-                shrink: true,
-                lg: 6,
-                xs: 12,
-              },
-              {
-                path: "phoneNumber",
-                placeholder: "Phone number",
-                type: FieldType.TEXT,
-                isTopLabel: true,
-                shrink: true,
-                lg: 6,
-                xs: 12,
-              },
-              {
-                path: "streetAddress1",
-                placeholder: "Street address 1",
-                type: FieldType.TEXT,
-                isTopLabel: true,
-                shrink: true,
-                lg: 6,
-                xs: 12,
-              },
-              {
-                path: "streetAddress2",
-                placeholder: "Street address 2(optional)",
-                type: FieldType.TEXT,
-                isTopLabel: true,
-                shrink: true,
-                lg: 6,
-                xs: 12,
-              },
-              {
-                path: "city",
-                placeholder: "City",
-                type: FieldType.TEXT,
-                isTopLabel: true,
-                shrink: true,
-                lg: 6,
-                xs: 12,
-              },
-              {
-                path: "zipcode",
-                placeholder: "Zipcode",
-                type: FieldType.TEXT,
-                isTopLabel: true,
-                shrink: true,
-                lg: 6,
-                xs: 12,
-              },
-              {
-                path: "state",
-                placeholder: "State",
-                type: FieldType.SELECT,
-                options: usStates,
-                lg: 6,
-                xs: 12,
-              },
-            ],
-            required: true,
-          },
-        ],
-      },
-      {
-        groupName: "Coordination of Care",
-        helperText: `Coordination of Care allows for your Prairie team to provide updates on your care with an outside provider like a therapist or your primary care provider. This leads to better outcomes on average, since everyone has the latest information about your care from your psychiatrist here at Prairie Health.<br/>
-      Your care team at Prairie Health will share relevant medical information with the people with whom you'd like us to coordinate care via mail, fax or any other secure methods.`,
-        fields: [
-          {
-            label: "Would you like to get your medication delivered?",
-            path: "careMedicationDeliverFrom",
-            type: FieldType.RADIO_GROUP,
-            options: MEDICATION_DELIVER_TYPES,
-            lg: 12,
-            xs: 12,
-            isTopLabel: true,
-            required: true,
-          },
-          {
-            label: "Who would you like us to coordinate your care with?",
-            type: FieldType.MULTI_INSTANCE,
-            path: "pharmacyInformation",
-            properties: [
-              {
-                path: "provider",
-                placeholder: "Select type of provider",
-                type: FieldType.SELECT,
-                options: CARE_PROVIDER_TYPES,
-                lg: 6,
-                xs: 12,
-              },
-              {
-                path: "name",
-                placeholder: "Name of the person",
-                type: FieldType.TEXT,
-                isTopLabel: true,
-                shrink: true,
-                lg: 6,
-                xs: 12,
-              },
-              {
-                path: "streetAddress1",
-                placeholder: "Street address 1",
-                type: FieldType.TEXT,
-                isTopLabel: true,
-                shrink: true,
-                lg: 6,
-                xs: 12,
-              },
-              {
-                path: "streetAddress2",
-                placeholder: "Street address 2(optional)",
-                type: FieldType.TEXT,
-                isTopLabel: true,
-                shrink: true,
-                lg: 6,
-                xs: 12,
-              },
-              {
-                path: "city",
-                placeholder: "City",
-                type: FieldType.TEXT,
-                isTopLabel: true,
-                shrink: true,
-                lg: 6,
-                xs: 12,
-              },
-              {
-                path: "zipcode",
-                placeholder: "Zipcode",
-                type: FieldType.TEXT,
-                isTopLabel: true,
-                shrink: true,
-                lg: 6,
-                xs: 12,
-              },
-              {
-                path: "state",
-                placeholder: "Zipcode",
-                type: FieldType.SELECT,
-                options: usStates,
-                lg: 6,
-                xs: 12,
-              },
-              {
-                path: "phoneNumber",
-                placeholder: "Phone number",
-                type: FieldType.TEXT,
-                isTopLabel: true,
-                shrink: true,
-                lg: 6,
-                xs: 12,
-              },
-              {
-                path: "faxNumber",
-                type: FieldType.TEXT,
-                isTopLabel: true,
-                shrink: true,
-                placeholder: "Fax number(if available)",
-                lg: 6,
-                xs: 12,
-              },
-              {
-                path: "emailAddress",
-                placeholder: "Email address(if available)",
-                type: FieldType.TEXT,
-                isTopLabel: true,
-                shrink: true,
-                lg: 6,
-                xs: 12,
-              },
-            ],
-            limit: 2,
-            addButton: "Add another provider",
-            instanceLabel: "Provider",
-            required: true,
-          },
-        ],
-      },
-    ],
+    groups: [],
   },
 };

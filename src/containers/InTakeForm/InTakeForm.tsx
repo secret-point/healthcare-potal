@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { FormEvent, useState } from "react";
+import { FormEvent, useMemo, useState } from "react";
 import { useHistory } from "react-router";
 import { useForm, FormProvider } from "react-hook-form";
 import Grid from "@material-ui/core/Grid";
@@ -34,6 +34,28 @@ const getInputUserForm = (user: any) => {
       ...user.dangerToOthers,
       danger: user.dangerToOthers.danger ? "Yes" : "No",
     },
+    psychHospitalizationHistory: user.psychHospitalizationHistory.map(
+      (history: any) => ({
+        ...history,
+        date: dayjs(history.date).format("YYYY-MM-DD"),
+      })
+    ),
+    medicalDiagnosisHistory: user.medicalDiagnosisHistory.map(
+      (history: any) => ({
+        ...history,
+        date: dayjs(history.date).format("YYYY-MM-DD"),
+      })
+    ),
+    medicalHospitalizationHistory: user.medicalHospitalizationHistory.map(
+      (history: any) => ({
+        ...history,
+        date: dayjs(history.date).format("YYYY-MM-DD"),
+      })
+    ),
+    medicalSurgeryHistory: user.medicalSurgeryHistory.map((history: any) => ({
+      ...history,
+      date: dayjs(history.date).format("YYYY-MM-DD"),
+    })),
   };
   return updated;
 };
@@ -45,9 +67,11 @@ const InTakeForm = () => {
   const [currentStep, setCurrentStep] = useState(InTakeFormSteps.START);
   const [form, setForm] = useState<any>({});
 
+  const defaultUserForm = useMemo(() => getInputUserForm(user), [user]);
+
   const methods = useForm({
     mode: "onChange",
-    defaultValues: getInputUserForm(user),
+    defaultValues: defaultUserForm,
   });
 
   const handleCompleteInTake = async () => {
