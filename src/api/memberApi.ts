@@ -5,6 +5,7 @@ import { useApiFetch } from "./useApiFetch";
 import {
   TCareMember,
   TCheckInFormRequest,
+  TCoordinationFormRequest,
   TInTakeFormRequest,
   TFeedbackRequest,
   TProgressRequest,
@@ -92,6 +93,18 @@ export const useUpdateInTakeForm = () => {
       apiFetch("/mp/intake-form", { method: "PUT", data }),
     {
       mutationKey: QUERY_KEYS.UPDATE_INTAKE_FORM,
+    }
+  );
+};
+
+export const useUpdateCoordinationForm = () => {
+  const apiFetch = useApiFetch();
+
+  return useMutation(
+    (data: TCoordinationFormRequest) =>
+      apiFetch("/mp/care-coordination", { method: "PUT", data }),
+    {
+      mutationKey: QUERY_KEYS.UPDATE_COORDINATION_FORM,
     }
   );
 };

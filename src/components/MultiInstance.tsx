@@ -77,7 +77,10 @@ const MultiInstance: React.FC<MultiInstanceProps> = ({
   const [instances, setInstances] = useState<number[]>([0]);
 
   useEffect(() => {
-    setInstances(new Array(value.length).fill(0).map((_value, index) => index));
+    if (!value) return;
+    setInstances(
+      new Array(value.length || 1).fill(0).map((_value, index) => index)
+    );
     // eslint-disable-next-line
   }, [path]);
 

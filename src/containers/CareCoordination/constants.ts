@@ -1,0 +1,102 @@
+import { FieldType } from "../../types/general";
+import {
+  CARE_PROVIDER_TYPES,
+  INFORMATION_TYPES,
+} from "../../constants/identity";
+import { usStates } from "../../constants/usStates";
+
+export const CARE_PROVIDER = {
+  label: "Who would you like us to coordinate your care with?",
+  type: FieldType.MULTI_INSTANCE,
+  path: "pharmacyInformation",
+  properties: [
+    {
+      path: "type",
+      placeholder: "Select type of provider",
+      type: FieldType.SELECT,
+      options: CARE_PROVIDER_TYPES,
+      xs: 6,
+    },
+    {
+      path: "name",
+      placeholder: "Name of the person",
+      type: FieldType.TEXT,
+      isTopLabel: true,
+      shrink: true,
+      xs: 6,
+    },
+    {
+      path: "streetAddress1",
+      placeholder: "Street address 1",
+      type: FieldType.TEXT,
+      isTopLabel: true,
+      shrink: true,
+      xs: 6,
+    },
+    {
+      path: "streetAddress2",
+      placeholder: "Street address 2(optional)",
+      type: FieldType.TEXT,
+      isTopLabel: true,
+      shrink: true,
+      xs: 6,
+    },
+    {
+      path: "city",
+      placeholder: "City",
+      type: FieldType.TEXT,
+      isTopLabel: true,
+      shrink: true,
+      xs: 6,
+    },
+    {
+      path: "zipcode",
+      placeholder: "Zipcode",
+      type: FieldType.TEXT,
+      isTopLabel: true,
+      shrink: true,
+      xs: 6,
+    },
+    {
+      path: "state",
+      placeholder: "State",
+      type: FieldType.SELECT,
+      options: usStates,
+      xs: 6,
+    },
+    {
+      path: "phoneNumber",
+      placeholder: "Phone number",
+      type: FieldType.TEXT,
+      isTopLabel: true,
+      shrink: true,
+      xs: 6,
+    },
+    {
+      path: "faxNumber",
+      type: FieldType.TEXT,
+      isTopLabel: true,
+      shrink: true,
+      placeholder: "Fax number(if available)",
+      xs: 6,
+    },
+    {
+      path: "emailAddress",
+      placeholder: "Email address(if available)",
+      type: FieldType.TEXT,
+      isTopLabel: true,
+      shrink: true,
+      xs: 6,
+    },
+    {
+      path: "sharedInformationType",
+      placeholder: "Types of information shared",
+      type: FieldType.SELECT,
+      options: INFORMATION_TYPES,
+      xs: 6,
+    },
+  ],
+  addButton: "Add another provider",
+  instanceLabel: "Provider",
+  required: true,
+};

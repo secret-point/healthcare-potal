@@ -1,4 +1,3 @@
-import dayjs from "dayjs";
 import { FormEvent, useMemo, useState } from "react";
 import { useHistory } from "react-router";
 import { useForm, FormProvider } from "react-hook-form";
@@ -13,64 +12,7 @@ import { InTakeFormSteps } from "./constants";
 import CompleteInTakeForm from "./CompleteInTakeForm";
 import StartInTake from "./StartInTake";
 import InTakeFormInput from "./InTakeFormInput";
-
-const convertUserToInTakeForm = (user: any) => ({
-  ...user,
-  dob: dayjs(user.dob).format("YYYY-MM-DD"),
-  height: {
-    feet: Math.floor(user.height / 12),
-    inches: user.height % 12,
-  },
-  weapon: {
-    ...user.weapon,
-    hasAccess: user.weapon.hasAccess ? "Yes" : "No",
-  },
-  dangerToSelf: {
-    ...user.dangerToSelf,
-    danger: user.dangerToSelf.danger ? "Yes" : "No",
-  },
-  dangerToOthers: {
-    ...user.dangerToOthers,
-    danger: user.dangerToOthers.danger ? "Yes" : "No",
-  },
-  psychHospitalizationHistory: user.psychHospitalizationHistory.map(
-    (history: any) => ({
-      ...history,
-      date: dayjs(history.date).format("YYYY-MM-DD"),
-    })
-  ),
-  medicalDiagnosisHistory: user.medicalDiagnosisHistory.map((history: any) => ({
-    ...history,
-    date: dayjs(history.date).format("YYYY-MM-DD"),
-  })),
-  medicalHospitalizationHistory: user.medicalHospitalizationHistory.map(
-    (history: any) => ({
-      ...history,
-      date: dayjs(history.date).format("YYYY-MM-DD"),
-    })
-  ),
-  medicalSurgeryHistory: user.medicalSurgeryHistory.map((history: any) => ({
-    ...history,
-    date: dayjs(history.date).format("YYYY-MM-DD"),
-  })),
-});
-
-const convertInTakeFormToUser = (user: any) => ({
-  ...user,
-  height: user.height.feet * 12 + user.height.inches,
-  weapon: {
-    ...user.weapon,
-    hasAccess: user.weapon.hasAccess === "Yes",
-  },
-  dangerToSelf: {
-    ...user.dangerToSelf,
-    danger: user.dangerToSelf.danger === "Yes",
-  },
-  dangerToOthers: {
-    ...user.dangerToOthers,
-    danger: user.dangerToOthers.danger === "Yes",
-  },
-});
+import { convertUserToInTakeForm, convertInTakeFormToUser } from "./utils";
 
 const InTakeForm = () => {
   const { user, loadUser } = useAuth();
@@ -79,11 +21,14 @@ const InTakeForm = () => {
   const [currentStep, setCurrentStep] = useState(InTakeFormSteps.START);
   const [form, setForm] = useState<any>({});
 
-  const defaultUserForm = useMemo(() => convertUserToInTakeForm(user), [user]);
+  const defaultInTakeForm = useMemo(
+    () => convertUserToInTakeForm(user),
+    [user]
+  );
 
   const methods = useForm({
     mode: "onChange",
-    defaultValues: defaultUserForm,
+    defaultValues: defaultInTakeForm,
   });
 
   const handleCompleteInTake = async (form: any) => {

@@ -183,6 +183,7 @@ export const MEDICATION_DELIVER_TYPES: TDropItem[] = [
 export const CARE_PROVIDER_TYPES: TDropItem[] = [
   { code: "Immunologist", display: "Immunologist" },
   { code: "Anesthesiologist", display: "Anesthesiologist" },
+  { code: "Cardiologist", display: "Cardiologist" },
   { code: "ColonAndRectalSurgeon", display: "ColonAndRectalSurgeon" },
   {
     code: "CricticalCareMedicineSpecialist",
@@ -207,7 +208,7 @@ export const CARE_PROVIDER_TYPES: TDropItem[] = [
   { code: "MedicalGeneticist", display: "MedicalGeneticist" },
   { code: "Nephrologist", display: "Nephrologist" },
   { code: "Neurologist", display: "Neurologist" },
-  { code: "OB-GYN", display: "OB-GYN" },
+  { code: "OBGY", display: "OBGY" },
   { code: "Oncologist", display: "Oncologist" },
   { code: "Ophthalmolgist", display: "Ophthalmolgist" },
   { code: "Osteopath", display: "Osteopath" },
@@ -232,11 +233,11 @@ export const CARE_PROVIDER_TYPES: TDropItem[] = [
 ];
 
 export const INFORMATION_TYPES: TDropItem[] = [
-  { code: "ALL", display: "Select all" },
-  { code: "DIAGNOSIS", display: "Diagnosis" },
-  { code: "PRESCRIPTION", display: "Prescription" },
-  { code: "CONSULTATION", display: "Consultation" },
-  { code: "GENETIC_TEST", display: "Genetic test" },
-  { code: "ASSESSMENT_RECORD", display: "Assessment record" },
-  { code: "DISCHARGE_SUMMARY", display: "Discharge summary" },
+  { code: "Select all", display: "Select all" },
+  { code: "Diagnosis", display: "Diagnosis" },
+  { code: "Prescription", display: "Prescription" },
+  { code: "Consultation", display: "Consultation" },
+  { code: "Genetic test", display: "Genetic test" },
+  { code: "Assessment record", display: "Assessment record" },
+  { code: "Discharge summary", display: "Discharge summary" },
 ];

@@ -39,3 +39,5 @@ export type TCheckInFormRequest = any;
 export type TInTakeFormRequest = any;
 
 export type TFeedbackRequest = any;
+
+export type TCoordinationFormRequest = any;
