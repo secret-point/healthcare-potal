@@ -58,7 +58,7 @@ const LatestPrairieScore: FC<LatestPrairieScoreProps> = ({
               Latest PrairieScore
             </Typography>
             <Typography variant="body1">
-              {`Updated ${diffInDays} days ago`}
+              {diffInDays ? `Updated ${diffInDays} days ago` : "Updated Today"}
             </Typography>
           </Grid>
 

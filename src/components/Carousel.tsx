@@ -44,7 +44,6 @@ const useStyles = makeStyles((theme: Theme) =>
 interface CarouselProps extends MCarouselProps {
   title: string;
   itemCount: number;
-  missingCount: number;
 }
 
 const Carousel: React.FC<CarouselProps> = ({
@@ -53,7 +52,6 @@ const Carousel: React.FC<CarouselProps> = ({
   responsive,
   itemCount,
   itemClass,
-  missingCount,
   containerClass,
 }) => {
   const classes = useStyles();
@@ -65,7 +63,7 @@ const Carousel: React.FC<CarouselProps> = ({
       <Typography className={classes.carouselTitle} variant="h2">
         {title}
         <Badge
-          badgeContent={missingCount}
+          badgeContent={itemCount}
           color="error"
           className={layoutClasses.ml2}
         />

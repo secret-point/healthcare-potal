@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { useGetMemberTodos } from "../../api";
 import Carousel from "../../components/Carousel";
 import TodoItem from "../../components/TodoItem";
@@ -32,14 +33,18 @@ const TodoList: React.FC<TodoListProps> = ({ onClickItem }) => {
     onClickItem?.(item);
   };
 
+  const incompletedTodos = useMemo(
+    () => todoList.filter((todo) => !todo.completed),
+    [todoList]
+  );
+
   return (
     <Carousel
       title="To-do Items"
-      itemCount={todoList.length}
-      missingCount={todoList.length}
+      itemCount={incompletedTodos.length}
       responsive={responsive}
     >
-      {todoList?.map((todoItem) => (
+      {incompletedTodos?.map((todoItem) => (
         <TodoItem
           key={todoItem._id}
           item={todoItem}
