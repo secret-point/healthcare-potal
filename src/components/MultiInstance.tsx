@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import dotProp from "dot-prop";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 
 import Box from "@material-ui/core/Box";
@@ -64,15 +64,22 @@ const MultiInstance: React.FC<MultiInstanceProps> = ({
   inputLabelClass,
 }) => {
   const {
+    watch,
     formState: { errors },
   } = useFormContext();
 
+  const value = watch(path);
   const hasError = Boolean(dotProp.get(errors, path));
 
   const classes = useStyles({ hasError });
   const colorClasses = useColorStyles();
   const layoutClasses = useLayoutStyles();
   const [instances, setInstances] = useState<number[]>([0]);
+
+  useEffect(() => {
+    setInstances(new Array(value.length).fill(0).map((_value, index) => index));
+    // eslint-disable-next-line
+  }, [path]);
 
   const handleClickAddMoreInstance = () => {
     setInstances([...instances, instances.length]);

@@ -99,7 +99,7 @@ const Dropdown: FC<DropdownProps> = ({
     register(name, validator); // custom register react-select
 
     if (defaultValue) {
-      setValue(name, defaultValue);
+      setValue(name, value || defaultValue);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [register, name]);

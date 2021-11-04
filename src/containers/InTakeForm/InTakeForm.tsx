@@ -14,68 +14,82 @@ import CompleteInTakeForm from "./CompleteInTakeForm";
 import StartInTake from "./StartInTake";
 import InTakeFormInput from "./InTakeFormInput";
 
-const getInputUserForm = (user: any) => {
-  const updated = {
-    ...user,
-    dob: dayjs(user.dob).format("YYYY-MM-DD"),
-    height: {
-      feet: Math.floor(user.height / 12),
-      inches: user.height % 12,
-    },
-    weapon: {
-      ...user.weapon,
-      hasAccess: user.weapon.hasAccess ? "Yes" : "No",
-    },
-    dangerToSelf: {
-      ...user.dangerToSelf,
-      danger: user.dangerToSelf.danger ? "Yes" : "No",
-    },
-    dangerToOthers: {
-      ...user.dangerToOthers,
-      danger: user.dangerToOthers.danger ? "Yes" : "No",
-    },
-    psychHospitalizationHistory: user.psychHospitalizationHistory.map(
-      (history: any) => ({
-        ...history,
-        date: dayjs(history.date).format("YYYY-MM-DD"),
-      })
-    ),
-    medicalDiagnosisHistory: user.medicalDiagnosisHistory.map(
-      (history: any) => ({
-        ...history,
-        date: dayjs(history.date).format("YYYY-MM-DD"),
-      })
-    ),
-    medicalHospitalizationHistory: user.medicalHospitalizationHistory.map(
-      (history: any) => ({
-        ...history,
-        date: dayjs(history.date).format("YYYY-MM-DD"),
-      })
-    ),
-    medicalSurgeryHistory: user.medicalSurgeryHistory.map((history: any) => ({
+const convertUserToInTakeForm = (user: any) => ({
+  ...user,
+  dob: dayjs(user.dob).format("YYYY-MM-DD"),
+  height: {
+    feet: Math.floor(user.height / 12),
+    inches: user.height % 12,
+  },
+  weapon: {
+    ...user.weapon,
+    hasAccess: user.weapon.hasAccess ? "Yes" : "No",
+  },
+  dangerToSelf: {
+    ...user.dangerToSelf,
+    danger: user.dangerToSelf.danger ? "Yes" : "No",
+  },
+  dangerToOthers: {
+    ...user.dangerToOthers,
+    danger: user.dangerToOthers.danger ? "Yes" : "No",
+  },
+  psychHospitalizationHistory: user.psychHospitalizationHistory.map(
+    (history: any) => ({
       ...history,
       date: dayjs(history.date).format("YYYY-MM-DD"),
-    })),
-  };
-  return updated;
-};
+    })
+  ),
+  medicalDiagnosisHistory: user.medicalDiagnosisHistory.map((history: any) => ({
+    ...history,
+    date: dayjs(history.date).format("YYYY-MM-DD"),
+  })),
+  medicalHospitalizationHistory: user.medicalHospitalizationHistory.map(
+    (history: any) => ({
+      ...history,
+      date: dayjs(history.date).format("YYYY-MM-DD"),
+    })
+  ),
+  medicalSurgeryHistory: user.medicalSurgeryHistory.map((history: any) => ({
+    ...history,
+    date: dayjs(history.date).format("YYYY-MM-DD"),
+  })),
+});
+
+const convertInTakeFormToUser = (user: any) => ({
+  ...user,
+  height: user.height.feet * 12 + user.height.inches,
+  weapon: {
+    ...user.weapon,
+    hasAccess: user.weapon.hasAccess === "Yes",
+  },
+  dangerToSelf: {
+    ...user.dangerToSelf,
+    danger: user.dangerToSelf.danger === "Yes",
+  },
+  dangerToOthers: {
+    ...user.dangerToOthers,
+    danger: user.dangerToOthers.danger === "Yes",
+  },
+});
 
 const InTakeForm = () => {
-  const { user } = useAuth();
+  const { user, loadUser } = useAuth();
   const history = useHistory();
   const updateInTakeForm = useUpdateInTakeForm();
   const [currentStep, setCurrentStep] = useState(InTakeFormSteps.START);
   const [form, setForm] = useState<any>({});
 
-  const defaultUserForm = useMemo(() => getInputUserForm(user), [user]);
+  const defaultUserForm = useMemo(() => convertUserToInTakeForm(user), [user]);
 
   const methods = useForm({
     mode: "onChange",
     defaultValues: defaultUserForm,
   });
 
-  const handleCompleteInTake = async () => {
-    await updateInTakeForm.mutate(form);
+  const handleCompleteInTake = async (form: any) => {
+    await updateInTakeForm.mutate(convertInTakeFormToUser(form), {
+      onSuccess: loadUser,
+    });
     setCurrentStep(InTakeFormSteps.COMPLETE);
   };
 
@@ -108,11 +122,8 @@ const InTakeForm = () => {
         setCurrentStep(InTakeFormSteps.MEDICAL_HISTORY);
         break;
       case InTakeFormSteps.MEDICAL_HISTORY:
-        setCurrentStep(InTakeFormSteps.PHARMACY);
-        break;
-      case InTakeFormSteps.PHARMACY:
       default:
-        handleCompleteInTake();
+        handleCompleteInTake(newForm);
         break;
     }
   };

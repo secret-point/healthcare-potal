@@ -26,11 +26,10 @@ const useStyles = makeStyles(() =>
 );
 
 const IN_TAKE_FORM_PROGRESS: Data<number> = {
-  [InTakeFormSteps.SELF_INFORMATION]: 10,
-  [InTakeFormSteps.ADDITIONAL_INFORMATION]: 30,
-  [InTakeFormSteps.FEELING_INFORMATION]: 50,
-  [InTakeFormSteps.MEDICAL_HISTORY]: 70,
-  [InTakeFormSteps.PHARMACY]: 90,
+  [InTakeFormSteps.SELF_INFORMATION]: 15,
+  [InTakeFormSteps.ADDITIONAL_INFORMATION]: 40,
+  [InTakeFormSteps.FEELING_INFORMATION]: 65,
+  [InTakeFormSteps.MEDICAL_HISTORY]: 90,
 };
 
 interface InTakeFormInputProps {

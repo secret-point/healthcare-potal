@@ -24,7 +24,6 @@ export enum InTakeFormSteps {
   ADDITIONAL_INFORMATION = "ADDITIONAL_INFORMATION",
   FEELING_INFORMATION = "FEELING_INFORMATION",
   MEDICAL_HISTORY = "MEDICAL_HISTORY",
-  PHARMACY = "PHARMACY",
   COMPLETE = "COMPLETE",
 }
 
@@ -730,9 +729,5 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
         ],
       },
     ],
-  },
-  [InTakeFormSteps.PHARMACY]: {
-    title: "Alright, we’re almost done!",
-    groups: [],
   },
 };
