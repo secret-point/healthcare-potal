@@ -16,10 +16,12 @@ export const convertUserToCoordinationForm = (user: any) => ({
 });
 
 export const convertCoordinationFormToUser = (form: any) => ({
-  // extProvOne: form[0] ? { ...form[0], sharedInformationType: undefined } : undefined,
+  extProvOne: form[0]
+    ? { ...form[0], sharedInformationType: undefined }
+    : undefined,
   extProvOneShareType: form[0]?.sharedInformationType,
-  // extProvTwo: form[1]
-  //   ? { ...form[1], sharedInformationType: undefined }
-  //   : undefined,
+  extProvTwo: form[1]
+    ? { ...form[1], sharedInformationType: undefined }
+    : undefined,
   extProvTwoShareType: form[1]?.sharedInformationType,
 });
