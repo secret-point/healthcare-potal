@@ -1,4 +1,11 @@
-import { useContext, useState, useMemo, createContext, useEffect } from "react";
+import {
+  useContext,
+  useCallback,
+  useState,
+  useMemo,
+  createContext,
+  useEffect,
+} from "react";
 import { User } from "../types";
 import {
   setToken,
@@ -26,7 +33,7 @@ export function AuthProvider(props: any) {
   const [user, setUser] = useState<User | undefined>();
   const [isLoading, setIsLoading] = useState(true);
 
-  async function loadUser() {
+  const loadUser = useCallback(async () => {
     try {
       const user = await fetchCurrentUser();
       setUser(user);
@@ -35,17 +42,17 @@ export function AuthProvider(props: any) {
     } finally {
       setIsLoading(false);
     }
-  }
-
-  useEffect(() => {
-    loadUser();
     // eslint-disable-next-line
   }, []);
 
+  useEffect(() => {
+    loadUser();
+  }, [loadUser]);
+
   async function logIn(email: string, password: string) {
     const user = await signIn({ email, password });
-    setUser(user);
     setToken(user.token);
+    loadUser();
   }
 
   async function logOut() {

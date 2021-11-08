@@ -26,7 +26,7 @@ export const CARE_PROVIDER = {
       xs: 6,
     },
     {
-      path: "streetAddress1",
+      path: "address1",
       placeholder: "Street address 1",
       type: FieldType.TEXT,
       isTopLabel: true,
@@ -34,7 +34,7 @@ export const CARE_PROVIDER = {
       xs: 6,
     },
     {
-      path: "streetAddress2",
+      path: "address2",
       placeholder: "Street address 2(optional)",
       type: FieldType.TEXT,
       isTopLabel: true,
@@ -50,7 +50,7 @@ export const CARE_PROVIDER = {
       xs: 6,
     },
     {
-      path: "zipcode",
+      path: "zip",
       placeholder: "Zipcode",
       type: FieldType.TEXT,
       isTopLabel: true,
@@ -65,7 +65,7 @@ export const CARE_PROVIDER = {
       xs: 6,
     },
     {
-      path: "phoneNumber",
+      path: "phone",
       placeholder: "Phone number",
       type: FieldType.TEXT,
       isTopLabel: true,
@@ -73,7 +73,7 @@ export const CARE_PROVIDER = {
       xs: 6,
     },
     {
-      path: "faxNumber",
+      path: "fax",
       type: FieldType.TEXT,
       isTopLabel: true,
       shrink: true,
@@ -81,7 +81,7 @@ export const CARE_PROVIDER = {
       xs: 6,
     },
     {
-      path: "emailAddress",
+      path: "email",
       placeholder: "Email address(if available)",
       type: FieldType.TEXT,
       isTopLabel: true,
