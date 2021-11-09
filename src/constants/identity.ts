@@ -128,9 +128,42 @@ export const FAMILY_MEMBERS: TDropItem[] = [
 ];
 
 export const SUBTANCE_TYPES: TDropItem[] = [
-  { code: "Element", display: "Element" },
-  { code: "Compound", display: "Compound" },
-  { code: "Mixture", display: "Mixture" },
+  { code: "Alcohol", display: "Alcohol" },
+  { code: "Ayahuasca", display: "Ayahuasca" },
+  { code: "DMT", display: "DMT" },
+  { code: "Cocaine", display: "Cocaine" },
+  { code: "GHB", display: "GHB" },
+  { code: "Hallucinogens", display: "Hallucinogens" },
+  { code: "Heroin", display: "Heroin" },
+  { code: "Inhalants", display: "Inhalants" },
+  { code: "Ketamine", display: "Ketamine" },
+  { code: "Khat", display: "Khat" },
+  { code: "Kratom", display: "Kratom" },
+  { code: "LSD", display: "LSD" },
+  { code: "Marijuana(Cannabis)", display: "Marijuana(Cannabis)" },
+  { code: "MDMA(Ecstasy/Molly)", display: "MDMA(Ecstasy/Molly)" },
+  { code: "Mescaline(Peyote)", display: "Mescaline(Peyote)" },
+  { code: "Methamphetamine", display: "Methamphetamine" },
+  {
+    code: "Over-the-Counter Medicines--Dextromethorphan(DXM)",
+    display: "Over-the-Counter Medicines--Dextromethorphan(DXM)",
+  },
+  {
+    code: "Over-the-Counter Medicines--Loperamide",
+    display: "Over-the-Counter Medicines--Loperamide",
+  },
+  { code: "PCP", display: "PCP" },
+  { code: "Prescription Opioids", display: "Prescription Opioids" },
+  { code: "Prescription Stimulants", display: "Prescription Stimulants" },
+  { code: "Psilocybin", display: "Psilocybin" },
+  { code: "Rohyopnol(Flunitrazepam)", display: "Rohyopnol(Flunitrazepam)" },
+  { code: "Salvia", display: "Salvia" },
+  { code: "Steroids(Anabolic)", display: "Steroids(Anabolic)" },
+  {
+    code: "Synthetic Cathinones(Bath Salts)",
+    display: "Synthetic Cathinones(Bath Salts)",
+  },
+  { code: "Tobacco/Nicotine", display: "Tobacco/Nicotine" },
 ];
 
 export const CONFIRMATION_TYPES: TDropItem[] = [
