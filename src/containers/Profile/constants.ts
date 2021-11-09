@@ -86,7 +86,7 @@ export const UPDATE_PROFILE_DIALOGS = {
         fields: [
           {
             label: "Emergency Contact Phone Number",
-            path: "emergencyContact.phoneNumber",
+            path: "emergencyContact.phone",
             isTopLabel: true,
             shrink: true,
             xs: 12,
