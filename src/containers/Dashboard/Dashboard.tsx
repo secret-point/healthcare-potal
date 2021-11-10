@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     todoListWrapper: {
       width: 1024,
-      maxWidth: "90vw",
+      maxWidth: "100vw",
       marginLeft: theme.spacing(-1.5),
     },
   })

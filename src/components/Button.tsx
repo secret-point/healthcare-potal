@@ -143,7 +143,7 @@ export const TextButton: FC<TextButtonProps> = ({
     >
       <Typography
         role="button"
-        align="center"
+        align="left"
         variant="subtitle1"
         className={classes.buttonText}
       >
