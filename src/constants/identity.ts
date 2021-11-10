@@ -49,6 +49,7 @@ export const PRONOUNS: TDropItem[] = [
 export const BIOLOGICAL_SEXES: TDropItem[] = [
   { code: "Male", display: "Male" },
   { code: "Female", display: "Female" },
+  { code: "Other", display: "Other" },
 ];
 
 export const EDUCATIONAL_DEGREES: TDropItem[] = [
@@ -175,18 +176,6 @@ export const SYMPTOM_TYPES: TDropItem[] = [
   { code: "Remitting", display: "Remitting" },
   { code: "Chronic", display: "Chronic" },
   { code: "Relapsing", display: "Relapsing" },
-];
-
-export const MEDICATION_TYPES: TDropItem[] = [
-  { code: "Liquid", display: "Liquid" },
-  { code: "Tablet", display: "Tablet" },
-  { code: "Capsules", display: "Capsules" },
-  { code: "Topical medicines", display: "Topical medicines" },
-  { code: "Suppositories", display: "Suppositories" },
-  { code: "Drops", display: "Drops" },
-  { code: "Inhalers", display: "Inhalers" },
-  { code: "Injections", display: "Injections" },
-  { code: "Implants or patches", display: "Implants or patches" },
 ];
 
 export const TREATMENT_TYPES: TDropItem[] = [

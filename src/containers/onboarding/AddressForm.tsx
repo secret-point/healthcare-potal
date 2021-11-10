@@ -2,11 +2,13 @@ import Grid from "@material-ui/core/Grid";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
 import Button from "../../components/Button";
-import TextInput from "../../components/TextInput";
 import ErrorText from "../../components/ErrorText";
+import Dropdown from "../../components/Dropdown";
+import TextInput from "../../components/TextInput";
 import { Theme } from "../../theme/types/createPalette";
 import { useInputDetails } from "../../hooks/useInputDetails";
 import { useLayoutStyles } from "../../components/useCommonStyles";
+import { usStates } from "../../constants/usStates";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -65,11 +67,12 @@ const AddressForm = () => {
       <Grid item xs={12} className={layoutClasses.mt3}>
         <Grid container spacing={1}>
           <Grid item xs={6}>
-            <TextInput
+            <Dropdown
               name="state"
-              label="State"
+              label="state"
               variant="outlined"
               placeholder="State"
+              options={usStates}
               validator={{ required: "Your state is required." }}
             />
           </Grid>

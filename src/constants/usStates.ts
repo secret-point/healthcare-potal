@@ -1,206 +1,206 @@
 export const usStates = [
   {
     code: "AL",
-    display: "Alabama",
+    display: "AL",
   },
   {
     code: "AK",
-    display: "Alaska",
+    display: "AK",
   },
   {
     code: "AZ",
-    display: "Arizona",
+    display: "AZ",
   },
   {
     code: "AR",
-    display: "Arkansas",
+    display: "AR",
   },
   {
     code: "CA",
-    display: "California",
+    display: "CA",
   },
   {
     code: "CO",
-    display: "Colorado",
+    display: "CO",
   },
   {
     code: "CT",
-    display: "Connecticut",
+    display: "CT",
   },
   {
     code: "DE",
-    display: "Delaware",
+    display: "DE",
   },
   {
     code: "DC",
-    display: "District Of Columbia",
+    display: "DC",
   },
   {
     code: "FL",
-    display: "Florida",
+    display: "FL",
   },
   {
     code: "GA",
-    display: "Georgia",
+    display: "GA",
   },
   {
     code: "HI",
-    display: "Hawaii",
+    display: "HI",
   },
   {
     code: "ID",
-    display: "Idaho",
+    display: "ID",
   },
   {
     code: "IL",
-    display: "Illinois",
+    display: "IL",
   },
   {
     code: "IN",
-    display: "Indiana",
+    display: "IN",
   },
   {
     code: "IA",
-    display: "Iowa",
+    display: "IA",
   },
   {
     code: "KS",
-    display: "Kansas",
+    display: "KS",
   },
   {
     code: "KY",
-    display: "Kentucky",
+    display: "KY",
   },
   {
     code: "LA",
-    display: "Louisiana",
+    display: "LA",
   },
   {
     code: "ME",
-    display: "Maine",
+    display: "ME",
   },
   {
     code: "MD",
-    display: "Maryland",
+    display: "MD",
   },
   {
     code: "MA",
-    display: "Massachusetts",
+    display: "MA",
   },
   {
     code: "MI",
-    display: "Michigan",
+    display: "MI",
   },
   {
     code: "MN",
-    display: "Minnesota",
+    display: "MN",
   },
   {
     code: "MS",
-    display: "Mississippi",
+    display: "MS",
   },
   {
     code: "MO",
-    display: "Missouri",
+    display: "MO",
   },
   {
     code: "MT",
-    display: "Montana",
+    display: "MT",
   },
   {
     code: "NE",
-    display: "Nebraska",
+    display: "NE",
   },
   {
     code: "NV",
-    display: "Nevada",
+    display: "NV",
   },
   {
     code: "NH",
-    display: "New Hampshire",
+    display: "NH",
   },
   {
     code: "NJ",
-    display: "New Jersey",
+    display: "NJ",
   },
   {
     code: "NM",
-    display: "New Mexico",
+    display: "NM",
   },
   {
     code: "NY",
-    display: "New York",
+    display: "NY",
   },
   {
     code: "NC",
-    display: "North Carolina",
+    display: "NC",
   },
   {
     code: "ND",
-    display: "North Dakota",
+    display: "ND",
   },
   {
     code: "OH",
-    display: "Ohio",
+    display: "OH",
   },
   {
     code: "OK",
-    display: "Oklahoma",
+    display: "OK",
   },
   {
     code: "OR",
-    display: "Oregon",
+    display: "OR",
   },
   {
     code: "PA",
-    display: "Pennsylvania",
+    display: "PA",
   },
   {
     code: "RI",
-    display: "Rhode Island",
+    display: "RI",
   },
   {
     code: "SC",
-    display: "South Carolina",
+    display: "SC",
   },
   {
     code: "SD",
-    display: "South Dakota",
+    display: "SD",
   },
   {
     code: "TN",
-    display: "Tennessee",
+    display: "TN",
   },
   {
     code: "TX",
-    display: "Texas",
+    display: "TX",
   },
   {
     code: "UT",
-    display: "Utah",
+    display: "UT",
   },
   {
     code: "VT",
-    display: "Vermont",
+    display: "VT",
   },
   {
     code: "VA",
-    display: "Virginia",
+    display: "VA",
   },
   {
     code: "WA",
-    display: "Washington",
+    display: "WA",
   },
   {
     code: "WV",
-    display: "West Virginia",
+    display: "WV",
   },
   {
     code: "WI",
-    display: "Wisconsin",
+    display: "WI",
   },
   {
     code: "WY",
-    display: "Wyoming",
+    display: "WY",
   },
 ];

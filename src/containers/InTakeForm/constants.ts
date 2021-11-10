@@ -12,7 +12,6 @@ import {
   SUBTANCE_TYPES,
   CONFIRMATION_TYPES,
   SYMPTOM_TYPES,
-  MEDICATION_TYPES,
   TREATMENT_TYPES,
   FAMILY_MEMBERS,
 } from "../../constants/identity";
@@ -456,15 +455,15 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
           "You may leave the fields blank if the question does not apply to you.",
         fields: [
           {
-            label: "Which medication(s) are you currently taking?",
+            label: "Name of medication",
             path: "medList",
             type: FieldType.MULTI_INSTANCE,
             properties: [
               {
                 path: "type",
                 placeholder: "Select medication",
-                type: FieldType.SELECT,
-                options: MEDICATION_TYPES,
+                type: FieldType.TEXT,
+                shrink: true,
                 lg: 6,
                 xs: 12,
               },
