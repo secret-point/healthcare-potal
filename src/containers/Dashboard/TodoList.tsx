@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { useGetMemberTodos } from "../../api";
 import Carousel from "../../components/Carousel";
 import TodoItem from "../../components/TodoItem";
-import { TTodoItem } from "../../types";
+import { TodoItemType, TTodoItem } from "../../types";
 
 const responsive = {
   desktop: {
@@ -33,8 +33,13 @@ const TodoList: React.FC<TodoListProps> = ({ onClickItem }) => {
     onClickItem?.(item);
   };
 
+  // For now we will not show the verify id todoItem
   const incompletedTodos = useMemo(
-    () => todoList.filter((todo) => !todo.completed),
+    () =>
+      todoList.filter(
+        (todo) =>
+          !todo.completed || todo.todoItemType !== TodoItemType.VERIFY_ID
+      ),
     [todoList]
   );
 
