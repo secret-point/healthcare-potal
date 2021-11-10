@@ -40,11 +40,11 @@ export const useStyles = makeStyles((theme: Theme) =>
         padding: theme.spacing(2),
       },
       "& .MuiFormLabel-root.Mui-focused": {
-        color: theme.palette.secondaryNavy2.main,
+        color: theme.palette.secondary.main,
       },
       "& .MuiOutlinedInput-root.Mui-focused": {
         "& .MuiOutlinedInput-notchedOutline": {
-          borderColor: theme.palette.secondaryNavy2.main,
+          borderColor: theme.palette.secondary.main,
           borderWidth: 1,
         },
       },
