@@ -15,7 +15,7 @@ export const useStyles = makeStyles((theme: Theme) =>
 
       "& .MuiInputLabel-root": {
         fontSize: 16,
-        color: theme.palette.primaryNavy.main,
+        color: theme.palette.secondaryNavy1.main,
       },
 
       "& .MuiOutlinedInput-multiline": {

@@ -28,7 +28,7 @@ export interface User {
   middleName?: string;
   lastName: string;
   phone: string;
-  profilePicture: string;
+  profilePicture: Nullable<string>;
   emergencyContact: UserContact;
   billingAddress: UserAddress;
   shippingAddress: UserAddress;

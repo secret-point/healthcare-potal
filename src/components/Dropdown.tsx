@@ -26,6 +26,7 @@ const useStyles = makeStyles((theme: Theme) =>
         display: "flex",
         transform: "translate(0px, -32px)",
         alignItems: "center",
+        color: theme.palette.secondaryNavy1.main,
       },
       "&.MuiFormLabel-root.Mui-focused": {
         color: theme.palette.primaryNavy.main,

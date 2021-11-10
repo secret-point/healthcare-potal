@@ -21,11 +21,13 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface UserProfilePhotoProps {
   user: User;
+  onDeletePicture: VoidFunction;
   onUploadFile: (file: File) => void;
 }
 
 const UserProfilePhoto: FC<UserProfilePhotoProps> = ({
   user,
+  onDeletePicture,
   onUploadFile,
 }) => {
   const classes = useStyles();
@@ -50,7 +52,11 @@ const UserProfilePhoto: FC<UserProfilePhotoProps> = ({
             width={64}
             height={64}
           />
-          <ProfileAvatarUpload onUploadFile={onUploadFile} />
+          <ProfileAvatarUpload
+            picture={user.profilePicture}
+            onUploadFile={onUploadFile}
+            onDeletePicture={onDeletePicture}
+          />
         </Grid>
       </Grid>
     </Grid>

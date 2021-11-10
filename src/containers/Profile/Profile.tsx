@@ -57,6 +57,15 @@ export default function Profile() {
     });
   };
 
+  const handleDeletePicture = () => {
+    updateProfile.mutate(
+      {
+        profilePicture: null,
+      },
+      { onSuccess: loadUser }
+    );
+  };
+
   const handleUpdateProfile = async (form: unknown) => {
     try {
       await updateProfile.mutate(form as UpdateProfileFormRequest, {
@@ -71,7 +80,11 @@ export default function Profile() {
     <Container>
       <Grid container spacing={4}>
         <Grid item xs={12}>
-          <UserProfilePhoto user={user} onUploadFile={handleUploadFile} />
+          <UserProfilePhoto
+            user={user}
+            onDeletePicture={handleDeletePicture}
+            onUploadFile={handleUploadFile}
+          />
         </Grid>
 
         <Grid item xs={12}>

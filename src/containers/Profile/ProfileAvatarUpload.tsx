@@ -27,10 +27,14 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface ProfileAvatarUploadProps {
+  picture: Nullable<string>;
+  onDeletePicture: VoidFunction;
   onUploadFile: (file: File) => void;
 }
 
 const ProfileAvatarUpload: FC<ProfileAvatarUploadProps> = ({
+  picture,
+  onDeletePicture,
   onUploadFile,
 }) => {
   const classes = useStyles();
@@ -45,6 +49,7 @@ const ProfileAvatarUpload: FC<ProfileAvatarUploadProps> = ({
 
   const handleDeleteFile = () => {
     setFile(undefined);
+    onDeletePicture();
   };
 
   return (
@@ -63,17 +68,18 @@ const ProfileAvatarUpload: FC<ProfileAvatarUploadProps> = ({
           Upload new picture
         </Typography>
       </Link>
-      {file && (
-        <Link
-          component="label"
-          className={classes.buttonRole}
-          onClick={handleDeleteFile}
-        >
-          <Typography variant="subtitle1" className={classes.deleteLabel}>
-            Delete picture
-          </Typography>
-        </Link>
-      )}
+      {file ||
+        (picture && (
+          <Link
+            component="label"
+            className={classes.buttonRole}
+            onClick={handleDeleteFile}
+          >
+            <Typography variant="subtitle1" className={classes.deleteLabel}>
+              Delete picture
+            </Typography>
+          </Link>
+        ))}
     </div>
   );
 };

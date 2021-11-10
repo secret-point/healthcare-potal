@@ -42,7 +42,7 @@ interface ProfileAvatarProps extends StyleProps {
   className?: string;
   firstName: string;
   lastName: string;
-  picture: string;
+  picture: Nullable<string>;
 }
 
 const ProfileAvatar: FC<ProfileAvatarProps> = ({
