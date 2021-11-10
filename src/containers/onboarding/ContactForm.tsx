@@ -60,8 +60,7 @@ const ContactForm = () => {
             required: "Your phone number is required.",
             pattern: {
               value: phoneNumberPattern,
-              message:
-                "Please enter your phone number in the correct format (xxx-xxx-xxxx).",
+              message: "Please enter your phone number.",
             },
           }}
         />
