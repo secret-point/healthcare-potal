@@ -70,6 +70,7 @@ const FieldComponent: FC<FieldComponentProps> = ({ field, variant }) => {
 
     case FieldType.TEXT:
     case FieldType.DATE:
+    case FieldType.PASSWORD:
     default:
       return (
         <TextInput
@@ -78,7 +79,13 @@ const FieldComponent: FC<FieldComponentProps> = ({ field, variant }) => {
           variant={field.variant || variant || "standard"}
           required={field.required}
           placeholder={field.placeholder}
-          type={field.type === FieldType.DATE ? "date" : "text"}
+          type={
+            field.type === FieldType.DATE
+              ? "date"
+              : field.type === FieldType.PASSWORD
+              ? "password"
+              : "text"
+          }
           InputLabelProps={{
             shrink: field.shrink || false || field.type === FieldType.DATE,
           }}

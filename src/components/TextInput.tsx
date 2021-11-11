@@ -1,8 +1,13 @@
 import clsx from "clsx";
 import dotProp from "dot-prop";
+import { useState } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 
 import TextField, { TextFieldProps } from "@material-ui/core/TextField";
+import IconButton from "@material-ui/core/IconButton";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import VisibilityIcon from "@material-ui/icons/Visibility";
+import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
 import { Theme } from "../theme/types/createPalette";
@@ -88,6 +93,7 @@ export default function TextInput({
   className,
   type,
   required,
+  InputProps,
   InputLabelProps = { shrink: true },
   ...props
 }: TextInputProps) {
@@ -100,10 +106,26 @@ export default function TextInput({
     formState: { errors },
     getValues,
   } = useFormContext();
+  const [showPassword, setShowPassword] = useState(false);
 
   const values = getValues();
   const started = dotProp.get(values, name);
   const hasError = Boolean(dotProp.get(errors, name));
+
+  const handleTogglePasswordShow = () => setShowPassword((show) => !show);
+
+  const endAdornment =
+    type === "password" ? (
+      <InputAdornment position="end">
+        <IconButton
+          aria-label="toggle password visibility"
+          onClick={handleTogglePasswordShow}
+          edge="end"
+        >
+          {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+        </IconButton>
+      </InputAdornment>
+    ) : null;
 
   return (
     <Controller
@@ -111,7 +133,7 @@ export default function TextInput({
       as={
         <TextField
           id={name}
-          type={type}
+          type={type === "password" && showPassword ? "text" : type}
           label={
             label ? (
               <>
@@ -130,6 +152,11 @@ export default function TextInput({
           error={hasError}
           className={clsx(className, classes.textField)}
           InputLabelProps={InputLabelProps}
+          InputProps={
+            InputProps || {
+              endAdornment,
+            }
+          }
           {...register(name, validator)}
           {...props}
         />

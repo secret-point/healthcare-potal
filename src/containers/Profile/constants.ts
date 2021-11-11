@@ -162,10 +162,11 @@ export const UPDATE_PROFILE_DIALOGS = {
         row: "Password",
         fields: [
           {
-            label: "Password",
+            label: "Enter New Password",
             path: "password",
             isTopLabel: true,
             shrink: true,
+            type: FieldType.PASSWORD,
             xs: 12,
           },
         ],
@@ -174,10 +175,11 @@ export const UPDATE_PROFILE_DIALOGS = {
         row: "Confirm Password",
         fields: [
           {
-            label: "Confirm Password",
+            label: "Confirm New Password",
             path: "confirmPassword",
             isTopLabel: true,
             shrink: true,
+            type: FieldType.PASSWORD,
             xs: 12,
           },
         ],

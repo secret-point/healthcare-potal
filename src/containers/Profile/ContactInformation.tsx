@@ -62,7 +62,7 @@ const ContactInformation: FC<ContactInformationProps> = ({ onClickEdit }) => {
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        <Typography>Contact Information</Typography>
+        <Typography variant="h3">Contact Information</Typography>
       </Grid>
 
       <Grid item xs={12}>

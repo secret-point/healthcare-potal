@@ -98,7 +98,7 @@ const AccountInformation: FC<AccountInformationProps> = ({
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        <Typography>Account</Typography>
+        <Typography variant="h3">Account</Typography>
       </Grid>
 
       <Grid item xs={12}>
