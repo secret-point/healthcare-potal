@@ -39,7 +39,7 @@ export default function SignIn() {
     try {
       await logIn(methods.getValues("email"), methods.getValues("password"));
     } catch (error) {
-      setErrorText(error.message);
+      setErrorText("Please check your email or password.");
     }
   };
 

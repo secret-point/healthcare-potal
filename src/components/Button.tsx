@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
 
     button: {
-      boxShadow: "none",
+      boxShadow: "none !important",
       padding: theme.spacing(2),
       borderRadius: theme.spacing(2),
 
@@ -35,6 +35,11 @@ const useStyles = makeStyles((theme: Theme) =>
 
       "&.Mui-disabled": {
         backgroundColor: theme.palette.distinctiveGray.main,
+      },
+
+      "&.Mui-focusVisible": {
+        boxShadow: "none",
+        border: `2px solid ${theme.palette.secondaryMint2.main}`,
       },
     },
 
