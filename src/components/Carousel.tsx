@@ -56,7 +56,7 @@ const Carousel: React.FC<CarouselProps> = ({
 }) => {
   const classes = useStyles();
   const layoutClasses = useLayoutStyles();
-  const { deviceType } = useViewport();
+  const { deviceType, isMobile } = useViewport();
 
   return (
     <div className={classes.container}>
@@ -69,7 +69,7 @@ const Carousel: React.FC<CarouselProps> = ({
         />
       </Typography>
       <MCarousel
-        partialVisible
+        partialVisible={isMobile}
         arrows={false}
         deviceType={deviceType}
         itemClass={clsx(classes.item, itemClass)}

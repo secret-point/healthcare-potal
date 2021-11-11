@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme: Theme) =>
       display: "flex",
       width: "100%",
       justifyContent: "center",
+      padding: theme.spacing(0, 4),
     },
 
     mobileSideContentWrapper: {

@@ -21,6 +21,7 @@ const useStyles = makeStyles(() =>
     },
     mainContent: {
       flexGrow: 1,
+      overflowX: "hidden",
     },
   })
 );

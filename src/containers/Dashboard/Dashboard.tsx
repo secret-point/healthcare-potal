@@ -19,8 +19,7 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: theme.palette.backgroundGreen.main,
     },
     todoListWrapper: {
-      width: 1024,
-      maxWidth: "100vw",
+      width: "calc(100vw - 96px)",
       marginLeft: theme.spacing(-1.5),
     },
   })
@@ -54,8 +53,10 @@ export default function Dashboard() {
   return (
     <Container>
       <Grid container spacing={6} className={classes.container}>
-        <Grid item xs={12} className={classes.todoListWrapper}>
-          <TodoList onClickItem={handleClickTodoItem} />
+        <Grid item xs={12}>
+          <Grid container className={classes.todoListWrapper}>
+            <TodoList onClickItem={handleClickTodoItem} />
+          </Grid>
         </Grid>
 
         <Grid item xs={12}>
