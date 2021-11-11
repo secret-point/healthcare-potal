@@ -19,7 +19,10 @@ const SymptomsReport = () => {
   const layoutClasses = useLayoutStyles();
 
   return (
-    <Card variant="outlined" className={cardClasses.card}>
+    <Card
+      variant="outlined"
+      className={clsx(cardClasses.card, cardClasses.grayBorder)}
+    >
       <CardContent className={clsx(layoutClasses.noPadding, layoutClasses.mb1)}>
         <EmojiPeopleIcon
           className={clsx(colorClasses.secondaryGreen1, layoutClasses.mb1)}

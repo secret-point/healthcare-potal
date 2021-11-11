@@ -138,3 +138,8 @@ export enum ProgressTypes {
   CASE_2_2 = "2-2",
   CASE_2_3 = "2-3",
 }
+
+export type TPosition = {
+  x: number;
+  y: number;
+};

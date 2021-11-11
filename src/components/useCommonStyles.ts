@@ -13,6 +13,9 @@ export const useCardStyles = makeStyles(
         flexDirection: "column",
         justifyContent: "space-between",
       },
+      grayBorder: {
+        borderColor: theme.palette.distinctiveGray.main,
+      },
     }),
   { index: 1 }
 );

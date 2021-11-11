@@ -29,7 +29,10 @@ const SurveyProgress: FC<SurveyProgressProps> = ({ lastProgress }) => {
   if (diffInWeeks < 2) return null;
 
   return (
-    <Card variant="outlined" className={cardClasses.card}>
+    <Card
+      variant="outlined"
+      className={clsx(cardClasses.card, cardClasses.grayBorder)}
+    >
       <CardContent className={clsx(layoutClasses.noPadding, layoutClasses.mb1)}>
         <AssessmentOutlinedIcon
           className={clsx(colorClasses.secondaryGreen1, layoutClasses.mb1)}

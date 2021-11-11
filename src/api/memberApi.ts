@@ -1,4 +1,5 @@
 import { useMutation, useQuery } from "react-query";
+import { orderBy } from "lodash";
 
 import { QUERY_KEYS } from "./constants";
 import { useApiFetch } from "./useApiFetch";
@@ -70,7 +71,7 @@ export const useFetchProgressList = () => {
     [QUERY_KEYS.FETCH_SCORE_PROGRESS_HISTORY],
     async (): Promise<TProgress[]> => {
       const { data } = await apiFetch(`/mp/progresses`);
-      return data;
+      return orderBy(data, "updatedAt");
     }
   );
 };

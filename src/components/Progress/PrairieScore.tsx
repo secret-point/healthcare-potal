@@ -20,6 +20,7 @@ import {
   useLayoutStyles,
 } from "../useCommonStyles";
 import { ROUTES } from "../../app/types";
+import { getUniqueGraphValues } from "../../utils/helper";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -50,10 +51,12 @@ const PrairieScore = ({ progressList }: PrairieScoreProps) => {
     return [
       {
         id: "PrairieScore",
-        data: progressList.map((history) => ({
-          x: dayjs(firstDate).diff(history.updatedAt, "day"),
-          y: history.total,
-        })),
+        data: getUniqueGraphValues(
+          progressList.map((history) => ({
+            x: dayjs(firstDate).diff(history.updatedAt, "day"),
+            y: history.total || 0,
+          }))
+        ),
       },
     ] as any;
   }, [progressList]);
@@ -65,7 +68,12 @@ const PrairieScore = ({ progressList }: PrairieScoreProps) => {
   return (
     <Card
       variant="outlined"
-      className={clsx(cardClasses.card, layoutClasses.pb0, layoutClasses.pt4)}
+      className={clsx(
+        cardClasses.card,
+        cardClasses.grayBorder,
+        layoutClasses.pb0,
+        layoutClasses.pt4
+      )}
     >
       <Grid container spacing={4}>
         <Grid item xs={12} sm={7}>

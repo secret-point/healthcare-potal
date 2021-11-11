@@ -1,4 +1,4 @@
-import { SeverityTypes, TCareMember, TProgress } from "../types";
+import { SeverityTypes, TCareMember, TPosition, TProgress } from "../types";
 
 export const formatUserType = (userType: TCareMember["userType"]) => {
   switch (userType) {
@@ -25,3 +25,8 @@ export const getSeverityBasedOnScore = (score: TProgress): SeverityTypes => {
   }
   return SeverityTypes.MINIMAL;
 };
+
+export const getUniqueGraphValues = (positions: TPosition[]) =>
+  positions.filter(
+    (position, index) => index <= 0 || position.x !== positions[index - 1].x
+  );
