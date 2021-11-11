@@ -62,7 +62,7 @@ export function AuthProvider(props: any) {
 
   const isAuthenticated = Boolean(user);
 
-  const fullName = [user?.firstName, user?.lastName].join("");
+  const fullName = [user?.firstName, user?.lastName].join(" ");
 
   const values = useMemo<AuthContextType>(
     () => ({

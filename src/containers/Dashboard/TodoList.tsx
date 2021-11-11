@@ -38,7 +38,7 @@ const TodoList: React.FC<TodoListProps> = ({ onClickItem }) => {
     () =>
       todoList.filter(
         (todo) =>
-          !todo.completed || todo.todoItemType !== TodoItemType.VERIFY_ID
+          !todo.completed && todo.todoItemType !== TodoItemType.VERIFY_ID
       ),
     [todoList]
   );
