@@ -509,7 +509,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
               {
                 path: "description",
                 placeholder:
-                  "Describe the treatment (provider, frequency,, location)",
+                  "Describe the treatment (Provider, frequency, location)",
                 type: FieldType.TEXT,
                 isTopLabel: true,
                 shrink: true,

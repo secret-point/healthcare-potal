@@ -9,6 +9,7 @@ import { Theme } from "../../theme/types/createPalette";
 import { useInputDetails } from "../../hooks/useInputDetails";
 import { useLayoutStyles } from "../../components/useCommonStyles";
 import { usStates } from "../../constants/usStates";
+import { usZipcodePattern } from "../../utils/string";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -69,7 +70,7 @@ const AddressForm = () => {
           <Grid item xs={6}>
             <Dropdown
               name="state"
-              label="state"
+              label="State"
               variant="outlined"
               placeholder="State"
               options={usStates}
@@ -82,7 +83,13 @@ const AddressForm = () => {
               label="Zip Code"
               variant="outlined"
               placeholder="Zip Code"
-              validator={{ required: "Your zip code is required." }}
+              validator={{
+                required: "Your zip code is required.",
+                pattern: {
+                  value: usZipcodePattern,
+                  message: "Please enter a 5 digit number zip code.",
+                },
+              }}
             />
           </Grid>
         </Grid>
