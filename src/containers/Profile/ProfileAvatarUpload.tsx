@@ -68,18 +68,17 @@ const ProfileAvatarUpload: FC<ProfileAvatarUploadProps> = ({
           Upload new picture
         </Typography>
       </Link>
-      {file ||
-        (picture && (
-          <Link
-            component="label"
-            className={classes.buttonRole}
-            onClick={handleDeleteFile}
-          >
-            <Typography variant="subtitle1" className={classes.deleteLabel}>
-              Delete picture
-            </Typography>
-          </Link>
-        ))}
+      {(Boolean(file) || Boolean(picture)) && (
+        <Link
+          component="label"
+          className={classes.buttonRole}
+          onClick={handleDeleteFile}
+        >
+          <Typography variant="subtitle1" className={classes.deleteLabel}>
+            Delete picture
+          </Typography>
+        </Link>
+      )}
     </div>
   );
 };
