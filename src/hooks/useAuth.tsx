@@ -8,7 +8,7 @@ import {
 } from "react";
 import { User } from "../types";
 import {
-  setToken,
+  storeToken,
   removeToken,
   useSignIn,
   useFetchCurrentUser,
@@ -30,6 +30,7 @@ export const AuthContext = createContext<AuthContextType>(undefined!);
 export function AuthProvider(props: any) {
   const signIn = useSignIn();
   const fetchCurrentUser = useFetchCurrentUser();
+  const [token, setToken] = useState<string | null>(null);
   const [user, setUser] = useState<User | undefined>();
   const [isLoading, setIsLoading] = useState(true);
 
@@ -43,7 +44,7 @@ export function AuthProvider(props: any) {
       setIsLoading(false);
     }
     // eslint-disable-next-line
-  }, []);
+  }, [token]);
 
   useEffect(() => {
     loadUser();
@@ -51,8 +52,8 @@ export function AuthProvider(props: any) {
 
   async function logIn(email: string, password: string) {
     const user = await signIn({ email, password });
+    storeToken(user.token);
     setToken(user.token);
-    loadUser();
   }
 
   async function logOut() {

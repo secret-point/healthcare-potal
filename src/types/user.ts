@@ -75,6 +75,7 @@ export interface TCareMember
   profilePic: string;
   primaryContact: string;
   secondaryContact?: string;
+  bookingPageLink?: string;
   since?: string;
   status: string;
   userType: "cc" | "psych" | "Care Partner";

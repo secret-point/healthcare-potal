@@ -1,6 +1,9 @@
 import clsx from "clsx";
 import { FC } from "react";
-import { Link as RouterLink } from "react-router-dom";
+import {
+  Link as RouterLink,
+  LinkProps as RouterLinkProps,
+} from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
@@ -24,18 +27,17 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface LinkProps {
+interface LinkProps extends Pick<RouterLinkProps, "to" | "target"> {
   align?: "left" | "center" | "right";
-  to: string;
   text: string;
   className?: string;
 }
 
-const Link = ({ align, className, to, text }: LinkProps) => {
+const Link = ({ align, className, to, text, ...props }: LinkProps) => {
   const classes = useStyles();
 
   return (
-    <RouterLink to={to} className={clsx(classes.link, className)}>
+    <RouterLink to={to} {...props} className={clsx(classes.link, className)}>
       <Typography align={align} variant="subtitle1">
         {text}
       </Typography>

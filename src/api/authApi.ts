@@ -87,7 +87,7 @@ export const useChangePasswordCode = () => {
   };
 };
 
-export const setToken = (token: string) => {
+export const storeToken = (token: string) => {
   sessionStorage.setItem("token", token);
 };
 

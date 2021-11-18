@@ -57,14 +57,14 @@ const PrairieScoreHistory = ({
         id: "Score",
         data: scoreHistory.map((score) => ({
           x: dayjs(score.updatedAt).format("MM/DD/YYYY"),
-          y: score.total,
+          y: score.total || 0,
         })),
       },
       {
         id: "Current Score",
         data: scoreHistory.slice(active, active + 1).map((history) => ({
           x: dayjs(history.updatedAt).format("MM/DD/YYYY"),
-          y: history.total,
+          y: history.total || 0,
         })),
       },
     ] as any;
@@ -124,7 +124,7 @@ const PrairieScoreHistory = ({
           xFormat="time:%m/%d/%y"
           yScale={{
             type: "linear",
-            max: 48,
+            max: 52,
           }}
         />
       </Grid>

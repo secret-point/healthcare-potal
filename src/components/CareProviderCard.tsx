@@ -6,10 +6,14 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
 import { TCareMember } from "../types";
-import { TextButton } from "./Button";
-import { useFontStyles, useLayoutStyles } from "./useCommonStyles";
+import {
+  useColorStyles,
+  useFontStyles,
+  useLayoutStyles,
+} from "./useCommonStyles";
 import ProfileAvatar from "./ProfileAvatar";
 import { formatUserType } from "../utils/helper";
+import { ButtonLink } from "./Link";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -29,6 +33,18 @@ const useStyles = makeStyles((theme) =>
         textAlign: "left",
       },
     },
+
+    actions: {
+      padding: theme.spacing(0),
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "flex-start",
+    },
+
+    bookingPageLink: {
+      alignSelf: "flex-start",
+      marginLeft: `0px !important`,
+    },
   })
 );
 
@@ -40,6 +56,7 @@ const CareProviderCard = ({ member }: CareTeamMemberCardProps) => {
   const classes = useStyles();
   const layoutClasses = useLayoutStyles();
   const fontClasses = useFontStyles();
+  const colorClasses = useColorStyles();
 
   return (
     <Card variant="outlined" className={classes.teamMemberCard}>
@@ -60,11 +77,22 @@ const CareProviderCard = ({ member }: CareTeamMemberCardProps) => {
           {[member.firstName, member.lastName].join(" ")}
         </Typography>
       </CardContent>
-      <CardActions className={layoutClasses.noPadding}>
-        <TextButton
-          text={member.primaryContact || member.secondaryContact}
-          className={classes.textButton}
-        />
+      <CardActions className={classes.actions}>
+        <Typography
+          align="left"
+          variant="subtitle1"
+          className={colorClasses.secondaryGreen1}
+        >
+          {member.primaryContact || member.secondaryContact}
+        </Typography>
+        {member.bookingPageLink ? (
+          <ButtonLink
+            text="Book an appointment"
+            target="_blank"
+            to={member.bookingPageLink}
+            className={classes.bookingPageLink}
+          />
+        ) : null}
       </CardActions>
     </Card>
   );

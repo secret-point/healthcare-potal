@@ -1,5 +1,6 @@
 import { useMutation, useQuery } from "react-query";
 import { orderBy } from "lodash";
+import dayjs from "dayjs";
 
 import { QUERY_KEYS } from "./constants";
 import { useApiFetch } from "./useApiFetch";
@@ -71,7 +72,15 @@ export const useFetchProgressList = () => {
     [QUERY_KEYS.FETCH_SCORE_PROGRESS_HISTORY],
     async (): Promise<TProgress[]> => {
       const { data } = await apiFetch(`/mp/progresses`);
-      return orderBy(data, "updatedAt");
+      const orderedProgresses = orderBy(data, "updatedAt");
+      return orderedProgresses.filter(
+        (progress, index) =>
+          index === 0 ||
+          dayjs(progress.updatedAt).diff(
+            orderedProgresses[index - 1].updatedAt,
+            "days"
+          ) !== 0
+      );
     }
   );
 };
