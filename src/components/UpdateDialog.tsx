@@ -1,5 +1,5 @@
 import { FC, FormEvent, useState } from "react";
-import { useForm, FormProvider } from "react-hook-form";
+import { useForm, useFormContext, FormProvider } from "react-hook-form";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -37,6 +37,55 @@ const useStyles = makeStyles((theme) =>
     },
   })
 );
+
+interface UpdateFormProps {
+  rows: TFieldRow[];
+  onClose: () => void;
+  onSave: (e: FormEvent) => void;
+}
+
+const UpdateForm: FC<UpdateFormProps> = ({ onClose, onSave, rows }) => {
+  const { trigger } = useFormContext();
+
+  const handleSave = async (e: FormEvent) => {
+    e.preventDefault();
+
+    const result = await trigger();
+    if (!result) {
+      return;
+    }
+
+    onSave(e);
+  };
+
+  return (
+    <form onSubmit={handleSave}>
+      <Grid container spacing={4}>
+        {rows.map((row) => (
+          <Grid item key={row.row} xs={12}>
+            <Grid container spacing={3}>
+              {row.fields.map((field) => (
+                <Grid item key={field.path} xs={(field.xs || 12) as any}>
+                  <FieldComponent field={field} variant="outlined" />
+                </Grid>
+              ))}
+            </Grid>
+          </Grid>
+        ))}
+      </Grid>
+
+      <DialogActions>
+        <Button text="Cancel" fullWidth={false} onClick={onClose} />
+        <Button
+          text="Save"
+          type="submit"
+          fullWidth={false}
+          onClick={handleSave}
+        />
+      </DialogActions>
+    </form>
+  );
+};
 
 interface UpdateDialogProps {
   open: boolean;
@@ -90,32 +139,9 @@ const UpdateDialog: FC<UpdateDialogProps> = ({
 
       <DialogContent className={classes.dialogContent}>
         <FormProvider {...methods}>
-          <form onSubmit={handleSave}>
-            <Grid container spacing={4}>
-              {rows.map((row) => (
-                <Grid item key={row.row} xs={12}>
-                  <Grid container spacing={3}>
-                    {row.fields.map((field) => (
-                      <Grid item key={field.path} xs={(field.xs || 12) as any}>
-                        <FieldComponent field={field} variant="outlined" />
-                      </Grid>
-                    ))}
-                  </Grid>
-                </Grid>
-              ))}
-            </Grid>
-          </form>
+          <UpdateForm onClose={onClose} onSave={handleSave} rows={rows} />
         </FormProvider>
       </DialogContent>
-      <DialogActions>
-        <Button text="Cancel" fullWidth={false} onClick={onClose} />
-        <Button
-          text="Save"
-          type="submit"
-          fullWidth={false}
-          onClick={handleSave}
-        />
-      </DialogActions>
     </Dialog>
   );
 };

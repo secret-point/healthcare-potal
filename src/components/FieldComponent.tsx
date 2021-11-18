@@ -90,7 +90,7 @@ const FieldComponent: FC<FieldComponentProps> = ({ field, variant }) => {
             shrink: field.shrink || false || field.type === FieldType.DATE,
           }}
           isTopLabel={field.isTopLabel}
-          validator={{ required: field.required }}
+          validator={field.validator || { required: field.required }}
         />
       );
   }

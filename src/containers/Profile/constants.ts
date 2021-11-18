@@ -1,4 +1,5 @@
 import { EditableField } from "./types";
+import { emailPattern } from "../../utils/string";
 import { usStates } from "../../constants/usStates";
 import { FieldType } from "../../types/general";
 
@@ -32,6 +33,14 @@ export const UPDATE_PROFILE_DIALOGS = {
             isTopLabel: true,
             shrink: true,
             xs: 12,
+            validator: {
+              required: "Your email address is required.",
+              pattern: {
+                value: emailPattern,
+                message:
+                  "Please enter your email address in the correct format.",
+              },
+            },
           },
         ],
       },

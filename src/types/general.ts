@@ -67,6 +67,7 @@ export type TCustomField = {
   options?: TDropItem[];
   required?: boolean;
   variant?: "standard" | "outlined";
+  validator?: any;
   properties?: TCustomFieldProperty[];
   limit?: number;
   addButton?: string;
