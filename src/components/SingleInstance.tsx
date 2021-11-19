@@ -83,6 +83,7 @@ const SingleInstance: React.FC<SingleInstanceProps> = ({
                 required,
                 label: "",
                 path: [path, property.path].join("."),
+                validator: property.validator,
               }}
               variant={variant}
             />

@@ -7,6 +7,8 @@ export const phoneNumberPattern =
 
 export const usZipcodePattern = /^\d{5}$|^\d{5}-\d{4}$/;
 
+export const feetInchPattern = /^\d{1,2}$/;
+
 export const validateEmail = (email: string): boolean =>
   emailPattern.test(email);
 

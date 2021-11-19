@@ -16,6 +16,7 @@ import {
   FAMILY_MEMBERS,
 } from "../../constants/identity";
 import { TInTakeFormDef } from "./types";
+import { feetInchPattern } from "../../utils/string";
 
 export enum InTakeFormSteps {
   START = "START",
@@ -85,12 +86,24 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
                 placeholder: "Feet",
                 lg: 6,
                 xs: 6,
+                validator: {
+                  pattern: {
+                    value: feetInchPattern,
+                    message: "Please input the digits only for feet.",
+                  },
+                },
               },
               {
                 path: "inches",
                 placeholder: "Inches",
                 lg: 6,
                 xs: 6,
+                validator: {
+                  pattern: {
+                    value: feetInchPattern,
+                    message: "Please input the digits only for inches.",
+                  },
+                },
               },
             ],
             lg: 6,

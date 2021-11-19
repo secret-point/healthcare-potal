@@ -54,6 +54,7 @@ export type TCustomFieldProperty = {
   options?: TDropItem[];
   xs?: any;
   lg?: any;
+  validator?: any;
 };
 
 export type TCustomField = {
