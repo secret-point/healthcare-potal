@@ -35,7 +35,7 @@ export const CARE_PROVIDER = {
     },
     {
       path: "address2",
-      placeholder: "Street address 2(optional)",
+      placeholder: "Street address 2 (optional)",
       type: FieldType.TEXT,
       isTopLabel: true,
       shrink: true,
