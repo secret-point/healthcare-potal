@@ -112,7 +112,7 @@ interface UpdateDialogProps {
   rows: TFieldRow[];
   defaultValues: any;
   onClose: VoidFunction;
-  onSave: (form: unknown) => void;
+  onSave: (title: string, form: unknown) => void;
 }
 
 const UpdateDialog: FC<UpdateDialogProps> = ({
@@ -137,7 +137,7 @@ const UpdateDialog: FC<UpdateDialogProps> = ({
     setIsUpdating(true);
     try {
       const values = methods.getValues();
-      await onSave(values);
+      await onSave(title, values);
     } finally {
       setIsUpdating(false);
     }

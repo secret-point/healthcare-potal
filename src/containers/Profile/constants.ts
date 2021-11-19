@@ -6,7 +6,7 @@ import { EMERGENCY_RELATIONSHIPS } from "../../constants/identity";
 
 export const UPDATE_PROFILE_DIALOGS = {
   [EditableField.PREFERRED_NAME]: {
-    title: "Update your preferred name",
+    title: "Preferred Name",
     rows: [
       {
         row: "Name",
@@ -23,7 +23,7 @@ export const UPDATE_PROFILE_DIALOGS = {
     ],
   },
   [EditableField.EMAIL]: {
-    title: "Update your email",
+    title: "Email",
     rows: [
       {
         row: "Email",
@@ -48,7 +48,7 @@ export const UPDATE_PROFILE_DIALOGS = {
     ],
   },
   [EditableField.PHONE_NUMBER]: {
-    title: "Update your phone number",
+    title: "Phone Number",
     rows: [
       {
         row: "Phone Number",
@@ -73,7 +73,7 @@ export const UPDATE_PROFILE_DIALOGS = {
     ],
   },
   [EditableField.EMERGENCY_CONTACT]: {
-    title: "Update your emergency contact",
+    title: "Emergency Contact",
     rows: [
       {
         row: "Name",
@@ -127,7 +127,7 @@ export const UPDATE_PROFILE_DIALOGS = {
     ],
   },
   [EditableField.ADDRESS]: {
-    title: "Update your address",
+    title: "Address",
     rows: [
       {
         row: "Line 1",

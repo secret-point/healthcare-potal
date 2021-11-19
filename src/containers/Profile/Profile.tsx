@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSnackbar } from "notistack";
 import Grid from "@material-ui/core/Grid";
 
 import useAuth from "../../hooks/useAuth";
@@ -15,8 +16,11 @@ import { UpdateProfileFormRequest } from "../../types";
 
 export default function Profile() {
   const { user, loadUser } = useAuth();
+  const { enqueueSnackbar } = useSnackbar();
+
   const uploadFile = useUploadFile();
   const updateProfile = useUpdateProfile();
+
   const [editingField, setEditingField] = useState<EditableField>();
   const [showVerifyIDDialog, setShowVerifyIDDialog] = useState(false);
 
@@ -66,10 +70,17 @@ export default function Profile() {
     );
   };
 
-  const handleUpdateProfile = async (form: unknown) => {
+  const handleUpdateProfile = async (title: string, form: unknown) => {
     try {
       await updateProfile.mutate(form as UpdateProfileFormRequest, {
         onSuccess: loadUser,
+      });
+      enqueueSnackbar(`You have successfully updated the ${title}.`, {
+        variant: "success",
+      });
+    } catch (error) {
+      enqueueSnackbar(error.data?.errorMessage || error.message, {
+        variant: "error",
       });
     } finally {
       handleCloseUpdateDialog();
