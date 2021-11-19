@@ -1,4 +1,4 @@
-import { FC, FormEvent, useState } from "react";
+import { FC, FormEvent, useState, useMemo } from "react";
 import { useForm, useFormContext, FormProvider } from "react-hook-form";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -11,6 +11,8 @@ import { makeStyles, createStyles } from "@material-ui/core/styles";
 import { TFieldRow } from "../types/general";
 import Button from "./Button";
 import FieldComponent from "./FieldComponent";
+import { useColorStyles } from "./useCommonStyles";
+import { getFormErrorMessages } from "../utils/helper";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -45,7 +47,11 @@ interface UpdateFormProps {
 }
 
 const UpdateForm: FC<UpdateFormProps> = ({ onClose, onSave, rows }) => {
-  const { trigger } = useFormContext();
+  const {
+    trigger,
+    formState: { errors },
+  } = useFormContext();
+  const colorClasses = useColorStyles();
 
   const handleSave = async (e: FormEvent) => {
     e.preventDefault();
@@ -57,6 +63,8 @@ const UpdateForm: FC<UpdateFormProps> = ({ onClose, onSave, rows }) => {
 
     onSave(e);
   };
+
+  const errorMessages = useMemo(() => getFormErrorMessages(errors), [errors]);
 
   return (
     <form onSubmit={handleSave}>
@@ -74,11 +82,22 @@ const UpdateForm: FC<UpdateFormProps> = ({ onClose, onSave, rows }) => {
         ))}
       </Grid>
 
+      <Grid container spacing={1}>
+        {errorMessages.map((message, index) => (
+          <Grid item xs={12} key={index}>
+            <Typography variant="body2" className={colorClasses.accentRed}>
+              {message}
+            </Typography>
+          </Grid>
+        ))}
+      </Grid>
+
       <DialogActions>
         <Button text="Cancel" fullWidth={false} onClick={onClose} />
         <Button
           text="Save"
           type="submit"
+          color="primary"
           fullWidth={false}
           onClick={handleSave}
         />

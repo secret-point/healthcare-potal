@@ -30,3 +30,17 @@ export const getUniqueGraphValues = (positions: TPosition[]) =>
   positions.filter(
     (position, index) => index <= 0 || position.x !== positions[index - 1].x
   );
+
+export const getFormErrorMessages = (errors: any): string[] => {
+  if (!errors) return [];
+
+  let messages: string[] = [];
+  Object.values(errors).forEach((error: any) => {
+    if (error.message) {
+      messages.push(error.message);
+    } else {
+      messages = [...messages, ...getFormErrorMessages(error)];
+    }
+  });
+  return messages;
+};

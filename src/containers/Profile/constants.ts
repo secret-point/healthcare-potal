@@ -1,7 +1,8 @@
 import { EditableField } from "./types";
-import { emailPattern } from "../../utils/string";
+import { emailPattern, phoneNumberPattern } from "../../utils/string";
 import { usStates } from "../../constants/usStates";
 import { FieldType } from "../../types/general";
+import { EMERGENCY_RELATIONSHIPS } from "../../constants/identity";
 
 export const UPDATE_PROFILE_DIALOGS = {
   [EditableField.PREFERRED_NAME]: {
@@ -58,6 +59,14 @@ export const UPDATE_PROFILE_DIALOGS = {
             isTopLabel: true,
             shrink: true,
             xs: 12,
+            validator: {
+              required: "Your phone number is required.",
+              pattern: {
+                value: phoneNumberPattern,
+                message:
+                  "Please enter a 10 digit number without any special characters.",
+              },
+            },
           },
         ],
       },
@@ -75,6 +84,9 @@ export const UPDATE_PROFILE_DIALOGS = {
             isTopLabel: true,
             shrink: true,
             xs: 12,
+            validator: {
+              required: "Your contact name is required.",
+            },
           },
         ],
       },
@@ -84,8 +96,10 @@ export const UPDATE_PROFILE_DIALOGS = {
           {
             label: "Emergency Contact Relationship",
             path: "emergencyContact.relationship",
+            type: FieldType.SELECT,
             isTopLabel: true,
             shrink: true,
+            options: EMERGENCY_RELATIONSHIPS,
             xs: 12,
           },
         ],
@@ -99,6 +113,14 @@ export const UPDATE_PROFILE_DIALOGS = {
             isTopLabel: true,
             shrink: true,
             xs: 12,
+            validator: {
+              required: "Your emergency contact phone number is required.",
+              pattern: {
+                value: phoneNumberPattern,
+                message:
+                  "Please enter a 10 digit number without any special characters.",
+              },
+            },
           },
         ],
       },
