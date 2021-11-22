@@ -90,8 +90,8 @@ export const useUpdateCheckInForm = () => {
 
   return useMutation(
     (data: TCheckInFormRequest) =>
-      apiFetch("/mp/check-in", { method: "POST", data }),
-    { mutationKey: QUERY_KEYS.UPDATE_CHECKIN_FORM }
+      apiFetch("/mp/assessment", { method: "POST", data }),
+    { mutationKey: QUERY_KEYS.UPDATE_ASSESSMENT_FORM }
   );
 };
 

@@ -14,6 +14,7 @@ import { ResetPasswordLinkForm } from "../../types";
 
 import ResetPasswordForm from "./ResetPasswordForm";
 import { ROUTES } from "../../app/types";
+import useNotification from "../../hooks/useNotification";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -28,6 +29,7 @@ export default function ResetPassword() {
   const classes = useStyles();
   const layoutClasses = useLayoutStyles();
   const [linkSent, setLinkSent] = useState(false);
+  const { handleSuccess, handleError } = useNotification();
 
   const sendResetPasswordLink = useSendResetPasswordLink();
 
@@ -38,11 +40,17 @@ export default function ResetPassword() {
   const handleResetPassword = async (e: FormEvent) => {
     e.preventDefault();
     const resetPasswordForm = methods.getValues() as ResetPasswordLinkForm;
-    await sendResetPasswordLink({
-      ...resetPasswordForm,
-      verificationUrl: window.location.origin + ROUTES.VERIFICATION_LINK,
-    });
-    setLinkSent(true);
+    try {
+      await sendResetPasswordLink({
+        ...resetPasswordForm,
+        verificationUrl: window.location.origin + ROUTES.VERIFICATION_LINK,
+      });
+      setLinkSent(true);
+
+      handleSuccess("Email with verification code sent successfully.");
+    } catch (error) {
+      handleError(error, error.data?.message || error.message);
+    }
   };
 
   const handleGoBack = () => {

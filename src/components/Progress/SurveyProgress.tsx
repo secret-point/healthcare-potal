@@ -40,13 +40,17 @@ const SurveyProgress: FC<SurveyProgressProps> = ({ lastProgress }) => {
         <Typography variant="subtitle1" className={layoutClasses.mb05}>
           <span
             dangerouslySetInnerHTML={{
-              __html: `It's been <b>${diffInWeeks} weeks</b> since your last check-in`,
+              __html: `It's been <b>${diffInWeeks} weeks</b> since your last assessment`,
             }}
           />
         </Typography>
       </CardContent>
       <CardActions className={layoutClasses.noPadding}>
-        <ButtonLink text="Take the survey" to={ROUTES.CHECKIN} align="left" />
+        <ButtonLink
+          text="Take the survey"
+          to={ROUTES.ASSESSMENT}
+          align="left"
+        />
       </CardActions>
     </Card>
   );

@@ -34,7 +34,7 @@ const SymptomsReport = () => {
       <CardActions className={layoutClasses.noPadding}>
         <ButtonLink
           text="Report your symptoms"
-          to={ROUTES.CHECKIN}
+          to={ROUTES.ASSESSMENT}
           align="left"
         />
       </CardActions>

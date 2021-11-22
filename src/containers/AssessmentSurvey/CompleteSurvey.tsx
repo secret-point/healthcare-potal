@@ -8,21 +8,20 @@ import {
   useFontStyles,
   useLayoutStyles,
 } from "../../components/useCommonStyles";
+import FeedbackForm from "../../components/FeedbackForm";
 import { useViewport } from "../../hooks/useViewport";
 
-const useStyles = makeStyles(() =>
+const useStyles = makeStyles((theme) =>
   createStyles({
-    togetherImage: {
-      maxWidth: 480,
+    feedbackFormWrapper: {
+      position: "fixed",
+      left: 0,
+      bottom: theme.spacing(4),
     },
   })
 );
 
-interface WelcomeProps {
-  onCancel: VoidFunction;
-}
-
-const Welcome: React.FC<WelcomeProps> = ({ onCancel }) => {
+const CompleteSurvey = () => {
   const classes = useStyles();
   const fontClasses = useFontStyles();
   const layoutClasses = useLayoutStyles();
@@ -37,12 +36,7 @@ const Welcome: React.FC<WelcomeProps> = ({ onCancel }) => {
         xs={12}
         className={layoutClasses.mb3}
       >
-        <img
-          src="/images/together.png"
-          width="100%"
-          alt="All together."
-          className={classes.togetherImage}
-        />
+        <img src="/images/celebration.png" height={120} alt="Celebration" />
       </Grid>
       <Grid item xs={12}>
         <Typography
@@ -50,8 +44,7 @@ const Welcome: React.FC<WelcomeProps> = ({ onCancel }) => {
           align="center"
           className={clsx(fontClasses.fontNormal, layoutClasses.mb2)}
         >
-          Welcome to your
-          <b> 2nd check-in!</b>
+          Thank you for completing your assessment!
         </Typography>
       </Grid>
       <Grid
@@ -60,29 +53,30 @@ const Welcome: React.FC<WelcomeProps> = ({ onCancel }) => {
         className={isMobile ? layoutClasses.mb4 : layoutClasses.mb6}
       >
         <Typography variant="subtitle1" align="center">
-          Completing this survey allows you and your care team to measure your
-          progress. Once you complete your check-in, your care team will review
-          your response.
+          Your care team will be reviewing your response and reach out to you if
+          needed. You can view your progress and your score history by clicking
+          on the button below.
         </Typography>
       </Grid>
       <Grid item xs={12}>
         <Button
-          text="Start"
+          text="View My Progress"
           color="primary"
           type="submit"
           variant="contained"
         />
       </Grid>
-      <Grid item xs={12}>
-        <Button
-          color="secondary"
-          text="Go Back Home"
-          variant="text"
-          onClick={onCancel}
-        />
+      <Grid
+        container
+        justify="center"
+        item
+        xs={12}
+        className={classes.feedbackFormWrapper}
+      >
+        <FeedbackForm />
       </Grid>
     </Grid>
   );
 };
 
-export default Welcome;
+export default CompleteSurvey;

@@ -4,22 +4,23 @@ import { useForm, FormProvider } from "react-hook-form";
 import Grid from "@material-ui/core/Grid";
 
 import { ROUTES } from "../../app/types";
-import { useUpdateCheckInForm } from "../../api";
+import { useFetchProgressList, useUpdateCheckInForm } from "../../api";
 import Container from "../../components/Container";
 
 import Welcome from "./Welcome";
 import ExperienceSurvey from "./ExperienceSurvey";
 import CompleteSurvey from "./CompleteSurvey";
 import {
-  CheckInSurveySteps,
+  AssessmentSurveySteps,
   CHECKIN_QUESTIONS,
   frequencyOptionCodeToValue,
 } from "./constants";
 
-const CheckInSurvey = () => {
+const AssessmentSurvey = () => {
   const history = useHistory();
   const updateCheckInForm = useUpdateCheckInForm();
-  const [surveyStep, setSurveyStep] = useState(CheckInSurveySteps.WELCOME);
+  const [surveyStep, setSurveyStep] = useState(AssessmentSurveySteps.WELCOME);
+  const { refetch } = useFetchProgressList();
 
   const methods = useForm({
     mode: "onChange",
@@ -51,16 +52,17 @@ const CheckInSurvey = () => {
 
   const handleCompleteCheckIn = async (form: any) => {
     await updateCheckInForm.mutate(getTransformedForm(form));
-    setSurveyStep(CheckInSurveySteps.COMPLETE);
+    setSurveyStep(AssessmentSurveySteps.COMPLETE);
   };
 
-  const handleNext = (e?: FormEvent) => {
+  const handleNext = async (e?: FormEvent) => {
     e?.preventDefault();
     switch (surveyStep) {
-      case CheckInSurveySteps.WELCOME:
-        setSurveyStep(CheckInSurveySteps.QUESTIONS);
+      case AssessmentSurveySteps.WELCOME:
+        setSurveyStep(AssessmentSurveySteps.QUESTIONS);
         break;
       default:
+        await refetch();
         history.push(ROUTES.PROGRESS);
         break;
     }
@@ -72,16 +74,18 @@ const CheckInSurvey = () => {
         <form onSubmit={handleNext}>
           <Grid container justify="center">
             <Grid item xs={12} sm={10} md={8} lg={6}>
-              {surveyStep === CheckInSurveySteps.WELCOME && (
+              {surveyStep === AssessmentSurveySteps.WELCOME && (
                 <Welcome onCancel={handleGoToHome} />
               )}
-              {surveyStep === CheckInSurveySteps.QUESTIONS && (
+              {surveyStep === AssessmentSurveySteps.QUESTIONS && (
                 <ExperienceSurvey
                   questions={CHECKIN_QUESTIONS}
                   onNext={handleCompleteCheckIn}
                 />
               )}
-              {surveyStep === CheckInSurveySteps.COMPLETE && <CompleteSurvey />}
+              {surveyStep === AssessmentSurveySteps.COMPLETE && (
+                <CompleteSurvey />
+              )}
             </Grid>
           </Grid>
         </form>
@@ -90,4 +94,4 @@ const CheckInSurvey = () => {
   );
 };
 
-export default CheckInSurvey;
+export default AssessmentSurvey;

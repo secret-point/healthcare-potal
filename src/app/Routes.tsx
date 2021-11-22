@@ -7,7 +7,7 @@ import Progress from "../containers/Progress/Progress";
 import Dashboard from "../containers/Dashboard/Dashboard";
 import Onboarding from "../containers/onboarding/Onboarding";
 import ResetPassword from "../containers/auth/ResetPassword";
-import CheckInSurvey from "../containers/CheckInSurvey/CheckInSurvey";
+import AssessmentSurvey from "../containers/AssessmentSurvey/AssessmentSurvey";
 import InTakeForm from "../containers/InTakeForm/InTakeForm";
 import CareCoordination from "../containers/CareCoordination/CareCoordination";
 import ConfirmVerificationLink from "../containers/auth/ConfirmVerificationLink";
@@ -39,8 +39,8 @@ export function AuthorizedRoutes() {
           <Route path={ROUTES.PROFILE} exact>
             <Profile />
           </Route>
-          <Route path={ROUTES.CHECKIN} exact>
-            <CheckInSurvey />
+          <Route path={ROUTES.ASSESSMENT} exact>
+            <AssessmentSurvey />
           </Route>
           <Route path={ROUTES.PROGRESS} exact>
             <Progress />

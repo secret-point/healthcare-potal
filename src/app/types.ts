@@ -5,7 +5,7 @@ export enum ROUTES {
   VERIFICATION_LINK = "/verification-link",
   DASHBOARD = "/dashboard",
   PROFILE = "/profile",
-  CHECKIN = "/check-in",
+  ASSESSMENT = "/assessment",
   PROGRESS = "/progress",
   INTAKE_FORM = "/intake-form",
   CARE_COORDINATION = "/care-coordination",

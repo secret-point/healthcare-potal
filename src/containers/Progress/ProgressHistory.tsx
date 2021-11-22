@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 
+import { ROUTES } from "../../app/types";
 import { useFetchProgressList } from "../../api/memberApi";
 import {
   useFontStyles,
@@ -11,14 +13,21 @@ import PrairieScoreHistory from "./components/PrairieScoreHistory";
 import PrairieStatusCardSlices from "./components/PrairieStatusCardSlices";
 
 const ProgressHistory = () => {
+  const history = useHistory();
   const fontClasses = useFontStyles();
   const layoutClasses = useLayoutStyles();
-  const { data: progressList = [] } = useFetchProgressList();
+  const { data: progressList = [], isSuccess } = useFetchProgressList();
   const [active, setActive] = useState(progressList.length - 1);
 
   useEffect(() => {
     setActive(progressList.length - 1);
   }, [progressList]);
+
+  useEffect(() => {
+    if (isSuccess && !progressList.length) {
+      history.push(ROUTES.ASSESSMENT);
+    }
+  }, [isSuccess, history, progressList]);
 
   return (
     <Grid container>

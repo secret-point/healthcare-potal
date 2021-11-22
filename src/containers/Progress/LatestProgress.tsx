@@ -24,6 +24,7 @@ const LatestProgress = () => {
   const latestItem = progressList[progressList.length - 1];
   const previousItem = progressList[progressList.length - 2] || latestItem;
   const requireCheckIn =
+    dayjs().diff(latestItem.updatedAt, "hours") <= 24 ||
     (latestItem.total > 10 &&
       dayjs(latestItem.updatedAt).diff(previousItem.updatedAt, "day") > 5) ||
     (latestItem.total <= 10 &&
@@ -43,7 +44,11 @@ const LatestProgress = () => {
           Your Latest Progress
         </Typography>
         {!requireCheckIn && (
-          <ButtonLink text="Update my score" to={ROUTES.CHECKIN} align="left" />
+          <ButtonLink
+            text="Take the assessment"
+            to={ROUTES.ASSESSMENT}
+            align="left"
+          />
         )}
       </Grid>
 

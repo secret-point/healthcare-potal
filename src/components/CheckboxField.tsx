@@ -18,15 +18,23 @@ const useStyles = makeStyles((theme: Theme) => ({
     padding: theme.spacing(0.5),
     borderRadius: theme.spacing(1),
     border: `1px solid rgba(0, 0, 0, 0.23)`,
+    "& span": {
+      fontSize: 16,
+      "&:last-child": {
+        color: theme.palette.primaryNavy.main,
+      },
+    },
   },
   selectedControlLabel: {
     border: `1px solid ${theme.palette.secondaryGreen1.main}`,
-    "& .MuiTypography-root": {
+    "& span:last-child": {
       color: theme.palette.secondaryGreen1.main,
     },
   },
   label: {
-    fontSize: 16,
+    "& span": {
+      fontSize: 16,
+    },
   },
   selectedLabel: {
     color: ({ color }: StyleProps) => theme.palette[color || "primary"].main,
@@ -64,9 +72,9 @@ const CheckboxField: FC<CheckboxFieldProps> = ({
             />
           )}
           className={className}
-          classes={{
-            label: clsx(classes.label, isChecked && classes.selectedLabel),
-          }}
+          // classes={{
+          //   label: clsx(classes.label, isChecked && classes.selectedLabel),
+          // }}
         />
       }
       label={label}

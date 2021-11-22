@@ -138,7 +138,7 @@ export class ScoreHistorySummary {
         return {
           title: "Scores not improving? Don’t worry! ☺️",
           summary:
-            "It’s very common for scores to not change as much before you start seeing improvments. Let’s check-in by taking the survey next week to continue monitoring your wellbeing.",
+            "It’s very common for scores to not change as much before you start seeing improvments. Let’s assess by taking the survey next week to continue monitoring your wellbeing.",
         };
       case ProgressTypes.CASE_1_1_2:
         return {

@@ -1,6 +1,6 @@
 import { TDropItem, TQuestion } from "../../types";
 
-export enum CheckInSurveySteps {
+export enum AssessmentSurveySteps {
   WELCOME = "WELCOME",
   QUESTIONS = "QUESTIONS",
   COMPLETE = "COMPLETE",
