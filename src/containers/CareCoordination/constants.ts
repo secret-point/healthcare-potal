@@ -4,6 +4,7 @@ import {
   INFORMATION_TYPES,
 } from "../../constants/identity";
 import { usStates } from "../../constants/usStates";
+import { emailPattern } from "../../utils/string";
 
 export const CARE_PROVIDER = {
   label: "Who would you like us to coordinate your care with?",
@@ -12,6 +13,7 @@ export const CARE_PROVIDER = {
   properties: [
     {
       path: "type",
+      label: "Select type of provider",
       placeholder: "Select type of provider",
       type: FieldType.SELECT,
       options: CARE_PROVIDER_TYPES,
@@ -19,6 +21,7 @@ export const CARE_PROVIDER = {
     },
     {
       path: "name",
+      label: "Name of the person",
       placeholder: "Name of the person",
       type: FieldType.TEXT,
       isTopLabel: true,
@@ -27,6 +30,7 @@ export const CARE_PROVIDER = {
     },
     {
       path: "address1",
+      label: "Street address 1",
       placeholder: "Street address 1",
       type: FieldType.TEXT,
       isTopLabel: true,
@@ -35,6 +39,7 @@ export const CARE_PROVIDER = {
     },
     {
       path: "address2",
+      label: "Street address 2 (optional)",
       placeholder: "Street address 2 (optional)",
       type: FieldType.TEXT,
       isTopLabel: true,
@@ -43,6 +48,7 @@ export const CARE_PROVIDER = {
     },
     {
       path: "city",
+      label: "City",
       placeholder: "City",
       type: FieldType.TEXT,
       isTopLabel: true,
@@ -51,6 +57,7 @@ export const CARE_PROVIDER = {
     },
     {
       path: "zip",
+      label: "Zipcode",
       placeholder: "Zipcode",
       type: FieldType.TEXT,
       isTopLabel: true,
@@ -66,6 +73,7 @@ export const CARE_PROVIDER = {
     },
     {
       path: "phone",
+      label: "Phone number",
       placeholder: "Phone number",
       type: FieldType.TEXT,
       isTopLabel: true,
@@ -74,22 +82,31 @@ export const CARE_PROVIDER = {
     },
     {
       path: "fax",
+      label: "Fax number(if available)",
+      placeholder: "Fax number(if available)",
       type: FieldType.TEXT,
       isTopLabel: true,
       shrink: true,
-      placeholder: "Fax number(if available)",
       xs: 6,
     },
     {
       path: "email",
+      label: "Email address(if available)",
       placeholder: "Email address(if available)",
       type: FieldType.TEXT,
       isTopLabel: true,
       shrink: true,
       xs: 6,
+      validator: {
+        pattern: {
+          value: emailPattern,
+          message: "Please enter email address in the correct format.",
+        },
+      },
     },
     {
       path: "sharedInformationTypes",
+      label: "Types of information shared",
       placeholder: "Types of information shared",
       type: FieldType.MULTI_SELECT,
       options: INFORMATION_TYPES,

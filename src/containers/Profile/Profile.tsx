@@ -75,9 +75,12 @@ export default function Profile() {
       await updateProfile.mutate(form as UpdateProfileFormRequest, {
         onSuccess: loadUser,
       });
-      enqueueSnackbar(`You have successfully updated the ${title}.`, {
-        variant: "success",
-      });
+      enqueueSnackbar(
+        `You've successfully updated the ${title.toLowerCase()}.`,
+        {
+          variant: "success",
+        }
+      );
     } catch (error) {
       enqueueSnackbar(error.data?.errorMessage || error.message, {
         variant: "error",
