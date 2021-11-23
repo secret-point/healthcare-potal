@@ -198,6 +198,13 @@ export const UPDATE_PROFILE_DIALOGS = {
             isTopLabel: true,
             shrink: true,
             type: FieldType.PASSWORD,
+            validator: {
+              required: "Your password is required.",
+              minLength: {
+                value: 8,
+                message: "Please enter the password which is greater than 8.",
+              },
+            },
             xs: 12,
           },
         ],
@@ -211,6 +218,9 @@ export const UPDATE_PROFILE_DIALOGS = {
             isTopLabel: true,
             shrink: true,
             type: FieldType.PASSWORD,
+            validator: {
+              required: "Your confirm password is required.",
+            },
             xs: 12,
           },
         ],

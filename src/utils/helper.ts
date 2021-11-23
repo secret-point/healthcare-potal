@@ -38,7 +38,9 @@ export const getFormErrorMessages = (errors: any): string[] => {
   Object.values(errors).forEach((error: any) => {
     if (error.message) {
       messages.push(error.message);
-    } else {
+    } else if (typeof error === "string") {
+      messages.push(error);
+    } else if (typeof error !== "function") {
       messages = [...messages, ...getFormErrorMessages(error)];
     }
   });

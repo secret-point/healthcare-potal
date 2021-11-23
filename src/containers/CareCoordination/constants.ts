@@ -4,7 +4,7 @@ import {
   INFORMATION_TYPES,
 } from "../../constants/identity";
 import { usStates } from "../../constants/usStates";
-import { emailPattern } from "../../utils/string";
+import { emailPattern, phoneNumberPattern } from "../../utils/string";
 
 export const CARE_PROVIDER = {
   label: "Who would you like us to coordinate your care with?",
@@ -17,6 +17,9 @@ export const CARE_PROVIDER = {
       placeholder: "Select type of provider",
       type: FieldType.SELECT,
       options: CARE_PROVIDER_TYPES,
+      validator: {
+        required: "Provider type is required.",
+      },
       xs: 6,
     },
     {
@@ -26,6 +29,9 @@ export const CARE_PROVIDER = {
       type: FieldType.TEXT,
       isTopLabel: true,
       shrink: true,
+      validator: {
+        required: "Provider name is required.",
+      },
       xs: 6,
     },
     {
@@ -35,6 +41,9 @@ export const CARE_PROVIDER = {
       type: FieldType.TEXT,
       isTopLabel: true,
       shrink: true,
+      validator: {
+        required: "Street address 1 is required.",
+      },
       xs: 6,
     },
     {
@@ -53,6 +62,9 @@ export const CARE_PROVIDER = {
       type: FieldType.TEXT,
       isTopLabel: true,
       shrink: true,
+      validator: {
+        required: "City is required.",
+      },
       xs: 6,
     },
     {
@@ -62,6 +74,9 @@ export const CARE_PROVIDER = {
       type: FieldType.TEXT,
       isTopLabel: true,
       shrink: true,
+      validator: {
+        required: "Zipcode is required.",
+      },
       xs: 6,
     },
     {
@@ -78,6 +93,14 @@ export const CARE_PROVIDER = {
       type: FieldType.TEXT,
       isTopLabel: true,
       shrink: true,
+      validator: {
+        required: "Phone number is required.",
+        pattern: {
+          value: phoneNumberPattern,
+          message:
+            "Please enter a 10 digit number without any special characters.",
+        },
+      },
       xs: 6,
     },
     {
