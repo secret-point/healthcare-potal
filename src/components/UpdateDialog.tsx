@@ -1,4 +1,5 @@
-import { FC, FormEvent, useState, useMemo } from "react";
+import dotProp from "dot-prop";
+import { FC, FormEvent, useEffect, useMemo, useState } from "react";
 import { useForm, useFormContext, FormProvider } from "react-hook-form";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -41,17 +42,25 @@ const useStyles = makeStyles((theme) =>
 );
 
 interface UpdateFormProps {
+  isPasswordForm: boolean;
   rows: TFieldRow[];
   onClose: () => void;
   onSave: (e: FormEvent) => void;
 }
 
-const UpdateForm: FC<UpdateFormProps> = ({ onClose, onSave, rows }) => {
+const UpdateForm: FC<UpdateFormProps> = ({
+  isPasswordForm,
+  onClose,
+  onSave,
+  rows,
+}) => {
   const {
     trigger,
+    getValues,
     formState: { errors },
   } = useFormContext();
   const colorClasses = useColorStyles();
+  const [extraError, setExtraError] = useState("");
 
   const handleSave = async (e: FormEvent) => {
     e.preventDefault();
@@ -61,10 +70,30 @@ const UpdateForm: FC<UpdateFormProps> = ({ onClose, onSave, rows }) => {
       return;
     }
 
+    const values = getValues();
+    const password = dotProp.get(values, "password") as string;
+    const confirmPassword = dotProp.get(values, "confirmPassword") as string;
+    if (password !== confirmPassword && isPasswordForm) {
+      setExtraError("Password does not match.");
+      return;
+    }
+
     onSave(e);
   };
 
-  const errorMessages = useMemo(() => getFormErrorMessages(errors), [errors]);
+  useEffect(() => {
+    if (!isPasswordForm) {
+      setExtraError("");
+    }
+  }, [isPasswordForm]);
+
+  const errorMessages = useMemo(
+    () =>
+      [...getFormErrorMessages(errors), extraError].filter(
+        (message) => message
+      ),
+    [errors, extraError]
+  );
 
   return (
     <form onSubmit={handleSave}>
@@ -158,7 +187,12 @@ const UpdateDialog: FC<UpdateDialogProps> = ({
 
       <DialogContent className={classes.dialogContent}>
         <FormProvider {...methods}>
-          <UpdateForm onClose={onClose} onSave={handleSave} rows={rows} />
+          <UpdateForm
+            isPasswordForm={/password/.test(title)}
+            onClose={onClose}
+            onSave={handleSave}
+            rows={rows}
+          />
         </FormProvider>
       </DialogContent>
     </Dialog>
