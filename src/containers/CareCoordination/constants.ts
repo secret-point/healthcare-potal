@@ -89,9 +89,9 @@ export const CARE_PROVIDER = {
       xs: 6,
     },
     {
-      path: "sharedInformationType",
+      path: "sharedInformationTypes",
       placeholder: "Types of information shared",
-      type: FieldType.SELECT,
+      type: FieldType.MULTI_SELECT,
       options: INFORMATION_TYPES,
       xs: 6,
     },

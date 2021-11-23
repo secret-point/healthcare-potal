@@ -1,15 +1,15 @@
 export const convertUserToCoordinationForm = (user: any) => ({
   extProviders: [
-    user.extProvOne || user.extProvOneShareType
+    user.extProvOne || user.extProvOneShareTypes
       ? {
           ...(user.extProvOne || {}),
-          sharedInformationType: user.extProvOneShareType,
+          sharedInformationTypes: user.extProvOneShareTypes,
         }
       : null,
     user.extProvTwo
       ? {
           ...(user.extProvTwo || {}),
-          sharedInformationType: user.extProvTwoShareType,
+          sharedInformationTypes: user.extProvTwoShareTypes,
         }
       : null,
   ].filter((extProv) => extProv),
@@ -17,11 +17,11 @@ export const convertUserToCoordinationForm = (user: any) => ({
 
 export const convertCoordinationFormToUser = (form: any) => ({
   extProvOne: form[0]
-    ? { ...form[0], sharedInformationType: undefined }
+    ? { ...form[0], sharedInformationTypes: undefined }
     : undefined,
-  extProvOneShareType: form[0]?.sharedInformationType,
+  extProvOneShareTypes: form[0]?.sharedInformationTypes,
   extProvTwo: form[1]
-    ? { ...form[1], sharedInformationType: undefined }
+    ? { ...form[1], sharedInformationTypes: undefined }
     : undefined,
-  extProvTwoShareType: form[1]?.sharedInformationType,
+  extProvTwoShareTypes: form[1]?.sharedInformationTypes,
 });

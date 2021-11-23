@@ -47,7 +47,9 @@ export default function ResetPassword() {
       });
       setLinkSent(true);
 
-      handleSuccess("Email with verification code sent successfully.");
+      handleSuccess(
+        "You will receive an email to reset your password if there exists an account associated with the email address you provided."
+      );
     } catch (error) {
       handleError(error, error.data?.message || error.message);
     }

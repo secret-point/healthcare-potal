@@ -259,7 +259,7 @@ export const CARE_PROVIDER_TYPES: TDropItem[] = [
 ];
 
 export const INFORMATION_TYPES: TDropItem[] = [
-  { code: "Select all", display: "Select all" },
+  // { code: "Share all information", display: "Share all information" },
   { code: "Diagnosis", display: "Diagnosis" },
   { code: "Prescription", display: "Prescription" },
   { code: "Consultation", display: "Consultation" },
