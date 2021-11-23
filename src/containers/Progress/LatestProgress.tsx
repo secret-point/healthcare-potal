@@ -5,17 +5,13 @@ import Typography from "@material-ui/core/Typography";
 import { useFetchProgressList } from "../../api/memberApi";
 import { ROUTES } from "../../app/types";
 import { ButtonLink } from "../../components/Link";
-import {
-  useFontStyles,
-  useLayoutStyles,
-} from "../../components/useCommonStyles";
+import { useLayoutStyles } from "../../components/useCommonStyles";
 
 import ProgressSummary from "./components/ProgressSummary";
 import CheckInNotice from "./components/CheckInNotice";
 import LatestPrairieScore from "./components/LatestPrairieScore";
 
 const LatestProgress = () => {
-  const fontClasses = useFontStyles();
   const layoutClasses = useLayoutStyles();
   const { data: progressList = [] } = useFetchProgressList();
 
@@ -23,8 +19,8 @@ const LatestProgress = () => {
 
   const latestItem = progressList[progressList.length - 1];
   const previousItem = progressList[progressList.length - 2] || latestItem;
+  const requireNewAssessment = dayjs().diff(latestItem.updatedAt, "hours") > 24;
   const requireCheckIn =
-    dayjs().diff(latestItem.updatedAt, "hours") <= 24 ||
     (latestItem.total > 10 &&
       dayjs(latestItem.updatedAt).diff(previousItem.updatedAt, "day") > 5) ||
     (latestItem.total <= 10 &&
@@ -40,10 +36,8 @@ const LatestProgress = () => {
         alignItems="center"
         className={layoutClasses.mb3}
       >
-        <Typography variant="h2" className={fontClasses.font500}>
-          Your Latest Progress
-        </Typography>
-        {!requireCheckIn && (
+        <Typography variant="h2">Your Latest Progress</Typography>
+        {requireNewAssessment && (
           <ButtonLink
             text="Take the assessment"
             to={ROUTES.ASSESSMENT}

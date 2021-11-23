@@ -5,16 +5,12 @@ import Typography from "@material-ui/core/Typography";
 
 import { ROUTES } from "../../app/types";
 import { useFetchProgressList } from "../../api/memberApi";
-import {
-  useFontStyles,
-  useLayoutStyles,
-} from "../../components/useCommonStyles";
+import { useLayoutStyles } from "../../components/useCommonStyles";
 import PrairieScoreHistory from "./components/PrairieScoreHistory";
 import PrairieStatusCardSlices from "./components/PrairieStatusCardSlices";
 
 const ProgressHistory = () => {
   const history = useHistory();
-  const fontClasses = useFontStyles();
   const layoutClasses = useLayoutStyles();
   const { data: progressList = [], isSuccess } = useFetchProgressList();
   const [active, setActive] = useState(progressList.length - 1);
@@ -39,9 +35,7 @@ const ProgressHistory = () => {
         justify="space-between"
         className={layoutClasses.mb2}
       >
-        <Typography variant="h2" className={fontClasses.font500}>
-          Your Progress History
-        </Typography>
+        <Typography variant="h2">Your Progress History</Typography>
       </Grid>
 
       <Grid
