@@ -70,7 +70,7 @@ export interface ChangePasswordCodeForm {
   confirmPassword: string;
 }
 
-export interface TCareMember
+export interface ICareMember
   extends Pick<User, "_id" | "firstName" | "lastName"> {
   profilePic: string;
   primaryContact: string;
@@ -79,6 +79,21 @@ export interface TCareMember
   since?: string;
   status: string;
   userType: "cc" | "psych" | "Care Partner";
+}
+
+export interface IExtProvider {
+  _id: string;
+  address1: string;
+  address2: string;
+  city: string;
+  email: string;
+  fax: string;
+  name: string;
+  phone: string;
+  state: string;
+  type: string;
+  zip: string;
+  sharedInformationTypes: string[];
 }
 
 export type UpdateProfileFormRequest = AtLeastOne<User>;

@@ -5,15 +5,14 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
-import { ICareMember } from "../types";
+import { IExtProvider } from "../types";
+import { formatPhoneNumber } from "../utils/string";
 import {
   useColorStyles,
   useFontStyles,
   useLayoutStyles,
 } from "./useCommonStyles";
 import ProfileAvatar from "./ProfileAvatar";
-import { formatUserType } from "../utils/helper";
-import { ButtonLink } from "./Link";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -49,33 +48,33 @@ const useStyles = makeStyles((theme) =>
 );
 
 interface CareTeamMemberCardProps {
-  member: ICareMember;
+  provider: IExtProvider;
 }
 
-const CareProviderCard = ({ member }: CareTeamMemberCardProps) => {
+const CareProviderCard = ({ provider }: CareTeamMemberCardProps) => {
   const classes = useStyles();
   const layoutClasses = useLayoutStyles();
   const fontClasses = useFontStyles();
   const colorClasses = useColorStyles();
-  const userType = formatUserType(member.userType);
+  const [firstName, lastName] = provider.name.split(/\s+/g);
 
   return (
     <Card variant="outlined" className={classes.teamMemberCard}>
       <CardContent className={clsx(layoutClasses.noPadding, layoutClasses.mb1)}>
         <ProfileAvatar
-          firstName={member.firstName}
-          lastName={member.lastName}
-          picture={member.profilePic}
+          firstName={firstName}
+          lastName={lastName}
+          picture={null}
           className={layoutClasses.mb2}
         />
         <Typography variant="subtitle2" className={layoutClasses.mb05}>
-          {formatUserType(member.userType)}
+          {provider.type}
         </Typography>
         <Typography
           variant="h3"
           className={clsx(fontClasses.fontNormal, layoutClasses.mb1)}
         >
-          {[member.firstName, member.lastName].join(" ")}
+          {provider.name}
         </Typography>
       </CardContent>
       <CardActions className={classes.actions}>
@@ -84,19 +83,8 @@ const CareProviderCard = ({ member }: CareTeamMemberCardProps) => {
           variant="subtitle1"
           className={colorClasses.secondaryGreen1}
         >
-          {userType === "Care Coordinator" || userType === "Care Partner"
-            ? "Text "
-            : ""}
-          {member.primaryContact || member.secondaryContact}
+          {formatPhoneNumber(provider.phone || "")}
         </Typography>
-        {member.bookingPageLink && (
-          <ButtonLink
-            text="Book an appointment"
-            target="_blank"
-            to={member.bookingPageLink}
-            className={classes.bookingPageLink}
-          />
-        )}
       </CardActions>
     </Card>
   );

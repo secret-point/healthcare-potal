@@ -5,7 +5,7 @@ import dayjs from "dayjs";
 import { QUERY_KEYS } from "./constants";
 import { useApiFetch } from "./useApiFetch";
 import {
-  TCareMember,
+  ICareMember,
   TCheckInFormRequest,
   TCoordinationFormRequest,
   TInTakeFormRequest,
@@ -38,7 +38,7 @@ export const useFetchCareProviders = () => {
 
   return useQuery(
     [QUERY_KEYS.FETCH_CARE_TEAM_LIST],
-    async (): Promise<TCareMember[]> => {
+    async (): Promise<ICareMember[]> => {
       const { data } = await apiFetch("/mp/care-providers");
       return data;
     }

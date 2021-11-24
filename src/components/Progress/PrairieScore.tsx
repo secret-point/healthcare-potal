@@ -51,9 +51,10 @@ const PrairieScore = ({ progressList }: PrairieScoreProps) => {
       {
         id: "PrairieScore",
         data: progressList.map((history) => ({
-          x: dayjs(firstDate).diff(history.updatedAt, "day"),
+          x: dayjs(firstDate).diff(history.updatedAt, "day") + 1,
           y: history.total || 0,
         })),
+        tickValuesLeft: [0, 100],
       },
     ] as any;
   }, [progressList]);
@@ -105,15 +106,17 @@ const PrairieScore = ({ progressList }: PrairieScoreProps) => {
                   {lastScoreItem.total}
                   &nbsp;
                 </Typography>
-                <Typography
-                  variant="h2"
-                  className={clsx(
-                    colorClasses.secondaryGreen1,
-                    fontClasses.fontNormal
-                  )}
-                >
-                  {`(${lastScoreItem.total - firstScoreItem.total})`}
-                </Typography>
+                {progressList.length > 1 && (
+                  <Typography
+                    variant="h2"
+                    className={clsx(
+                      colorClasses.secondaryGreen1,
+                      fontClasses.fontNormal
+                    )}
+                  >
+                    {`(${lastScoreItem.total - firstScoreItem.total})`}
+                  </Typography>
+                )}
               </Box>
               <Typography variant="subtitle2" className={layoutClasses.mb15}>
                 {formatFullDay(lastScoreItem.updatedAt)}

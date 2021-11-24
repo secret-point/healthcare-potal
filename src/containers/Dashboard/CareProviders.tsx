@@ -1,14 +1,18 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
 import { useFetchCareProviders } from "../../api";
+import { useViewport } from "../../hooks/useViewport";
+import useAuth from "../../hooks/useAuth";
+
 import CareProviderCard from "../../components/CareProviderCard";
+import ExtProviderCard from "../../components/ExtProviderCard";
 import { TextButton } from "../../components/Button";
 import { useLayoutStyles } from "../../components/useCommonStyles";
-import { useViewport } from "../../hooks/useViewport";
 import EmptyCareTeamMemberCard from "../../components/EmptyCareTeamMemberCard";
+import { convertUserToCoordinationForm } from "../CareCoordination/utils";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -32,10 +36,18 @@ const useStyles = makeStyles((theme) =>
 
 const CareTeam = () => {
   const classes = useStyles();
+
+  const [showCareTeam, setShowCareTeam] = useState(false);
+
+  const { user } = useAuth();
   const { isMobile } = useViewport();
   const layoutClasses = useLayoutStyles();
-  const [showCareTeam, setShowCareTeam] = useState(false);
   const { data: careProviders = [] } = useFetchCareProviders();
+
+  const { extProviders } = useMemo(
+    () => convertUserToCoordinationForm(user),
+    [user]
+  );
 
   const handleToggleShowCareTeam = () => {
     setShowCareTeam(!showCareTeam);
@@ -74,16 +86,31 @@ const CareTeam = () => {
               <CareProviderCard member={careProvider} />
             </Grid>
           ))}
-          <Grid
-            item
-            xs={12}
-            sm={6}
-            md={4}
-            lg={3}
-            className={classes.teamMemberItem}
-          >
-            <EmptyCareTeamMemberCard />
-          </Grid>
+          {extProviders.map((extProvider) => (
+            <Grid
+              item
+              xs={12}
+              sm={6}
+              md={4}
+              lg={3}
+              key={extProvider._id}
+              className={classes.teamMemberItem}
+            >
+              <ExtProviderCard provider={extProvider} />
+            </Grid>
+          ))}
+          {!extProviders.length && (
+            <Grid
+              item
+              xs={12}
+              sm={6}
+              md={4}
+              lg={3}
+              className={classes.teamMemberItem}
+            >
+              <EmptyCareTeamMemberCard />
+            </Grid>
+          )}
         </Grid>
       )}
 

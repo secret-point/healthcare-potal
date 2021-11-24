@@ -1,6 +1,6 @@
-import { SeverityTypes, TCareMember, TPosition, TProgress } from "../types";
+import { SeverityTypes, ICareMember, TPosition, TProgress } from "../types";
 
-export const formatUserType = (userType: TCareMember["userType"]) => {
+export const formatUserType = (userType: ICareMember["userType"]) => {
   switch (userType) {
     case "cc":
       return "Care Coordinator";

@@ -1,4 +1,8 @@
-export const convertUserToCoordinationForm = (user: any) => ({
+import { IExtProvider } from "../../types";
+
+export const convertUserToCoordinationForm = (
+  user: any
+): { extProviders: IExtProvider[] } => ({
   extProviders: [
     user.extProvOne || user.extProvOneShareTypes
       ? {
