@@ -474,7 +474,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
             properties: [
               {
                 path: "type",
-                placeholder: "Select medication",
+                placeholder: "Name of medication",
                 type: FieldType.TEXT,
                 shrink: true,
                 lg: 6,

@@ -131,9 +131,10 @@ export const FAMILY_MEMBERS: TDropItem[] = [
 export const SUBTANCE_TYPES: TDropItem[] = [
   { code: "Alcohol", display: "Alcohol" },
   { code: "Ayahuasca", display: "Ayahuasca" },
-  { code: "DMT", display: "DMT" },
+  { code: "Caffeine", display: "Caffeine" },
   { code: "Cocaine", display: "Cocaine" },
   { code: "GHB", display: "GHB" },
+  { code: "DMT", display: "DMT" },
   { code: "Hallucinogens", display: "Hallucinogens" },
   { code: "Heroin", display: "Heroin" },
   { code: "Inhalants", display: "Inhalants" },

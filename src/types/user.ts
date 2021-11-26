@@ -22,17 +22,18 @@ export type UserIDVerificationStatus =
 
 export interface User {
   _id: string;
+  billingAddress: UserAddress;
   email: string;
-  memberID: string;
+  emergencyContact: UserContact;
   firstName: string;
-  middleName?: string;
+  IDStatus: UserIDVerificationStatus;
   lastName: string;
+  memberID: string;
+  middleName?: string;
   phone: string;
   profilePicture: Nullable<string>;
-  emergencyContact: UserContact;
-  billingAddress: UserAddress;
   shippingAddress: UserAddress;
-  IDStatus: UserIDVerificationStatus;
+  status: "Pending" | "Onboarding" | "Active" | "Cancelled";
 }
 
 export interface AuthorizedUser extends User {

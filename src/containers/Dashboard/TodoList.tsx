@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { useGetMemberTodos } from "../../api";
 import Carousel from "../../components/Carousel";
 import TodoItem from "../../components/TodoItem";
-import { TodoItemType, TTodoItem } from "../../types";
+import { TodoItemType, TTodoItem, User } from "../../types";
 
 const responsive = {
   desktop: {
@@ -23,24 +23,34 @@ const responsive = {
 };
 
 interface TodoListProps {
+  user: User;
   onClickItem?: (item: TTodoItem) => void;
 }
 
-const TodoList: React.FC<TodoListProps> = ({ onClickItem }) => {
+const TodoList: React.FC<TodoListProps> = ({ user, onClickItem }) => {
   const { data: todoList = [] } = useGetMemberTodos();
 
   const handleClickItem = (item: TTodoItem) => {
     onClickItem?.(item);
   };
 
-  // For now we will not show the verify id todoItem
   const incompletedTodos = useMemo(
     () =>
-      todoList.filter(
-        (todo) =>
-          !todo.completed && todo.todoItemType !== TodoItemType.VERIFY_ID
-      ),
-    [todoList]
+      todoList.filter((todo) => {
+        if (todo.completed) return false;
+        // For now we will not show the verify id todoItem
+        if (todo.todoItemType === TodoItemType.VERIFY_ID) return false;
+        // If user status is not pending, and todoItem is not completed, we will filter it out
+        if (
+          user.status !== "Pending" &&
+          todo.todoItemType === TodoItemType.COMPLETE_INTAKE_FORM
+        ) {
+          return false;
+        }
+
+        return true;
+      }),
+    [user.status, todoList]
   );
 
   return (

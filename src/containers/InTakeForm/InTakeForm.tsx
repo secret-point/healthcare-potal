@@ -22,6 +22,12 @@ const InTakeForm = () => {
   const [form, setForm] = useState<any>({});
 
   useEffect(() => {
+    if (user?.status && user.status !== "Pending") {
+      history.push(ROUTES.DASHBOARD);
+    }
+  }, [user, history]);
+
+  useEffect(() => {
     window.scrollTo(0, 0);
   }, [currentStep]);
 

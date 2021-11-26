@@ -12,6 +12,7 @@ import VerifyIDDialog from "../../components/VerifyID/VerifyIDDialog";
 import CareTeam from "./CareProviders";
 import TodoList from "./TodoList";
 import ActivityProgress from "./ActivityProgress";
+import useAuth from "../../hooks/useAuth";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -28,6 +29,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function Dashboard() {
   const classes = useStyles();
   const history = useHistory();
+  const { user } = useAuth();
   const [showVerifyIDDialog, setShowVerifyIDDialog] = useState(false);
 
   const handleCloseVerifyIDDialog = () => {
@@ -50,12 +52,14 @@ export default function Dashboard() {
     }
   };
 
+  if (!user) return null;
+
   return (
     <Container>
       <Grid container spacing={6} className={classes.container}>
         <Grid item xs={12}>
           <Grid container className={classes.todoListWrapper}>
-            <TodoList onClickItem={handleClickTodoItem} />
+            <TodoList user={user} onClickItem={handleClickTodoItem} />
           </Grid>
         </Grid>
 
