@@ -39,6 +39,10 @@ const useStyles = makeStyles((theme) =>
       display: "flex",
       flexDirection: "column",
       alignItems: "flex-start",
+
+      "& > *": {
+        marginLeft: "0 !important",
+      },
     },
 
     bookingPageLink: {
@@ -69,7 +73,7 @@ const CareProviderCard = ({ member }: CareTeamMemberCardProps) => {
           className={layoutClasses.mb2}
         />
         <Typography variant="subtitle2" className={layoutClasses.mb05}>
-          {formatUserType(member.userType)}
+          {userType}
         </Typography>
         <Typography
           variant="h3"
@@ -79,6 +83,23 @@ const CareProviderCard = ({ member }: CareTeamMemberCardProps) => {
         </Typography>
       </CardContent>
       <CardActions className={classes.actions}>
+        {userType !== "Psychiatrist" ? null : member.bookingPageLink ? (
+          <ButtonLink
+            className={classes.bookingPageLink}
+            text="Book an appointment"
+            target="_blank"
+            to={member.bookingPageLink}
+          />
+        ) : (
+          <Typography
+            align="left"
+            variant="subtitle1"
+            className={colorClasses.disabled}
+          >
+            Book an appointment
+          </Typography>
+        )}
+
         <Typography
           align="left"
           variant="subtitle1"
@@ -89,14 +110,6 @@ const CareProviderCard = ({ member }: CareTeamMemberCardProps) => {
             : ""}
           {member.primaryContact || member.secondaryContact}
         </Typography>
-        {member.bookingPageLink && (
-          <ButtonLink
-            text="Book an appointment"
-            target="_blank"
-            to={member.bookingPageLink}
-            className={classes.bookingPageLink}
-          />
-        )}
       </CardActions>
     </Card>
   );

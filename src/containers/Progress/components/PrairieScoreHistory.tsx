@@ -94,20 +94,20 @@ const PrairieScoreHistory = ({
         className={classes.responsiveLineWrapper}
       >
         <ResponsiveLine
-          enableSlices="x"
-          enableArea
-          isInteractive={false}
-          curve="natural"
           colors={{ scheme: "set2" }}
-          margin={{ top: 4, bottom: 30, left: 30 }}
+          curve="natural"
           data={data}
-          lineWidth={1}
           defs={[
             linearGradientDef("gradientA", [
               { offset: 0, color: "inherit" },
               { offset: 100, color: "inherit", opacity: 0 },
             ]),
           ]}
+          enableArea
+          enableSlices="x"
+          isInteractive={false}
+          margin={{ top: 4, bottom: 30, left: 30 }}
+          lineWidth={1}
           pointSize={10}
           pointBorderColor={{ theme: "background" }}
           pointBorderWidth={2}
@@ -124,7 +124,7 @@ const PrairieScoreHistory = ({
           xFormat="time:%m/%d/%y"
           yScale={{
             type: "linear",
-            max: 52,
+            max: 48,
           }}
         />
       </Grid>

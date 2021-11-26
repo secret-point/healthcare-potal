@@ -54,7 +54,6 @@ const PrairieScore = ({ progressList }: PrairieScoreProps) => {
           x: dayjs(firstDate).diff(history.updatedAt, "day") + 1,
           y: history.total || 0,
         })),
-        tickValuesLeft: [0, 100],
       },
     ] as any;
   }, [progressList]);
@@ -77,20 +76,28 @@ const PrairieScore = ({ progressList }: PrairieScoreProps) => {
         <Grid item xs={12} sm={7}>
           <Box className={classes.responsiveLineWrapper}>
             <ResponsiveLine
-              margin={{ top: 4, bottom: 4, left: 4 }}
-              enableSlices="x"
-              enableArea
-              curve="natural"
               colors={{ scheme: "set2" }}
+              curve="natural"
               data={data}
-              lineWidth={1}
               defs={[
                 linearGradientDef("gradientA", [
                   { offset: 0, color: "inherit" },
                   { offset: 100, color: "inherit", opacity: 0 },
                 ]),
               ]}
-              layers={["areas", "crosshair", "lines", "slices"]}
+              enableArea
+              enableSlices="x"
+              margin={{ top: 4, bottom: 30, left: 30 }}
+              lineWidth={1}
+              pointSize={10}
+              pointBorderColor={{ theme: "background" }}
+              pointBorderWidth={2}
+              xFormat="time:%m/%d/%y"
+              yScale={{
+                type: "linear",
+                max: 48,
+              }}
+              layers={["crosshair", "lines", "slices", "points"]}
               fill={[{ match: "*", id: "gradientA" }]}
             />
           </Box>
