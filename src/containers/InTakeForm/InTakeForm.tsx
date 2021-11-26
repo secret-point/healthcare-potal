@@ -1,8 +1,10 @@
-import { FormEvent, useEffect, useMemo, useState } from "react";
+import { useSnackbar } from "notistack";
+import { FormEvent, useCallback, useEffect, useMemo, useState } from "react";
 import { useHistory } from "react-router";
 import { useForm, FormProvider } from "react-hook-form";
 import Grid from "@material-ui/core/Grid";
 
+import { User } from "../../types";
 import { ROUTES } from "../../app/types";
 import { useUpdateInTakeForm } from "../../api";
 import Container from "../../components/Container";
@@ -15,31 +17,105 @@ import InTakeFormInput from "./InTakeFormInput";
 import { convertUserToInTakeForm, convertInTakeFormToUser } from "./utils";
 
 const InTakeForm = () => {
-  const { user, loadUser } = useAuth();
   const history = useHistory();
+  const { user, loadUser } = useAuth();
   const updateInTakeForm = useUpdateInTakeForm();
-  const [currentStep, setCurrentStep] = useState(InTakeFormSteps.START);
-  const [form, setForm] = useState<any>({});
+  const { enqueueSnackbar } = useSnackbar();
 
+  const [form, setForm] = useState<any>({});
+  const [currentStep, setCurrentStep] = useState(InTakeFormSteps.START);
+
+  // We will only allow the users to stay on InTakeForm if the status is not pending
   useEffect(() => {
     if (user?.status && user.status !== "Pending") {
       history.push(ROUTES.DASHBOARD);
     }
   }, [user, history]);
 
+  // Scrolls to the top of the page when the step is changed.
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [currentStep]);
 
+  const getInTakeFormStorageKey = (user: User) =>
+    `${user._id || ""}-saved-intake-form`;
+
+  const previousInTakeForm = useMemo(() => {
+    if (!user) return;
+
+    const previousInTakeFormKey = getInTakeFormStorageKey(user);
+    const savedInTakeForm =
+      JSON.parse(localStorage.getItem(previousInTakeFormKey) || "{}") || {};
+    return savedInTakeForm;
+  }, [user]);
+
   const defaultInTakeForm = useMemo(
-    () => convertUserToInTakeForm(user),
-    [user]
+    () => previousInTakeForm.values || convertUserToInTakeForm(user),
+    [user, previousInTakeForm]
   );
 
   const methods = useForm({
     mode: "onChange",
     defaultValues: defaultInTakeForm,
   });
+
+  // Restores the previous intake session
+  const restorePreviousInTakeSession = useCallback(() => {
+    if (previousInTakeForm.step) {
+      setCurrentStep(previousInTakeForm.step);
+      enqueueSnackbar("Previous intake session has been restored.", {
+        variant: "success",
+      });
+    }
+  }, [previousInTakeForm, enqueueSnackbar]);
+
+  useEffect(() => {
+    restorePreviousInTakeSession();
+  }, [restorePreviousInTakeSession]);
+
+  const isInProgress = ![
+    InTakeFormSteps.START,
+    InTakeFormSteps.COMPLETE,
+  ].includes(currentStep);
+
+  const handleLeaveForm = () => {
+    if (!user) return;
+
+    const currentInTakeForm = { ...form, ...methods.getValues() };
+    const localStoragePayload = {
+      step: currentStep,
+      values: currentInTakeForm,
+    };
+    localStorage.setItem(
+      getInTakeFormStorageKey(user),
+      JSON.stringify(localStoragePayload)
+    );
+    history.push(ROUTES.DASHBOARD);
+  };
+
+  useEffect(() => {
+    const handlePopState = () => {
+      if (!isInProgress) return;
+      handleLeaveForm();
+    };
+
+    // Intercept browser back button
+    window.addEventListener("popstate", handlePopState, true);
+
+    // Unmount
+    return () => {
+      window.removeEventListener("popstate", handlePopState, true);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isInProgress]);
+
+  if (!user) {
+    return null;
+  }
+
+  const handleCancel = () => {
+    history.goBack();
+  };
 
   const handleCompleteInTake = async (form: any) => {
     await updateInTakeForm.mutate(convertInTakeFormToUser(form), {
@@ -83,19 +159,6 @@ const InTakeForm = () => {
     }
   };
 
-  const handleCancel = () => {
-    history.goBack();
-  };
-
-  const handleLeaveForm = () => {
-    history.push(ROUTES.DASHBOARD);
-  };
-
-  const showProgress = ![
-    InTakeFormSteps.START,
-    InTakeFormSteps.COMPLETE,
-  ].includes(currentStep);
-
   return (
     <Container>
       <FormProvider {...methods}>
@@ -106,7 +169,7 @@ const InTakeForm = () => {
                 <StartInTake onCancel={handleCancel} />
               )}
 
-              {showProgress && (
+              {isInProgress && (
                 <InTakeFormInput
                   currentStep={currentStep}
                   onNext={handleNextForm}
