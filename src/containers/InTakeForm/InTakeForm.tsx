@@ -56,7 +56,7 @@ const InTakeForm = () => {
 
   const methods = useForm({
     mode: "onChange",
-    defaultValues: defaultInTakeForm,
+    defaultValues: previousInTakeForm || defaultInTakeForm,
   });
 
   // Restores the previous intake session
