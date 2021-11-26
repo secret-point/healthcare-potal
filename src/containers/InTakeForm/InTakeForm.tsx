@@ -36,9 +36,18 @@ const InTakeForm = () => {
     [user]
   );
 
+  const previousInTakeForm = useMemo(() => {
+    if (!user) return;
+    const previousInTakeFormKey = `${user._id}-saved-intake-form`;
+    const savedInTakeForm = JSON.parse(
+      localStorage.getItem(previousInTakeFormKey) || "null"
+    );
+    return savedInTakeForm;
+  }, [user]);
+
   const methods = useForm({
     mode: "onChange",
-    defaultValues: defaultInTakeForm,
+    defaultValues: previousInTakeForm || defaultInTakeForm,
   });
 
   const handleCompleteInTake = async (form: any) => {
@@ -83,11 +92,22 @@ const InTakeForm = () => {
     }
   };
 
+  if (!user) {
+    return null;
+  }
+
   const handleCancel = () => {
     history.goBack();
   };
 
   const handleLeaveForm = () => {
+    const currentInTakeForm = { ...form, ...methods.getValues() };
+
+    localStorage.setItem(
+      `${user._id}-saved-intake-form`,
+      JSON.stringify(currentInTakeForm)
+    );
+
     history.push(ROUTES.DASHBOARD);
   };
 
