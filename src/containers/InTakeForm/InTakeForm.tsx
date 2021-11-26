@@ -56,7 +56,7 @@ const InTakeForm = () => {
 
   const methods = useForm({
     mode: "onChange",
-    defaultValues: previousInTakeForm || defaultInTakeForm,
+    defaultValues: defaultInTakeForm,
   });
 
   // Restores the previous intake session
@@ -79,7 +79,7 @@ const InTakeForm = () => {
   ].includes(currentStep);
 
   const handleLeaveForm = () => {
-    if (!user) return;
+    if (!user || !isInProgress) return;
 
     const currentInTakeForm = { ...form, ...methods.getValues() };
     const localStoragePayload = {
@@ -93,21 +93,11 @@ const InTakeForm = () => {
     history.push(ROUTES.DASHBOARD);
   };
 
-  useEffect(() => {
-    const handlePopState = () => {
-      if (!isInProgress) return;
-      handleLeaveForm();
-    };
-
-    // Intercept browser back button
-    window.addEventListener("popstate", handlePopState, true);
-
-    // Unmount
-    return () => {
-      window.removeEventListener("popstate", handlePopState, true);
-    };
+  useEffect(
+    () => handleLeaveForm,
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isInProgress]);
+    [isInProgress]
+  );
 
   if (!user) {
     return null;
@@ -122,6 +112,7 @@ const InTakeForm = () => {
       onSuccess: loadUser,
     });
     setCurrentStep(InTakeFormSteps.COMPLETE);
+    localStorage.removeItem(getInTakeFormStorageKey(user));
   };
 
   const handleGoToNextStep = (e?: FormEvent) => {
