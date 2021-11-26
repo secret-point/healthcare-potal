@@ -1,3 +1,4 @@
+import { useSnackbar } from "notistack";
 import { FormEvent, useState } from "react";
 import { useHistory } from "react-router";
 import { useForm, FormProvider } from "react-hook-form";
@@ -18,6 +19,8 @@ import AllSetup from "./AllSetup";
 export default function Onboarding() {
   const history = useHistory();
   const register = useRegister();
+  const { enqueueSnackbar } = useSnackbar();
+
   const [form, setForm] = useState<any>({});
   const [loading, setLoading] = useState(false);
   const [currentStep, setCurrentStep] = useState(ONBOARDING.NAME);
@@ -35,6 +38,10 @@ export default function Onboarding() {
     try {
       await register(form);
       setCurrentStep(ONBOARDING.FINAL);
+    } catch (error) {
+      enqueueSnackbar(error.response?.data?.message || error.message, {
+        variant: "error",
+      });
     } finally {
       setLoading(false);
     }

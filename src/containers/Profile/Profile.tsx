@@ -73,17 +73,21 @@ export default function Profile() {
   const handleUpdateProfile = async (title: string, form: unknown) => {
     try {
       await updateProfile.mutate(form as UpdateProfileFormRequest, {
-        onSuccess: loadUser,
-      });
-      enqueueSnackbar(
-        `You've successfully updated the ${title.toLowerCase()}.`,
-        {
-          variant: "success",
-        }
-      );
-    } catch (error) {
-      enqueueSnackbar(error.data?.errorMessage || error.message, {
-        variant: "error",
+        onSuccess: () => {
+          enqueueSnackbar(
+            `You've successfully updated the ${title.toLowerCase()}.`,
+            {
+              variant: "success",
+            }
+          );
+
+          loadUser();
+        },
+        onError: (error: any) => {
+          enqueueSnackbar(error.response?.data?.message || error.message, {
+            variant: "error",
+          });
+        },
       });
     } finally {
       handleCloseUpdateDialog();
