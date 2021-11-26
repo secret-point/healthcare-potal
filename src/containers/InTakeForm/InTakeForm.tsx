@@ -91,7 +91,7 @@ const InTakeForm = () => {
       <FormProvider {...methods}>
         <form onSubmit={handleGoToNextStep}>
           <Grid container justify="center">
-            <Grid item xs={12} lg={10}>
+            <Grid item xs={12} sm={10} lg={8}>
               {currentStep === InTakeFormSteps.START && (
                 <StartInTake onCancel={handleCancel} />
               )}
