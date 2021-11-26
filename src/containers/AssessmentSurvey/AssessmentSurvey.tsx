@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useForm, FormProvider } from "react-hook-form";
 import Grid from "@material-ui/core/Grid";
@@ -21,6 +21,10 @@ const AssessmentSurvey = () => {
   const updateCheckInForm = useUpdateCheckInForm();
   const [surveyStep, setSurveyStep] = useState(AssessmentSurveySteps.WELCOME);
   const { refetch } = useFetchProgressList();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [surveyStep]);
 
   const methods = useForm({
     mode: "onChange",

@@ -1,4 +1,4 @@
-import { FormEvent, useMemo, useState } from "react";
+import { FormEvent, useEffect, useMemo, useState } from "react";
 import { useHistory } from "react-router";
 import { useForm, FormProvider } from "react-hook-form";
 import Grid from "@material-ui/core/Grid";
@@ -20,6 +20,10 @@ const InTakeForm = () => {
   const updateInTakeForm = useUpdateInTakeForm();
   const [currentStep, setCurrentStep] = useState(InTakeFormSteps.START);
   const [form, setForm] = useState<any>({});
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [currentStep]);
 
   const defaultInTakeForm = useMemo(
     () => convertUserToInTakeForm(user),
