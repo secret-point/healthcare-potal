@@ -174,9 +174,14 @@ export const CONFIRMATION_TYPES: TDropItem[] = [
 ];
 
 export const SYMPTOM_TYPES: TDropItem[] = [
-  { code: "Remitting", display: "Remitting" },
-  { code: "Chronic", display: "Chronic" },
-  { code: "Relapsing", display: "Relapsing" },
+  { code: "Sleep Disorder", display: "Sleep Disorder" },
+  { code: "Interest Deficit", display: "Interest Deficit" },
+  { code: "Guilty", display: "Guilty" },
+  { code: "Energy Deficit", display: "Energy Deficit" },
+  { code: "Concentration Deficit", display: "Concentration Deficit" },
+  { code: "Appetite", display: "Appetite" },
+  { code: "Psychomotor Retardation", display: "Psychomotor Retardation" },
+  { code: "Agitation", display: "Agitation" },
 ];
 
 export const TREATMENT_TYPES: TDropItem[] = [
