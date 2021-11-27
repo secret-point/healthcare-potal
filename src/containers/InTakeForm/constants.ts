@@ -76,6 +76,24 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
             placeholder: "MM/DD/YYYY",
             required: true,
             isTopLabel: true,
+            validator: {
+              required: true,
+              validate: {
+                valid: (value: any) => {
+                  const [year, month, day] = value
+                    .split("-")
+                    .map((each: string) => Number(each));
+                  return (
+                    year >= 1900 &&
+                    year <= new Date().getFullYear() &&
+                    month >= 1 &&
+                    month <= 12 &&
+                    day >= 1 &&
+                    day <= 10
+                  );
+                },
+              },
+            },
             lg: 6,
             xs: 12,
           },
