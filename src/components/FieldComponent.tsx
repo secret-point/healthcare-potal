@@ -74,8 +74,10 @@ const FieldComponent: FC<FieldComponentProps> = ({ field, variant }) => {
     default:
       return (
         <TextInput
-          name={field.path}
+          disabled={field.disabled}
           label={field.label}
+          name={field.path}
+          isTopLabel={field.isTopLabel}
           variant={field.variant || variant || "standard"}
           required={field.required}
           placeholder={field.placeholder}
@@ -89,7 +91,6 @@ const FieldComponent: FC<FieldComponentProps> = ({ field, variant }) => {
           InputLabelProps={{
             shrink: field.shrink || false || field.type === FieldType.DATE,
           }}
-          isTopLabel={field.isTopLabel}
           validator={field.validator || { required: field.required }}
         />
       );

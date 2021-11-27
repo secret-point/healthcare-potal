@@ -62,6 +62,7 @@ export type TCustomField = {
   helperText?: string;
   isTopLabel?: boolean;
   path: string;
+  disabled?: boolean;
   type?: FieldType;
   placeholder?: string;
   shrink?: boolean;

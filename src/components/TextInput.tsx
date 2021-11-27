@@ -29,6 +29,9 @@ export const useStyles = makeStyles((theme: Theme) =>
       "& .MuiInputBase-root": {
         borderRadius: theme.spacing(1),
       },
+      "& .MuiInputBase-root.Mui-disabled": {
+        backgroundColor: "#E2E2E2",
+      },
       "& .MuiInputBase-input": {
         fontFamily: "DM Sans",
         fontSize: 16,
@@ -95,6 +98,7 @@ export default function TextInput({
   required,
   InputProps,
   InputLabelProps = { shrink: true },
+  isTopLabel,
   ...props
 }: TextInputProps) {
   const classes = useStyles();
