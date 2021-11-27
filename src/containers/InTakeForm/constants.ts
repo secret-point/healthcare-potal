@@ -16,7 +16,11 @@ import {
   FAMILY_MEMBERS,
 } from "../../constants/identity";
 import { TInTakeFormDef } from "./types";
-import { feetInchPattern } from "../../utils/string";
+import {
+  emailPattern,
+  feetInchPattern,
+  phoneNumberPattern,
+} from "../../utils/string";
 
 export enum InTakeFormSteps {
   START = "START",
@@ -164,6 +168,14 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
             isTopLabel: true,
             shrink: true,
             required: true,
+            validator: {
+              required: "Emergency contact phone number is required.",
+              pattern: {
+                value: phoneNumberPattern,
+                message:
+                  "Please enter a 10 digit number without any special characters.",
+              },
+            },
             lg: 6,
             xs: 12,
           },
@@ -174,7 +186,12 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
             type: FieldType.TEXT,
             isTopLabel: true,
             shrink: true,
-            required: true,
+            validator: {
+              pattern: {
+                value: emailPattern,
+                message: "Please enter email address in the correct format.",
+              },
+            },
             lg: 6,
             xs: 12,
           },
