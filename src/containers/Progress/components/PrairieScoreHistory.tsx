@@ -95,7 +95,7 @@ const PrairieScoreHistory = ({
       >
         <ResponsiveLine
           colors={{ scheme: "set2" }}
-          curve="natural"
+          curve="linear"
           data={data}
           defs={[
             linearGradientDef("gradientA", [
