@@ -12,7 +12,6 @@ import ExtProviderCard from "../../components/ExtProviderCard";
 import { TextButton } from "../../components/Button";
 import { useLayoutStyles } from "../../components/useCommonStyles";
 import EmptyCareTeamMemberCard from "../../components/EmptyCareTeamMemberCard";
-import { convertUserToCoordinationForm } from "../CareCoordination/utils";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -44,8 +43,8 @@ const CareTeam = () => {
   const layoutClasses = useLayoutStyles();
   const { data: careProviders = [] } = useFetchCareProviders();
 
-  const { extProviders } = useMemo(
-    () => convertUserToCoordinationForm(user),
+  const extProviders = useMemo(
+    () => [user?.extProvOne, user?.extProvTwo].filter((extProv) => extProv),
     [user]
   );
 

@@ -20,11 +20,23 @@ export type UserIDVerificationStatus =
   | "Expired"
   | "Unverified";
 
+export type TExtProvShareType =
+  | "Diagnosis"
+  | "Prescription"
+  | "Consultation"
+  | "Laboratory"
+  | "Assessment Record"
+  | "Discharge Summary";
+
 export interface User {
   _id: string;
   billingAddress: UserAddress;
   email: string;
   emergencyContact: UserContact;
+  extProvOne?: any;
+  extProvOneShareTypes?: TExtProvShareType;
+  extProvTwo?: any;
+  extProvTwoShareTypes?: TExtProvShareType;
   firstName: string;
   IDStatus: UserIDVerificationStatus;
   lastName: string;
