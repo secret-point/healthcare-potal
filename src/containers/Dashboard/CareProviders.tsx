@@ -98,7 +98,7 @@ const CareTeam = () => {
               <ExtProviderCard provider={extProvider} />
             </Grid>
           ))}
-          {!extProviders.length && (
+          {extProviders.length < 2 && (
             <Grid
               item
               xs={12}
