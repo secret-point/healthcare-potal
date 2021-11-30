@@ -143,7 +143,7 @@ const CareCoordination = () => {
       {
         onSuccess: () => {
           handleSuccess(
-            "You have successfully updated your care coordinators."
+            "You have sucessfully updated your external providers."
           );
           loadUser();
         },

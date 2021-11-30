@@ -202,7 +202,7 @@ export const UPDATE_PROFILE_DIALOGS = {
               required: "Your password is required.",
               minLength: {
                 value: 8,
-                message: "Please enter the password which is greater than 8.",
+                message: "Your password should be 8 characters or longer.",
               },
             },
             xs: 12,

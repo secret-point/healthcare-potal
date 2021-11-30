@@ -75,7 +75,7 @@ export default function Profile() {
       await updateProfile.mutate(form as UpdateProfileFormRequest, {
         onSuccess: () => {
           enqueueSnackbar(
-            `You've successfully updated the ${title.toLowerCase()}.`,
+            `You've successfully updated your ${title.toLowerCase()}.`,
             {
               variant: "success",
             }

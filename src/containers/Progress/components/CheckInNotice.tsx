@@ -42,7 +42,9 @@ const CheckInNotice: FC<CheckInNoticeProps> = ({ latestItem }) => {
       >
         <Grid container justify="space-between" alignItems="center">
           <Typography variant="h5">
-            {`It’s been ${diffInDays} days since your last assessment.`}
+            {diffInDays
+              ? `It’s been ${diffInDays} days since your last assessment.`
+              : "You last took your assessment today."}
           </Typography>
           <ButtonLink
             text="Take the survey"
