@@ -83,7 +83,15 @@ const CareProviderCard = ({ member }: CareTeamMemberCardProps) => {
         </Typography>
       </CardContent>
       <CardActions className={classes.actions}>
-        {userType !== "Psychiatrist" ? null : member.bookingPageLink ? (
+        {userType !== "Psychiatrist" ? (
+          <Typography
+            align="left"
+            variant="subtitle1"
+            className={colorClasses.secondaryGreen1}
+          >
+            {member.primaryContact || member.secondaryContact}
+          </Typography>
+        ) : member.bookingPageLink ? (
           <ButtonLink
             className={classes.bookingPageLink}
             text="Book an appointment"
@@ -99,17 +107,6 @@ const CareProviderCard = ({ member }: CareTeamMemberCardProps) => {
             Book an appointment
           </Typography>
         )}
-
-        <Typography
-          align="left"
-          variant="subtitle1"
-          className={colorClasses.secondaryGreen1}
-        >
-          {userType === "Care Coordinator" || userType === "Care Partner"
-            ? "Text "
-            : ""}
-          {member.primaryContact || member.secondaryContact}
-        </Typography>
       </CardActions>
     </Card>
   );
