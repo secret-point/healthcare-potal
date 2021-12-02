@@ -24,12 +24,13 @@ const useStyles = makeStyles((theme: Theme) =>
         height: 32,
         fontSize: 16,
         display: "flex",
-        transform: "translate(0px, -32px)",
+        transform: "none",
+        position: "relative",
         alignItems: "center",
         color: theme.palette.secondaryNavy1.main,
       },
       "&.MuiFormLabel-root.Mui-focused": {
-        color: theme.palette.primaryNavy.main,
+        color: theme.palette.secondary.main,
       },
     },
     select: {

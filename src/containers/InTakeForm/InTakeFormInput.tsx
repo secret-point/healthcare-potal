@@ -65,7 +65,7 @@ const InTakeFormInput: FC<InTakeFormInputProps> = ({
       setError(null);
       onNext();
     } else {
-      setError("Please fill out the required fields");
+      setError("Please fix the errors.");
     }
   };
 

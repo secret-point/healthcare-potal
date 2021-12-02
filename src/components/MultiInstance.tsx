@@ -22,9 +22,6 @@ interface StyleProps {
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    container: {
-      transform: "translateY(-32px)",
-    },
     inputLabel: {
       "&.MuiFormLabel-root": {
         fontSize: 16,
@@ -104,10 +101,10 @@ const MultiInstance: React.FC<MultiInstanceProps> = ({
         </FormLabel>
       </Grid>
 
-      <Grid container spacing={2}>
+      <Grid container spacing={3}>
         {instances.map((index) => (
           <Grid key={index} item xs={12}>
-            <Grid container spacing={2}>
+            <Grid container spacing={3}>
               {instanceLabel && (
                 <Grid item xs={12}>
                   <Typography variant="h5">

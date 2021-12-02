@@ -19,9 +19,6 @@ interface StyleProps {
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    container: {
-      transform: "translateY(-32px)",
-    },
     inputLabel: {
       "&.MuiFormLabel-root": {
         fontSize: 16,
@@ -83,7 +80,7 @@ const SingleInstance: React.FC<SingleInstanceProps> = ({
   }
 
   return (
-    <Grid container className={classes.container}>
+    <Grid container>
       <Grid item xs={12}>
         <FormLabel htmlFor={path} className={classes.inputLabel}>
           {label}
@@ -94,7 +91,7 @@ const SingleInstance: React.FC<SingleInstanceProps> = ({
           )}
         </FormLabel>
       </Grid>
-      <Grid container spacing={2}>
+      <Grid container spacing={3}>
         {properties.map((property) => (
           <Grid key={property.path} item xs={property.xs} lg={property.lg}>
             <FieldComponent

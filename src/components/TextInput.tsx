@@ -65,7 +65,8 @@ export const useStyles = makeStyles((theme: Theme) =>
         height: 32,
         fontSize: 16,
         display: "flex",
-        transform: "translate(0px, -32px)",
+        transform: "none",
+        position: "relative",
         alignItems: "center",
       },
       "& .MuiOutlinedInput-root fieldset.MuiOutlinedInput-notchedOutline ": {
