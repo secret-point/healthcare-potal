@@ -80,7 +80,7 @@ const InTakeFormInput: FC<InTakeFormInputProps> = ({
         </Typography>
       </Grid>
 
-      <Grid item xs={12} className={layoutClasses.mb6}>
+      <Grid item xs={12} className={layoutClasses.mb4}>
         <LinearProgress
           variant="determinate"
           color="secondary"

@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) =>
     },
 
     dialogTitle: {
-      padding: theme.spacing(4, 4, 2),
+      padding: theme.spacing(4, 4, 0),
     },
 
     dialogContent: {
@@ -97,7 +97,7 @@ const UpdateForm: FC<UpdateFormProps> = ({
 
   return (
     <form onSubmit={handleSave}>
-      <Grid container spacing={4}>
+      <Grid container spacing={2}>
         {rows.map((row) => (
           <Grid item key={row.row} xs={12}>
             <Grid container spacing={3}>

@@ -38,7 +38,7 @@ const PasswordForm = () => {
         />
       </Grid>
 
-      <Grid item xs={12} className={layoutClasses.mt3}>
+      <Grid item xs={12}>
         <TextInput
           name="confirmPassword"
           label="Confirm Password"

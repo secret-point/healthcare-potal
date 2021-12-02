@@ -68,7 +68,7 @@ const ConfirmVerificationLink = () => {
       <PlainModal>
         {!passwordChanged ? (
           <Grid container>
-            <Grid item xs={12} className={layoutClasses.mb6}>
+            <Grid item xs={12} className={layoutClasses.mb4}>
               <Typography variant="h2" align="center">
                 Change your password
               </Typography>
@@ -90,7 +90,7 @@ const ConfirmVerificationLink = () => {
               </Typography>
             </Grid>
 
-            <Grid item xs={12} className={layoutClasses.mb6}>
+            <Grid item xs={12} className={layoutClasses.mb4}>
               <Typography variant="subtitle1" align="center">
                 You may now sign to your account using your email and your new
                 password.

@@ -47,7 +47,7 @@ export default function SignIn() {
     <Container>
       <PlainModal>
         <Grid container>
-          <Grid item xs={12} className={layoutClasses.mb6}>
+          <Grid item xs={12} className={layoutClasses.mb4}>
             <Typography variant="h2" align="center" className={classes.title}>
               Sign In
             </Typography>

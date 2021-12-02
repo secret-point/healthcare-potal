@@ -70,7 +70,7 @@ export default function ResetPassword() {
               </Typography>
             </Grid>
 
-            <Grid item xs={12} className={layoutClasses.mb6}>
+            <Grid item xs={12} className={layoutClasses.mb4}>
               <Typography variant="subtitle1" align="center">
                 We&apos;ll send you an email with a link to reset your password
               </Typography>
