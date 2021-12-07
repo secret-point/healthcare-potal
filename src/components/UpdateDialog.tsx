@@ -58,9 +58,12 @@ const UpdateForm: FC<UpdateFormProps> = ({
     trigger,
     getValues,
     formState: { errors },
+    watch,
   } = useFormContext();
   const colorClasses = useColorStyles();
   const [extraError, setExtraError] = useState("");
+
+  console.log(watch());
 
   const handleSave = async (e: FormEvent) => {
     e.preventDefault();
