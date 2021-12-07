@@ -105,7 +105,7 @@ export class ScoreHistorySummary {
     for (; i >= 0; i--) {
       if (this.history[i + 1].total > this.history[i].total) break;
     }
-    const decreaseStartItem = this.history[Math.max(i, 0)];
+    const decreaseStartItem = this.history[i + 1];
     const decreasingWeeks = dayjs(lastHistory.updatedAt).diff(
       decreaseStartItem.updatedAt,
       "week"
