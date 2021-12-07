@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import dotProp from "dot-prop";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 
 import TextField, { TextFieldProps } from "@material-ui/core/TextField";
@@ -111,12 +111,18 @@ export default function TextInput({
     register,
     formState: { errors },
     watch,
+    setValue,
   } = useFormContext();
   const [showPassword, setShowPassword] = useState(false);
 
-  const values = watch();
-  const started = dotProp.get(values, name);
+  const value = watch(name);
   const hasError = Boolean(dotProp.get(errors, name));
+
+  useEffect(() => {
+    register(name, validator); // custom register react-select
+    setValue(name, value);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [register, name]);
 
   const handleTogglePasswordShow = () => setShowPassword((show) => !show);
 
@@ -135,7 +141,7 @@ export default function TextInput({
 
   return (
     <Controller
-      defaultValue={started || ""}
+      defaultValue={value || ""}
       as={
         <TextField
           id={name}
