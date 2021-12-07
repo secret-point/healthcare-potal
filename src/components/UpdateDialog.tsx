@@ -161,7 +161,7 @@ const UpdateDialog: FC<UpdateDialogProps> = ({
   });
 
   useEffect(() => {
-    methods.reset(defaultValues);
+    methods.reset({ defaultValues });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [methods.reset, defaultValues]);
 

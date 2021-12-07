@@ -24,10 +24,7 @@ export default function Profile() {
   const [editingField, setEditingField] = useState<EditableField>();
   const [showVerifyIDDialog, setShowVerifyIDDialog] = useState(false);
 
-  const defaultValues = useMemo(
-    () => ({ email: "jamesconway325@gmail.com" }),
-    []
-  );
+  const defaultValues = useMemo(() => ({ ...user, password: "" }), [user]);
 
   if (!user) return null;
 
