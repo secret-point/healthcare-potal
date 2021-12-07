@@ -96,7 +96,8 @@ const CareProviderCard = ({ member }: CareTeamMemberCardProps) => {
             className={classes.bookingPageLink}
             text="Book an appointment"
             target="_blank"
-            to={member.bookingPageLink}
+            to={{ pathname: member.bookingPageLink }}
+            rel="noopener noreferrer"
           />
         ) : (
           <Typography

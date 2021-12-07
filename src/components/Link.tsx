@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface LinkProps extends Pick<RouterLinkProps, "to" | "target"> {
+interface LinkProps extends Pick<RouterLinkProps, "to" | "target" | "rel"> {
   align?: "left" | "center" | "right";
   text: string;
   className?: string;
@@ -50,12 +50,13 @@ export const ButtonLink: FC<LinkProps> = ({
   className,
   to,
   text,
+  ...props
 }) => {
   const classes = useStyles();
   const fontClasses = useFontStyles();
 
   return (
-    <RouterLink to={to} className={clsx(classes.link, className)}>
+    <RouterLink to={to} className={clsx(classes.link, className)} {...props}>
       <Typography
         align={align}
         variant="subtitle1"
