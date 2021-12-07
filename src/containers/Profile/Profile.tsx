@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useSnackbar } from "notistack";
 import Grid from "@material-ui/core/Grid";
 
@@ -23,6 +23,8 @@ export default function Profile() {
 
   const [editingField, setEditingField] = useState<EditableField>();
   const [showVerifyIDDialog, setShowVerifyIDDialog] = useState(false);
+
+  const defaultValues = useMemo(() => ({ ...user, password: "" }), [user]);
 
   if (!user) return null;
 
@@ -121,7 +123,7 @@ export default function Profile() {
       {editingField && user && (
         <UpdateDialog
           open
-          defaultValues={{ ...user, password: "" }}
+          defaultValues={defaultValues}
           title={UPDATE_PROFILE_DIALOGS[editingField].title}
           rows={UPDATE_PROFILE_DIALOGS[editingField].rows}
           onClose={handleCloseUpdateDialog}

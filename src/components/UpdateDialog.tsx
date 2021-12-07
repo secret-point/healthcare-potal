@@ -160,6 +160,11 @@ const UpdateDialog: FC<UpdateDialogProps> = ({
     defaultValues,
   });
 
+  useEffect(() => {
+    methods.reset(defaultValues);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [defaultValues]);
+
   const handleSave = async (e: FormEvent) => {
     e.preventDefault();
 
