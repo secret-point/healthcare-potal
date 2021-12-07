@@ -135,7 +135,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
             label: "What's your weight?",
             path: "weight",
             placeholder: "Weight (in lbs)",
-            type: FieldType.TEXT,
+            type: FieldType.NUMBER,
             isTopLabel: true,
             shrink: true,
             required: true,
@@ -517,8 +517,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
               },
               {
                 path: "description",
-                placeholder:
-                  "Describe the medication (strength/dose, frequency)",
+                placeholder: "Are you currently taking any medication?",
                 type: FieldType.TEXT,
                 isTopLabel: true,
                 shrink: true,

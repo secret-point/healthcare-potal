@@ -18,6 +18,10 @@ const useStyles = makeStyles((theme: Theme) =>
     dropdown: {},
     formControl: {
       minWidth: "100%",
+      "& .MuiOutlinedInput-root": {
+        background: "white",
+        borderRadius: theme.spacing(1),
+      },
     },
     inputLabel: {
       "&.MuiInputLabel-outlined.MuiInputLabel-shrink": {
@@ -34,14 +38,12 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     select: {
-      "& .MuiOutlinedInput-root": {
-        borderRadius: theme.spacing(1),
-      },
       "& .MuiSelect-select.MuiSelect-select": {
         display: "flex",
         alignItems: "center",
         fontSize: 16,
         padding: theme.spacing(2),
+        background: "white",
         color: theme.palette.primaryNavy.main,
       },
       "& fieldset": {

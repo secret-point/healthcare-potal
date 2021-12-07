@@ -31,6 +31,7 @@ export enum FieldType {
   SELECT = "SELECT",
   TEXT = "TEXT",
   DATE = "DATE",
+  NUMBER = "NUMBER",
   PASSWORD = "PASSWORD",
   RADIO_GROUP = "RADIO_GROUP",
   MULTI_SELECT = "MULTI_SELECT",

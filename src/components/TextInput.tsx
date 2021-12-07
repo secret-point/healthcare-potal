@@ -28,6 +28,7 @@ export const useStyles = makeStyles((theme: Theme) =>
       },
       "& .MuiInputBase-root": {
         borderRadius: theme.spacing(1),
+        background: "white",
       },
       "& .MuiInputBase-root.Mui-disabled": {
         backgroundColor: "#E2E2E2",
