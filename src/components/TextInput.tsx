@@ -110,11 +110,11 @@ export default function TextInput({
     control,
     register,
     formState: { errors },
-    getValues,
+    watch,
   } = useFormContext();
   const [showPassword, setShowPassword] = useState(false);
 
-  const values = getValues();
+  const values = watch();
   const started = dotProp.get(values, name);
   const hasError = Boolean(dotProp.get(errors, name));
 
