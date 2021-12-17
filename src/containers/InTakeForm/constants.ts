@@ -17,7 +17,7 @@ import {
 } from "../../constants/identity";
 import { TInTakeFormDef } from "./types";
 import {
-  emailPattern,
+  validateEmail,
   feetInchPattern,
   phoneNumberPattern,
 } from "../../utils/string";
@@ -205,10 +205,10 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
             isTopLabel: true,
             shrink: true,
             validator: {
-              pattern: {
-                value: emailPattern,
-                message: "Please enter email address in the correct format.",
-              },
+              validate: (value: string) =>
+                !value || validateEmail(value)
+                  ? true
+                  : "Please enter email address in the correct format.",
             },
             lg: 6,
             xs: 12,

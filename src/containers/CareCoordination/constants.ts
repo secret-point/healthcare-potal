@@ -4,7 +4,7 @@ import {
   INFORMATION_TYPES,
 } from "../../constants/identity";
 import { usStates } from "../../constants/usStates";
-import { emailPattern, phoneNumberPattern } from "../../utils/string";
+import { phoneNumberPattern, validateEmail } from "../../utils/string";
 
 export const CARE_PROVIDER = {
   label: "Who would you like us to coordinate your care with?",
@@ -121,10 +121,10 @@ export const CARE_PROVIDER = {
       shrink: true,
       xs: 6,
       validator: {
-        pattern: {
-          value: emailPattern,
-          message: "Please enter email address in the correct format.",
-        },
+        validate: (value: string) =>
+          !value || validateEmail(value)
+            ? true
+            : "Please enter email address in the correct format.",
       },
     },
     {
