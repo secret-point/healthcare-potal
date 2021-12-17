@@ -14,6 +14,7 @@ import Button from "./Button";
 import FieldComponent from "./FieldComponent";
 import { useColorStyles } from "./useCommonStyles";
 import { getFormErrorMessages } from "../utils/helper";
+import PasswordUpdateResult from "./PasswordUpdateResult";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -62,6 +63,16 @@ const UpdateForm: FC<UpdateFormProps> = ({
   const colorClasses = useColorStyles();
   const [extraError, setExtraError] = useState("");
 
+  const values = getValues();
+  const password = dotProp.get(values, "password") as string;
+  const confirmPassword = dotProp.get(values, "confirmPassword") as string;
+  const showPasswordResult = Boolean(password || confirmPassword);
+  const shouldPasswordMatch =
+    Boolean(password) &&
+    Boolean(confirmPassword) &&
+    password === confirmPassword;
+  const shouldLongerThan8 = Boolean(password) && password.length >= 8;
+
   const handleSave = async (e: FormEvent) => {
     e.preventDefault();
 
@@ -69,12 +80,7 @@ const UpdateForm: FC<UpdateFormProps> = ({
     if (!result) {
       return;
     }
-
-    const values = getValues();
-    const password = dotProp.get(values, "password") as string;
-    const confirmPassword = dotProp.get(values, "confirmPassword") as string;
-    if (password !== confirmPassword && isPasswordForm) {
-      setExtraError("Password does not match.");
+    if (showPasswordResult && (!shouldLongerThan8 || !shouldPasswordMatch)) {
       return;
     }
 
@@ -120,6 +126,13 @@ const UpdateForm: FC<UpdateFormProps> = ({
           </Grid>
         ))}
       </Grid>
+
+      {showPasswordResult && (
+        <PasswordUpdateResult
+          shouldLongerThan8={shouldLongerThan8}
+          shouldPasswordMatch={shouldPasswordMatch}
+        />
+      )}
 
       <DialogActions>
         <Button text="Cancel" fullWidth={false} onClick={onClose} />

@@ -56,7 +56,7 @@ const CareProviderCard = ({ provider }: CareTeamMemberCardProps) => {
   const layoutClasses = useLayoutStyles();
   const fontClasses = useFontStyles();
   const colorClasses = useColorStyles();
-  const [firstName, lastName] = provider.name.split(/\s+/g);
+  const [firstName = "", lastName = ""] = provider.name.split(/\s+/g);
 
   return (
     <Card variant="outlined" className={classes.teamMemberCard}>

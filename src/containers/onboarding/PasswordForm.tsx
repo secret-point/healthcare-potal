@@ -1,12 +1,10 @@
 import dotProp from "dot-prop";
 import { useFormContext } from "react-hook-form";
 import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
 
 import Button from "../../components/Button";
 import TextInput from "../../components/TextInput";
-import { ReactComponent as GreenCheckIcon } from "../../icons/GreenCheckIcon.svg";
-import { ReactComponent as RedCrossIcon } from "../../icons/RedCrossIcon.svg";
+import PasswordUpdateResult from "../../components/PasswordUpdateResult";
 import { useLayoutStyles } from "../../components/useCommonStyles";
 
 const PasswordForm = () => {
@@ -19,8 +17,10 @@ const PasswordForm = () => {
 
   const showResult = Boolean(password || confirmPassword);
   const shouldPasswordMatch =
-    password && confirmPassword && password === confirmPassword;
-  const shouldLongerThan8 = password && password.length >= 8;
+    Boolean(password) &&
+    Boolean(confirmPassword) &&
+    password === confirmPassword;
+  const shouldLongerThan8 = Boolean(password) && password.length >= 8;
 
   return (
     <Grid container spacing={1}>
@@ -53,20 +53,10 @@ const PasswordForm = () => {
       </Grid>
 
       {showResult && (
-        <Grid item xs={12} className={layoutClasses.mt2}>
-          <Grid container item xs={12} alignItems="center">
-            {shouldPasswordMatch ? <GreenCheckIcon /> : <RedCrossIcon />}
-            <Typography className={layoutClasses.ml2}>
-              Password matches
-            </Typography>
-          </Grid>
-          <Grid container item xs={12} alignItems="center">
-            {shouldLongerThan8 ? <GreenCheckIcon /> : <RedCrossIcon />}
-            <Typography className={layoutClasses.ml2}>
-              Minimum of 8 characters
-            </Typography>
-          </Grid>
-        </Grid>
+        <PasswordUpdateResult
+          shouldLongerThan8={shouldLongerThan8}
+          shouldPasswordMatch={shouldPasswordMatch}
+        />
       )}
 
       <Grid item xs={12} className={layoutClasses.mt3}>

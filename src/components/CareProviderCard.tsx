@@ -48,6 +48,10 @@ const useStyles = makeStyles((theme) =>
     bookingPageLink: {
       alignSelf: "flex-start",
       marginLeft: `0px !important`,
+
+      "& .MuiTypography-root": {
+        fontWeight: "normal",
+      },
     },
   })
 );
