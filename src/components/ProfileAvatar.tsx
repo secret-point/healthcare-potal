@@ -11,12 +11,14 @@ import { ROUTES } from "../app/types";
 interface StyleProps {
   width?: number;
   height?: number;
+  isClickable?: boolean;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     avatar: {
-      cursor: "pointer",
+      cursor: (props: StyleProps) =>
+        props.isClickable ? "pointer" : "default",
       width: (props: StyleProps) => props.width,
       height: (props: StyleProps) => props.height,
       borderRadius: (props: StyleProps) => props.width,
@@ -47,6 +49,7 @@ interface ProfileAvatarProps extends StyleProps {
 
 const ProfileAvatar: FC<ProfileAvatarProps> = ({
   className,
+  isClickable = false,
   height = 40,
   width = 40,
   firstName,
@@ -54,9 +57,10 @@ const ProfileAvatar: FC<ProfileAvatarProps> = ({
   picture,
 }) => {
   const history = useHistory();
-  const classes = useStyles({ width, height });
+  const classes = useStyles({ isClickable, height, width });
 
   const handleClickAvatar = () => {
+    if (!isClickable) return;
     history.push(ROUTES.PROFILE);
   };
 
