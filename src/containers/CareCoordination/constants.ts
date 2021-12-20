@@ -105,8 +105,8 @@ export const CARE_PROVIDER = {
     },
     {
       path: "fax",
-      label: "Fax number(if available)",
-      placeholder: "Fax number(if available)",
+      label: "Fax number (if available)",
+      placeholder: "Fax number (if available)",
       type: FieldType.TEXT,
       isTopLabel: true,
       shrink: true,
@@ -114,8 +114,8 @@ export const CARE_PROVIDER = {
     },
     {
       path: "email",
-      label: "Email address(if available)",
-      placeholder: "Email address(if available)",
+      label: "Email address (if available)",
+      placeholder: "Email address (if available)",
       type: FieldType.TEXT,
       isTopLabel: true,
       shrink: true,

@@ -138,7 +138,7 @@ export class ScoreHistorySummary {
         return {
           title: "Scores not improving? Don’t worry! ☺️",
           summary:
-            "It’s very common for scores to not change as much before you start seeing improvments. Let’s assess by taking the survey next week to continue monitoring your wellbeing.",
+            "It’s common for your PrairieScore to take a bit of time to improve. Remember to take an assessment regularly to continue monitoring your wellbeing.",
         };
       case ProgressTypes.CASE_1_1_2:
         return {
@@ -157,7 +157,8 @@ export class ScoreHistorySummary {
         };
       case ProgressTypes.CASE_1_3_1:
         return {
-          title: "Don’t worry about your score going up!🥰💕",
+          title:
+            "Your score increased slightly, but don't worry too much about it! 🎉",
           summary:
             "Always remember - mental health journey has its own ebbs and flows. While your score increased slightly, we’ll be watching out for your progress so that you don’t have to worry about it. We’re always here for you!",
         };

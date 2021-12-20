@@ -114,6 +114,7 @@ const Container: React.FC<ContainerProps> = ({ children, className }) => {
                 firstName={user.firstName}
                 lastName={user.lastName}
                 picture={user.profilePicture}
+                isClickable
               />
             )}
           </Box>

@@ -404,7 +404,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
             xs: 12,
           },
           {
-            label: "My symptoms improve when I...",
+            label: "What can cause your symptoms to improve?",
             path: "relievedBy",
             placeholder: "What has been helpful in improving your symptoms?",
             type: FieldType.TEXT,
@@ -415,7 +415,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
             xs: 12,
           },
           {
-            label: "My symptoms worsen when I...",
+            label: "What can cause your symptoms to worsen?",
             path: "worsenedBy",
             placeholder: "What can cause your symptoms worse?",
             required: true,
