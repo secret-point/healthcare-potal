@@ -107,12 +107,19 @@ const InTakeForm = () => {
     history.goBack();
   };
 
-  const handleCompleteInTake = async (form: any) => {
-    await updateInTakeForm.mutate(convertInTakeFormToUser(form), {
-      onSuccess: loadUser,
-    });
+  const handleUpdateIntakeFormDone = () => {
+    loadUser();
     setCurrentStep(InTakeFormSteps.COMPLETE);
     localStorage.removeItem(getInTakeFormStorageKey(user));
+    enqueueSnackbar("Your intake form has been submitted.", {
+      variant: "success",
+    });
+  };
+
+  const handleCompleteInTake = async (form: any) => {
+    await updateInTakeForm.mutate(convertInTakeFormToUser(form), {
+      onSuccess: handleUpdateIntakeFormDone,
+    });
   };
 
   const handleGoToNextStep = (e?: FormEvent) => {
