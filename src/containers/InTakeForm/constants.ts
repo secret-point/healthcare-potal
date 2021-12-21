@@ -89,7 +89,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
                     month >= 1 &&
                     month <= 12 &&
                     day >= 1 &&
-                    day <= 10;
+                    day <= 31;
                   return isValid ? true : "Birthday is invalid.";
                 },
               },
