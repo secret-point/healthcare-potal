@@ -82,6 +82,8 @@ const InTakeForm = () => {
     if (!user || !isInProgress) return;
 
     const currentInTakeForm = { ...form, ...methods.getValues() };
+    if (!Object.keys(currentInTakeForm).length) return;
+
     const localStoragePayload = {
       step: currentStep,
       values: currentInTakeForm,
@@ -92,12 +94,6 @@ const InTakeForm = () => {
     );
     history.push(ROUTES.DASHBOARD);
   };
-
-  useEffect(
-    () => handleLeaveForm,
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [isInProgress]
-  );
 
   if (!user) {
     return null;
