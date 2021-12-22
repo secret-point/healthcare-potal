@@ -63,6 +63,7 @@ const FieldComponent: FC<FieldComponentProps> = ({ field, variant }) => {
           limit={field.limit}
           required={field.required}
           addButton={field.addButton}
+          deleteButton={field.deleteButton}
           instanceLabel={field.instanceLabel}
           properties={field.properties || []}
         />

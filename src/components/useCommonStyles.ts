@@ -303,6 +303,9 @@ export const useLayoutStyles = makeStyles(
         alignItems: "center",
         justifyContent: "center",
       },
+      gap3: {
+        gap: theme.spacing(3),
+      },
     }),
   { index: 1 }
 );

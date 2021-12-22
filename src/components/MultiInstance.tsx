@@ -9,6 +9,7 @@ import FormLabel from "@material-ui/core/FormLabel";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
+import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 
 import { Theme } from "../theme/types/createPalette";
 import { TCustomFieldProperty } from "../types";
@@ -34,6 +35,17 @@ const useStyles = makeStyles((theme: Theme) =>
         alignItems: "center",
       },
     },
+    redAlertButton: {
+      "& .MuiTypography-root": {
+        color: theme.palette.accentRed.main,
+      },
+
+      "&:hover": {
+        "& .MuiTypography-root": {
+          color: theme.palette.accentRed2.main,
+        },
+      },
+    },
   })
 );
 
@@ -43,6 +55,7 @@ interface MultiInstanceProps {
   limit?: number;
   required?: boolean;
   addButton?: string;
+  deleteButton?: string;
   instanceLabel?: string;
   variant?: "standard" | "outlined";
   properties: TCustomFieldProperty[];
@@ -56,6 +69,7 @@ const MultiInstance: React.FC<MultiInstanceProps> = ({
   required,
   variant,
   addButton,
+  deleteButton,
   instanceLabel,
   properties,
   inputLabelClass,
@@ -85,6 +99,41 @@ const MultiInstance: React.FC<MultiInstanceProps> = ({
     setInstances([...instances, instances.length]);
   };
 
+  const handleClickDelete = () => {
+    setInstances(instances.slice(0, instances.length - 1));
+  };
+
+  const renderInstance = (index: number) => (
+    <Grid key={index} item xs={12}>
+      <Grid container spacing={3}>
+        {instanceLabel && (
+          <Grid item xs={12}>
+            <Typography variant="h5">
+              {`${instanceLabel} ${index + 1}`}
+            </Typography>
+          </Grid>
+        )}
+        {properties.map((property) => (
+          <Grid key={property.path} item xs={property.xs} lg={property.lg}>
+            <FieldComponent
+              key={property.path}
+              field={{
+                ...property,
+                required,
+                label: "",
+                path: [path, index, property.path].join("."),
+              }}
+              variant={variant}
+            />
+          </Grid>
+        ))}
+      </Grid>
+    </Grid>
+  );
+
+  const shouldShowDeleteButton = deleteButton && instances.length >= 2;
+  const shouldShowAddButton = !limit || instances.length < limit;
+
   return (
     <Grid container>
       <Grid item xs={12}>
@@ -102,52 +151,41 @@ const MultiInstance: React.FC<MultiInstanceProps> = ({
       </Grid>
 
       <Grid container spacing={3}>
-        {instances.map((index) => (
-          <Grid key={index} item xs={12}>
-            <Grid container spacing={3}>
-              {instanceLabel && (
-                <Grid item xs={12}>
-                  <Typography variant="h5">
-                    {`${instanceLabel} ${index + 1}`}
-                  </Typography>
-                </Grid>
-              )}
-              {properties.map((property) => (
-                <Grid
-                  key={property.path}
-                  item
-                  xs={property.xs}
-                  lg={property.lg}
-                >
-                  <FieldComponent
-                    key={property.path}
-                    field={{
-                      ...property,
-                      required,
-                      label: "",
-                      path: [path, index, property.path].join("."),
-                    }}
-                    variant={variant}
-                  />
-                </Grid>
-              ))}
-            </Grid>
-          </Grid>
-        ))}
+        {instances.map((index) => renderInstance(index))}
       </Grid>
 
-      {(!limit || instances.length < limit) && (
-        <Grid container justify="flex-end">
-          <TextButton
-            text={
-              <Box display="flex" alignItems="center">
-                <AddCircleOutlineIcon />
-                &nbsp;
-                {addButton}
-              </Box>
-            }
-            onClick={handleClickAddMoreInstance}
-          />
+      {(shouldShowDeleteButton || shouldShowAddButton) && (
+        <Grid
+          container
+          className={clsx(layoutClasses.mt1, layoutClasses.gap3)}
+          justify="flex-end"
+        >
+          {shouldShowAddButton && (
+            <TextButton
+              text={
+                <Box display="flex" alignItems="center">
+                  <AddCircleOutlineIcon />
+                  &nbsp;
+                  {addButton}
+                </Box>
+              }
+              onClick={handleClickAddMoreInstance}
+            />
+          )}
+
+          {shouldShowDeleteButton && (
+            <TextButton
+              className={classes.redAlertButton}
+              text={
+                <Box display="flex" alignItems="center">
+                  <RemoveCircleOutlineIcon />
+                  &nbsp;
+                  {deleteButton}
+                </Box>
+              }
+              onClick={handleClickDelete}
+            />
+          )}
         </Grid>
       )}
     </Grid>

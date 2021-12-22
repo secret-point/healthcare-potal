@@ -400,6 +400,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
               },
             ],
             addButton: "Add more symptoms",
+            deleteButton: "Delete symptom",
             lg: 12,
             xs: 12,
           },

@@ -74,6 +74,7 @@ export type TCustomField = {
   properties?: TCustomFieldProperty[];
   limit?: number;
   addButton?: string;
+  deleteButton?: string;
   instanceLabel?: string;
   xs?: any;
   lg?: any;
