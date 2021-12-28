@@ -5,13 +5,13 @@ export const localConfig = {
 };
 
 export const stagingConfig = {
-  apiUrl: "https://cpdashnode-dot-cynomys-nonprod.df.r.appspot.com/",
+  apiUrl: "https://cpdashnode-dot-cynomys-nonprod.df.r.appspot.com",
   googleClientId:
     "798126627437-d61jurgqkldgsie6eg0ek0q0nb79kno3.apps.googleusercontent.com",
 };
 
 export const prodConfig = {
-  apiUrl: "https://cpdashnode-dot-cynomys-nonprod.df.r.appspot.com/",
+  apiUrl: "https://cpdashnode-dot-cynomys-nonprod.df.r.appspot.com",
   googleClientId:
     "798126627437-d61jurgqkldgsie6eg0ek0q0nb79kno3.apps.googleusercontent.com",
 };
