@@ -17,7 +17,7 @@ export type TProgressRequest = {
   GAD6: number;
   GAD7: number;
   comment: string;
-  sideEffect: string;
+  sideEffects: string[];
   CSAT: number;
   markAsRead: boolean;
   archived: boolean;
@@ -27,8 +27,17 @@ export type TProgressRequest = {
   deltaTotalGAD: Nullable<number>;
 };
 
+export type TProgress = TProgressRequest & {
+  totalPHQ: number;
+  totalGAD: number;
+  total: number;
+  updatedAt: string;
+};
+
 export type TCheckInFormRequest = any;
 
 export type TInTakeFormRequest = any;
 
 export type TFeedbackRequest = any;
+
+export type TCoordinationFormRequest = any;

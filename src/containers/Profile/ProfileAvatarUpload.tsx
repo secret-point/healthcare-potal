@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, FC, useState } from "react";
 import Link from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
@@ -26,7 +26,17 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function ProfileAvatarUpload() {
+interface ProfileAvatarUploadProps {
+  picture: Nullable<string>;
+  onDeletePicture: VoidFunction;
+  onUploadFile: (file: File) => void;
+}
+
+const ProfileAvatarUpload: FC<ProfileAvatarUploadProps> = ({
+  picture,
+  onDeletePicture,
+  onUploadFile,
+}) => {
   const classes = useStyles();
   const [file, setFile] = useState<File>();
 
@@ -34,10 +44,12 @@ export default function ProfileAvatarUpload() {
     const file = e.target?.files?.[0];
     if (!file) return null;
     setFile(file);
+    onUploadFile(file);
   };
 
   const handleDeleteFile = () => {
     setFile(undefined);
+    onDeletePicture();
   };
 
   return (
@@ -47,7 +59,7 @@ export default function ProfileAvatarUpload() {
           id="json"
           name="json"
           type="file"
-          accept="image/*"
+          accept="image/jpeg, image/png"
           style={{ display: "none" }}
           multiple={false}
           onChange={handleChangeFile}
@@ -56,7 +68,7 @@ export default function ProfileAvatarUpload() {
           Upload new picture
         </Typography>
       </Link>
-      {file && (
+      {(Boolean(file) || Boolean(picture)) && (
         <Link
           component="label"
           className={classes.buttonRole}
@@ -69,4 +81,6 @@ export default function ProfileAvatarUpload() {
       )}
     </div>
   );
-}
+};
+
+export default ProfileAvatarUpload;

@@ -8,20 +8,21 @@ import {
   useFontStyles,
   useLayoutStyles,
 } from "../../components/useCommonStyles";
-import FeedbackForm from "../../components/FeedbackForm";
 import { useViewport } from "../../hooks/useViewport";
 
-const useStyles = makeStyles((theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
-    feedbackFormWrapper: {
-      position: "fixed",
-      left: 0,
-      bottom: theme.spacing(4),
+    togetherImage: {
+      maxWidth: 480,
     },
   })
 );
 
-const CompleteSurvey = () => {
+interface WelcomeProps {
+  onCancel: VoidFunction;
+}
+
+const Welcome: React.FC<WelcomeProps> = ({ onCancel }) => {
   const classes = useStyles();
   const fontClasses = useFontStyles();
   const layoutClasses = useLayoutStyles();
@@ -36,7 +37,12 @@ const CompleteSurvey = () => {
         xs={12}
         className={layoutClasses.mb3}
       >
-        <img src="/images/celebration.png" height={120} alt="Celebration" />
+        <img
+          src="/images/together.png"
+          width="100%"
+          alt="All together."
+          className={classes.togetherImage}
+        />
       </Grid>
       <Grid item xs={12}>
         <Typography
@@ -44,7 +50,8 @@ const CompleteSurvey = () => {
           align="center"
           className={clsx(fontClasses.fontNormal, layoutClasses.mb2)}
         >
-          Thank you for completing your check-in!
+          Welcome to your
+          <b> assessment!</b>
         </Typography>
       </Grid>
       <Grid
@@ -53,30 +60,29 @@ const CompleteSurvey = () => {
         className={isMobile ? layoutClasses.mb4 : layoutClasses.mb6}
       >
         <Typography variant="subtitle1" align="center">
-          Your care team will be reviewing your response and reach out to you if
-          needed. You can view your progress and your score history by clicking
-          on the button below.
+          Completing this survey allows you and your care team to measure your
+          progress. Once you complete your assessment, your care team will
+          review your response.
         </Typography>
       </Grid>
       <Grid item xs={12}>
         <Button
-          text="View My Progress"
+          text="Start"
           color="primary"
           type="submit"
           variant="contained"
         />
       </Grid>
-      <Grid
-        container
-        justify="center"
-        item
-        xs={12}
-        className={classes.feedbackFormWrapper}
-      >
-        <FeedbackForm />
+      <Grid item xs={12}>
+        <Button
+          color="secondary"
+          text="Go Back Home"
+          variant="text"
+          onClick={onCancel}
+        />
       </Grid>
     </Grid>
   );
 };
 
-export default CompleteSurvey;
+export default Welcome;

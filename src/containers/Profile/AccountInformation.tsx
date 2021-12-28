@@ -7,7 +7,6 @@ import { makeStyles, createStyles } from "@material-ui/core/styles";
 
 import { Theme } from "../../theme/types/createPalette";
 import { TCustomField, User } from "../../types";
-import { shouldVerifyId } from "../../utils/string";
 import CustomList from "../../components/CustomList";
 import { TextButton } from "../../components/Button";
 import { EditableField } from "./types";
@@ -41,7 +40,6 @@ interface AccountInformationProps {
 const AccountInformation: FC<AccountInformationProps> = ({
   user,
   onClickEdit,
-  onShowVerifyIDDialog,
 }) => {
   const classes = useStyles();
 
@@ -80,26 +78,27 @@ const AccountInformation: FC<AccountInformationProps> = ({
         />
       ),
     },
-    {
-      label: "ID",
-      path: "verificationStatus",
-      render: (value: string) => (
-        <Box className={classes.editableFieldWrapper}>
-          <Typography variant="subtitle1" className={classes.listValue}>
-            {value || "Unverified"}
-          </Typography>
-          {shouldVerifyId(value) && (
-            <TextButton text="Verify ID" onClick={onShowVerifyIDDialog} />
-          )}
-        </Box>
-      ),
-    },
+    // Hide the verify id for now
+    // {
+    //   label: "ID",
+    //   path: "IDStatus",
+    //   render: (value: string) => (
+    //     <Box className={classes.editableFieldWrapper}>
+    //       <Typography variant="subtitle1" className={classes.listValue}>
+    //         {value}
+    //       </Typography>
+    //       {false && shouldVerifyId(value as UserIDVerificationStatus) && (
+    //         <TextButton text="Verify ID" onClick={onShowVerifyIDDialog} />
+    //       )}
+    //     </Box>
+    //   ),
+    // },
   ];
 
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        <Typography>Account</Typography>
+        <Typography variant="h3">Account</Typography>
       </Grid>
 
       <Grid item xs={12}>

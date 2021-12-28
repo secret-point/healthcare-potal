@@ -19,30 +19,42 @@ const ContactInformation: FC<ContactInformationProps> = ({ onClickEdit }) => {
       label: "Email",
       path: "email",
       render: () => (
-        <TextButton onClick={() => onClickEdit(EditableField.EMAIL)} />
+        <span>
+          {user?.email}
+          <TextButton onClick={() => onClickEdit(EditableField.EMAIL)} />
+        </span>
       ),
     },
     {
       label: "Phone Number",
-      path: "phoneNumber",
+      path: "phone",
       render: () => (
-        <TextButton onClick={() => onClickEdit(EditableField.PHONE_NUMBER)} />
+        <span>
+          {user?.phone}
+          <TextButton onClick={() => onClickEdit(EditableField.PHONE_NUMBER)} />
+        </span>
       ),
     },
     {
       label: "Emergency Contact",
       path: "emergencyContact",
       render: () => (
-        <TextButton
-          onClick={() => onClickEdit(EditableField.EMERGENCY_CONTACT)}
-        />
+        <span>
+          {user?.emergencyContact?.name}
+          <TextButton
+            onClick={() => onClickEdit(EditableField.EMERGENCY_CONTACT)}
+          />
+        </span>
       ),
     },
     {
       label: "Address",
       path: "address",
       render: () => (
-        <TextButton onClick={() => onClickEdit(EditableField.ADDRESS)} />
+        <span>
+          {user?.billingAddress?.address1}
+          <TextButton onClick={() => onClickEdit(EditableField.ADDRESS)} />
+        </span>
       ),
     },
   ];
@@ -50,7 +62,7 @@ const ContactInformation: FC<ContactInformationProps> = ({ onClickEdit }) => {
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        <Typography>Contact Information</Typography>
+        <Typography variant="h3">Contact Information</Typography>
       </Grid>
 
       <Grid item xs={12}>

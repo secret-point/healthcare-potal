@@ -1,21 +1,29 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 
-// import { useFetchProgressHistory } from "../../api";
-import {
-  useFontStyles,
-  useLayoutStyles,
-} from "../../components/useCommonStyles";
+import { ROUTES } from "../../app/types";
+import { useFetchProgressList } from "../../api/memberApi";
+import { useLayoutStyles } from "../../components/useCommonStyles";
 import PrairieScoreHistory from "./components/PrairieScoreHistory";
 import PrairieStatusCardSlices from "./components/PrairieStatusCardSlices";
-import { mockScoreHistory } from "./mockScores";
 
 const ProgressHistory = () => {
-  const fontClasses = useFontStyles();
+  const history = useHistory();
   const layoutClasses = useLayoutStyles();
-  // const { progressHistory } = useFetchProgressHistory();
-  const [active, setActive] = useState(mockScoreHistory.length - 1);
+  const { data: progressList = [], isSuccess } = useFetchProgressList();
+  const [active, setActive] = useState(progressList.length - 1);
+
+  useEffect(() => {
+    setActive(progressList.length - 1);
+  }, [progressList]);
+
+  useEffect(() => {
+    if (isSuccess && !progressList.length) {
+      history.push(ROUTES.ASSESSMENT);
+    }
+  }, [isSuccess, history, progressList]);
 
   return (
     <Grid container>
@@ -27,9 +35,7 @@ const ProgressHistory = () => {
         justify="space-between"
         className={layoutClasses.mb2}
       >
-        <Typography variant="h2" className={fontClasses.font500}>
-          Your Progress History
-        </Typography>
+        <Typography variant="h2">Your Progress History</Typography>
       </Grid>
 
       <Grid
@@ -39,15 +45,12 @@ const ProgressHistory = () => {
         className={layoutClasses.mb3}
       >
         <Grid item xs={12} md={8}>
-          <PrairieScoreHistory
-            active={active}
-            scoreHistory={mockScoreHistory}
-          />
+          <PrairieScoreHistory active={active} scoreHistory={progressList} />
         </Grid>
         <Grid item xs={12} md={4}>
           <PrairieStatusCardSlices
             active={active}
-            scores={mockScoreHistory}
+            scores={progressList}
             onUpdateActive={setActive}
           />
         </Grid>

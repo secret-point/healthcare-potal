@@ -6,13 +6,14 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 
 import { useChangePasswordCode, useVerifyResetPasswordCode } from "../../api";
+import { ChangePasswordCodeForm } from "../../types";
+import { ROUTES } from "../../app/types";
 import { useQueryParams } from "../../api/useQueryParams";
 import Button from "../../components/Button";
 import Container from "../../components/Container";
 import PlainModal from "../../components/PlainModal";
 import PasswordForm from "../onboarding/PasswordForm";
 import { useLayoutStyles } from "../../components/useCommonStyles";
-import { ChangePasswordCodeForm } from "../../types";
 
 const ConfirmVerificationLink = () => {
   const history = useHistory();
@@ -27,12 +28,19 @@ const ConfirmVerificationLink = () => {
   const email = queryParams.get("email") || "";
 
   const handleVerifyLink = useCallback(async () => {
-    // await verifyResetPasswordCode({ code, email });
-    enqueueSnackbar("You have successfully verified the link.", {
-      variant: "success",
-    });
+    try {
+      await verifyResetPasswordCode({ code, email });
+      enqueueSnackbar("You have successfully verified the link.", {
+        variant: "success",
+      });
+    } catch {
+      enqueueSnackbar("The verification link is not valid.", {
+        variant: "error",
+      });
+      history.push(ROUTES.RESET_PASSWORD);
+    }
     // eslint-disable-next-line
-  }, [code, email, verifyResetPasswordCode]);
+  }, [code, email]);
 
   useEffect(() => {
     handleVerifyLink();
@@ -60,7 +68,7 @@ const ConfirmVerificationLink = () => {
       <PlainModal>
         {!passwordChanged ? (
           <Grid container>
-            <Grid item xs={12} className={layoutClasses.mb6}>
+            <Grid item xs={12} className={layoutClasses.mb4}>
               <Typography variant="h2" align="center">
                 Change your password
               </Typography>
@@ -82,7 +90,7 @@ const ConfirmVerificationLink = () => {
               </Typography>
             </Grid>
 
-            <Grid item xs={12} className={layoutClasses.mb6}>
+            <Grid item xs={12} className={layoutClasses.mb4}>
               <Typography variant="subtitle1" align="center">
                 You may now sign to your account using your email and your new
                 password.

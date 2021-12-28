@@ -11,7 +11,7 @@ import { ResponsiveLine } from "@nivo/line";
 import { linearGradientDef } from "@nivo/core";
 
 import { ButtonLink } from "../Link";
-import { TScoreHistory } from "../../types/general";
+import { TProgress } from "../../types";
 import { formatFullDay } from "../../utils/date";
 import {
   useCardStyles,
@@ -34,10 +34,10 @@ const useStyles = makeStyles(() =>
 );
 
 interface PrairieScoreProps {
-  scoreHistory: TScoreHistory;
+  progressList: TProgress[];
 }
 
-const PrairieScore = ({ scoreHistory }: PrairieScoreProps) => {
+const PrairieScore = ({ progressList }: PrairieScoreProps) => {
   const classes = useStyles();
   const cardClasses = useCardStyles();
   const colorClasses = useColorStyles();
@@ -45,46 +45,59 @@ const PrairieScore = ({ scoreHistory }: PrairieScoreProps) => {
   const layoutClasses = useLayoutStyles();
 
   const data = useMemo(() => {
-    if (!scoreHistory.length) return { id: "PrairieScore", data: [] };
-    const firstDate = scoreHistory[0].date;
+    if (!progressList.length) return { id: "PrairieScore", data: [] };
+    const firstDate = progressList[0].updatedAt;
     return [
       {
         id: "PrairieScore",
-        data: scoreHistory.map((history) => ({
-          x: dayjs(firstDate).diff(history.date, "day"),
-          y: history.score,
+        data: progressList.map((history) => ({
+          x: dayjs(firstDate).diff(history.updatedAt, "day") + 1,
+          y: history.total || 0,
         })),
       },
     ] as any;
-  }, [scoreHistory]);
+  }, [progressList]);
 
-  if (!scoreHistory.length) return null;
-  const firstScoreItem = scoreHistory[0];
-  const lastScoreItem = scoreHistory[scoreHistory.length - 1];
+  if (!progressList.length) return null;
+  const firstScoreItem = progressList[0];
+  const lastScoreItem = progressList[progressList.length - 1];
 
   return (
     <Card
       variant="outlined"
-      className={clsx(cardClasses.card, layoutClasses.pb0, layoutClasses.pt4)}
+      className={clsx(
+        cardClasses.card,
+        cardClasses.grayBorder,
+        layoutClasses.pb0,
+        layoutClasses.pt4
+      )}
     >
       <Grid container spacing={4}>
         <Grid item xs={12} sm={7}>
           <Box className={classes.responsiveLineWrapper}>
             <ResponsiveLine
-              margin={{ top: 4, bottom: 4, left: 4 }}
-              enableSlices="x"
-              enableArea
-              curve="natural"
               colors={{ scheme: "set2" }}
+              curve="linear"
               data={data}
-              lineWidth={1}
               defs={[
                 linearGradientDef("gradientA", [
                   { offset: 0, color: "inherit" },
                   { offset: 100, color: "inherit", opacity: 0 },
                 ]),
               ]}
-              layers={["areas", "crosshair", "lines", "slices"]}
+              enableArea
+              enableSlices="x"
+              margin={{ top: 4, bottom: 30, left: 30 }}
+              lineWidth={1}
+              pointSize={10}
+              pointBorderColor={{ theme: "background" }}
+              pointBorderWidth={2}
+              xFormat="time:%m/%d/%y"
+              yScale={{
+                type: "linear",
+                max: 48,
+              }}
+              layers={["crosshair", "lines", "slices", "points"]}
               fill={[{ match: "*", id: "gradientA" }]}
             />
           </Box>
@@ -97,21 +110,23 @@ const PrairieScore = ({ scoreHistory }: PrairieScoreProps) => {
               </Typography>
               <Box width={1} display="flex">
                 <Typography variant="h2">
-                  {lastScoreItem.score}
+                  {lastScoreItem.total}
                   &nbsp;
                 </Typography>
-                <Typography
-                  variant="h2"
-                  className={clsx(
-                    colorClasses.secondaryGreen1,
-                    fontClasses.fontNormal
-                  )}
-                >
-                  {`(${lastScoreItem.score - firstScoreItem.score})`}
-                </Typography>
+                {progressList.length > 1 && (
+                  <Typography
+                    variant="h2"
+                    className={clsx(
+                      colorClasses.secondaryGreen1,
+                      fontClasses.fontNormal
+                    )}
+                  >
+                    {`(${lastScoreItem.total - firstScoreItem.total})`}
+                  </Typography>
+                )}
               </Box>
               <Typography variant="subtitle2" className={layoutClasses.mb15}>
-                {formatFullDay(lastScoreItem.date)}
+                {formatFullDay(lastScoreItem.updatedAt)}
               </Typography>
             </Box>
 

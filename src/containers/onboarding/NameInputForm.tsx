@@ -6,7 +6,6 @@ import TextInput from "../../components/TextInput";
 import { Theme } from "../../theme/types/createPalette";
 import ErrorText from "../../components/ErrorText";
 import { useInputDetails } from "../../hooks/useInputDetails";
-import { useLayoutStyles } from "../../components/useCommonStyles";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -24,7 +23,6 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const NameInputForm = () => {
   const classes = useStyles();
-  const layoutClasses = useLayoutStyles();
 
   const requiredFields = ["firstName", "lastName"];
   const { inputErrors, editedFields } = useInputDetails({
@@ -43,7 +41,7 @@ const NameInputForm = () => {
         />
       </Grid>
 
-      <Grid item xs={12} className={layoutClasses.mt3}>
+      <Grid item xs={12}>
         <TextInput
           name="lastName"
           label="Last Name"

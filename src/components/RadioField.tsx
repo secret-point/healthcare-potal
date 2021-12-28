@@ -28,12 +28,21 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: theme.spacing(1),
       borderRadius: theme.spacing(1),
       border: `1px solid rgba(0, 0, 0, 0.23)`,
+      "& span": {
+        fontSize: 16,
+        "&:last-child": {
+          color: theme.palette.primaryNavy.main,
+        },
+      },
     },
     selectedFormControlLabel: {
       "& .MuiFormControlLabel-label": {
         color: theme.palette.secondaryGreen1.main,
       },
       border: `1px solid ${theme.palette.secondaryGreen1.main}`,
+      "& span:last-child": {
+        color: theme.palette.secondaryGreen1.main,
+      },
     },
     topLabel: {
       fontSize: 16,
@@ -55,6 +64,7 @@ type RadioFieldProps = {
     md?: GridSize;
     lg?: GridSize;
   };
+  onChange?: (name: string, value: string) => void;
 };
 
 const RadioField: FC<RadioFieldProps> = ({
@@ -65,6 +75,7 @@ const RadioField: FC<RadioFieldProps> = ({
   options,
   layout,
   validator,
+  onChange,
 }) => {
   const classes = useStyles();
   const colorClasses = useColorStyles();
@@ -84,6 +95,7 @@ const RadioField: FC<RadioFieldProps> = ({
     const value = event.target.value;
     setMuiValue(value);
     setValue(name, value);
+    onChange?.(name, value);
   };
 
   useEffect(() => {

@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme: Theme) =>
       display: "flex",
       width: "100%",
       justifyContent: "center",
+      padding: theme.spacing(0, 4),
     },
 
     mobileSideContentWrapper: {
@@ -108,7 +109,14 @@ const Container: React.FC<ContainerProps> = ({ children, className }) => {
         <Grid container justify="center" className={classes.topBarWrapper}>
           <Box className={classes.menuTriggerWrapper}>
             <MenuIconButton onClick={handleClickMenuButton} />
-            {!isMobile && <ProfileAvatar user={user} />}
+            {!isMobile && (
+              <ProfileAvatar
+                firstName={user.firstName}
+                lastName={user.lastName}
+                picture={user.profilePicture}
+                isClickable
+              />
+            )}
           </Box>
           <IconButton
             disableTouchRipple
@@ -130,9 +138,6 @@ const Container: React.FC<ContainerProps> = ({ children, className }) => {
           container
           item
           xs={12}
-          sm={12}
-          md={10}
-          lg={8}
           justify="center"
           className={clsx(
             classes.mainContent,

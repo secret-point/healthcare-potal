@@ -1,12 +1,12 @@
 import dayjs from "dayjs";
-import { ProgressTypes, TScoreHistory, TProgressSummary } from "../types";
+import { ProgressTypes, TProgress, TProgressSummary } from "../types";
 
 const SCORE_DELTA = 3;
 
 export class ScoreHistorySummary {
-  history: TScoreHistory;
+  history: TProgress[];
 
-  constructor(history: TScoreHistory) {
+  constructor(history: TProgress[]) {
     this.history = history;
   }
 
@@ -16,15 +16,15 @@ export class ScoreHistorySummary {
     }
     const lastHistory = this.history[this.history.length - 1];
 
-    if (lastHistory.score <= 10) {
+    if (lastHistory.total <= 10) {
       const last2ndHistory = this.history[this.history.length - 2];
       if (!last2ndHistory) {
         return ProgressTypes.CASE_2_1;
       }
-      if (last2ndHistory.score - lastHistory.score > SCORE_DELTA) {
+      if (last2ndHistory.total - lastHistory.total > SCORE_DELTA) {
         return ProgressTypes.CASE_2_2;
       }
-      if (lastHistory.score - last2ndHistory.score > SCORE_DELTA) {
+      if (lastHistory.total - last2ndHistory.total > SCORE_DELTA) {
         return ProgressTypes.CASE_2_3;
       }
       return ProgressTypes.CASE_2_1;
@@ -35,22 +35,22 @@ export class ScoreHistorySummary {
       return ProgressTypes.CASE_1_1_1;
     }
 
-    if (last2ndHistory.score - lastHistory.score > SCORE_DELTA) {
+    if (last2ndHistory.total - lastHistory.total > SCORE_DELTA) {
       const last3rdHistory = this.history[this.history.length - 3];
       if (
         last3rdHistory &&
-        last3rdHistory.score - last2ndHistory.score > SCORE_DELTA
+        last3rdHistory.total - last2ndHistory.total > SCORE_DELTA
       ) {
         return ProgressTypes.CASE_1_2_2;
       }
       return ProgressTypes.CASE_1_2_1;
     }
 
-    if (lastHistory.score - last2ndHistory.score > SCORE_DELTA) {
+    if (lastHistory.total - last2ndHistory.total > SCORE_DELTA) {
       const last3rdHistory = this.history[this.history.length - 3];
       if (
         last3rdHistory &&
-        last2ndHistory.score - last3rdHistory.score > SCORE_DELTA
+        last2ndHistory.total - last3rdHistory.total > SCORE_DELTA
       ) {
         return ProgressTypes.CASE_1_3_2;
       }
@@ -60,7 +60,7 @@ export class ScoreHistorySummary {
     const last3rdHistory = this.history[this.history.length - 3];
     if (
       last3rdHistory &&
-      Math.abs(last3rdHistory.score - last2ndHistory.score) <= SCORE_DELTA
+      Math.abs(last3rdHistory.total - last2ndHistory.total) <= SCORE_DELTA
     ) {
       return ProgressTypes.CASE_1_1_2;
     }
@@ -75,15 +75,15 @@ export class ScoreHistorySummary {
     let i = this.history.length - 2;
     const lastHistory = this.history[i];
     for (; i >= 0; i--) {
-      if (this.history[i + 1].score < this.history[i].score) break;
+      if (this.history[i + 1].total < this.history[i].total) break;
     }
     const increaseStartItem = this.history[Math.max(i, 0)];
-    const increasingWeeks = dayjs(lastHistory.date).diff(
-      increaseStartItem.date,
+    const increasingWeeks = dayjs(lastHistory.updatedAt).diff(
+      increaseStartItem.updatedAt,
       "week"
     );
-    const increasingDays = dayjs(lastHistory.date).diff(
-      increaseStartItem.date,
+    const increasingDays = dayjs(lastHistory.updatedAt).diff(
+      increaseStartItem.updatedAt,
       "day"
     );
 
@@ -103,21 +103,21 @@ export class ScoreHistorySummary {
     let i = this.history.length - 2;
     const lastHistory = this.history[this.history.length - 1];
     for (; i >= 0; i--) {
-      if (this.history[i + 1].score > this.history[i].score) break;
+      if (this.history[i + 1].total > this.history[i].total) break;
     }
-    const decreaseStartItem = this.history[Math.max(i, 0)];
-    const decreasingWeeks = dayjs(lastHistory.date).diff(
-      decreaseStartItem.date,
+    const decreaseStartItem = this.history[i + 1];
+    const decreasingWeeks = dayjs(lastHistory.updatedAt).diff(
+      decreaseStartItem.updatedAt,
       "week"
     );
-    const decreasingDays = dayjs(lastHistory.date).diff(
-      decreaseStartItem.date,
+    const decreasingDays = dayjs(lastHistory.updatedAt).diff(
+      decreaseStartItem.updatedAt,
       "day"
     );
-    const decreasingStartDate = dayjs(decreaseStartItem.date).format(
+    const decreasingStartDate = dayjs(decreaseStartItem.updatedAt).format(
       "MMM D, YYYY"
     );
-    const decreasingPoints = decreaseStartItem.score - lastHistory.score;
+    const decreasingPoints = decreaseStartItem.total - lastHistory.total;
 
     return {
       decreasingWeeks,
@@ -138,7 +138,7 @@ export class ScoreHistorySummary {
         return {
           title: "Scores not improving? Don’t worry! ☺️",
           summary:
-            "It’s very common for scores to not change as much before you start seeing improvments. Let’s check-in by taking the survey next week to continue monitoring your wellbeing.",
+            "It’s common for your PrairieScore to take a bit of time to improve. Remember to take an assessment regularly to continue monitoring your wellbeing.",
         };
       case ProgressTypes.CASE_1_1_2:
         return {
@@ -157,7 +157,8 @@ export class ScoreHistorySummary {
         };
       case ProgressTypes.CASE_1_3_1:
         return {
-          title: "Don’t worry about your score going up!🥰💕",
+          title:
+            "Your score increased slightly, but don't worry too much about it! 🎉",
           summary:
             "Always remember - mental health journey has its own ebbs and flows. While your score increased slightly, we’ll be watching out for your progress so that you don’t have to worry about it. We’re always here for you!",
         };

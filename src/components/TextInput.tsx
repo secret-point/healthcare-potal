@@ -1,8 +1,13 @@
 import clsx from "clsx";
 import dotProp from "dot-prop";
+import { useEffect, useState } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 
 import TextField, { TextFieldProps } from "@material-ui/core/TextField";
+import IconButton from "@material-ui/core/IconButton";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import VisibilityIcon from "@material-ui/icons/Visibility";
+import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
 import { Theme } from "../theme/types/createPalette";
@@ -15,7 +20,7 @@ export const useStyles = makeStyles((theme: Theme) =>
 
       "& .MuiInputLabel-root": {
         fontSize: 16,
-        color: theme.palette.primaryNavy.main,
+        color: theme.palette.secondaryNavy1.main,
       },
 
       "& .MuiOutlinedInput-multiline": {
@@ -23,6 +28,10 @@ export const useStyles = makeStyles((theme: Theme) =>
       },
       "& .MuiInputBase-root": {
         borderRadius: theme.spacing(1),
+        background: "white",
+      },
+      "& .MuiInputBase-root.Mui-disabled": {
+        backgroundColor: "#E2E2E2",
       },
       "& .MuiInputBase-input": {
         fontFamily: "DM Sans",
@@ -40,11 +49,11 @@ export const useStyles = makeStyles((theme: Theme) =>
         padding: theme.spacing(2),
       },
       "& .MuiFormLabel-root.Mui-focused": {
-        color: theme.palette.secondaryNavy2.main,
+        color: theme.palette.secondary.main,
       },
       "& .MuiOutlinedInput-root.Mui-focused": {
         "& .MuiOutlinedInput-notchedOutline": {
-          borderColor: theme.palette.secondaryNavy2.main,
+          borderColor: theme.palette.secondary.main,
           borderWidth: 1,
         },
       },
@@ -57,7 +66,8 @@ export const useStyles = makeStyles((theme: Theme) =>
         height: 32,
         fontSize: 16,
         display: "flex",
-        transform: "translate(0px, -32px)",
+        transform: "none",
+        position: "relative",
         alignItems: "center",
       },
       "& .MuiOutlinedInput-root fieldset.MuiOutlinedInput-notchedOutline ": {
@@ -88,7 +98,9 @@ export default function TextInput({
   className,
   type,
   required,
+  InputProps,
   InputLabelProps = { shrink: true },
+  isTopLabel,
   ...props
 }: TextInputProps) {
   const classes = useStyles();
@@ -98,20 +110,42 @@ export default function TextInput({
     control,
     register,
     formState: { errors },
-    getValues,
+    watch,
+    setValue,
   } = useFormContext();
+  const [showPassword, setShowPassword] = useState(false);
 
-  const values = getValues();
-  const started = dotProp.get(values, name);
+  const value = watch(name);
   const hasError = Boolean(dotProp.get(errors, name));
+
+  useEffect(() => {
+    register(name, validator); // custom register react-select
+    setValue(name, value);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [register, name]);
+
+  const handleTogglePasswordShow = () => setShowPassword((show) => !show);
+
+  const endAdornment =
+    type === "password" ? (
+      <InputAdornment position="end">
+        <IconButton
+          aria-label="toggle password visibility"
+          onClick={handleTogglePasswordShow}
+          edge="end"
+        >
+          {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+        </IconButton>
+      </InputAdornment>
+    ) : null;
 
   return (
     <Controller
-      defaultValue={started || ""}
+      defaultValue={value || ""}
       as={
         <TextField
           id={name}
-          type={type}
+          type={type === "password" && showPassword ? "text" : type}
           label={
             label ? (
               <>
@@ -130,6 +164,11 @@ export default function TextInput({
           error={hasError}
           className={clsx(className, classes.textField)}
           InputLabelProps={InputLabelProps}
+          InputProps={
+            InputProps || {
+              endAdornment,
+            }
+          }
           {...register(name, validator)}
           {...props}
         />

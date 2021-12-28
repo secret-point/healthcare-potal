@@ -12,6 +12,13 @@ import { ViewportProvider } from "./hooks/useViewport";
 import reportWebVitals from "./reportWebVitals";
 import "./index.css";
 
+// const queryClient = new QueryClient({
+//   defaultOptions: {
+//     queries: {
+//       staleTime: Infinity,
+//     },
+//   },
+// });
 const queryClient = new QueryClient();
 
 ReactDOM.render(

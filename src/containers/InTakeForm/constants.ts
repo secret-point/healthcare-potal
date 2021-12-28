@@ -12,14 +12,15 @@ import {
   SUBTANCE_TYPES,
   CONFIRMATION_TYPES,
   SYMPTOM_TYPES,
-  MEDICATION_TYPES,
   TREATMENT_TYPES,
   FAMILY_MEMBERS,
-  MEDICATION_DELIVER_TYPES,
-  CARE_PROVIDER_TYPES,
 } from "../../constants/identity";
-import { usStates } from "../../constants/usStates";
 import { TInTakeFormDef } from "./types";
+import {
+  validateEmail,
+  feetInchPattern,
+  phoneNumberPattern,
+} from "../../utils/string";
 
 export enum InTakeFormSteps {
   START = "START",
@@ -27,7 +28,6 @@ export enum InTakeFormSteps {
   ADDITIONAL_INFORMATION = "ADDITIONAL_INFORMATION",
   FEELING_INFORMATION = "FEELING_INFORMATION",
   MEDICAL_HISTORY = "MEDICAL_HISTORY",
-  PHARMACY = "PHARMACY",
   COMPLETE = "COMPLETE",
 }
 
@@ -61,7 +61,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
           },
           {
             label: "What is your biological sex?",
-            path: "sex",
+            path: "gender",
             type: FieldType.SELECT,
             options: BIOLOGICAL_SEXES,
             required: true,
@@ -71,11 +71,29 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
           },
           {
             label: "When's your birthday?",
-            path: "birthday",
+            path: "dob",
             type: FieldType.DATE,
             placeholder: "MM/DD/YYYY",
             required: true,
             isTopLabel: true,
+            validator: {
+              required: "Birthday is required.",
+              validate: {
+                valid: (value: any) => {
+                  const [year, month, day] = value
+                    .split("-")
+                    .map((each: string) => Number(each));
+                  const isValid =
+                    year >= 1900 &&
+                    year <= new Date().getFullYear() &&
+                    month >= 1 &&
+                    month <= 12 &&
+                    day >= 1 &&
+                    day <= 31;
+                  return isValid ? true : "Birthday is invalid.";
+                },
+              },
+            },
             lg: 6,
             xs: 12,
           },
@@ -90,12 +108,24 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
                 placeholder: "Feet",
                 lg: 6,
                 xs: 6,
+                validator: {
+                  pattern: {
+                    value: feetInchPattern,
+                    message: "Please input the digits only for feet.",
+                  },
+                },
               },
               {
                 path: "inches",
                 placeholder: "Inches",
                 lg: 6,
                 xs: 6,
+                validator: {
+                  pattern: {
+                    value: feetInchPattern,
+                    message: "Please input the digits only for inches.",
+                  },
+                },
               },
             ],
             lg: 6,
@@ -105,7 +135,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
             label: "What's your weight?",
             path: "weight",
             placeholder: "Weight (in lbs)",
-            type: FieldType.TEXT,
+            type: FieldType.NUMBER,
             isTopLabel: true,
             shrink: true,
             required: true,
@@ -114,7 +144,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
           },
           {
             label: "How would you describe your ethnicity?",
-            path: "ethnicity",
+            path: "race",
             placeholder: "Select your ethnicity",
             type: FieldType.SELECT,
             options: ETHNICITIES,
@@ -129,7 +159,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
         fields: [
           {
             label: "What is the name of your emergency contact?",
-            path: "emergencyContact",
+            path: "emergencyContact.name",
             placeholder: "Name of emergency contact",
             type: FieldType.TEXT,
             isTopLabel: true,
@@ -140,7 +170,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
           },
           {
             label: "What is the relationship with your emergency contact?",
-            path: "emergencyRelationship",
+            path: "emergencyContact.relationship",
             placeholder: "Select relationship",
             type: FieldType.SELECT,
             options: EMERGENCY_RELATIONSHIPS,
@@ -150,23 +180,36 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
           },
           {
             label: "What is the phone number of your emergency contact?",
-            path: "emergencyPhoneNumber",
+            path: "emergencyContact.phone",
             placeholder: "Phone number of emergency contact",
             type: FieldType.TEXT,
             isTopLabel: true,
             shrink: true,
             required: true,
+            validator: {
+              required: "Emergency contact phone number is required.",
+              pattern: {
+                value: phoneNumberPattern,
+                message:
+                  "Please enter a 10 digit number without any special characters.",
+              },
+            },
             lg: 6,
             xs: 12,
           },
           {
             label: "What is the email address of your emergency contact?",
-            path: "emergencyEmailAddress",
+            path: "emergencyContact.email",
             placeholder: "Email address of emergency contact",
             type: FieldType.TEXT,
             isTopLabel: true,
             shrink: true,
-            required: true,
+            validator: {
+              validate: (value: string) =>
+                !value || validateEmail(value)
+                  ? true
+                  : "Please enter email address in the correct format.",
+            },
             lg: 6,
             xs: 12,
           },
@@ -183,7 +226,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
         fields: [
           {
             label: "Where were you born?",
-            path: "birthPlace",
+            path: "born",
             placeholder: "City/state you were born",
             type: FieldType.TEXT,
             isTopLabel: true,
@@ -193,7 +236,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
           },
           {
             label: "What is your highest educational degree?",
-            path: "educationalDegree",
+            path: "highestDegree",
             placeholder: "Select your highest degree",
             type: FieldType.SELECT,
             options: EDUCATIONAL_DEGREES,
@@ -211,7 +254,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
           },
           {
             label: "What is your employment status?",
-            path: "employmentStatus",
+            path: "employment",
             placeholder: "Select your emloyment status",
             type: FieldType.SELECT,
             options: EMPLOYMENT_STATUS,
@@ -220,7 +263,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
           },
           {
             label: "What is your current living arrangement?",
-            path: "livingArrangement",
+            path: "livingArr",
             placeholder: "Select your living arrangement",
             type: FieldType.SELECT,
             options: LIVING_ARRANGEMENT_TYPES,
@@ -229,7 +272,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
           },
           {
             label: "Who are you currently living with? Check all that apply",
-            path: "livingWithWhom",
+            path: "livingWith",
             placeholder: "Select all who you are living with",
             type: FieldType.MULTI_SELECT,
             options: PEOPLE_LIVING_WITH,
@@ -238,7 +281,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
           },
           {
             label: "How would you characterize your cultural background?",
-            path: "culturalBackground",
+            path: "cultureBackground",
             placeholder: "Cultural Background",
             type: FieldType.TEXT,
             isTopLabel: true,
@@ -248,7 +291,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
           },
           {
             label: "Are you currently using any substances?",
-            path: "substances",
+            path: "substanceList",
             type: FieldType.MULTI_INSTANCE,
             properties: [
               {
@@ -276,7 +319,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
           },
           {
             label: "How would you describe your level of physical activity?",
-            path: "physicalActivity",
+            path: "physicallyActive",
             placeholder: "Physical activity",
             type: FieldType.TEXT,
             isTopLabel: true,
@@ -286,7 +329,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
           },
           {
             label: "How would you describe your level of sexual activity?",
-            path: "sexualActivity",
+            path: "sexuallyActive",
             placeholder: "Sexual activity",
             type: FieldType.TEXT,
             isTopLabel: true,
@@ -296,12 +339,12 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
           },
           {
             label: "Do you currently possess a weapon/firearm?",
-            path: "weaponPossess",
+            path: "weapon",
             type: FieldType.SINGLE_INSTANCE,
             required: true,
             properties: [
               {
-                path: "type",
+                path: "hasAccess",
                 placeholder: "Select Yes/No",
                 type: FieldType.SELECT,
                 options: CONFIRMATION_TYPES,
@@ -333,7 +376,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
         fields: [
           {
             label: "Which symptoms are you currently experiencing?",
-            path: "currentSymptoms",
+            path: "symptomList",
             type: FieldType.MULTI_INSTANCE,
             required: true,
             properties: [
@@ -357,12 +400,13 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
               },
             ],
             addButton: "Add more symptoms",
+            deleteButton: "Delete symptom",
             lg: 12,
             xs: 12,
           },
           {
-            label: "My symptoms improve when I...",
-            path: "symptomsImproveWhen",
+            label: "What can cause your symptoms to improve?",
+            path: "relievedBy",
             placeholder: "What has been helpful in improving your symptoms?",
             type: FieldType.TEXT,
             isTopLabel: true,
@@ -372,8 +416,8 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
             xs: 12,
           },
           {
-            label: "My symptoms worsen when I...",
-            path: "symptomsWorsenWhen",
+            label: "What can cause your symptoms to worsen?",
+            path: "worsenedBy",
             placeholder: "What can cause your symptoms worse?",
             required: true,
             type: FieldType.TEXT,
@@ -384,7 +428,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
           },
           {
             label: "Additional Comments",
-            path: "additionalComments",
+            path: "symptomRemark",
             placeholder:
               "Anything else your doctor should know about what you’re going through right now?",
             type: FieldType.TEXT,
@@ -397,11 +441,11 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
           {
             label:
               "Have you recently (in the past 3 years) tried to harm yourself, or tried to take your life?",
-            path: "recentHarmYourself",
+            path: "dangerToSelf",
             type: FieldType.SINGLE_INSTANCE,
             properties: [
               {
-                path: "type",
+                path: "danger",
                 placeholder: "Select Yes/No",
                 type: FieldType.SELECT,
                 options: CONFIRMATION_TYPES,
@@ -427,11 +471,11 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
           {
             label:
               "Have you recently (in the past 3 years) tried to harm anyone else?",
-            path: "recentHarmAnyoneElse",
+            path: "dangerToOthers",
             type: FieldType.SINGLE_INSTANCE,
             properties: [
               {
-                path: "type",
+                path: "danger",
                 placeholder: "Select Yes/No",
                 type: FieldType.SELECT,
                 options: CONFIRMATION_TYPES,
@@ -460,22 +504,21 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
           "You may leave the fields blank if the question does not apply to you.",
         fields: [
           {
-            label: "Which medication(s) are you currently taking?",
-            path: "yourMedications",
+            label: "Name of medication",
+            path: "medList",
             type: FieldType.MULTI_INSTANCE,
             properties: [
               {
                 path: "type",
-                placeholder: "Select medication",
-                type: FieldType.MULTI_SELECT,
-                options: MEDICATION_TYPES,
+                placeholder: "Name of medication",
+                type: FieldType.TEXT,
+                shrink: true,
                 lg: 6,
                 xs: 12,
               },
               {
                 path: "description",
-                placeholder:
-                  "Describe the medication (strength/dose, frequency)",
+                placeholder: "Are you currently taking any medication?",
                 type: FieldType.TEXT,
                 isTopLabel: true,
                 shrink: true,
@@ -500,7 +543,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
           {
             label:
               "Are you currently receiving any mental health treatment? (Seeing a therapist, psychologist, psychiatrist...)",
-            path: "currentMentalHealthTreatments",
+            path: "psychTreatmentList",
             type: FieldType.MULTI_INSTANCE,
             properties: [
               {
@@ -514,7 +557,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
               {
                 path: "description",
                 placeholder:
-                  "Describe the treatment (provider, frequency,, location)",
+                  "Describe the treatment (Provider, frequency, location)",
                 type: FieldType.TEXT,
                 isTopLabel: true,
                 shrink: true,
@@ -541,11 +584,11 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
         fields: [
           {
             label: "Is there a history of mental illness in your family?",
-            path: "familyMentalIllness",
+            path: "psychFamilyHistory",
             type: FieldType.MULTI_INSTANCE,
             properties: [
               {
-                path: "member",
+                path: "relationship",
                 placeholder: "Select family member",
                 type: FieldType.SELECT,
                 options: FAMILY_MEMBERS,
@@ -553,7 +596,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
                 xs: 12,
               },
               {
-                path: "description",
+                path: "psychHistory",
                 placeholder: "Describe their experience with mental illness",
                 type: FieldType.TEXT,
                 isTopLabel: true,
@@ -569,7 +612,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
           {
             label:
               "Have you been hospitalized in the past due to mental illness?",
-            path: "mentalIllnessHospitalization",
+            path: "psychHospitalizationHistory",
             type: FieldType.MULTI_INSTANCE,
             properties: [
               {
@@ -594,39 +637,10 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
             xs: 12,
           },
           {
-            label:
-              "Have you had any surgery in the past due to mental illness?",
-            path: "mentalIllnessSurgeries",
-            type: FieldType.MULTI_INSTANCE,
-            properties: [
-              {
-                path: "date",
-                placeholder: "Date",
-                type: FieldType.DATE,
-                isTopLabel: true,
-                shrink: true,
-                lg: 6,
-                xs: 12,
-              },
-              {
-                path: "description",
-                placeholder: "What was the surgery for?",
-                type: FieldType.TEXT,
-                isTopLabel: true,
-                shrink: true,
-                lg: 6,
-                xs: 12,
-              },
-            ],
-            addButton: "Add more surgery history",
-            lg: 12,
-            xs: 12,
-          },
-          {
             label: "Do you have any traumatic experiences?",
             helperText:
               "You may also share this information directly with your doctor during your intake.",
-            path: "traumaticExperience",
+            path: "psychTrauma",
             placeholder: "Traumatic experience",
             type: FieldType.TEXT,
             isTopLabel: true,
@@ -644,7 +658,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
           {
             label:
               "Have you been diagnosed of any other medication conditions not related to mental health?",
-            path: "otherMedicationConditionsDiagnosis",
+            path: "medicalDiagnosisHistory",
             type: FieldType.MULTI_INSTANCE,
             properties: [
               {
@@ -655,7 +669,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
                 xs: 12,
               },
               {
-                path: "diagnosis",
+                path: "description",
                 placeholder: "What was the diagnosis?",
                 type: FieldType.TEXT,
                 lg: 6,
@@ -667,11 +681,11 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
           {
             label:
               "Is there a history of other medical conditions in your family?",
-            path: "familyMedicalConditions",
+            path: "medicalFamilyHistory",
             type: FieldType.MULTI_INSTANCE,
             properties: [
               {
-                path: "member",
+                path: "relationship",
                 placeholder: "Select family member",
                 type: FieldType.SELECT,
                 options: FAMILY_MEMBERS,
@@ -679,7 +693,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
                 xs: 12,
               },
               {
-                path: "description",
+                path: "medicalHistory",
                 placeholder: "Describe their medical conditions",
                 type: FieldType.TEXT,
                 isTopLabel: true,
@@ -695,7 +709,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
           {
             label:
               "Have you been hospitalized in the past due to other medical conditions?",
-            path: "medicalConditionsHospitalization",
+            path: "medicalHospitalizationHistory",
             type: FieldType.MULTI_INSTANCE,
             properties: [
               {
@@ -722,9 +736,8 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
             xs: 12,
           },
           {
-            label:
-              "Have you had any surgery in the past due to other medical conditions?",
-            path: "medicalConditionsSurgery",
+            label: "Have you had any surgery in the past?",
+            path: "medicalSurgeryHistory",
             type: FieldType.MULTI_INSTANCE,
             properties: [
               {
@@ -752,222 +765,13 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
           },
           {
             label: "Do you have any chronic conditions?",
-            path: "chronicConditions",
+            path: "medicalChronicCondition",
             placeholder: "Chronic condition",
             type: FieldType.TEXT,
             isTopLabel: true,
             shrink: true,
             lg: 12,
             xs: 12,
-          },
-        ],
-      },
-    ],
-  },
-  [InTakeFormSteps.PHARMACY]: {
-    title: "Alright, we’re almost done!",
-    groups: [
-      {
-        groupName: "Pharmacy Selection",
-        helperText: `If you use Prairie's Delivery Service, we'll deliver your monthly batch of medication for a flat rate of $15 (per medication).
-      While you may also pick up your medication at another pharmacy of your choice, the copay amount owed will differ from pharmacy to pharmacy, and be based on your insurance coverage.`,
-        fields: [
-          {
-            label: "Would you like to get your medication delivered?",
-            path: "pharmacyMedicationDeliverFrom",
-            type: FieldType.RADIO_GROUP,
-            options: MEDICATION_DELIVER_TYPES,
-            lg: 12,
-            xs: 12,
-            isTopLabel: true,
-            required: true,
-          },
-          {
-            label:
-              "Please provide the information of the pharmacy you wish to use.",
-            type: FieldType.SINGLE_INSTANCE,
-            path: "pharmacyInformation",
-            properties: [
-              {
-                path: "name",
-                placeholder: "Name of the pharmacy",
-                type: FieldType.TEXT,
-                isTopLabel: true,
-                shrink: true,
-                lg: 6,
-                xs: 12,
-              },
-              {
-                path: "phoneNumber",
-                placeholder: "Phone number",
-                type: FieldType.TEXT,
-                isTopLabel: true,
-                shrink: true,
-                lg: 6,
-                xs: 12,
-              },
-              {
-                path: "streetAddress1",
-                placeholder: "Street address 1",
-                type: FieldType.TEXT,
-                isTopLabel: true,
-                shrink: true,
-                lg: 6,
-                xs: 12,
-              },
-              {
-                path: "streetAddress2",
-                placeholder: "Street address 2(optional)",
-                type: FieldType.TEXT,
-                isTopLabel: true,
-                shrink: true,
-                lg: 6,
-                xs: 12,
-              },
-              {
-                path: "city",
-                placeholder: "City",
-                type: FieldType.TEXT,
-                isTopLabel: true,
-                shrink: true,
-                lg: 6,
-                xs: 12,
-              },
-              {
-                path: "zipcode",
-                placeholder: "Zipcode",
-                type: FieldType.TEXT,
-                isTopLabel: true,
-                shrink: true,
-                lg: 6,
-                xs: 12,
-              },
-              {
-                path: "state",
-                placeholder: "State",
-                type: FieldType.SELECT,
-                options: usStates,
-                lg: 6,
-                xs: 12,
-              },
-            ],
-            required: true,
-          },
-        ],
-      },
-      {
-        groupName: "Coordination of Care",
-        helperText: `Coordination of Care allows for your Prairie team to provide updates on your care with an outside provider like a therapist or your primary care provider. This leads to better outcomes on average, since everyone has the latest information about your care from your psychiatrist here at Prairie Health.<br/>
-      Your care team at Prairie Health will share relevant medical information with the people with whom you'd like us to coordinate care via mail, fax or any other secure methods.`,
-        fields: [
-          {
-            label: "Would you like to get your medication delivered?",
-            path: "careMedicationDeliverFrom",
-            type: FieldType.RADIO_GROUP,
-            options: MEDICATION_DELIVER_TYPES,
-            lg: 12,
-            xs: 12,
-            isTopLabel: true,
-            required: true,
-          },
-          {
-            label: "Who would you like us to coordinate your care with?",
-            type: FieldType.MULTI_INSTANCE,
-            path: "pharmacyInformation",
-            properties: [
-              {
-                path: "provider",
-                placeholder: "Select type of provider",
-                type: FieldType.SELECT,
-                options: CARE_PROVIDER_TYPES,
-                lg: 6,
-                xs: 12,
-              },
-              {
-                path: "name",
-                placeholder: "Name of the person",
-                type: FieldType.TEXT,
-                isTopLabel: true,
-                shrink: true,
-                lg: 6,
-                xs: 12,
-              },
-              {
-                path: "streetAddress1",
-                placeholder: "Street address 1",
-                type: FieldType.TEXT,
-                isTopLabel: true,
-                shrink: true,
-                lg: 6,
-                xs: 12,
-              },
-              {
-                path: "streetAddress2",
-                placeholder: "Street address 2(optional)",
-                type: FieldType.TEXT,
-                isTopLabel: true,
-                shrink: true,
-                lg: 6,
-                xs: 12,
-              },
-              {
-                path: "city",
-                placeholder: "City",
-                type: FieldType.TEXT,
-                isTopLabel: true,
-                shrink: true,
-                lg: 6,
-                xs: 12,
-              },
-              {
-                path: "zipcode",
-                placeholder: "Zipcode",
-                type: FieldType.TEXT,
-                isTopLabel: true,
-                shrink: true,
-                lg: 6,
-                xs: 12,
-              },
-              {
-                path: "state",
-                placeholder: "Zipcode",
-                type: FieldType.SELECT,
-                options: usStates,
-                lg: 6,
-                xs: 12,
-              },
-              {
-                path: "phoneNumber",
-                placeholder: "Phone number",
-                type: FieldType.TEXT,
-                isTopLabel: true,
-                shrink: true,
-                lg: 6,
-                xs: 12,
-              },
-              {
-                path: "faxNumber",
-                type: FieldType.TEXT,
-                isTopLabel: true,
-                shrink: true,
-                placeholder: "Fax number(if available)",
-                lg: 6,
-                xs: 12,
-              },
-              {
-                path: "emailAddress",
-                placeholder: "Email address(if available)",
-                type: FieldType.TEXT,
-                isTopLabel: true,
-                shrink: true,
-                lg: 6,
-                xs: 12,
-              },
-            ],
-            limit: 2,
-            addButton: "Add another provider",
-            instanceLabel: "Provider",
-            required: true,
           },
         ],
       },

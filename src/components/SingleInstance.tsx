@@ -8,9 +8,10 @@ import FormLabel from "@material-ui/core/FormLabel";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
 import { Theme } from "../theme/types/createPalette";
-import { TCustomFieldProperty } from "../types";
+import { FieldType, TCustomFieldProperty } from "../types";
 import FieldComponent from "./FieldComponent";
 import { useColorStyles, useLayoutStyles } from "./useCommonStyles";
+import { CONFIRMATION_TYPES } from "../constants/identity";
 
 interface StyleProps {
   hasError: boolean;
@@ -18,16 +19,13 @@ interface StyleProps {
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    container: {
-      transform: "translateY(-32px)",
-    },
     inputLabel: {
       "&.MuiFormLabel-root": {
         fontSize: 16,
         color: (props: StyleProps) =>
           props.hasError
             ? theme.palette.accentRed.main
-            : theme.palette.secondaryNavy2.main,
+            : theme.palette.secondaryNavy1.main,
         height: 32,
         display: "flex",
         alignItems: "center",
@@ -53,6 +51,7 @@ const SingleInstance: React.FC<SingleInstanceProps> = ({
 }) => {
   const {
     formState: { errors },
+    getValues,
   } = useFormContext();
 
   const hasError = Boolean(dotProp.get(errors, path));
@@ -61,8 +60,27 @@ const SingleInstance: React.FC<SingleInstanceProps> = ({
   const colorClasses = useColorStyles();
   const layoutClasses = useLayoutStyles();
 
+  /**
+   * Business Logic Here
+   * If No is selected, we should mark other values as not required.
+   */
+  const confirmationProperty = properties.find(
+    (property) =>
+      property.type === FieldType.SELECT &&
+      property.options === CONFIRMATION_TYPES
+  );
+  let requiredOtherValues = required;
+
+  if (confirmationProperty) {
+    const confirmationPropertyPath = [path, confirmationProperty.path].join(
+      "."
+    );
+    const confirmationPropertyValue = getValues(confirmationPropertyPath);
+    if (confirmationPropertyValue === "No") requiredOtherValues = false;
+  }
+
   return (
-    <Grid container className={classes.container}>
+    <Grid container>
       <Grid item xs={12}>
         <FormLabel htmlFor={path} className={classes.inputLabel}>
           {label}
@@ -73,16 +91,25 @@ const SingleInstance: React.FC<SingleInstanceProps> = ({
           )}
         </FormLabel>
       </Grid>
-      <Grid container spacing={2}>
+      <Grid container spacing={3}>
         {properties.map((property) => (
           <Grid key={property.path} item xs={property.xs} lg={property.lg}>
             <FieldComponent
               key={property.path}
               field={{
                 ...property,
-                required,
+                required: confirmationProperty
+                  ? confirmationProperty.path === property.path
+                    ? required
+                    : requiredOtherValues
+                  : required,
+                disabled:
+                  confirmationProperty &&
+                  confirmationProperty?.path !== property.path &&
+                  !requiredOtherValues,
                 label: "",
                 path: [path, property.path].join("."),
+                validator: property.validator,
               }}
               variant={variant}
             />

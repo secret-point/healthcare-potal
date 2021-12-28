@@ -9,7 +9,7 @@ import { ResponsiveLine } from "@nivo/line";
 // @ts-ignore
 import { linearGradientDef } from "@nivo/core";
 
-import { TScoreHistory } from "../../../types/general";
+import { TProgress } from "../../../types";
 import {
   useCardStyles,
   useFontStyles,
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface PrairieScoreHistoryProps {
   active: number;
-  scoreHistory: TScoreHistory;
+  scoreHistory: TProgress[];
 }
 
 const PrairieScoreHistory = ({
@@ -55,16 +55,16 @@ const PrairieScoreHistory = ({
     return [
       {
         id: "Score",
-        data: scoreHistory.map((history) => ({
-          x: dayjs(history.date).format("MM/DD/YYYY"),
-          y: history.score,
+        data: scoreHistory.map((score) => ({
+          x: dayjs(score.updatedAt).format("MM/DD/YYYY"),
+          y: score.total || 0,
         })),
       },
       {
         id: "Current Score",
         data: scoreHistory.slice(active, active + 1).map((history) => ({
-          x: dayjs(history.date).format("MM/DD/YYYY"),
-          y: history.score,
+          x: dayjs(history.updatedAt).format("MM/DD/YYYY"),
+          y: history.total || 0,
         })),
       },
     ] as any;
@@ -94,20 +94,20 @@ const PrairieScoreHistory = ({
         className={classes.responsiveLineWrapper}
       >
         <ResponsiveLine
-          enableSlices="x"
-          enableArea
-          isInteractive={false}
-          curve="natural"
           colors={{ scheme: "set2" }}
-          margin={{ top: 4, bottom: 30, left: 30 }}
+          curve="linear"
           data={data}
-          lineWidth={1}
           defs={[
             linearGradientDef("gradientA", [
               { offset: 0, color: "inherit" },
               { offset: 100, color: "inherit", opacity: 0 },
             ]),
           ]}
+          enableArea
+          enableSlices="x"
+          isInteractive={false}
+          margin={{ top: 4, bottom: 30, left: 30 }}
+          lineWidth={1}
           pointSize={10}
           pointBorderColor={{ theme: "background" }}
           pointBorderWidth={2}

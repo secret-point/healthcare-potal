@@ -7,7 +7,6 @@ import TextInput from "../../components/TextInput";
 import { emailPattern, phoneNumberPattern } from "../../utils/string";
 import { Theme } from "../../theme/types/createPalette";
 import { useInputDetails } from "../../hooks/useInputDetails";
-import { useLayoutStyles } from "../../components/useCommonStyles";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -25,9 +24,8 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const ContactForm = () => {
   const classes = useStyles();
-  const layoutClasses = useLayoutStyles();
 
-  const requiredFields = ["email", "phoneNumber"];
+  const requiredFields = ["email", "phone"];
   const { inputErrors, editedFields } = useInputDetails({
     fields: requiredFields,
   });
@@ -50,9 +48,9 @@ const ContactForm = () => {
         />
       </Grid>
 
-      <Grid item xs={12} className={layoutClasses.mt3}>
+      <Grid item xs={12}>
         <TextInput
-          name="phoneNumber"
+          name="phone"
           label="Phone Number"
           variant="outlined"
           placeholder="Phone Number"
@@ -61,7 +59,7 @@ const ContactForm = () => {
             pattern: {
               value: phoneNumberPattern,
               message:
-                "Please enter your phone number in the correct format (numbers only).",
+                "Please enter a 10 digit number without any special characters.",
             },
           }}
         />

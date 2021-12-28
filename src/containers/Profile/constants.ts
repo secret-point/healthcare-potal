@@ -1,10 +1,12 @@
 import { EditableField } from "./types";
+import { emailPattern, phoneNumberPattern } from "../../utils/string";
 import { usStates } from "../../constants/usStates";
 import { FieldType } from "../../types/general";
+import { EMERGENCY_RELATIONSHIPS } from "../../constants/identity";
 
 export const UPDATE_PROFILE_DIALOGS = {
   [EditableField.PREFERRED_NAME]: {
-    title: "Update your preferred name",
+    title: "Preferred Name",
     rows: [
       {
         row: "Name",
@@ -21,7 +23,7 @@ export const UPDATE_PROFILE_DIALOGS = {
     ],
   },
   [EditableField.EMAIL]: {
-    title: "Update your email",
+    title: "Email",
     rows: [
       {
         row: "Email",
@@ -32,30 +34,46 @@ export const UPDATE_PROFILE_DIALOGS = {
             isTopLabel: true,
             shrink: true,
             xs: 12,
+            validator: {
+              required: "Your email address is required.",
+              pattern: {
+                value: emailPattern,
+                message:
+                  "Please enter your email address in the correct format.",
+              },
+            },
           },
         ],
       },
     ],
   },
   [EditableField.PHONE_NUMBER]: {
-    title: "Update your phone number",
+    title: "Phone Number",
     rows: [
       {
         row: "Phone Number",
         fields: [
           {
             label: "Phone Number",
-            path: "phoneNumber",
+            path: "phone",
             isTopLabel: true,
             shrink: true,
             xs: 12,
+            validator: {
+              required: "Your phone number is required.",
+              pattern: {
+                value: phoneNumberPattern,
+                message:
+                  "Please enter a 10 digit number without any special characters.",
+              },
+            },
           },
         ],
       },
     ],
   },
   [EditableField.EMERGENCY_CONTACT]: {
-    title: "Update your emergency contact",
+    title: "Emergency Contact",
     rows: [
       {
         row: "Name",
@@ -66,6 +84,9 @@ export const UPDATE_PROFILE_DIALOGS = {
             isTopLabel: true,
             shrink: true,
             xs: 12,
+            validator: {
+              required: "Your contact name is required.",
+            },
           },
         ],
       },
@@ -75,8 +96,10 @@ export const UPDATE_PROFILE_DIALOGS = {
           {
             label: "Emergency Contact Relationship",
             path: "emergencyContact.relationship",
+            type: FieldType.SELECT,
             isTopLabel: true,
             shrink: true,
+            options: EMERGENCY_RELATIONSHIPS,
             xs: 12,
           },
         ],
@@ -86,24 +109,32 @@ export const UPDATE_PROFILE_DIALOGS = {
         fields: [
           {
             label: "Emergency Contact Phone Number",
-            path: "emergencyContact.phoneNumber",
+            path: "emergencyContact.phone",
             isTopLabel: true,
             shrink: true,
             xs: 12,
+            validator: {
+              required: "Your emergency contact phone number is required.",
+              pattern: {
+                value: phoneNumberPattern,
+                message:
+                  "Please enter a 10 digit number without any special characters.",
+              },
+            },
           },
         ],
       },
     ],
   },
   [EditableField.ADDRESS]: {
-    title: "Update your address",
+    title: "Address",
     rows: [
       {
         row: "Line 1",
         fields: [
           {
             label: "Address Line 1",
-            path: "address.line1",
+            path: "billingAddress.address1",
             isTopLabel: true,
             shrink: true,
             xs: 12,
@@ -115,7 +146,7 @@ export const UPDATE_PROFILE_DIALOGS = {
         fields: [
           {
             label: "Address Line 2",
-            path: "address.line2",
+            path: "billingAddress.address2",
             isTopLabel: true,
             shrink: true,
             xs: 12,
@@ -127,7 +158,7 @@ export const UPDATE_PROFILE_DIALOGS = {
         fields: [
           {
             label: "City",
-            path: "address.city",
+            path: "billingAddress.city",
             isTopLabel: true,
             shrink: true,
             xs: 12,
@@ -139,14 +170,14 @@ export const UPDATE_PROFILE_DIALOGS = {
         fields: [
           {
             label: "State",
-            path: "address.state",
+            path: "billingAddress.state",
             type: FieldType.SELECT,
             options: usStates,
             xs: 6,
           },
           {
             label: "Zip Code",
-            path: "address.zipCode",
+            path: "billingAddress.zip",
             isTopLabel: true,
             shrink: true,
             xs: 6,
@@ -162,10 +193,18 @@ export const UPDATE_PROFILE_DIALOGS = {
         row: "Password",
         fields: [
           {
-            label: "Password",
+            label: "Enter New Password",
             path: "password",
             isTopLabel: true,
             shrink: true,
+            type: FieldType.PASSWORD,
+            validator: {
+              required: "Your password is required.",
+              minLength: {
+                value: 8,
+                message: "Your password should be 8 characters or longer.",
+              },
+            },
             xs: 12,
           },
         ],
@@ -174,10 +213,14 @@ export const UPDATE_PROFILE_DIALOGS = {
         row: "Confirm Password",
         fields: [
           {
-            label: "Confirm Password",
+            label: "Confirm New Password",
             path: "confirmPassword",
             isTopLabel: true,
             shrink: true,
+            type: FieldType.PASSWORD,
+            validator: {
+              required: "Your confirm password is required.",
+            },
             xs: 12,
           },
         ],

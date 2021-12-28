@@ -19,11 +19,17 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface PhotoInformationProps {
+interface UserProfilePhotoProps {
   user: User;
+  onDeletePicture: VoidFunction;
+  onUploadFile: (file: File) => void;
 }
 
-const PhotoInformation: FC<PhotoInformationProps> = ({ user }) => {
+const UserProfilePhoto: FC<UserProfilePhotoProps> = ({
+  user,
+  onDeletePicture,
+  onUploadFile,
+}) => {
   const classes = useStyles();
 
   return (
@@ -39,12 +45,22 @@ const PhotoInformation: FC<PhotoInformationProps> = ({ user }) => {
           alignItems="center"
           className={classes.informationWrapper}
         >
-          <ProfileAvatar user={user} width={64} height={64} />
-          <ProfileAvatarUpload />
+          <ProfileAvatar
+            firstName={user.firstName}
+            lastName={user.lastName}
+            picture={user.profilePicture}
+            width={64}
+            height={64}
+          />
+          <ProfileAvatarUpload
+            picture={user.profilePicture}
+            onUploadFile={onUploadFile}
+            onDeletePicture={onDeletePicture}
+          />
         </Grid>
       </Grid>
     </Grid>
   );
 };
 
-export default PhotoInformation;
+export default UserProfilePhoto;

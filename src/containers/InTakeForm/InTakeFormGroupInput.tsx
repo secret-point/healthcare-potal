@@ -39,7 +39,7 @@ const InTakeFormGroupInput: FC<InTakeFormGroupInputProps> = ({ group }) => {
         </Grid>
       )}
 
-      <Grid container spacing={4}>
+      <Grid container spacing={2}>
         {group.fields.map((field) => (
           <Grid key={field.path} item xs={field.xs} lg={field.lg}>
             <FieldComponent field={field} variant="outlined" />

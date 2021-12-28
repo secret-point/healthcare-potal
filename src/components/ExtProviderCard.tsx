@@ -5,9 +5,13 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
-import { TCareTeamMember } from "../types";
-import { TextButton } from "./Button";
-import { useFontStyles, useLayoutStyles } from "./useCommonStyles";
+import { IExtProvider } from "../types";
+import { formatPhoneNumber } from "../utils/string";
+import {
+  useColorStyles,
+  useFontStyles,
+  useLayoutStyles,
+} from "./useCommonStyles";
 import ProfileAvatar from "./ProfileAvatar";
 
 const useStyles = makeStyles((theme) =>
@@ -23,56 +27,67 @@ const useStyles = makeStyles((theme) =>
       justifyContent: "space-between",
     },
 
-    roundImage: {
-      borderRadius: 20,
-    },
-
     textButton: {
       "& .MuiTypography-root": {
         textAlign: "left",
       },
     },
+
+    actions: {
+      padding: theme.spacing(0),
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "flex-start",
+    },
+
+    bookingPageLink: {
+      alignSelf: "flex-start",
+      marginLeft: `0px !important`,
+    },
   })
 );
 
 interface CareTeamMemberCardProps {
-  member: TCareTeamMember;
+  provider: IExtProvider;
 }
 
-const CareTeamMemberCard = ({ member }: CareTeamMemberCardProps) => {
+const CareProviderCard = ({ provider }: CareTeamMemberCardProps) => {
   const classes = useStyles();
   const layoutClasses = useLayoutStyles();
   const fontClasses = useFontStyles();
+  const colorClasses = useColorStyles();
+  const [firstName = "", lastName = ""] = provider.name.split(/\s+/g);
 
   return (
     <Card variant="outlined" className={classes.teamMemberCard}>
       <CardContent className={clsx(layoutClasses.noPadding, layoutClasses.mb1)}>
-        {member.picture ? (
-          <img
-            width={40}
-            height={40}
-            alt="User Profile"
-            src={member.picture}
-            className={clsx(classes.roundImage, layoutClasses.mb2)}
-          />
-        ) : (
-          <ProfileAvatar user={member} className={layoutClasses.mb2} />
-        )}
+        <ProfileAvatar
+          firstName={firstName}
+          lastName={lastName}
+          picture={null}
+          className={layoutClasses.mb2}
+        />
         <Typography variant="subtitle2" className={layoutClasses.mb05}>
-          {member.type}
+          {provider.type}
         </Typography>
         <Typography
           variant="h3"
           className={clsx(fontClasses.fontNormal, layoutClasses.mb1)}
         >
-          {[member.firstName, member.lastName].join(" ")}
+          {provider.name}
         </Typography>
       </CardContent>
-      <CardActions className={layoutClasses.noPadding}>
-        <TextButton text={member.contact} className={classes.textButton} />
+      <CardActions className={classes.actions}>
+        <Typography
+          align="left"
+          variant="subtitle1"
+          className={colorClasses.secondaryGreen1}
+        >
+          {formatPhoneNumber(provider.phone || "")}
+        </Typography>
       </CardActions>
     </Card>
   );
 };
 
-export default CareTeamMemberCard;
+export default CareProviderCard;

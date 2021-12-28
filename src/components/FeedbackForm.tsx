@@ -53,7 +53,7 @@ const FeedbackForm = ({
   const submitFeedback = useSubmitFeedback();
 
   const [feedbackSent, setFeedbackSent] = useState(false);
-  const [feedbackScore, setFeedbackScore] = useState<number | null>(null);
+  const [starRating, setFeedbackScore] = useState<number | null>(null);
 
   const methods = useForm({
     mode: "onChange",
@@ -67,13 +67,14 @@ const FeedbackForm = ({
   const handleSendFeedback = async () => {
     await submitFeedback.mutate({
       ...methods.getValues(),
-      score: feedbackScore,
+      starRating,
     });
     setFeedbackSent(true);
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    e.stopPropagation();
     handleSendFeedback();
   };
 
@@ -101,11 +102,11 @@ const FeedbackForm = ({
       >
         {title}
       </Typography>
-      {feedbackScore === null ? (
+      {starRating === null ? (
         <Rating
-          name="feedback"
+          name="starRating"
           size="large"
-          value={feedbackScore}
+          value={starRating}
           classes={{ iconEmpty: colorClasses.distinctiveGray }}
           onChange={handleChangeFeedbackScore}
         />
@@ -113,7 +114,7 @@ const FeedbackForm = ({
         <form onSubmit={handleSubmit}>
           <FormProvider {...methods}>
             <TextInput
-              name="feedback"
+              name="comment"
               className={classes.textInput}
               InputProps={{
                 endAdornment: (

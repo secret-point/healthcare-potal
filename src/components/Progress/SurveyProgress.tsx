@@ -1,4 +1,6 @@
 import clsx from "clsx";
+import { FC } from "react";
+import dayjs from "dayjs";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
@@ -12,26 +14,43 @@ import {
   useColorStyles,
   useLayoutStyles,
 } from "../useCommonStyles";
+import { TProgress } from "../../types";
 
-const SurveyProgress = () => {
+interface SurveyProgressProps {
+  lastProgress: TProgress;
+}
+
+const SurveyProgress: FC<SurveyProgressProps> = ({ lastProgress }) => {
   const cardClasses = useCardStyles();
   const colorClasses = useColorStyles();
   const layoutClasses = useLayoutStyles();
+  const diffInWeeks = dayjs().diff(lastProgress.updatedAt, "weeks");
+
+  if (diffInWeeks < 2) return null;
 
   return (
-    <Card variant="outlined" className={cardClasses.card}>
+    <Card
+      variant="outlined"
+      className={clsx(cardClasses.card, cardClasses.grayBorder)}
+    >
       <CardContent className={clsx(layoutClasses.noPadding, layoutClasses.mb1)}>
         <AssessmentOutlinedIcon
           className={clsx(colorClasses.secondaryGreen1, layoutClasses.mb1)}
         />
         <Typography variant="subtitle1" className={layoutClasses.mb05}>
-          It&apos;s been
-          <b> 4 weeks </b>
-          since your last check-in.
+          <span
+            dangerouslySetInnerHTML={{
+              __html: `It's been <b>${diffInWeeks} weeks</b> since your last assessment`,
+            }}
+          />
         </Typography>
       </CardContent>
       <CardActions className={layoutClasses.noPadding}>
-        <ButtonLink text="Take the survey" to={ROUTES.CHECKIN} align="left" />
+        <ButtonLink
+          text="Take the survey"
+          to={ROUTES.ASSESSMENT}
+          align="left"
+        />
       </CardActions>
     </Card>
   );

@@ -1,7 +1,14 @@
-import { useContext, useState, useMemo, createContext, useEffect } from "react";
+import {
+  useContext,
+  useCallback,
+  useState,
+  useMemo,
+  createContext,
+  useEffect,
+} from "react";
 import { User } from "../types";
 import {
-  setToken,
+  storeToken,
   removeToken,
   useSignIn,
   useFetchCurrentUser,
@@ -23,10 +30,11 @@ export const AuthContext = createContext<AuthContextType>(undefined!);
 export function AuthProvider(props: any) {
   const signIn = useSignIn();
   const fetchCurrentUser = useFetchCurrentUser();
+  const [token, setToken] = useState<string | null>(null);
   const [user, setUser] = useState<User | undefined>();
   const [isLoading, setIsLoading] = useState(true);
 
-  async function loadUser() {
+  const loadUser = useCallback(async () => {
     try {
       const user = await fetchCurrentUser();
       setUser(user);
@@ -35,16 +43,16 @@ export function AuthProvider(props: any) {
     } finally {
       setIsLoading(false);
     }
-  }
+    // eslint-disable-next-line
+  }, [token]);
 
   useEffect(() => {
     loadUser();
-    // eslint-disable-next-line
-  }, []);
+  }, [loadUser]);
 
   async function logIn(email: string, password: string) {
     const user = await signIn({ email, password });
-    setUser(user);
+    storeToken(user.token);
     setToken(user.token);
   }
 
@@ -55,7 +63,7 @@ export function AuthProvider(props: any) {
 
   const isAuthenticated = Boolean(user);
 
-  const fullName = [user?.firstName, user?.lastName].join("");
+  const fullName = [user?.firstName, user?.lastName].join(" ");
 
   const values = useMemo<AuthContextType>(
     () => ({

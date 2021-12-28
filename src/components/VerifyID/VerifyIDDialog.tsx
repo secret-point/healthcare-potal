@@ -13,6 +13,7 @@ import UploadID from "./UploadID";
 import InitialStep from "./InitialStep";
 import { VerifySteps } from "./constants";
 import { useUploadFile, useVerifyID } from "../../api";
+import useAuth from "../../hooks/useAuth";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -57,25 +58,32 @@ const VerifyIDDialog: FC<VerifyIDDialogProps> = ({ open, onClose }) => {
   const classes = useStyles();
   const uploadFile = useUploadFile();
   const veirfyID = useVerifyID();
+  const { user } = useAuth();
   const [file, setFile] = useState<File>();
-  const [fileID, setFileID] = useState<string>();
+  const [IDDocumentURL, setIDDocumentURL] = useState<string>();
   const [step, setStep] = useState(VerifySteps.INTIAL_STEP);
 
   const handleUploadFile = async (file: File) => {
     setFile(file);
-    await uploadFile.mutate(file, {
-      onSuccess: ({ data: { fileID } }) => {
-        setFileID(fileID);
+    if (!user) return;
+
+    const formData = new FormData();
+    formData.append("upload", file);
+    formData.append("fileTitle", file.name);
+    formData.append("memberID", user._id);
+    formData.append("documentType", "PhotoID");
+
+    await uploadFile.mutate(formData, {
+      onSuccess: ({ data: { documentURL } }) => {
+        setIDDocumentURL(documentURL);
       },
     });
   };
 
   const handleVerifyID = async () => {
-    if (!fileID) return;
+    if (!IDDocumentURL) return;
     try {
-      await veirfyID.mutate(fileID);
-    } catch (error) {
-      // console.error(error);
+      await veirfyID.mutate(IDDocumentURL);
     } finally {
       setStep(VerifySteps.FINAL);
     }

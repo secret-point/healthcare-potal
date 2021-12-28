@@ -11,12 +11,10 @@ export const useFetchCurrentUser = () => {
   const apiFetch = useApiFetch();
 
   return async () => {
-    const {
-      data: { user },
-    } = await apiFetch("/cp/current", {
+    const { data } = await apiFetch("/mp/current", {
       method: "GET",
     });
-    return user;
+    return data;
   };
 };
 
@@ -30,7 +28,7 @@ export const useSignIn = () => {
     email: string;
     password: string;
   }): Promise<AuthorizedUser> => {
-    const { data } = await apiFetch("/cp/login", {
+    const { data } = await apiFetch("/mp/login", {
       method: "POST",
       data: { email, password },
     });
@@ -45,7 +43,7 @@ export const useRegister = () => {
   const apiFetch = useApiFetch();
 
   return async (form: RegisterForm): Promise<AuthorizedUser> => {
-    const { data } = await apiFetch("/register", {
+    const { data } = await apiFetch("/mp/register", {
       method: "POST",
       data: form,
     });
@@ -57,7 +55,7 @@ export const useSendResetPasswordLink = () => {
   const apiFetch = useApiFetch();
 
   return async (form: ResetPasswordLinkForm): Promise<unknown> => {
-    const { data } = await apiFetch("/send-reset-password-link", {
+    const { data } = await apiFetch("/mp/send-reset-password-link", {
       method: "POST",
       data: form,
     });
@@ -69,7 +67,7 @@ export const useVerifyResetPasswordCode = () => {
   const apiFetch = useApiFetch();
 
   return async (form: VerifyResetPasswordCodeForm): Promise<unknown> => {
-    const { data } = await apiFetch("/verify-reset-password-code", {
+    const { data } = await apiFetch("/mp/verify-reset-password-code", {
       method: "POST",
       data: form,
     });
@@ -81,7 +79,7 @@ export const useChangePasswordCode = () => {
   const apiFetch = useApiFetch();
 
   return async (form: ChangePasswordCodeForm): Promise<unknown> => {
-    const { data } = await apiFetch("/verify-reset-password-code", {
+    const { data } = await apiFetch("/mp/reset-password", {
       method: "POST",
       data: form,
     });
@@ -89,7 +87,7 @@ export const useChangePasswordCode = () => {
   };
 };
 
-export const setToken = (token: string) => {
+export const storeToken = (token: string) => {
   sessionStorage.setItem("token", token);
 };
 

@@ -59,6 +59,12 @@ const ExperienceSurvey: FC<ExperienceSurveyProps> = ({ questions, onNext }) => {
     }
   };
 
+  const handleDelayNext = () => {
+    setTimeout(() => {
+      handleClickNext();
+    }, 500);
+  };
+
   const handleClickPrevious = () => {
     if (number <= 0) return;
     setNumber(number - 1);
@@ -117,6 +123,7 @@ const ExperienceSurvey: FC<ExperienceSurveyProps> = ({ questions, onNext }) => {
             layout={{ xs: 12, sm: 6 }}
             name={question.code}
             options={question.options}
+            onChange={handleDelayNext}
           />
         )}
         {question.type === "MCQ" && <MCQQuestion question={question} />}
@@ -130,15 +137,17 @@ const ExperienceSurvey: FC<ExperienceSurveyProps> = ({ questions, onNext }) => {
         )}
       </Grid>
 
-      <Grid item xs={12}>
-        <Button
-          text="Next"
-          color="primary"
-          variant="contained"
-          disabled={!answer && isRadioQuestion}
-          onClick={handleClickNext}
-        />
-      </Grid>
+      {(!isRadioQuestion || !question.options) && (
+        <Grid item xs={12}>
+          <Button
+            text="Next"
+            color="primary"
+            variant="contained"
+            disabled={!answer && isRadioQuestion}
+            onClick={handleClickNext}
+          />
+        </Grid>
+      )}
 
       <Grid item xs={12}>
         <Button text="Back" variant="text" onClick={handleClickPrevious} />

@@ -51,7 +51,7 @@ const MCQQuestion: FC<MCQQuestionProps> = ({ question }) => {
       <Grid item xs={12} sm={6}>
         <TextInput
           name="MCQ_OTHER_REASON"
-          placeholder="Others(please specify)"
+          placeholder="Others (please specify)"
           className={classes.textInput}
         />
       </Grid>

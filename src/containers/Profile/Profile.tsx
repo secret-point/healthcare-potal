@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
+import { useSnackbar } from "notistack";
 import Grid from "@material-ui/core/Grid";
 
 import useAuth from "../../hooks/useAuth";
@@ -9,15 +10,21 @@ import { EditableField } from "./types";
 import { UPDATE_PROFILE_DIALOGS } from "./constants";
 import AccountInformation from "./AccountInformation";
 import ContactInformation from "./ContactInformation";
-import PhotoInformation from "./PhotoInformation";
-import { useUpdateProfile } from "../../api";
+import UserProfilePhoto from "./UserProfilePhoto";
+import { useUpdateProfile, useUploadFile } from "../../api";
 import { UpdateProfileFormRequest } from "../../types";
 
 export default function Profile() {
-  const { user } = useAuth();
+  const { user, loadUser } = useAuth();
+  const { enqueueSnackbar } = useSnackbar();
+
+  const uploadFile = useUploadFile();
   const updateProfile = useUpdateProfile();
+
   const [editingField, setEditingField] = useState<EditableField>();
   const [showVerifyIDDialog, setShowVerifyIDDialog] = useState(false);
+
+  const defaultValues = useMemo(() => ({ ...user, password: "" }), [user]);
 
   if (!user) return null;
 
@@ -37,15 +44,67 @@ export default function Profile() {
     setShowVerifyIDDialog(false);
   };
 
-  const handleUpdateProfile = (form: unknown) => {
-    updateProfile.mutate(form as UpdateProfileFormRequest);
+  const handleUploadFile = async (file: File) => {
+    const formData = new FormData();
+    formData.append("upload", file);
+    formData.append("fileTitle", file.name);
+    formData.append("memberID", user._id);
+    formData.append("documentType", "Avatar");
+
+    await uploadFile.mutate(formData, {
+      onSuccess: async ({ data }) => {
+        await updateProfile.mutate(
+          {
+            profilePicture: data.documentURL,
+          },
+          { onSuccess: loadUser }
+        );
+      },
+    });
+  };
+
+  const handleDeletePicture = () => {
+    updateProfile.mutate(
+      {
+        profilePicture: null,
+      },
+      { onSuccess: loadUser }
+    );
+  };
+
+  const handleUpdateProfile = async (title: string, form: unknown) => {
+    try {
+      await updateProfile.mutate(form as UpdateProfileFormRequest, {
+        onSuccess: () => {
+          enqueueSnackbar(
+            `You've successfully updated your ${title.toLowerCase()}.`,
+            {
+              variant: "success",
+            }
+          );
+
+          loadUser();
+        },
+        onError: (error: any) => {
+          enqueueSnackbar(error.response?.data?.message || error.message, {
+            variant: "error",
+          });
+        },
+      });
+    } finally {
+      handleCloseUpdateDialog();
+    }
   };
 
   return (
     <Container>
       <Grid container spacing={4}>
         <Grid item xs={12}>
-          <PhotoInformation user={user} />
+          <UserProfilePhoto
+            user={user}
+            onDeletePicture={handleDeletePicture}
+            onUploadFile={handleUploadFile}
+          />
         </Grid>
 
         <Grid item xs={12}>
@@ -61,9 +120,10 @@ export default function Profile() {
         </Grid>
       </Grid>
 
-      {editingField && (
+      {editingField && user && (
         <UpdateDialog
           open
+          defaultValues={defaultValues}
           title={UPDATE_PROFILE_DIALOGS[editingField].title}
           rows={UPDATE_PROFILE_DIALOGS[editingField].rows}
           onClose={handleCloseUpdateDialog}

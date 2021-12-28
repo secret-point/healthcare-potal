@@ -63,7 +63,7 @@ const SignInForm = ({ onSubmit }: SignInFormProps) => {
           />
         </Grid>
 
-        <Grid item xs={12} className={layoutClasses.mt3}>
+        <Grid item xs={12}>
           <TextInput
             name="password"
             type={showPassword ? "text" : "password"}
@@ -87,7 +87,7 @@ const SignInForm = ({ onSubmit }: SignInFormProps) => {
           />
         </Grid>
 
-        <Grid item xs={12} className={layoutClasses.mt3}>
+        <Grid item xs={12} className={layoutClasses.mt2}>
           <Button
             text="SIGN IN"
             type="submit"

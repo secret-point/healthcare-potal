@@ -13,6 +13,8 @@ import { useLayoutStyles } from "../../components/useCommonStyles";
 import { ResetPasswordLinkForm } from "../../types";
 
 import ResetPasswordForm from "./ResetPasswordForm";
+import { ROUTES } from "../../app/types";
+import useNotification from "../../hooks/useNotification";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -27,6 +29,7 @@ export default function ResetPassword() {
   const classes = useStyles();
   const layoutClasses = useLayoutStyles();
   const [linkSent, setLinkSent] = useState(false);
+  const { handleSuccess, handleError } = useNotification();
 
   const sendResetPasswordLink = useSendResetPasswordLink();
 
@@ -37,8 +40,19 @@ export default function ResetPassword() {
   const handleResetPassword = async (e: FormEvent) => {
     e.preventDefault();
     const resetPasswordForm = methods.getValues() as ResetPasswordLinkForm;
-    await sendResetPasswordLink(resetPasswordForm as ResetPasswordLinkForm);
-    setLinkSent(true);
+    try {
+      await sendResetPasswordLink({
+        ...resetPasswordForm,
+        verificationUrl: window.location.origin + ROUTES.VERIFICATION_LINK,
+      });
+      setLinkSent(true);
+
+      handleSuccess(
+        "You will receive an email to reset your password if there exists an account associated with the email address you provided."
+      );
+    } catch (error) {
+      handleError(error, error.data?.message || error.message);
+    }
   };
 
   const handleGoBack = () => {
@@ -56,7 +70,7 @@ export default function ResetPassword() {
               </Typography>
             </Grid>
 
-            <Grid item xs={12} className={layoutClasses.mb6}>
+            <Grid item xs={12} className={layoutClasses.mb4}>
               <Typography variant="subtitle1" align="center">
                 We&apos;ll send you an email with a link to reset your password
               </Typography>

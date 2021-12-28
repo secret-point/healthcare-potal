@@ -18,28 +18,32 @@ const useStyles = makeStyles((theme: Theme) =>
     dropdown: {},
     formControl: {
       minWidth: "100%",
+      "& .MuiOutlinedInput-root": {
+        background: "white",
+        borderRadius: theme.spacing(1),
+      },
     },
     inputLabel: {
       "&.MuiInputLabel-outlined.MuiInputLabel-shrink": {
         height: 32,
         fontSize: 16,
         display: "flex",
-        transform: "translate(0px, -32px)",
+        transform: "none",
+        position: "relative",
         alignItems: "center",
+        color: theme.palette.secondaryNavy1.main,
       },
       "&.MuiFormLabel-root.Mui-focused": {
-        color: theme.palette.primaryNavy.main,
+        color: theme.palette.secondary.main,
       },
     },
     select: {
-      "& .MuiOutlinedInput-root": {
-        borderRadius: theme.spacing(1),
-      },
       "& .MuiSelect-select.MuiSelect-select": {
         display: "flex",
         alignItems: "center",
         fontSize: 16,
         padding: theme.spacing(2),
+        background: "white",
         color: theme.palette.primaryNavy.main,
       },
       "& fieldset": {
@@ -99,7 +103,7 @@ const Dropdown: FC<DropdownProps> = ({
     register(name, validator); // custom register react-select
 
     if (defaultValue) {
-      setValue(name, defaultValue);
+      setValue(name, value || defaultValue);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [register, name]);

@@ -1,6 +1,8 @@
+import { useSnackbar } from "notistack";
 import { FormEvent, useState } from "react";
 import { useHistory } from "react-router";
 import { useForm, FormProvider } from "react-hook-form";
+import LinearProgress from "@material-ui/core/LinearProgress";
 
 import { useRegister } from "../../api";
 import Container from "../../components/Container";
@@ -17,7 +19,10 @@ import AllSetup from "./AllSetup";
 export default function Onboarding() {
   const history = useHistory();
   const register = useRegister();
+  const { enqueueSnackbar } = useSnackbar();
+
   const [form, setForm] = useState<any>({});
+  const [loading, setLoading] = useState(false);
   const [currentStep, setCurrentStep] = useState(ONBOARDING.NAME);
 
   const methods = useForm({
@@ -29,9 +34,33 @@ export default function Onboarding() {
   };
 
   const handleRegister = async (form: any) => {
-    await register(form);
-    setCurrentStep(ONBOARDING.FINAL);
+    setLoading(true);
+    try {
+      await register(form);
+      setCurrentStep(ONBOARDING.FINAL);
+    } catch (error) {
+      enqueueSnackbar(error.response?.data?.message || error.message, {
+        variant: "error",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
+
+  const convertToRegisterForm = (form: any) => ({
+    firstName: form.firstName,
+    lastName: form.lastName,
+    email: form.email,
+    phone: form.phone,
+    password: form.password,
+    billingAddress: {
+      address1: form.addressLine1,
+      address2: form.addressLine2,
+      city: form.city,
+      state: form.state,
+      zip: form.zipcode,
+    },
+  });
 
   const handleNext = (e: FormEvent) => {
     e.preventDefault();
@@ -50,7 +79,7 @@ export default function Onboarding() {
         setCurrentStep(ONBOARDING.PASSWORD);
         break;
       default:
-        handleRegister(newForm);
+        handleRegister(convertToRegisterForm(newForm));
         break;
     }
   };
@@ -64,6 +93,7 @@ export default function Onboarding() {
           <AllSetup onSignIn={handleLogIn} />
         )}
 
+        {loading && <LinearProgress />}
         <FormProvider {...methods}>
           <form onSubmit={handleNext}>
             {currentStep === ONBOARDING.NAME && <NameInputForm />}

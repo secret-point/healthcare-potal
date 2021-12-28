@@ -1,13 +1,17 @@
 import { useMutation, useQuery } from "react-query";
+import { orderBy } from "lodash";
+import dayjs from "dayjs";
 
 import { QUERY_KEYS } from "./constants";
 import { useApiFetch } from "./useApiFetch";
 import {
-  TCareTeamMember,
+  ICareMember,
   TCheckInFormRequest,
+  TCoordinationFormRequest,
   TInTakeFormRequest,
   TFeedbackRequest,
   TProgressRequest,
+  TProgress,
   TTodoItem,
   UpdateProfileFormRequest,
 } from "../types";
@@ -29,24 +33,15 @@ export const useGetMemberTodos = () => {
   );
 };
 
-export const useFetchCareTeamList = () => {
+export const useFetchCareProviders = () => {
   const apiFetch = useApiFetch();
 
   return useQuery(
     [QUERY_KEYS.FETCH_CARE_TEAM_LIST],
-    async (): Promise<TCareTeamMember[]> => {
-      const { data } = await apiFetch("/mp/care-team");
+    async (): Promise<ICareMember[]> => {
+      const { data } = await apiFetch("/mp/care-providers");
       return data;
     }
-  );
-};
-
-export const useUploadFile = () => {
-  const apiFetch = useApiFetch();
-
-  return useMutation(
-    (file: File) => apiFetch("/mp/file", { method: "POST", data: { file } }),
-    { mutationKey: QUERY_KEYS.UPLOAD_FILE }
   );
 };
 
@@ -65,19 +60,27 @@ export const useCreateProgress = () => {
 
   return useMutation(
     (data: TProgressRequest) =>
-      apiFetch("/mp/progress", { method: "POST", data }),
+      apiFetch("/mp/progresses", { method: "POST", data }),
     { mutationKey: QUERY_KEYS.UPLOAD_MEMBER_AVATAR }
   );
 };
 
-export const useFetchProgressHistory = () => {
+export const useFetchProgressList = () => {
   const apiFetch = useApiFetch();
 
   return useQuery(
     [QUERY_KEYS.FETCH_SCORE_PROGRESS_HISTORY],
-    async (): Promise<TCareTeamMember[]> => {
-      const { data } = await apiFetch(`/mp/progress`);
-      return data;
+    async (): Promise<TProgress[]> => {
+      const { data } = await apiFetch(`/mp/progresses`);
+      const orderedProgresses = orderBy(data, "updatedAt");
+      return orderedProgresses.filter(
+        (progress, index) =>
+          index === 0 ||
+          dayjs(progress.updatedAt).diff(
+            orderedProgresses[index - 1].updatedAt,
+            "days"
+          ) !== 0
+      );
     }
   );
 };
@@ -87,8 +90,8 @@ export const useUpdateCheckInForm = () => {
 
   return useMutation(
     (data: TCheckInFormRequest) =>
-      apiFetch("/mp/checkin-form", { method: "PUT", data }),
-    { mutationKey: QUERY_KEYS.UPDATE_CHECKIN_FORM }
+      apiFetch("/mp/assessment", { method: "POST", data }),
+    { mutationKey: QUERY_KEYS.UPDATE_ASSESSMENT_FORM }
   );
 };
 
@@ -100,6 +103,18 @@ export const useUpdateInTakeForm = () => {
       apiFetch("/mp/intake-form", { method: "PUT", data }),
     {
       mutationKey: QUERY_KEYS.UPDATE_INTAKE_FORM,
+    }
+  );
+};
+
+export const useUpdateCoordinationForm = () => {
+  const apiFetch = useApiFetch();
+
+  return useMutation(
+    (data: TCoordinationFormRequest) =>
+      apiFetch("/mp/care-coordination", { method: "PUT", data }),
+    {
+      mutationKey: QUERY_KEYS.UPDATE_COORDINATION_FORM,
     }
   );
 };
@@ -120,10 +135,28 @@ export const useVerifyID = () => {
   const apiFetch = useApiFetch();
 
   return useMutation(
-    (fileID: string) =>
-      apiFetch("/mp/verify-id", { method: "PUT", data: { fileID } }),
+    (documentURL: string) =>
+      apiFetch("/mp/verify-id", { method: "PUT", data: { documentURL } }),
     {
       mutationKey: QUERY_KEYS.SUBMIT_FEEDBACK,
+    }
+  );
+};
+
+export const useUploadFile = () => {
+  const apiFetch = useApiFetch();
+
+  return useMutation(
+    (formData: FormData) =>
+      apiFetch("/files/upload", {
+        method: "POST",
+        data: formData,
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      }),
+    {
+      mutationKey: QUERY_KEYS.UPLOAD_FILE,
     }
   );
 };

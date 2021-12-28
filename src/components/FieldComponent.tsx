@@ -63,6 +63,7 @@ const FieldComponent: FC<FieldComponentProps> = ({ field, variant }) => {
           limit={field.limit}
           required={field.required}
           addButton={field.addButton}
+          deleteButton={field.deleteButton}
           instanceLabel={field.instanceLabel}
           properties={field.properties || []}
         />
@@ -70,20 +71,31 @@ const FieldComponent: FC<FieldComponentProps> = ({ field, variant }) => {
 
     case FieldType.TEXT:
     case FieldType.DATE:
+    case FieldType.PASSWORD:
+    case FieldType.NUMBER:
     default:
       return (
         <TextInput
-          name={field.path}
+          disabled={field.disabled}
           label={field.label}
+          name={field.path}
+          isTopLabel={field.isTopLabel}
           variant={field.variant || variant || "standard"}
           required={field.required}
           placeholder={field.placeholder}
-          type={field.type === FieldType.DATE ? "date" : "text"}
+          type={
+            field.type === FieldType.DATE
+              ? "date"
+              : field.type === FieldType.PASSWORD
+              ? "password"
+              : field.type === FieldType.NUMBER
+              ? "number"
+              : "text"
+          }
           InputLabelProps={{
             shrink: field.shrink || false || field.type === FieldType.DATE,
           }}
-          isTopLabel={field.isTopLabel}
-          validator={{ required: field.required }}
+          validator={field.validator || { required: field.required }}
         />
       );
   }

@@ -2,11 +2,13 @@ import Grid from "@material-ui/core/Grid";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
 import Button from "../../components/Button";
-import TextInput from "../../components/TextInput";
 import ErrorText from "../../components/ErrorText";
+import Dropdown from "../../components/Dropdown";
+import TextInput from "../../components/TextInput";
 import { Theme } from "../../theme/types/createPalette";
 import { useInputDetails } from "../../hooks/useInputDetails";
-import { useLayoutStyles } from "../../components/useCommonStyles";
+import { usStates } from "../../constants/usStates";
+import { usZipcodePattern } from "../../utils/string";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -24,7 +26,6 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const AddressForm = () => {
   const classes = useStyles();
-  const layoutClasses = useLayoutStyles();
 
   const requiredFields = ["addressLine1", "city", "state", "zipcode"];
   const { inputErrors, editedFields } = useInputDetails({
@@ -43,7 +44,7 @@ const AddressForm = () => {
         />
       </Grid>
 
-      <Grid item xs={12} className={layoutClasses.mt3}>
+      <Grid item xs={12}>
         <TextInput
           name="addressLine2"
           label="Address Line 2"
@@ -52,7 +53,7 @@ const AddressForm = () => {
         />
       </Grid>
 
-      <Grid item xs={12} className={layoutClasses.mt3}>
+      <Grid item xs={12}>
         <TextInput
           name="city"
           label="City"
@@ -62,14 +63,15 @@ const AddressForm = () => {
         />
       </Grid>
 
-      <Grid item xs={12} className={layoutClasses.mt3}>
+      <Grid item xs={12}>
         <Grid container spacing={1}>
           <Grid item xs={6}>
-            <TextInput
+            <Dropdown
               name="state"
               label="State"
               variant="outlined"
               placeholder="State"
+              options={usStates}
               validator={{ required: "Your state is required." }}
             />
           </Grid>
@@ -79,7 +81,13 @@ const AddressForm = () => {
               label="Zip Code"
               variant="outlined"
               placeholder="Zip Code"
-              validator={{ required: "Your zip code is required." }}
+              validator={{
+                required: "Your zip code is required.",
+                pattern: {
+                  value: usZipcodePattern,
+                  message: "Please enter a 5 digit number zip code.",
+                },
+              }}
             />
           </Grid>
         </Grid>

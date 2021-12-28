@@ -31,6 +31,8 @@ export enum FieldType {
   SELECT = "SELECT",
   TEXT = "TEXT",
   DATE = "DATE",
+  NUMBER = "NUMBER",
+  PASSWORD = "PASSWORD",
   RADIO_GROUP = "RADIO_GROUP",
   MULTI_SELECT = "MULTI_SELECT",
   MULTI_INSTANCE = "MULTI_INSTANCE",
@@ -53,6 +55,7 @@ export type TCustomFieldProperty = {
   options?: TDropItem[];
   xs?: any;
   lg?: any;
+  validator?: any;
 };
 
 export type TCustomField = {
@@ -60,15 +63,18 @@ export type TCustomField = {
   helperText?: string;
   isTopLabel?: boolean;
   path: string;
+  disabled?: boolean;
   type?: FieldType;
   placeholder?: string;
   shrink?: boolean;
   options?: TDropItem[];
   required?: boolean;
   variant?: "standard" | "outlined";
+  validator?: any;
   properties?: TCustomFieldProperty[];
   limit?: number;
   addButton?: string;
+  deleteButton?: string;
   instanceLabel?: string;
   xs?: any;
   lg?: any;
@@ -100,21 +106,13 @@ export type TTodoItem = {
 };
 
 export enum SeverityTypes {
+  MINIMAL = "Minimal",
   SEVERE = "Severe",
   MODERATE_SEVERE = "Moderately Severe",
   MODERATE = "Moderate",
   MILD = "Mild",
   REMISSION = "Remission",
 }
-
-export type TScoreItem = {
-  score: number;
-  date: Date;
-  severity: SeverityTypes;
-  symptoms: string[];
-};
-
-export type TScoreHistory = TScoreItem[];
 
 export type TProgressSummary = {
   title: string;
@@ -146,3 +144,8 @@ export enum ProgressTypes {
   CASE_2_2 = "2-2",
   CASE_2_3 = "2-3",
 }
+
+export type TPosition = {
+  x: number;
+  y: number;
+};

@@ -10,7 +10,7 @@ import { makeStyles, createStyles } from "@material-ui/core/styles";
 import { ButtonLink } from "../../../components/Link";
 import { useBackgroundColorStyles } from "../../../components/useCommonStyles";
 import { ROUTES } from "../../../app/types";
-import { TScoreItem } from "../../../types";
+import { TProgress } from "../../../types";
 import { Theme } from "../../../theme/types/createPalette";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -26,14 +26,14 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface CheckInNoticeProps {
-  latestItem: TScoreItem;
+  latestItem: TProgress;
 }
 
 const CheckInNotice: FC<CheckInNoticeProps> = ({ latestItem }) => {
   const classes = useStyles();
   const backgroundClasses = useBackgroundColorStyles();
 
-  const diffInDays = dayjs().diff(latestItem.date, "day");
+  const diffInDays = dayjs().diff(latestItem.updatedAt, "day");
 
   return (
     <Card className={classes.card}>
@@ -42,9 +42,15 @@ const CheckInNotice: FC<CheckInNoticeProps> = ({ latestItem }) => {
       >
         <Grid container justify="space-between" alignItems="center">
           <Typography variant="h5">
-            {`It’s been ${diffInDays} days since your last check-in.`}
+            {diffInDays
+              ? `It’s been ${diffInDays} days since your last assessment.`
+              : "You last took your assessment today."}
           </Typography>
-          <ButtonLink text="Take the survey" to={ROUTES.CHECKIN} align="left" />
+          <ButtonLink
+            text="Take the survey"
+            to={ROUTES.ASSESSMENT}
+            align="left"
+          />
         </Grid>
       </CardContent>
     </Card>

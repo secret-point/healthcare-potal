@@ -1,10 +1,10 @@
 import { FC } from "react";
-import { TScoreHistory } from "../../../types";
-import PriaireStatusCard from "./PrairieStatusCard";
+import { TProgress } from "../../../types";
+import PrairieStatusCard from "./PrairieStatusCard";
 
 interface PrairieStatusCardSlicesProps {
   active: number;
-  scores: TScoreHistory;
+  scores: TProgress[];
   onUpdateActive: (active: number) => void;
 }
 
@@ -27,7 +27,7 @@ const PrairieStatusCardSlices: FC<PrairieStatusCardSlicesProps> = ({
   };
 
   return (
-    <PriaireStatusCard
+    <PrairieStatusCard
       previousScore={scores[active - 1]}
       currentScore={scores[active]}
       disabledNext={disabledNext}
