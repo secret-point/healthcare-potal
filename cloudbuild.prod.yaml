@@ -5,7 +5,7 @@ steps:
 
   - name: node:14
     entrypoint: yarn
-    args: ['build']
+    args: ['build:prod']
 
   - name: 'gcr.io/cloud-builders/gcloud'
     args: ['app', 'deploy', 'app.prod.yaml']
