@@ -11,9 +11,9 @@ export const stagingConfig = {
 };
 
 export const prodConfig = {
-  apiUrl: "https://cpdashnode-dot-cynomys-nonprod.df.r.appspot.com",
+  apiUrl: "https://cpdashnodeprod-dot-cynomys-prod.uc.r.appspot.com",
   googleClientId:
-    "798126627437-d61jurgqkldgsie6eg0ek0q0nb79kno3.apps.googleusercontent.com",
+    "796116242709-22u22b4v06bafs9tsit6qkh70sqnj417.apps.googleusercontent.com",
 };
 
 const config = (() => {
