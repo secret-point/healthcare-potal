@@ -43,17 +43,20 @@ export const convertUserToInTakeForm = (user: any) => ({
 
 export const convertInTakeFormToUser = (form: any) => ({
   ...form,
-  height: form.height.feet * 12 + form.height.inches,
+  height:
+    form.height && typeof form.height === "object"
+      ? form.height.feet * 12 + form.height.inches
+      : 0,
   weapon: {
-    ...form.weapon,
-    hasAccess: form.weapon.hasAccess === "Yes",
+    ...(form.weapon || {}),
+    hasAccess: form.weapon?.hasAccess === "Yes",
   },
   dangerToSelf: {
-    ...form.dangerToSelf,
-    danger: form.dangerToSelf.danger === "Yes",
+    ...(form.dangerToSelf || {}),
+    danger: form.dangerToSelf?.danger === "Yes",
   },
   dangerToOthers: {
-    ...form.dangerToOthers,
-    danger: form.dangerToOthers.danger === "Yes",
+    ...(form.dangerToOthers || {}),
+    danger: form.dangerToOthers?.danger === "Yes",
   },
 });
