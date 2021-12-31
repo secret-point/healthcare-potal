@@ -434,7 +434,6 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
             type: FieldType.TEXT,
             isTopLabel: true,
             shrink: true,
-            required: true,
             lg: 12,
             xs: 12,
           },
@@ -518,7 +517,8 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
               },
               {
                 path: "description",
-                placeholder: "Are you currently taking any medication?",
+                placeholder:
+                  "Describe the medication (Dose/strength, frequency, purpose)",
                 type: FieldType.TEXT,
                 isTopLabel: true,
                 shrink: true,

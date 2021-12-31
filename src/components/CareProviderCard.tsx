@@ -93,7 +93,7 @@ const CareProviderCard = ({ member }: CareTeamMemberCardProps) => {
             variant="subtitle1"
             className={colorClasses.secondaryGreen1}
           >
-            {member.primaryContact || member.secondaryContact}
+            {`Text ${member.primaryContact || member.secondaryContact}`}
           </Typography>
         ) : member.bookingPageLink ? (
           <ButtonLink
