@@ -47,19 +47,22 @@ export default function Onboarding() {
     }
   };
 
+  const address = {
+    address1: form.addressLine1,
+    address2: form.addressLine2,
+    city: form.city,
+    state: form.state,
+    zip: form.zipcode,
+  };
+
   const convertToRegisterForm = (form: any) => ({
     firstName: form.firstName,
     lastName: form.lastName,
     email: form.email,
     phone: form.phone,
     password: form.password,
-    billingAddress: {
-      address1: form.addressLine1,
-      address2: form.addressLine2,
-      city: form.city,
-      state: form.state,
-      zip: form.zipcode,
-    },
+    billingAddress: address,
+    shippingAddress: address,
   });
 
   const handleNext = (e: FormEvent) => {

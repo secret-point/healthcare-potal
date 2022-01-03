@@ -27,10 +27,14 @@ const InTakeForm = () => {
 
   // We will only allow the users to stay on InTakeForm if the status is not pending
   useEffect(() => {
-    if (user?.status && user.status !== "Pending") {
+    if (
+      user?.status &&
+      user.status !== "Pending" &&
+      currentStep === InTakeFormSteps.START
+    ) {
       history.push(ROUTES.DASHBOARD);
     }
-  }, [user, history]);
+  }, [currentStep, user, history]);
 
   // Scrolls to the top of the page when the step is changed.
   useEffect(() => {
