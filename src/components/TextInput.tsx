@@ -41,7 +41,7 @@ export const useStyles = makeStyles((theme: Theme) =>
         color: theme.palette.primaryNavy.main,
 
         "&::placeholder": {
-          color: theme.palette.primaryNavy.main,
+          color: theme.palette.secondaryNavy2.main,
           opacity: 1,
         },
       },
