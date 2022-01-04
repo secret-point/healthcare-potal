@@ -62,8 +62,6 @@ const CheckboxField: FC<CheckboxFieldProps> = ({
     register(name);
   }, [register, name]);
 
-  useEffect(() => {}, [name]);
-
   const handleMUIChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     setValue(name, event.target.checked);
   };
