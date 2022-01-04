@@ -9,14 +9,6 @@ import TextInput from "../../components/TextInput";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    checkbox: {
-      width: "100%",
-      margin: theme.spacing(0),
-      padding: theme.spacing(0.5),
-      borderRadius: theme.spacing(1),
-      border: `1px solid ${theme.palette.distinctiveGray.main}`,
-    },
-
     textInput: {
       "& .MuiInputBase-root": {
         borderRadius: theme.spacing(1),
@@ -43,7 +35,6 @@ const MCQQuestion: FC<MCQQuestionProps> = ({ question }) => {
             name={option.code}
             label={option.display}
             color="secondary"
-            className={classes.checkbox}
           />
         </Grid>
       ))}
