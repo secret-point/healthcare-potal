@@ -55,8 +55,8 @@ const CheckboxField: FC<CheckboxFieldProps> = ({
   className,
 }) => {
   const classes = useStyles({ color });
-  const { register, getValues, setValue } = useFormContext();
-  const isChecked = getValues(name);
+  const { register, watch, setValue } = useFormContext();
+  const isChecked = watch(name);
 
   useEffect(() => {
     register(name);
