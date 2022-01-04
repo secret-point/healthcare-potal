@@ -18,7 +18,7 @@ export const EMERGENCY_RELATIONSHIPS: TDropItem[] = [
 ];
 
 export const ETHNICITIES: TDropItem[] = [
-  { code: "American Indian or Alask", display: "American Indian or Alask" },
+  { code: "American Indian or Alaska", display: "American Indian or Alaska" },
   { code: "Asian or Asian American", display: "Asian or Asian American" },
   { code: "Black or African American", display: "Black or African American" },
   { code: "Hispanic or Latin", display: "Hispanic or Latin" },
@@ -53,9 +53,17 @@ export const BIOLOGICAL_SEXES: TDropItem[] = [
 ];
 
 export const EDUCATIONAL_DEGREES: TDropItem[] = [
-  { code: "Associate degree", display: "Associate degree" },
+  { code: "12th grade or less", display: "12th grade or less" },
+  {
+    code: "High school diploma or equivalent",
+    display: "High school diploma or equivalent",
+  },
+  { code: "Some college (no degree)", display: "Some college (no degree)" },
+  { code: "Trade/Vocational school", display: "Trade/Vocational school" },
+  { code: "Associate's degree", display: "Associate's degree" },
   { code: "Bachelor's degree", display: "Bachelor's degree" },
   { code: "Master's degree", display: "Master's degree" },
+  { code: "Professional degree", display: "Professional degree" },
   { code: "Doctoral degree", display: "Doctoral degree" },
   { code: "Decline to respond", display: "Decline to respond" },
 ];

@@ -123,7 +123,7 @@ const ExperienceSurvey: FC<ExperienceSurveyProps> = ({ questions, onNext }) => {
             layout={{ xs: 12, sm: 6 }}
             name={question.code}
             options={question.options}
-            onChange={handleDelayNext}
+            onClick={handleDelayNext}
           />
         )}
         {question.type === "MCQ" && <MCQQuestion question={question} />}

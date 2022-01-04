@@ -1,6 +1,6 @@
 import clsx from "clsx";
-import { FC } from "react";
-import { Controller, useFormContext } from "react-hook-form";
+import { ChangeEventHandler, FC, useEffect } from "react";
+import { useFormContext } from "react-hook-form";
 import Checkbox, { CheckboxProps } from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { makeStyles } from "@material-ui/core";
@@ -55,26 +55,26 @@ const CheckboxField: FC<CheckboxFieldProps> = ({
   className,
 }) => {
   const classes = useStyles({ color });
-  const { control, watch } = useFormContext();
-  const isChecked = watch(name);
+  const { register, getValues, setValue } = useFormContext();
+  const isChecked = getValues(name);
+
+  useEffect(() => {
+    register(name);
+  }, [register, name]);
+
+  useEffect(() => {}, [name]);
+
+  const handleMUIChange: ChangeEventHandler<HTMLInputElement> = (event) => {
+    setValue(name, event.target.checked);
+  };
 
   return (
     <FormControlLabel
       control={
-        <Controller
-          name={name}
-          control={control}
-          render={(props) => (
-            <Checkbox
-              {...props}
-              checked={props.value || false}
-              onChange={(e) => props.onChange(e.target.checked)}
-            />
-          )}
+        <Checkbox
+          checked={isChecked || false}
           className={className}
-          // classes={{
-          //   label: clsx(classes.label, isChecked && classes.selectedLabel),
-          // }}
+          onChange={handleMUIChange}
         />
       }
       label={label}

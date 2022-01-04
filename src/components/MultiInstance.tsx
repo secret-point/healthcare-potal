@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) =>
         color: (props: StyleProps) =>
           props.hasError
             ? theme.palette.accentRed.main
-            : theme.palette.secondaryNavy2.main,
+            : theme.palette.secondaryNavy1.main,
         height: 32,
         display: "flex",
         alignItems: "center",

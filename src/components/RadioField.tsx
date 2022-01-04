@@ -65,6 +65,7 @@ type RadioFieldProps = {
     lg?: GridSize;
   };
   onChange?: (name: string, value: string) => void;
+  onClick?: VoidFunction;
 };
 
 const RadioField: FC<RadioFieldProps> = ({
@@ -76,6 +77,7 @@ const RadioField: FC<RadioFieldProps> = ({
   layout,
   validator,
   onChange,
+  onClick,
 }) => {
   const classes = useStyles();
   const colorClasses = useColorStyles();
@@ -145,7 +147,7 @@ const RadioField: FC<RadioFieldProps> = ({
             >
               <FormControlLabel
                 value={option.code}
-                control={<Radio color="secondary" />}
+                control={<Radio color="secondary" onClick={onClick} />}
                 label={option.display}
                 className={clsx(
                   classes.formControlLabel,

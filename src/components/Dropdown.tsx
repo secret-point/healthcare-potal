@@ -50,9 +50,17 @@ const useStyles = makeStyles((theme: Theme) =>
         borderRadius: theme.spacing(1),
       },
     },
+    placeholderSelect: {
+      "& .MuiSelect-select.MuiSelect-select": {
+        color: theme.palette.secondaryNavy2.main,
+      },
+    },
     menuItem: {
       fontSize: 16,
       color: theme.palette.primaryNavy.main,
+    },
+    selectMenuItem: {
+      color: theme.palette.secondaryNavy2.main,
     },
   })
 );
@@ -136,6 +144,12 @@ const Dropdown: FC<DropdownProps> = ({
 
   const hasError = Boolean(dotProp.get(errors, name));
 
+  const selectedValue = getValue();
+
+  const isPlaceHolderOption = Array.isArray(selectedValue)
+    ? selectedValue.length === 0
+    : !selectedValue;
+
   return (
     <div className={classes.dropdown} ref={myRef}>
       <FormControl variant={variant} className={classes.formControl}>
@@ -166,7 +180,7 @@ const Dropdown: FC<DropdownProps> = ({
             <Select
               name={name}
               labelId={label}
-              value={getValue()}
+              value={selectedValue}
               displayEmpty
               disabled={disabled}
               multiple={multiple}
@@ -187,10 +201,17 @@ const Dropdown: FC<DropdownProps> = ({
               required={required}
               onOpen={() => setValue(name, value)}
               onChange={handleMUIChange}
-              className={classes.select}
+              className={clsx(
+                classes.select,
+                isPlaceHolderOption && classes.placeholderSelect
+              )}
             >
               {placeholder && (
-                <MenuItem value="" disabled className={classes.menuItem}>
+                <MenuItem
+                  value=""
+                  disabled
+                  className={clsx(classes.menuItem, classes.selectMenuItem)}
+                >
                   {placeholder}
                 </MenuItem>
               )}

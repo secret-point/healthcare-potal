@@ -31,7 +31,7 @@ export const shouldVerifyId = (status: UserIDVerificationStatus) =>
 
 export const formatPhoneNumber = (value: string): string => {
   const tempValue = value.replace(/\D[^.]/g, "");
-  if (tempValue.length < 9) return tempValue;
+  if (tempValue.length < 9) return value;
   return [
     tempValue.slice(0, 3),
     tempValue.slice(3, 6),

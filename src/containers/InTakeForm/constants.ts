@@ -282,7 +282,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
           {
             label: "How would you characterize your cultural background?",
             path: "cultureBackground",
-            placeholder: "Cultural Background",
+            placeholder: "Describe your cultural background",
             type: FieldType.TEXT,
             isTopLabel: true,
             shrink: true,
@@ -318,9 +318,9 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
             xs: 12,
           },
           {
-            label: "How would you describe your level of physical activity?",
+            label: "How would you describe your level of physical activeness?",
             path: "physicallyActive",
-            placeholder: "Physical activity",
+            placeholder: "Describe your level of physical activeness",
             type: FieldType.TEXT,
             isTopLabel: true,
             shrink: true,
@@ -328,9 +328,9 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
             xs: 12,
           },
           {
-            label: "How would you describe your level of sexual activity?",
+            label: "How would you describe your level of sexual activeness?",
             path: "sexuallyActive",
-            placeholder: "Sexual activity",
+            placeholder: "Describe your level of sexual activeness",
             type: FieldType.TEXT,
             isTopLabel: true,
             shrink: true,
@@ -434,7 +434,6 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
             type: FieldType.TEXT,
             isTopLabel: true,
             shrink: true,
-            required: true,
             lg: 12,
             xs: 12,
           },
@@ -518,7 +517,8 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
               },
               {
                 path: "description",
-                placeholder: "Are you currently taking any medication?",
+                placeholder:
+                  "Describe the medication (Dose/strength, frequency, purpose)",
                 type: FieldType.TEXT,
                 isTopLabel: true,
                 shrink: true,
@@ -533,7 +533,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
           {
             label: "Do you have drug allergies?",
             path: "drugAllergies",
-            placeholder: "Drug Allergies",
+            placeholder: "Describe any drug allergies that you have",
             type: FieldType.TEXT,
             isTopLabel: true,
             shrink: true,
@@ -641,7 +641,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
             helperText:
               "You may also share this information directly with your doctor during your intake.",
             path: "psychTrauma",
-            placeholder: "Traumatic experience",
+            placeholder: "Describe any traumatic experience that you have",
             type: FieldType.TEXT,
             isTopLabel: true,
             shrink: true,
@@ -670,7 +670,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
               },
               {
                 path: "description",
-                placeholder: "What was the diagnosis?",
+                placeholder: "Describe your diagnosis",
                 type: FieldType.TEXT,
                 lg: 6,
                 xs: 12,
@@ -686,7 +686,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
             properties: [
               {
                 path: "relationship",
-                placeholder: "Select family member",
+                placeholder: "Select a family member",
                 type: FieldType.SELECT,
                 options: FAMILY_MEMBERS,
                 lg: 6,
@@ -723,7 +723,8 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
               },
               {
                 path: "description",
-                placeholder: "What were you hospitalized for?",
+                placeholder:
+                  "Describe the circumstances of your hospitalization",
                 type: FieldType.TEXT,
                 isTopLabel: true,
                 shrink: true,
@@ -751,7 +752,7 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
               },
               {
                 path: "description",
-                placeholder: "What was the surgery for?",
+                placeholder: "Describe your surgery",
                 type: FieldType.TEXT,
                 isTopLabel: true,
                 shrink: true,

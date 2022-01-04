@@ -24,6 +24,8 @@ import {
   convertCoordinationFormToUser,
 } from "./utils";
 import useNotification from "../../hooks/useNotification";
+import { useHistory } from "react-router-dom";
+import { ROUTES } from "../../app/types";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -119,6 +121,7 @@ const CoordinationForm: FC<CoordinationFormProps> = ({ onSubmit }) => {
 };
 
 const CareCoordination = () => {
+  const history = useHistory();
   const { user, loadUser } = useAuth();
   const updateCoordinationForm = useUpdateCoordinationForm();
   const { handleSuccess, handleError } = useNotification();
@@ -141,11 +144,12 @@ const CareCoordination = () => {
     await updateCoordinationForm.mutate(
       convertCoordinationFormToUser(form.extProviders),
       {
-        onSuccess: () => {
+        onSuccess: async () => {
           handleSuccess(
             "You have sucessfully updated your external providers."
           );
-          loadUser();
+          await loadUser();
+          history.push(ROUTES.DASHBOARD);
         },
         onError: (error) => {
           handleError(

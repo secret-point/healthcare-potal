@@ -35,7 +35,9 @@ const AssessmentSurvey = () => {
   };
 
   const getTransformedForm = (form: any): Record<string, any> => {
-    const formResult: Record<string, any> = {};
+    const formResult: Record<string, any> = {
+      markAsRead: false,
+    };
 
     CHECKIN_QUESTIONS.forEach((question) => {
       if (question.type === "GAD" || question.type === "PHQ") {
