@@ -111,7 +111,6 @@ export default function TextInput({
     register,
     formState: { errors },
     watch,
-    setValue,
   } = useFormContext();
   const [showPassword, setShowPassword] = useState(false);
 
@@ -120,9 +119,7 @@ export default function TextInput({
 
   useEffect(() => {
     register(name, validator); // custom register react-select
-    setValue(name, value);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [register, name]);
+  }, [register, name, validator]);
 
   const handleTogglePasswordShow = () => setShowPassword((show) => !show);
 

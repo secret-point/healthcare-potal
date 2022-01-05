@@ -42,7 +42,7 @@ const ExperienceSurvey: FC<ExperienceSurveyProps> = ({ questions, onNext }) => {
   const [number, setNumber] = useState(0);
 
   const [form, setForm] = useState<any>({});
-  const { watch, getValues } = useFormContext();
+  const { watch, getValues, register, setValue } = useFormContext();
 
   const question = questions[number];
   const answer = watch(question.code);
@@ -68,6 +68,9 @@ const ExperienceSurvey: FC<ExperienceSurveyProps> = ({ questions, onNext }) => {
   const handleClickPrevious = () => {
     if (number <= 0) return;
     setNumber(number - 1);
+    // temporary fix
+    register("MCQ_OTHER_REASON");
+    setValue("MCQ_OTHER_REASON", form.MCQ_OTHER_REASON);
   };
 
   return (
