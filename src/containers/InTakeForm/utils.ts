@@ -43,6 +43,7 @@ export const convertUserToInTakeForm = (user: any) => ({
 
 export const convertInTakeFormToUser = (form: any) => ({
   ...form,
+  dob: dayjs(form.dob),
   height:
     form.height && typeof form.height === "object"
       ? form.height.feet * 12 + form.height.inches
