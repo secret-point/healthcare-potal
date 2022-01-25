@@ -39,6 +39,11 @@ const ResetPasswordForm = () => {
               message: "Please enter your email address in the correct format.",
             },
           }}
+          InputProps={{
+            inputProps: {
+              style: { textTransform: "lowercase" },
+            },
+          }}
         />
       </Grid>
 
