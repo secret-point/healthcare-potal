@@ -17,7 +17,7 @@ const responsive = {
   },
   mobile: {
     items: 1,
-    partialVisibilityGutter: 40,
+    partialVisibilityGutter: 0,
     breakpoint: { max: 468, min: 0 },
   },
 };

@@ -31,6 +31,10 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: theme.spacing(0, 4),
     },
 
+    mobileContentWrapper: {
+      padding: 0,
+    },
+
     mobileSideContentWrapper: {
       display: "none",
     },
@@ -131,6 +135,7 @@ const Container: React.FC<ContainerProps> = ({ children, className }) => {
       <Box
         className={clsx(
           classes.contentWrapper,
+          isMobile && classes.mobileContentWrapper,
           showMenu && isMobile && classes.mobileSideContentWrapper
         )}
       >
