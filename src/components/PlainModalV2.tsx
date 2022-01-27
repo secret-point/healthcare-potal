@@ -5,7 +5,7 @@ import { makeStyles, createStyles } from "@material-ui/core";
 import { ReactComponent as PrairieIcon } from "../assets/PrairieIcon.svg";
 import { useViewport } from "../hooks/useViewport";
 
-interface PlainModalProps {
+interface PlainModalV2Props {
   background?: string;
   CoverIcon?: FC<SVGProps<SVGSVGElement> & { title?: string }>;
 }
@@ -47,7 +47,8 @@ const useStyles = makeStyles((theme) =>
     desktopChildren: {
       width: 432,
       minWidth: 432,
-      background: (props: PlainModalProps) => props.background || "transparent",
+      background: (props: PlainModalV2Props) =>
+        props.background || "transparent",
       padding: theme.spacing(0),
       borderRadius: theme.spacing(2),
     },
@@ -59,7 +60,7 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-const PlainModal: FC<PlainModalProps> = ({
+const PlainModalV2: FC<PlainModalV2Props> = ({
   background,
   CoverIcon,
   children,
@@ -90,4 +91,4 @@ const PlainModal: FC<PlainModalProps> = ({
   );
 };
 
-export default PlainModal;
+export default PlainModalV2;

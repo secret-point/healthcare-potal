@@ -7,7 +7,7 @@ import { makeStyles, createStyles } from "@material-ui/core/styles";
 import Container from "../../components/Container";
 import ErrorText from "../../components/ErrorText";
 import Link from "../../components/Link";
-import PlainModal from "../../components/PlainModal";
+import PlainModal from "../../components/PlainModalV2";
 import useAuth from "../../hooks/useAuth";
 
 import SignInForm from "./SignInForm";

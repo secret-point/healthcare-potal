@@ -8,7 +8,7 @@ import { makeStyles, createStyles } from "@material-ui/core/styles";
 import { useSendResetPasswordLink } from "../../api";
 import Button from "../../components/Button";
 import Container from "../../components/Container";
-import PlainModal from "../../components/PlainModal";
+import PlainModal from "../../components/PlainModalV2";
 import { useLayoutStyles } from "../../components/useCommonStyles";
 import { ResetPasswordLinkForm } from "../../types";
 
