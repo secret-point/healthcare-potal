@@ -16,6 +16,13 @@ import { useLayoutStyles } from "../../components/useCommonStyles";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    boldLabel: {
+      "& label": {
+        color: `${theme.palette.primaryNavy.main} !important`,
+        fontSize: "14px !important",
+        fontWeight: "700",
+      },
+    },
     iconButton: {
       padding: theme.spacing(0),
     },
@@ -48,8 +55,9 @@ const SignInForm = ({ onSubmit }: SignInFormProps) => {
       <Grid container spacing={1}>
         <Grid item xs={12}>
           <TextInput
+            className={classes.boldLabel}
             name="email"
-            label="Email"
+            label="Enter your Email"
             variant="outlined"
             placeholder="Email"
             validator={{
@@ -70,9 +78,10 @@ const SignInForm = ({ onSubmit }: SignInFormProps) => {
 
         <Grid item xs={12}>
           <TextInput
+            className={classes.boldLabel}
             name="password"
             type={showPassword ? "text" : "password"}
-            label="Password"
+            label="Enter your password"
             variant="outlined"
             placeholder="Password"
             validator={{ required: "Your password is required." }}
