@@ -28,10 +28,11 @@ const useStyles = makeStyles((theme: Theme) =>
       display: "flex",
       width: "100%",
       justifyContent: "center",
-      padding: theme.spacing(0, 4),
+      padding: theme.spacing(0, 8),
     },
 
     mobileContentWrapper: {
+      marginTop: theme.spacing(0.5),
       padding: 0,
     },
 
@@ -44,7 +45,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
 
     mobileContent: {
-      marginTop: theme.spacing(3),
+      margin: 0,
     },
 
     topBarWrapper: {

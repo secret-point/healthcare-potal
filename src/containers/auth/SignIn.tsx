@@ -70,9 +70,9 @@ export default function SignIn() {
             )}
           </Grid>
 
-          <Grid container item xs={12} justify="center">
+          {/* <Grid container item xs={12} justify="center">
             <Link align="center" to="/register" text="Create an account" />
-          </Grid>
+          </Grid> */}
 
           <Grid container item xs={12} justify="center">
             <Link
