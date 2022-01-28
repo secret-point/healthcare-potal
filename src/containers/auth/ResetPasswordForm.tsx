@@ -10,6 +10,13 @@ import { useInputDetails } from "../../hooks/useInputDetails";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    boldLabel: {
+      "& label": {
+        color: `${theme.palette.primaryNavy.main} !important`,
+        fontSize: "14px !important",
+        fontWeight: "700",
+      },
+    },
     errorTextWrapper: {
       marginTop: theme.spacing(1.5),
     },
@@ -25,11 +32,12 @@ const ResetPasswordForm = () => {
   });
 
   return (
-    <Grid container spacing={2}>
+    <Grid container spacing={4}>
       <Grid item xs={12}>
         <TextInput
+          className={classes.boldLabel}
           name="email"
-          label="Email"
+          label="Enter your Email"
           variant="outlined"
           placeholder="Email"
           validator={{
@@ -37,6 +45,11 @@ const ResetPasswordForm = () => {
             pattern: {
               value: emailPattern,
               message: "Please enter your email address in the correct format.",
+            },
+          }}
+          InputProps={{
+            inputProps: {
+              style: { textTransform: "lowercase" },
             },
           }}
         />

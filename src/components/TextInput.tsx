@@ -43,6 +43,7 @@ export const useStyles = makeStyles((theme: Theme) =>
         "&::placeholder": {
           color: theme.palette.secondaryNavy2.main,
           opacity: 1,
+          textTransform: "none",
         },
       },
       "& .MuiOutlinedInput-input:not(.MuiOutlinedInput-inputMultiline)": {

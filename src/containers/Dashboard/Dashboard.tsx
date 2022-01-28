@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: theme.palette.backgroundGreen.main,
     },
     todoListWrapper: {
-      width: "calc(100vw - 96px)",
+      width: "calc(100vw - 160px)",
       marginLeft: theme.spacing(-1.5),
     },
   })

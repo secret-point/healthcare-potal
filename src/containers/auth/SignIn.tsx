@@ -7,19 +7,20 @@ import { makeStyles, createStyles } from "@material-ui/core/styles";
 import Container from "../../components/Container";
 import ErrorText from "../../components/ErrorText";
 import Link from "../../components/Link";
-import PlainModal from "../../components/PlainModal";
+import PlainModal from "../../components/PlainModalV2";
 import useAuth from "../../hooks/useAuth";
 
 import SignInForm from "./SignInForm";
 import { useLayoutStyles } from "../../components/useCommonStyles";
+import { ReactComponent as SignInCover } from "../../icons/SignInCover.svg";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
     errorTextWrapper: {
       marginTop: theme.spacing(1.5),
     },
-    title: {
-      fontWeight: 500,
+    subtitle: {
+      fontWeight: 400,
     },
   })
 );
@@ -45,11 +46,15 @@ export default function SignIn() {
 
   return (
     <Container>
-      <PlainModal>
+      <PlainModal CoverIcon={SignInCover}>
         <Grid container>
+          <Grid item xs={12} className={layoutClasses.mb1}>
+            <Typography variant="h1">Welcome!</Typography>
+          </Grid>
+
           <Grid item xs={12} className={layoutClasses.mb4}>
-            <Typography variant="h2" align="center" className={classes.title}>
-              Sign In
+            <Typography variant="subtitle1" className={classes.subtitle}>
+              Sign in to manage your Prairie Health account.
             </Typography>
           </Grid>
 
@@ -65,15 +70,15 @@ export default function SignIn() {
             )}
           </Grid>
 
-          <Grid container item xs={12} justify="center">
+          {/* <Grid container item xs={12} justify="center">
             <Link align="center" to="/register" text="Create an account" />
-          </Grid>
+          </Grid> */}
 
           <Grid container item xs={12} justify="center">
             <Link
               align="center"
               to="/reset-password"
-              text="Don't remember your password?"
+              text="Forgot your password?"
             />
           </Grid>
         </Grid>

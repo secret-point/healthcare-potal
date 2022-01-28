@@ -6,7 +6,7 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 
 import { useRegister } from "../../api";
 import Container from "../../components/Container";
-import PlainModal from "../../components/PlainModal";
+import PlainModal from "../../components/PlainModalV1";
 import { ONBOARDING } from "../../types";
 
 import NameInputForm from "./NameInputForm";

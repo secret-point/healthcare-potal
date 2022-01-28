@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-const PlainModal: React.FC = ({ children }) => {
+const PlainModalV1: React.FC = ({ children }) => {
   const classes = useStyles();
   const { isMobile } = useViewport();
 
@@ -40,4 +40,4 @@ const PlainModal: React.FC = ({ children }) => {
   );
 };
 
-export default PlainModal;
+export default PlainModalV1;

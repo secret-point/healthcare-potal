@@ -11,7 +11,7 @@ import { ROUTES } from "../../app/types";
 import { useQueryParams } from "../../api/useQueryParams";
 import Button from "../../components/Button";
 import Container from "../../components/Container";
-import PlainModal from "../../components/PlainModal";
+import PlainModal from "../../components/PlainModalV1";
 import PasswordForm from "../onboarding/PasswordForm";
 import { useLayoutStyles } from "../../components/useCommonStyles";
 
