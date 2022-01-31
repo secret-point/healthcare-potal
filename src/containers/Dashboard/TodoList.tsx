@@ -24,15 +24,11 @@ const responsive = {
 
 interface TodoListProps {
   user: User;
-  onClickItem?: (item: TTodoItem) => void;
+  onClickItem: (item: TTodoItem) => void;
 }
 
 const TodoList: React.FC<TodoListProps> = ({ user, onClickItem }) => {
   const { data: todoList = [] } = useGetMemberTodos();
-
-  const handleClickItem = (item: TTodoItem) => {
-    onClickItem?.(item);
-  };
 
   const incompletedTodos = useMemo(
     () =>
@@ -63,7 +59,7 @@ const TodoList: React.FC<TodoListProps> = ({ user, onClickItem }) => {
         <TodoItem
           key={todoItem._id}
           item={todoItem}
-          onClick={() => handleClickItem(todoItem)}
+          onClick={() => onClickItem(todoItem)}
         />
       ))}
     </Carousel>

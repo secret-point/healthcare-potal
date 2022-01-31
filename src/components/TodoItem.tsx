@@ -32,6 +32,8 @@ const TodoItem: FC<TodoItemProps> = ({ item, onClick }) => {
         return "Verify";
       case TodoItemType.CHECK_YOUR_PROGRESS:
         return "Take the survey";
+      case TodoItemType.TRACK_YOUR_PROGRESS:
+        return "Take the assessment";
       default:
         return null;
     }
@@ -45,6 +47,8 @@ const TodoItem: FC<TodoItemProps> = ({ item, onClick }) => {
         return "Verify your ID";
       case TodoItemType.CHECK_YOUR_PROGRESS:
         return "Check your progress";
+      case TodoItemType.TRACK_YOUR_PROGRESS:
+        return "Track your progress";
       default:
         return null;
     }
@@ -61,9 +65,11 @@ const TodoItem: FC<TodoItemProps> = ({ item, onClick }) => {
         >
           {headerText}
         </Typography>
-        <Typography variant="subtitle2" className={fontClasses.fontNormal}>
-          {["By", formatFullDay(item.dueDate)].join(" ")}
-        </Typography>
+        {item.todoItemType !== TodoItemType.TRACK_YOUR_PROGRESS && (
+          <Typography variant="subtitle2" className={fontClasses.fontNormal}>
+            {["By", formatFullDay(item.dueDate)].join(" ")}
+          </Typography>
+        )}
       </CardContent>
       <CardActions className={layoutClasses.noPadding}>
         <TextButton text={buttonText} onClick={onClick} />

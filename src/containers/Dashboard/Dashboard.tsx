@@ -44,6 +44,9 @@ export default function Dashboard() {
       case TodoItemType.CHECK_YOUR_PROGRESS:
         history.push(ROUTES.PROGRESS);
         break;
+      case TodoItemType.TRACK_YOUR_PROGRESS:
+        history.push(ROUTES.ASSESSMENT);
+        break;
       case TodoItemType.VERIFY_ID:
         setShowVerifyIDDialog(true);
         break;
