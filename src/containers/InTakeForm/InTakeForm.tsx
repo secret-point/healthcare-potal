@@ -1,10 +1,10 @@
 import { useSnackbar } from "notistack";
-import { FormEvent, useEffect, useMemo, useState } from "react";
+import { FormEvent, useCallback, useEffect, useMemo, useState } from "react";
 import { useHistory } from "react-router";
 import { useForm, FormProvider } from "react-hook-form";
 import Grid from "@material-ui/core/Grid";
 
-// import { User } from "../../types";
+import { User } from "../../types";
 import { ROUTES } from "../../app/types";
 import { useUpdateInTakeForm } from "../../api";
 import Container from "../../components/Container";
@@ -32,7 +32,7 @@ const InTakeForm = () => {
       user.status !== "Pending" &&
       currentStep === InTakeFormSteps.START
     ) {
-      // history.push(ROUTES.DASHBOARD);
+      history.push(ROUTES.DASHBOARD);
     }
   }, [currentStep, user, history]);
 
@@ -41,23 +41,25 @@ const InTakeForm = () => {
     window.scrollTo(0, 0);
   }, [currentStep]);
 
-  // const getInTakeFormStorageKey = (user: User) =>
-  //   `${user._id || ""}-saved-intake-form`;
+  const getInTakeFormStorageKey = (user: User) =>
+    `${user._id || ""}-saved-intake-form`;
 
-  // const previousInTakeForm = useMemo(() => {
-  //   if (!user) return;
+  const previousInTakeForm = useMemo(() => {
+    if (!user) return;
 
-  //   const previousInTakeFormKey = getInTakeFormStorageKey(user);
-  //   const savedInTakeForm =
-  //     JSON.parse(localStorage.getItem(previousInTakeFormKey) || "{}") || {};
-  //   return savedInTakeForm;
-  // }, [user]);
+    const previousInTakeFormKey = getInTakeFormStorageKey(user);
+    const savedInTakeForm =
+      JSON.parse(localStorage.getItem(previousInTakeFormKey) || "{}") || {};
+    return savedInTakeForm;
+  }, [user]);
+
+  useEffect(() => {
+    setForm((form: any) => ({ ...form, ...previousInTakeForm.values }));
+  }, [previousInTakeForm]);
 
   const defaultInTakeForm = useMemo(
-    // () => previousInTakeForm.values || convertUserToInTakeForm(user),
-    () => convertUserToInTakeForm(user),
-    // [user, previousInTakeForm]
-    [user]
+    () => previousInTakeForm.values || convertUserToInTakeForm(user),
+    [user, previousInTakeForm]
   );
 
   const methods = useForm({
@@ -66,42 +68,38 @@ const InTakeForm = () => {
   });
 
   // Restores the previous intake session
-  // const restorePreviousInTakeSession = useCallback(() => {
-  //   if (previousInTakeForm.step) {
-  //     setCurrentStep(previousInTakeForm.step);
-  //     enqueueSnackbar("Previous intake session has been restored.", {
-  //       variant: "success",
-  //     });
-  //   }
-  // }, [previousInTakeForm, enqueueSnackbar]);
+  const restorePreviousInTakeSession = useCallback(() => {
+    if (previousInTakeForm.step) {
+      setCurrentStep(previousInTakeForm.step);
+      enqueueSnackbar("Previous intake session has been restored.", {
+        variant: "success",
+      });
+    }
+  }, [previousInTakeForm, enqueueSnackbar]);
 
-  // useEffect(() => {
-  //   restorePreviousInTakeSession();
-  // }, [restorePreviousInTakeSession]);
+  useEffect(() => {
+    restorePreviousInTakeSession();
+  }, [restorePreviousInTakeSession]);
 
   const isInProgress = ![
     InTakeFormSteps.START,
     InTakeFormSteps.COMPLETE,
   ].includes(currentStep);
 
-  // const handleLeaveForm = () => {
-  //   if (!user || !isInProgress) return;
-
-  //   const currentInTakeForm = { ...form, ...methods.getValues() };
-  //   if (!Object.keys(currentInTakeForm).length) return;
-
-  //   const localStoragePayload = {
-  //     step: currentStep,
-  //     values: currentInTakeForm,
-  //   };
-  //   localStorage.setItem(
-  //     getInTakeFormStorageKey(user),
-  //     JSON.stringify(localStoragePayload)
-  //   );
-  //   history.push(ROUTES.DASHBOARD);
-  // };
-
   const handleLeaveForm = () => {
+    if (!user || !isInProgress) return;
+
+    const currentInTakeForm = { ...form, ...methods.getValues() };
+    if (!Object.keys(currentInTakeForm).length) return;
+
+    const localStoragePayload = {
+      step: currentStep,
+      values: currentInTakeForm,
+    };
+    localStorage.setItem(
+      getInTakeFormStorageKey(user),
+      JSON.stringify(localStoragePayload)
+    );
     history.push(ROUTES.DASHBOARD);
   };
 
@@ -116,7 +114,7 @@ const InTakeForm = () => {
   const handleUpdateIntakeFormDone = () => {
     loadUser();
     setCurrentStep(InTakeFormSteps.COMPLETE);
-    // localStorage.removeItem(getInTakeFormStorageKey(user));
+    localStorage.removeItem(getInTakeFormStorageKey(user));
     enqueueSnackbar("Your intake form has been submitted.", {
       variant: "success",
     });

@@ -38,7 +38,11 @@ interface InTakeFormInputProps {
   onLeave: VoidFunction;
 }
 
-const InTakeFormInput: FC<InTakeFormInputProps> = ({ currentStep, onNext }) => {
+const InTakeFormInput: FC<InTakeFormInputProps> = ({
+  currentStep,
+  onNext,
+  onLeave,
+}) => {
   const { user } = useAuth();
   const classes = useStyles();
   const fontClasses = useFontStyles();
@@ -111,13 +115,13 @@ const InTakeFormInput: FC<InTakeFormInputProps> = ({ currentStep, onNext }) => {
         />
       </Grid>
 
-      {/* <Grid item xs={12}>
+      <Grid item xs={12}>
         <Button
           text="SAVE MY PROGRESS AND LEAVE"
           variant="text"
           onClick={onLeave}
         />
-      </Grid> */}
+      </Grid>
     </Grid>
   );
 };
