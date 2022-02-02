@@ -25,11 +25,12 @@ const useStyles = makeStyles((theme: Theme) =>
     formControlLabel: {
       width: "100%",
       margin: theme.spacing(0),
-      padding: theme.spacing(1),
+      padding: theme.spacing(3, 2),
       borderRadius: theme.spacing(1),
       border: `1px solid rgba(0, 0, 0, 0.23)`,
-      "& span": {
-        fontSize: 16,
+      "& > span": {
+        padding: theme.spacing(0, 2, 0, 0),
+        fontSize: 18,
         "&:last-child": {
           color: theme.palette.primaryNavy.main,
         },

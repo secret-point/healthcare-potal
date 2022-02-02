@@ -123,7 +123,7 @@ const ExperienceSurvey: FC<ExperienceSurveyProps> = ({ questions, onNext }) => {
       >
         {isRadioQuestion && question.options && (
           <RadioField
-            layout={{ xs: 12, sm: 6 }}
+            layout={{ xs: 12 }}
             name={question.code}
             options={question.options}
             onClick={handleDelayNext}
