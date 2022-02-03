@@ -14,6 +14,7 @@ import {
   SYMPTOM_TYPES,
   TREATMENT_TYPES,
   FAMILY_MEMBERS,
+  SOURCE_TYPES,
 } from "../../constants/identity";
 import { TInTakeFormDef } from "./types";
 import {
@@ -150,6 +151,32 @@ export const IN_TAKE_FORM_STEPS: TInTakeFormDef = {
             options: ETHNICITIES,
             required: true,
             lg: 6,
+            xs: 12,
+          },
+          {
+            label: "How did you hear about Prairie?",
+            path: "source",
+            type: FieldType.SINGLE_INSTANCE,
+            required: true,
+            properties: [
+              {
+                path: "category",
+                placeholder: "Select the source",
+                type: FieldType.SELECT,
+                options: SOURCE_TYPES,
+                lg: 6,
+                xs: 12,
+              },
+              {
+                path: "description",
+                placeholder: "Please tell us more",
+                type: FieldType.TEXT,
+                shrink: true,
+                lg: 6,
+                xs: 12,
+              },
+            ],
+            lg: 12,
             xs: 12,
           },
         ],
