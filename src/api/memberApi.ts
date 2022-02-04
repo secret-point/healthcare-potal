@@ -7,7 +7,8 @@ import { useApiFetch, serializeQueryParameters } from "./useApiFetch";
 import {
   ICareMember,
   ICheckAssessmentLinkForm,
-  TCheckInFormRequest,
+  TAsssessmentFormRequest,
+  TOneTimeAsssessmentFormRequest,
   TCoordinationFormRequest,
   TInTakeFormRequest,
   TFeedbackRequest,
@@ -89,12 +90,22 @@ export const useFetchProgressList = (enabled?: boolean) => {
   );
 };
 
-export const useUpdateCheckInForm = () => {
+export const useCreateNewAssessment = () => {
   const apiFetch = useApiFetch();
 
   return useMutation(
-    (data: TCheckInFormRequest) =>
+    (data: TAsssessmentFormRequest) =>
       apiFetch("/mp/assessment", { method: "POST", data }),
+    { mutationKey: QUERY_KEYS.UPDATE_ASSESSMENT_FORM }
+  );
+};
+
+export const useCreateOneTimeNewAssessment = () => {
+  const apiFetch = useApiFetch();
+
+  return useMutation(
+    (data: TOneTimeAsssessmentFormRequest) =>
+      apiFetch("/mp/one-time-assessment", { method: "POST", data }),
     { mutationKey: QUERY_KEYS.UPDATE_ASSESSMENT_FORM }
   );
 };

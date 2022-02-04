@@ -7,7 +7,8 @@ import { ROUTES } from "src/app/types";
 import {
   useCheckAssessmentLink,
   useFetchProgressList,
-  useUpdateCheckInForm,
+  useCreateNewAssessment,
+  useCreateOneTimeNewAssessment,
 } from "src/api";
 import Container from "src/components/Container";
 import { useAuth } from "src/hooks/useAuth";
@@ -32,11 +33,13 @@ const AssessmentSurvey = () => {
   const { handleError } = useNotification();
 
   const [surveyStep, setSurveyStep] = useState(AssessmentSurveySteps.WELCOME);
+  const [dob, setDOB] = useState<string | null>(null);
   const [isDOBDialogOpen, setIsDOBDialogOpen] = useState(false);
 
   const { refetch: refetchProgressList } = useFetchProgressList(false);
   const checkAssessmentLink = useCheckAssessmentLink();
-  const updateCheckInForm = useUpdateCheckInForm();
+  const createNewAssessment = useCreateNewAssessment();
+  const createNonAuthNewAssessment = useCreateOneTimeNewAssessment();
 
   const checkInitialAssessmentLink = useCallback(
     async () => {
@@ -94,14 +97,51 @@ const AssessmentSurvey = () => {
   };
 
   const handleCompleteCheckIn = async (form: any) => {
-    await updateCheckInForm.mutate(getTransformedForm(form));
-    setSurveyStep(AssessmentSurveySteps.COMPLETE);
+    const transformedForm = getTransformedForm(form);
+    if (isAuthenticated) {
+      await createNewAssessment.mutate(transformedForm, {
+        onSuccess: () => {
+          setSurveyStep(AssessmentSurveySteps.COMPLETE);
+        },
+        onError: (error) => {
+          handleError(
+            error,
+            "There was an error while processing the assessment"
+          );
+        },
+      });
+    } else {
+      await createNonAuthNewAssessment.mutate(
+        {
+          ...transformedForm,
+          assessmentId,
+          dob,
+        },
+        {
+          onSuccess: () => {
+            setSurveyStep(AssessmentSurveySteps.COMPLETE);
+          },
+          onError: (error) => {
+            handleError(
+              error,
+              "There was an error while processing the assessment"
+            );
+          },
+        }
+      );
+    }
   };
 
   const handleSubmitDOB = async (dob: string) => {
+    if (!dob && !isAuthenticated) {
+      setIsDOBDialogOpen(true);
+      return;
+    }
+
     try {
       await checkAssessmentLink({ assessmentId, dob });
       setSurveyStep(AssessmentSurveySteps.QUESTIONS);
+      setDOB(dob);
     } catch (error) {
       setIsDOBDialogOpen(true);
     }
@@ -120,14 +160,18 @@ const AssessmentSurvey = () => {
       case AssessmentSurveySteps.DOB_CHECKER:
         break;
       default:
-        await refetchProgressList();
-        history.push(ROUTES.PROGRESS);
+        if (isAuthenticated) {
+          await refetchProgressList();
+          history.push(ROUTES.PROGRESS);
+        } else {
+          history.push(ROUTES.LOGIN);
+        }
         break;
     }
   };
 
   const handleCloseDOBDialog = () => {
-    setIsDOBDialogOpen(true);
+    setIsDOBDialogOpen(false);
   };
 
   return (

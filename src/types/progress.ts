@@ -34,7 +34,9 @@ export type TProgress = TProgressRequest & {
   updatedAt: string;
 };
 
-export type TCheckInFormRequest = any;
+export type TAsssessmentFormRequest = any;
+
+export type TOneTimeAsssessmentFormRequest = any;
 
 export type TInTakeFormRequest = any;
 
