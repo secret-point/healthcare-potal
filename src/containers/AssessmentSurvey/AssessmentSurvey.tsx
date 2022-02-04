@@ -22,6 +22,7 @@ import Welcome from "./Welcome";
 import ExperienceSurvey from "./ExperienceSurvey";
 import CompleteSurvey from "./CompleteSurvey";
 import DateOfBirthChecker from "./DateOfBirthChecker";
+import DateOfBirthNotMatchDialog from "./DateOfBirthNotMatchDialog";
 
 const AssessmentSurvey = () => {
   const history = useHistory();
@@ -31,6 +32,7 @@ const AssessmentSurvey = () => {
   const { handleError } = useNotification();
 
   const [surveyStep, setSurveyStep] = useState(AssessmentSurveySteps.WELCOME);
+  const [isDOBDialogOpen, setIsDOBDialogOpen] = useState(false);
 
   const { refetch: refetchProgressList } = useFetchProgressList(false);
   const checkAssessmentLink = useCheckAssessmentLink();
@@ -101,7 +103,7 @@ const AssessmentSurvey = () => {
       await checkAssessmentLink({ assessmentId, dob });
       setSurveyStep(AssessmentSurveySteps.QUESTIONS);
     } catch (error) {
-      console.log(error);
+      setIsDOBDialogOpen(true);
     }
   };
 
@@ -122,6 +124,10 @@ const AssessmentSurvey = () => {
         history.push(ROUTES.PROGRESS);
         break;
     }
+  };
+
+  const handleCloseDOBDialog = () => {
+    setIsDOBDialogOpen(true);
   };
 
   return (
@@ -151,6 +157,11 @@ const AssessmentSurvey = () => {
           </form>
         )}
       </FormProvider>
+
+      <DateOfBirthNotMatchDialog
+        isOpen={isDOBDialogOpen}
+        onClose={handleCloseDOBDialog}
+      />
     </Container>
   );
 };
