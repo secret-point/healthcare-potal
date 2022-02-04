@@ -147,10 +147,10 @@ export const useVerifyID = () => {
   );
 };
 
-export const useCheckAssessmentLink = (form: ICheckAssessmentLinkForm) => {
+export const useCheckAssessmentLink = () => {
   const apiFetch = useApiFetch();
 
-  return useQuery([QUERY_KEYS.CHECK_ASSESSMENT_LINK, form], () => {
+  return (form: ICheckAssessmentLinkForm) => {
     if (!form.assessmentId) {
       return null;
     }
@@ -161,7 +161,7 @@ export const useCheckAssessmentLink = (form: ICheckAssessmentLinkForm) => {
         method: "GET",
       }
     );
-  });
+  };
 };
 
 export const useUploadFile = () => {

@@ -3,6 +3,7 @@ import { TDropItem, TQuestion } from "src/types";
 export enum AssessmentSurveySteps {
   WELCOME = "WELCOME",
   QUESTIONS = "QUESTIONS",
+  DOB_CHECKER = "DOB_CHECKER",
   COMPLETE = "COMPLETE",
 }
 

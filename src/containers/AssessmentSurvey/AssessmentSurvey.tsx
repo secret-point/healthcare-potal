@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useCallback, useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useForm, FormProvider } from "react-hook-form";
 import Grid from "@material-ui/core/Grid";
@@ -10,37 +10,52 @@ import {
   useUpdateCheckInForm,
 } from "src/api";
 import Container from "src/components/Container";
+import { useAuth } from "src/hooks/useAuth";
+import { useNotification } from "src/hooks/useNotification";
 
-import Welcome from "./Welcome";
-import ExperienceSurvey from "./ExperienceSurvey";
-import CompleteSurvey from "./CompleteSurvey";
 import {
   AssessmentSurveySteps,
   CHECKIN_QUESTIONS,
   frequencyOptionCodeToValue,
 } from "./constants";
-import { useNotification } from "src/hooks/useNotification";
+import Welcome from "./Welcome";
+import ExperienceSurvey from "./ExperienceSurvey";
+import CompleteSurvey from "./CompleteSurvey";
+import DateOfBirthChecker from "./DateOfBirthChecker";
 
 const AssessmentSurvey = () => {
   const history = useHistory();
   const { assessmentId } = useParams<{ assessmentId?: string }>();
 
+  const { isAuthenticated } = useAuth();
   const { handleError } = useNotification();
+
   const [surveyStep, setSurveyStep] = useState(AssessmentSurveySteps.WELCOME);
 
-  const { refetch } = useFetchProgressList(false);
-  const { isError, error } = useCheckAssessmentLink({ assessmentId });
+  const { refetch: refetchProgressList } = useFetchProgressList(false);
+  const checkAssessmentLink = useCheckAssessmentLink();
   const updateCheckInForm = useUpdateCheckInForm();
 
+  const checkInitialAssessmentLink = useCallback(
+    async () => {
+      try {
+        await checkAssessmentLink({ assessmentId });
+      } catch (error) {
+        handleError(
+          error,
+          (error as any)?.response?.data?.message || "Invalid assessment id."
+        );
+        history.push(ROUTES.DASHBOARD);
+      }
+    },
+    // eslint-disable-next-line
+    [assessmentId]
+  );
+
   useEffect(() => {
-    if (error) {
-      handleError(
-        error,
-        (error as any)?.response?.data?.message || "Invalid assessment id."
-      );
-      history.push(ROUTES.DASHBOARD);
-    }
-  }, [error, history, isError, handleError]);
+    checkInitialAssessmentLink();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [checkInitialAssessmentLink]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -81,14 +96,29 @@ const AssessmentSurvey = () => {
     setSurveyStep(AssessmentSurveySteps.COMPLETE);
   };
 
+  const handleSubmitDOB = async (dob: string) => {
+    try {
+      await checkAssessmentLink({ assessmentId, dob });
+      setSurveyStep(AssessmentSurveySteps.QUESTIONS);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handleNext = async (e?: FormEvent) => {
     e?.preventDefault();
     switch (surveyStep) {
       case AssessmentSurveySteps.WELCOME:
-        setSurveyStep(AssessmentSurveySteps.QUESTIONS);
+        if (isAuthenticated) {
+          setSurveyStep(AssessmentSurveySteps.QUESTIONS);
+        } else {
+          setSurveyStep(AssessmentSurveySteps.DOB_CHECKER);
+        }
+        break;
+      case AssessmentSurveySteps.DOB_CHECKER:
         break;
       default:
-        await refetch();
+        await refetchProgressList();
         history.push(ROUTES.PROGRESS);
         break;
     }
@@ -97,24 +127,29 @@ const AssessmentSurvey = () => {
   return (
     <Container showIcon>
       <FormProvider {...methods}>
-        <form onSubmit={handleNext}>
-          <Grid container justify="center">
-            <Grid item xs={12} sm={10} md={8} lg={6}>
-              {surveyStep === AssessmentSurveySteps.WELCOME && (
-                <Welcome onCancel={handleGoToHome} />
-              )}
-              {surveyStep === AssessmentSurveySteps.QUESTIONS && (
-                <ExperienceSurvey
-                  questions={CHECKIN_QUESTIONS}
-                  onNext={handleCompleteCheckIn}
-                />
-              )}
-              {surveyStep === AssessmentSurveySteps.COMPLETE && (
-                <CompleteSurvey />
-              )}
+        {surveyStep === AssessmentSurveySteps.DOB_CHECKER ? (
+          <DateOfBirthChecker onSubmit={handleSubmitDOB} />
+        ) : (
+          <form onSubmit={handleNext}>
+            <Grid container justify="center">
+              <Grid item xs={12} sm={10} md={8} lg={6}>
+                {surveyStep === AssessmentSurveySteps.WELCOME && (
+                  <Welcome onCancel={handleGoToHome} />
+                )}
+
+                {surveyStep === AssessmentSurveySteps.QUESTIONS && (
+                  <ExperienceSurvey
+                    questions={CHECKIN_QUESTIONS}
+                    onNext={handleCompleteCheckIn}
+                  />
+                )}
+                {surveyStep === AssessmentSurveySteps.COMPLETE && (
+                  <CompleteSurvey />
+                )}
+              </Grid>
             </Grid>
-          </Grid>
-        </form>
+          </form>
+        )}
       </FormProvider>
     </Container>
   );
