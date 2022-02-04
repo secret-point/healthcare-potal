@@ -1,5 +1,6 @@
 import { FC } from "react";
-import { TProgress } from "../../../types";
+import { TProgress } from "src/types";
+
 import PrairieStatusCard from "./PrairieStatusCard";
 
 interface PrairieStatusCardSlicesProps {

@@ -1,8 +1,9 @@
+import { emailPattern, phoneNumberPattern } from "src/utils/string";
+import { usStates } from "src/constants/usStates";
+import { FieldType } from "src/types/general";
+import { EMERGENCY_RELATIONSHIPS } from "src/constants/identity";
+
 import { EditableField } from "./types";
-import { emailPattern, phoneNumberPattern } from "../../utils/string";
-import { usStates } from "../../constants/usStates";
-import { FieldType } from "../../types/general";
-import { EMERGENCY_RELATIONSHIPS } from "../../constants/identity";
 
 export const UPDATE_PROFILE_DIALOGS = {
   [EditableField.PREFERRED_NAME]: {

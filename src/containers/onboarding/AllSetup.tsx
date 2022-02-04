@@ -2,9 +2,9 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
-import { Theme } from "../../theme/types/createPalette";
-import Button from "../../components/Button";
-import { useLayoutStyles } from "../../components/useCommonStyles";
+import { Theme } from "src/theme/types/createPalette";
+import Button from "src/components/Button";
+import { useLayoutStyles } from "src/components/useCommonStyles";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

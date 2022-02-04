@@ -1,8 +1,8 @@
 import { useMemo } from "react";
-import { useGetMemberTodos } from "../../api";
-import Carousel from "../../components/Carousel";
-import TodoItem from "../../components/TodoItem";
-import { TodoItemType, TTodoItem, User } from "../../types";
+import { useGetMemberTodos } from "src/api";
+import Carousel from "src/components/Carousel";
+import TodoItem from "src/components/TodoItem";
+import { TodoItemType, TTodoItem, User } from "src/types";
 
 const responsive = {
   desktop: {

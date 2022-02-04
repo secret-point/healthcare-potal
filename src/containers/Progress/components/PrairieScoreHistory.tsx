@@ -9,13 +9,13 @@ import { ResponsiveLine } from "@nivo/line";
 // @ts-ignore
 import { linearGradientDef } from "@nivo/core";
 
-import { TProgress } from "../../../types";
+import { TProgress } from "src/types";
 import {
   useCardStyles,
   useFontStyles,
   useLayoutStyles,
-} from "../../../components/useCommonStyles";
-import { Theme } from "../../../theme/types/createPalette";
+} from "src/components/useCommonStyles";
+import { Theme } from "src/theme/types/createPalette";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

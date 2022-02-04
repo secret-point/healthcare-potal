@@ -5,7 +5,7 @@ import Checkbox, { CheckboxProps } from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { makeStyles } from "@material-ui/core";
 
-import { Theme } from "../theme/types/createPalette";
+import { Theme } from "src/theme/types/createPalette";
 
 type StyleProps = {
   color: "primary" | "secondary" | "default" | undefined;

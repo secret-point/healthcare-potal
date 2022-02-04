@@ -3,9 +3,9 @@ import { useHistory } from "react-router-dom";
 import { useForm, FormProvider } from "react-hook-form";
 import Grid from "@material-ui/core/Grid";
 
-import { ROUTES } from "../../app/types";
-import { useFetchProgressList, useUpdateCheckInForm } from "../../api";
-import Container from "../../components/Container";
+import { ROUTES } from "src/app/types";
+import { useFetchProgressList, useUpdateCheckInForm } from "src/api";
+import Container from "src/components/Container";
 
 import Welcome from "./Welcome";
 import ExperienceSurvey from "./ExperienceSurvey";
@@ -15,12 +15,14 @@ import {
   CHECKIN_QUESTIONS,
   frequencyOptionCodeToValue,
 } from "./constants";
+// import { useQueryParams } from "src/api/useQueryParams";
 
 const AssessmentSurvey = () => {
   const history = useHistory();
   const updateCheckInForm = useUpdateCheckInForm();
   const [surveyStep, setSurveyStep] = useState(AssessmentSurveySteps.WELCOME);
   const { refetch } = useFetchProgressList();
+  // const { assessmentId } = useQueryParams();
 
   useEffect(() => {
     window.scrollTo(0, 0);

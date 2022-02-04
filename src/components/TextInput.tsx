@@ -10,7 +10,8 @@ import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
-import { Theme } from "../theme/types/createPalette";
+import { Theme } from "src/theme/types/createPalette";
+
 import { useColorStyles, useLayoutStyles } from "./useCommonStyles";
 
 export const useStyles = makeStyles((theme: Theme) =>

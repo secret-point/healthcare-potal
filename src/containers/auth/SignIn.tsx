@@ -4,15 +4,15 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
-import Container from "../../components/Container";
-import ErrorText from "../../components/ErrorText";
-import Link from "../../components/Link";
-import PlainModal from "../../components/PlainModalV2";
-import useAuth from "../../hooks/useAuth";
+import Container from "src/components/Container";
+import ErrorText from "src/components/ErrorText";
+import Link from "src/components/Link";
+import PlainModal from "src/components/PlainModalV2";
+import { useLayoutStyles } from "src/components/useCommonStyles";
+import useAuth from "src/hooks/useAuth";
+import { ReactComponent as SignInCover } from "src/icons/SignInCover.svg";
 
 import SignInForm from "./SignInForm";
-import { useLayoutStyles } from "../../components/useCommonStyles";
-import { ReactComponent as SignInCover } from "../../icons/SignInCover.svg";
 
 const useStyles = makeStyles((theme) =>
   createStyles({

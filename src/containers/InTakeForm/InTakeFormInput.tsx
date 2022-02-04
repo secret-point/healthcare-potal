@@ -7,13 +7,14 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
-import useAuth from "../../hooks/useAuth";
-import Button from "../../components/Button";
+import useAuth from "src/hooks/useAuth";
+import Button from "src/components/Button";
 import {
   useColorStyles,
   useFontStyles,
   useLayoutStyles,
-} from "../../components/useCommonStyles";
+} from "src/components/useCommonStyles";
+
 import { InTakeFormSteps, IN_TAKE_FORM_STEPS } from "./constants";
 import InTakeFormGroupInput from "./InTakeFormGroupInput";
 

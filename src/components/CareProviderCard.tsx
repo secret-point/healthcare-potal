@@ -5,14 +5,15 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
-import { ICareMember } from "../types";
+import { ICareMember } from "src/types";
+import { formatUserType } from "src/utils/helper";
+
 import {
   useColorStyles,
   useFontStyles,
   useLayoutStyles,
 } from "./useCommonStyles";
 import ProfileAvatar from "./ProfileAvatar";
-import { formatUserType } from "../utils/helper";
 import { ButtonLink } from "./Link";
 
 const useStyles = makeStyles((theme) =>

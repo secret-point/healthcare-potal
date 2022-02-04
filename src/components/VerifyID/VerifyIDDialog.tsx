@@ -7,13 +7,14 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
-import { Theme } from "../../theme/types/createPalette";
-import Button from "../Button";
+import { useUploadFile, useVerifyID } from "src/api";
+import Button from "src/components/Button";
+import useAuth from "src/hooks/useAuth";
+import { Theme } from "src/theme/types/createPalette";
+
 import UploadID from "./UploadID";
 import InitialStep from "./InitialStep";
 import { VerifySteps } from "./constants";
-import { useUploadFile, useVerifyID } from "../../api";
-import useAuth from "../../hooks/useAuth";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

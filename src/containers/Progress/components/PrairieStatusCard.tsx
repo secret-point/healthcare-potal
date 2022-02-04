@@ -7,15 +7,15 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
-import { TProgress } from "../../../types";
+import { TProgress } from "src/types";
 import {
   useCardStyles,
   useColorStyles,
   useLayoutStyles,
-} from "../../../components/useCommonStyles";
+} from "src/components/useCommonStyles";
 import PrairieStatus from "./PrairieStatus";
-import { ButtonGroup } from "../../../components/ArrowButtonGroup";
-import { getSeverityBasedOnScore } from "../../../utils/helper";
+import { ButtonGroup } from "src/components/ArrowButtonGroup";
+import { getSeverityBasedOnScore } from "src/utils/helper";
 
 const useStyles = makeStyles(() =>
   createStyles({

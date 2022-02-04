@@ -5,7 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import { Variant } from "@material-ui/core/styles/createTypography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
-import { Theme } from "../theme/types/createPalette";
+import { Theme } from "src/theme/types/createPalette";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

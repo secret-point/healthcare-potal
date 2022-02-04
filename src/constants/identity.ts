@@ -1,4 +1,4 @@
-import { TDropItem } from "../types/general";
+import { TDropItem } from "src/types/general";
 
 export const EMERGENCY_RELATIONSHIPS: TDropItem[] = [
   { code: "Mother", display: "Mother" },

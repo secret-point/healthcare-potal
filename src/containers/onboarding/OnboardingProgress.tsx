@@ -8,8 +8,8 @@ import { StepIconProps } from "@material-ui/core/StepIcon";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles, withStyles } from "@material-ui/core/styles";
 
-import { ONBOARDING } from "../../types";
-import { Theme } from "../../theme/types/createPalette";
+import { ONBOARDING } from "src/types";
+import { Theme } from "src/theme/types/createPalette";
 
 const OnobardingStepConnector = withStyles({
   alternativeLabel: {

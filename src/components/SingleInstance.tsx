@@ -7,11 +7,12 @@ import Grid from "@material-ui/core/Grid";
 import FormLabel from "@material-ui/core/FormLabel";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
-import { Theme } from "../theme/types/createPalette";
-import { FieldType, TCustomFieldProperty } from "../types";
+import { CONFIRMATION_TYPES } from "src/constants/identity";
+import { Theme } from "src/theme/types/createPalette";
+import { FieldType, TCustomFieldProperty } from "src/types";
+
 import FieldComponent from "./FieldComponent";
 import { useColorStyles, useLayoutStyles } from "./useCommonStyles";
-import { CONFIRMATION_TYPES } from "../constants/identity";
 
 interface StyleProps {
   hasError: boolean;

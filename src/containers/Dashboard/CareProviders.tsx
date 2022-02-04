@@ -3,15 +3,14 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
-import { useFetchCareProviders } from "../../api";
-import { useViewport } from "../../hooks/useViewport";
-import useAuth from "../../hooks/useAuth";
-
-import CareProviderCard from "../../components/CareProviderCard";
-import ExtProviderCard from "../../components/ExtProviderCard";
-import { TextButton } from "../../components/Button";
-import { useLayoutStyles } from "../../components/useCommonStyles";
-import EmptyCareTeamMemberCard from "../../components/EmptyCareTeamMemberCard";
+import { useFetchCareProviders } from "src/api";
+import CareProviderCard from "src/components/CareProviderCard";
+import ExtProviderCard from "src/components/ExtProviderCard";
+import { TextButton } from "src/components/Button";
+import { useLayoutStyles } from "src/components/useCommonStyles";
+import EmptyCareTeamMemberCard from "src/components/EmptyCareTeamMemberCard";
+import { useViewport } from "src/hooks/useViewport";
+import useAuth from "src/hooks/useAuth";
 
 const useStyles = makeStyles((theme) =>
   createStyles({

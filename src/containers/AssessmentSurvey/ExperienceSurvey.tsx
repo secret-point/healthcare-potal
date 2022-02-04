@@ -6,17 +6,14 @@ import Typography from "@material-ui/core/Typography";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
-import Button from "../../components/Button";
-import RadioField from "../../components/RadioField";
-import TextInput from "../../components/TextInput";
-import {
-  useFontStyles,
-  useLayoutStyles,
-} from "../../components/useCommonStyles";
-import { TQuestion } from "../../types";
+import Button from "src/components/Button";
+import RadioField from "src/components/RadioField";
+import TextInput from "src/components/TextInput";
+import { useFontStyles, useLayoutStyles } from "src/components/useCommonStyles";
+import { TQuestion } from "src/types";
 
 import MCQQuestion from "./MCQQuestion";
-import { useViewport } from "../../hooks/useViewport";
+import { useViewport } from "src/hooks/useViewport";
 
 const useStyles = makeStyles(() =>
   createStyles({

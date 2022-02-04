@@ -2,11 +2,11 @@ import dayjs from "dayjs";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 
-import { useFetchProgressList } from "../../api/memberApi";
-import PrairieScore from "../../components/Progress/PrairieScore";
-import SurveyProgress from "../../components/Progress/SurveyProgress";
-import SymptomsReport from "../../components/Progress/SymptomsReport";
-import { useLayoutStyles } from "../../components/useCommonStyles";
+import { useFetchProgressList } from "src/api/memberApi";
+import PrairieScore from "src/components/Progress/PrairieScore";
+import SurveyProgress from "src/components/Progress/SurveyProgress";
+import SymptomsReport from "src/components/Progress/SymptomsReport";
+import { useLayoutStyles } from "src/components/useCommonStyles";
 
 const ActivityProgress = () => {
   const layoutClasses = useLayoutStyles();

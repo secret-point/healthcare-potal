@@ -1,4 +1,4 @@
-import { TDropItem, TQuestion } from "../../types";
+import { TDropItem, TQuestion } from "src/types";
 
 export enum AssessmentSurveySteps {
   WELCOME = "WELCOME",

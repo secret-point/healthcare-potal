@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig } from "axios";
-import config from "../utils/config";
+import config from "src/utils/config";
 import { getToken } from "./authApi";
 
 export function useApiFetch() {

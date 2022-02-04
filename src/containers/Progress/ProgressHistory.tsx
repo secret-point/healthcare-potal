@@ -3,9 +3,10 @@ import { useHistory } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 
-import { ROUTES } from "../../app/types";
-import { useFetchProgressList } from "../../api/memberApi";
-import { useLayoutStyles } from "../../components/useCommonStyles";
+import { ROUTES } from "src/app/types";
+import { useFetchProgressList } from "src/api/memberApi";
+import { useLayoutStyles } from "src/components/useCommonStyles";
+
 import PrairieScoreHistory from "./components/PrairieScoreHistory";
 import PrairieStatusCardSlices from "./components/PrairieStatusCardSlices";
 

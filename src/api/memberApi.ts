@@ -14,7 +14,7 @@ import {
   TProgress,
   TTodoItem,
   UpdateProfileFormRequest,
-} from "../types";
+} from "src/types";
 
 export type CheckTriggerBody = {
   memberID: string;

@@ -1,11 +1,11 @@
 import Grid from "@material-ui/core/Grid";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
-import Button from "../../components/Button";
-import TextInput from "../../components/TextInput";
-import { Theme } from "../../theme/types/createPalette";
-import ErrorText from "../../components/ErrorText";
-import { useInputDetails } from "../../hooks/useInputDetails";
+import Button from "src/components/Button";
+import TextInput from "src/components/TextInput";
+import { Theme } from "src/theme/types/createPalette";
+import ErrorText from "src/components/ErrorText";
+import { useInputDetails } from "src/hooks/useInputDetails";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

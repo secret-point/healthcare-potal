@@ -1,4 +1,4 @@
-import { FieldType } from "../../types/general";
+import { FieldType } from "src/types/general";
 import {
   EMERGENCY_RELATIONSHIPS,
   ETHNICITIES,
@@ -15,13 +15,14 @@ import {
   TREATMENT_TYPES,
   FAMILY_MEMBERS,
   SOURCE_TYPES,
-} from "../../constants/identity";
-import { TInTakeFormDef } from "./types";
+} from "src/constants/identity";
 import {
   validateEmail,
   feetInchPattern,
   phoneNumberPattern,
-} from "../../utils/string";
+} from "src/utils/string";
+
+import { TInTakeFormDef } from "./types";
 
 export enum InTakeFormSteps {
   START = "START",

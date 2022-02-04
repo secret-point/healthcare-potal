@@ -1,4 +1,4 @@
-import { SeverityTypes, ICareMember, TPosition, TProgress } from "../types";
+import { SeverityTypes, ICareMember, TPosition, TProgress } from "src/types";
 
 export const formatUserType = (userType: ICareMember["userType"]) => {
   switch (userType) {

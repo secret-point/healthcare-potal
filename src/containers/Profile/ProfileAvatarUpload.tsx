@@ -3,7 +3,7 @@ import Link from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
-import { Theme } from "../../theme/types/createPalette";
+import { Theme } from "src/theme/types/createPalette";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

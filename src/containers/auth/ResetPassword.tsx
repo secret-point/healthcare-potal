@@ -5,17 +5,17 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
-import { useSendResetPasswordLink } from "../../api";
-import Button from "../../components/Button";
-import Container from "../../components/Container";
-import PlainModal from "../../components/PlainModalV2";
-import { useLayoutStyles } from "../../components/useCommonStyles";
-import { ResetPasswordLinkForm } from "../../types";
+import { useSendResetPasswordLink } from "src/api";
+import { ROUTES } from "src/app/types";
+import Button from "src/components/Button";
+import Container from "src/components/Container";
+import PlainModal from "src/components/PlainModalV2";
+import { useLayoutStyles } from "src/components/useCommonStyles";
+import { ResetPasswordLinkForm } from "src/types";
+import useNotification from "src/hooks/useNotification";
+import { ReactComponent as ResetPasswordCover } from "src/icons/ResetPasswordCover.svg";
 
 import ResetPasswordForm from "./ResetPasswordForm";
-import { ROUTES } from "../../app/types";
-import useNotification from "../../hooks/useNotification";
-import { ReactComponent as ResetPasswordCover } from "../../icons/ResetPasswordCover.svg";
 
 const useStyles = makeStyles(() =>
   createStyles({

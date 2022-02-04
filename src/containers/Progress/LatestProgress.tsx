@@ -2,10 +2,10 @@ import dayjs from "dayjs";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 
-import { useFetchProgressList } from "../../api/memberApi";
-import { ROUTES } from "../../app/types";
-import { ButtonLink } from "../../components/Link";
-import { useLayoutStyles } from "../../components/useCommonStyles";
+import { useFetchProgressList } from "src/api/memberApi";
+import { ROUTES } from "src/app/types";
+import { ButtonLink } from "src/components/Link";
+import { useLayoutStyles } from "src/components/useCommonStyles";
 
 import ProgressSummary from "./components/ProgressSummary";
 import CheckInNotice from "./components/CheckInNotice";

@@ -10,8 +10,9 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import Radio from "@material-ui/core/Radio";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
-import { TDropItem } from "../types";
-import { Theme } from "../theme/types/createPalette";
+import { TDropItem } from "src/types";
+import { Theme } from "src/theme/types/createPalette";
+
 import { useColorStyles, useLayoutStyles } from "./useCommonStyles";
 
 const useStyles = makeStyles((theme: Theme) =>

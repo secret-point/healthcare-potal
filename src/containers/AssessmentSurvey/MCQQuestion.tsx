@@ -2,10 +2,10 @@ import { FC } from "react";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
-import { TQuestion } from "../../types";
-import { Theme } from "../../theme/types/createPalette";
-import CheckboxField from "../../components/CheckboxField";
-import TextInput from "../../components/TextInput";
+import { TQuestion } from "src/types";
+import { Theme } from "src/theme/types/createPalette";
+import CheckboxField from "src/components/CheckboxField";
+import TextInput from "src/components/TextInput";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

@@ -6,11 +6,12 @@ import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 
-import useAuth from "../hooks/useAuth";
-import { ReactComponent as PrairieIcon } from "../icons/PrairieIcon.svg";
-import { Theme } from "../theme/types/createPalette";
-import { useViewport } from "../hooks/useViewport";
-import { ROUTES } from "../app/types";
+import useAuth from "src/hooks/useAuth";
+import { ReactComponent as PrairieIcon } from "src/icons/PrairieIcon.svg";
+import { Theme } from "src/theme/types/createPalette";
+import { useViewport } from "src/hooks/useViewport";
+
+import { ROUTES } from "src/app/types";
 import ProfileAvatar from "./ProfileAvatar";
 import MenuIconButton from "./MenuIconButton";
 import LeftSidebar from "./LeftSidebar";

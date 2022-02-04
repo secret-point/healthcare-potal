@@ -2,10 +2,10 @@ import dotProp from "dot-prop";
 import { useFormContext } from "react-hook-form";
 import Grid from "@material-ui/core/Grid";
 
-import Button from "../../components/Button";
-import TextInput from "../../components/TextInput";
-import PasswordUpdateResult from "../../components/PasswordUpdateResult";
-import { useLayoutStyles } from "../../components/useCommonStyles";
+import Button from "src/components/Button";
+import TextInput from "src/components/TextInput";
+import PasswordUpdateResult from "src/components/PasswordUpdateResult";
+import { useLayoutStyles } from "src/components/useCommonStyles";
 
 const PasswordForm = () => {
   const layoutClasses = useLayoutStyles();

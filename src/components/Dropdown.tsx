@@ -9,8 +9,8 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 
-import { Theme } from "../theme/types/createPalette";
-import { TDropItem } from "../types/general";
+import { Theme } from "src/theme/types/createPalette";
+import { TDropItem } from "src/types/general";
 import { useColorStyles, useLayoutStyles } from "./useCommonStyles";
 
 const useStyles = makeStyles((theme: Theme) =>

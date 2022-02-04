@@ -5,9 +5,10 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
+import { ROUTES } from "src/app/types";
+
 import { ButtonLink } from "./Link";
 import { useLayoutStyles } from "./useCommonStyles";
-import { ROUTES } from "../app/types";
 
 const useStyles = makeStyles((theme) =>
   createStyles({

@@ -1,4 +1,4 @@
-import { IExtProvider } from "../../types";
+import { IExtProvider } from "src/types";
 
 export const convertUserToCoordinationForm = (
   user: any

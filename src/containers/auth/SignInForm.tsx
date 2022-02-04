@@ -6,13 +6,13 @@ import { makeStyles, createStyles } from "@material-ui/core/styles";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 
-import Button from "../../components/Button";
-import ErrorText from "../../components/ErrorText";
-import TextInput from "../../components/TextInput";
-import { Theme } from "../../theme/types/createPalette";
-import { emailPattern } from "../../utils/string";
-import { useInputDetails } from "../../hooks/useInputDetails";
-import { useLayoutStyles } from "../../components/useCommonStyles";
+import Button from "src/components/Button";
+import ErrorText from "src/components/ErrorText";
+import TextInput from "src/components/TextInput";
+import { useLayoutStyles } from "src/components/useCommonStyles";
+import { Theme } from "src/theme/types/createPalette";
+import { emailPattern } from "src/utils/string";
+import { useInputDetails } from "src/hooks/useInputDetails";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

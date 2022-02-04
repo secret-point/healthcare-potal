@@ -4,7 +4,8 @@ import Button, { ButtonProps } from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { useBackgroundColorStyles, useLayoutStyles } from "./useCommonStyles";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
-import { useViewport } from "../hooks/useViewport";
+
+import { useViewport } from "src/hooks/useViewport";
 
 const SvgIcon = () => (
   <svg

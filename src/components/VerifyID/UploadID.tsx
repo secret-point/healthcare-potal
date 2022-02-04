@@ -3,8 +3,9 @@ import Grid from "@material-ui/core/Grid";
 import Link from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
-import { Theme } from "../../theme/types/createPalette";
-import { useLayoutStyles } from "../useCommonStyles";
+
+import { useLayoutStyles } from "src/components/useCommonStyles";
+import { Theme } from "src/theme/types/createPalette";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

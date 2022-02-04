@@ -3,7 +3,8 @@ import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
-import { TMenuItem } from "../types/general";
+import { TMenuItem } from "src/types/general";
+
 import MenuLink from "./MenuLink";
 import { useLayoutStyles } from "./useCommonStyles";
 

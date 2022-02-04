@@ -6,12 +6,9 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
-import {
-  useFontStyles,
-  useLayoutStyles,
-} from "../../../components/useCommonStyles";
-import { TProgress } from "../../../types";
-import { ScoreHistorySummary } from "../../../models/ScoreHistorySummary";
+import { useFontStyles, useLayoutStyles } from "src/components/useCommonStyles";
+import { TProgress } from "src/types";
+import { ScoreHistorySummary } from "src/models/ScoreHistorySummary";
 
 const useStyles = makeStyles((theme) =>
   createStyles({

@@ -6,9 +6,9 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import { get as _get } from "lodash";
 
-import { TCustomField } from "../types/general";
-import { Theme } from "../theme/types/createPalette";
-import { useViewport } from "../hooks/useViewport";
+import { useViewport } from "src/hooks/useViewport";
+import { Theme } from "src/theme/types/createPalette";
+import { TCustomField } from "src/types/general";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

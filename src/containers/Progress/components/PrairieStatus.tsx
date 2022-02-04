@@ -1,7 +1,8 @@
 import { FC, useMemo } from "react";
-import { SeverityTypes } from "../../../types";
-import { Theme } from "../../../theme/types/createPalette";
 import { useTheme } from "@material-ui/core";
+
+import { SeverityTypes } from "src/types";
+import { Theme } from "src/theme/types/createPalette";
 
 interface PrairieStatusProps {
   current: SeverityTypes;

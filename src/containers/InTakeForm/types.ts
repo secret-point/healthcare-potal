@@ -1,4 +1,4 @@
-import { TCustomField } from "../../types/general";
+import { TCustomField } from "src/types/general";
 
 export interface FormGroup {
   groupName: string;

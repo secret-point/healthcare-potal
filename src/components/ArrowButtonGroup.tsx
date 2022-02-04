@@ -5,8 +5,8 @@ import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
-import { useViewport } from "../hooks/useViewport";
-import { Theme } from "../theme/types/createPalette";
+import { useViewport } from "src/hooks/useViewport";
+import { Theme } from "src/theme/types/createPalette";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
