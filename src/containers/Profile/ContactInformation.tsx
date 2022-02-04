@@ -2,7 +2,7 @@ import { FC } from "react";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 
-import useAuth from "src/hooks/useAuth";
+import { useAuth } from "src/hooks/useAuth";
 import CustomList from "src/components/CustomList";
 import { TextButton } from "src/components/Button";
 

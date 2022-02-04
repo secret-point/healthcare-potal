@@ -9,7 +9,7 @@ import { makeStyles, createStyles } from "@material-ui/core/styles";
 
 import { useUploadFile, useVerifyID } from "src/api";
 import Button from "src/components/Button";
-import useAuth from "src/hooks/useAuth";
+import { useAuth } from "src/hooks/useAuth";
 import { Theme } from "src/theme/types/createPalette";
 
 import UploadID from "./UploadID";

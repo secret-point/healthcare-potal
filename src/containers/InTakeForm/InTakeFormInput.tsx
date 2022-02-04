@@ -7,7 +7,7 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
-import useAuth from "src/hooks/useAuth";
+import { useAuth } from "src/hooks/useAuth";
 import Button from "src/components/Button";
 import {
   useColorStyles,

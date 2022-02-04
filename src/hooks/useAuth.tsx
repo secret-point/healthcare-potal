@@ -82,6 +82,6 @@ export function AuthProvider(props: any) {
   return <AuthContext.Provider value={values} {...props} />;
 }
 
-export default function useAuth() {
+export function useAuth() {
   return useContext(AuthContext);
 }

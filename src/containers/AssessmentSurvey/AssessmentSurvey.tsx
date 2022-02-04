@@ -1,10 +1,14 @@
 import { FormEvent, useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { useForm, FormProvider } from "react-hook-form";
 import Grid from "@material-ui/core/Grid";
 
 import { ROUTES } from "src/app/types";
-import { useFetchProgressList, useUpdateCheckInForm } from "src/api";
+import {
+  useCheckAssessmentLink,
+  useFetchProgressList,
+  useUpdateCheckInForm,
+} from "src/api";
 import Container from "src/components/Container";
 
 import Welcome from "./Welcome";
@@ -15,14 +19,28 @@ import {
   CHECKIN_QUESTIONS,
   frequencyOptionCodeToValue,
 } from "./constants";
-// import { useQueryParams } from "src/api/useQueryParams";
+import { useNotification } from "src/hooks/useNotification";
 
 const AssessmentSurvey = () => {
   const history = useHistory();
-  const updateCheckInForm = useUpdateCheckInForm();
+  const { assessmentId } = useParams<{ assessmentId?: string }>();
+
+  const { handleError } = useNotification();
   const [surveyStep, setSurveyStep] = useState(AssessmentSurveySteps.WELCOME);
-  const { refetch } = useFetchProgressList();
-  // const { assessmentId } = useQueryParams();
+
+  const { refetch } = useFetchProgressList(false);
+  const { isError, error } = useCheckAssessmentLink({ assessmentId });
+  const updateCheckInForm = useUpdateCheckInForm();
+
+  useEffect(() => {
+    if (error) {
+      handleError(
+        error,
+        (error as any)?.response?.data?.message || "Invalid assessment id."
+      );
+      history.push(ROUTES.DASHBOARD);
+    }
+  }, [error, history, isError, handleError]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -77,7 +95,7 @@ const AssessmentSurvey = () => {
   };
 
   return (
-    <Container>
+    <Container showIcon>
       <FormProvider {...methods}>
         <form onSubmit={handleNext}>
           <Grid container justify="center">

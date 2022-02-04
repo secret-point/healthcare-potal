@@ -9,7 +9,7 @@ import ErrorText from "src/components/ErrorText";
 import Link from "src/components/Link";
 import PlainModal from "src/components/PlainModalV2";
 import { useLayoutStyles } from "src/components/useCommonStyles";
-import useAuth from "src/hooks/useAuth";
+import { useAuth } from "src/hooks/useAuth";
 import { ReactComponent as SignInCover } from "src/icons/SignInCover.svg";
 
 import SignInForm from "./SignInForm";

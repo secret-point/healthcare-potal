@@ -12,7 +12,7 @@ import Container from "src/components/Container";
 import PlainModal from "src/components/PlainModalV2";
 import { useLayoutStyles } from "src/components/useCommonStyles";
 import { ResetPasswordLinkForm } from "src/types";
-import useNotification from "src/hooks/useNotification";
+import { useNotification } from "src/hooks/useNotification";
 import { ReactComponent as ResetPasswordCover } from "src/icons/ResetPasswordCover.svg";
 
 import ResetPasswordForm from "./ResetPasswordForm";

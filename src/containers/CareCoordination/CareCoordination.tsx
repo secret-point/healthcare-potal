@@ -17,8 +17,8 @@ import {
   useLayoutStyles,
 } from "src/components/useCommonStyles";
 import MultiInstance from "src/components/MultiInstance";
-import useAuth from "src/hooks/useAuth";
-import useNotification from "src/hooks/useNotification";
+import { useAuth } from "src/hooks/useAuth";
+import { useNotification } from "src/hooks/useNotification";
 import { getFormErrorMessages } from "src/utils/helper";
 
 import { CARE_PROVIDER } from "./constants";

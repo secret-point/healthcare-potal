@@ -8,7 +8,7 @@ import { ROUTES } from "src/app/types";
 import { TodoItemType, TTodoItem } from "src/types";
 import Container from "src/components/Container";
 import VerifyIDDialog from "src/components/VerifyID/VerifyIDDialog";
-import useAuth from "src/hooks/useAuth";
+import { useAuth } from "src/hooks/useAuth";
 
 import CareTeam from "./CareProviders";
 import TodoList from "./TodoList";

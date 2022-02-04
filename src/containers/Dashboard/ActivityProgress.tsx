@@ -10,7 +10,7 @@ import { useLayoutStyles } from "src/components/useCommonStyles";
 
 const ActivityProgress = () => {
   const layoutClasses = useLayoutStyles();
-  const { data: progressList = [] } = useFetchProgressList();
+  const { data: progressList = [] } = useFetchProgressList(true);
   const lastProgress = progressList[progressList.length - 1];
   const diffInWeeks = dayjs().diff(lastProgress?.updatedAt, "weeks");
 

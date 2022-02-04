@@ -13,7 +13,7 @@ import LatestPrairieScore from "./components/LatestPrairieScore";
 
 const LatestProgress = () => {
   const layoutClasses = useLayoutStyles();
-  const { data: progressList = [] } = useFetchProgressList();
+  const { data: progressList = [] } = useFetchProgressList(true);
 
   if (progressList.length < 1) return null;
 

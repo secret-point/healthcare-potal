@@ -8,7 +8,7 @@ import { User } from "src/types";
 import { ROUTES } from "src/app/types";
 import { useUpdateInTakeForm } from "src/api";
 import Container from "src/components/Container";
-import useAuth from "src/hooks/useAuth";
+import { useAuth } from "src/hooks/useAuth";
 
 import { InTakeFormSteps } from "./constants";
 import CompleteInTakeForm from "./CompleteInTakeForm";

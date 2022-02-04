@@ -10,7 +10,7 @@ import { TextButton } from "src/components/Button";
 import { useLayoutStyles } from "src/components/useCommonStyles";
 import EmptyCareTeamMemberCard from "src/components/EmptyCareTeamMemberCard";
 import { useViewport } from "src/hooks/useViewport";
-import useAuth from "src/hooks/useAuth";
+import { useAuth } from "src/hooks/useAuth";
 
 const useStyles = makeStyles((theme) =>
   createStyles({

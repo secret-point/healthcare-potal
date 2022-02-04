@@ -4,7 +4,7 @@ import Grid from "@material-ui/core/Grid";
 
 import { useUpdateProfile, useUploadFile } from "src/api";
 import { UpdateProfileFormRequest } from "src/types";
-import useAuth from "src/hooks/useAuth";
+import { useAuth } from "src/hooks/useAuth";
 import Container from "src/components/Container";
 import UpdateDialog from "src/components/UpdateDialog";
 import VerifyIDDialog from "src/components/VerifyID/VerifyIDDialog";

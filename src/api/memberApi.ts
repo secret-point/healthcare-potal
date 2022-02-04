@@ -3,9 +3,10 @@ import { orderBy } from "lodash";
 import dayjs from "dayjs";
 
 import { QUERY_KEYS } from "./constants";
-import { useApiFetch } from "./useApiFetch";
+import { useApiFetch, serializeQueryParameters } from "./useApiFetch";
 import {
   ICareMember,
+  ICheckAssessmentLinkForm,
   TCheckInFormRequest,
   TCoordinationFormRequest,
   TInTakeFormRequest,
@@ -65,7 +66,7 @@ export const useCreateProgress = () => {
   );
 };
 
-export const useFetchProgressList = () => {
+export const useFetchProgressList = (enabled?: boolean) => {
   const apiFetch = useApiFetch();
 
   return useQuery(
@@ -81,6 +82,9 @@ export const useFetchProgressList = () => {
             "days"
           ) !== 0
       );
+    },
+    {
+      enabled,
     }
   );
 };
@@ -141,6 +145,23 @@ export const useVerifyID = () => {
       mutationKey: QUERY_KEYS.SUBMIT_FEEDBACK,
     }
   );
+};
+
+export const useCheckAssessmentLink = (form: ICheckAssessmentLinkForm) => {
+  const apiFetch = useApiFetch();
+
+  return useQuery([QUERY_KEYS.CHECK_ASSESSMENT_LINK, form], () => {
+    if (!form.assessmentId) {
+      return null;
+    }
+
+    return apiFetch(
+      `/mp/check-assessment-link${serializeQueryParameters(form)}`,
+      {
+        method: "GET",
+      }
+    );
+  });
 };
 
 export const useUploadFile = () => {
