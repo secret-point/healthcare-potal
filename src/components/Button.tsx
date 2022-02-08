@@ -6,7 +6,8 @@ import MuiButton, {
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 
-import { Theme } from "../theme/types/createPalette";
+import { Theme } from "src/theme/types/createPalette";
+
 import { useLayoutStyles } from "./useCommonStyles";
 
 const useStyles = makeStyles((theme: Theme) =>

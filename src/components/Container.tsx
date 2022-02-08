@@ -6,11 +6,12 @@ import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 
-import useAuth from "../hooks/useAuth";
-import { ReactComponent as PrairieIcon } from "../icons/PrairieIcon.svg";
-import { Theme } from "../theme/types/createPalette";
-import { useViewport } from "../hooks/useViewport";
-import { ROUTES } from "../app/types";
+import { useAuth } from "src/hooks/useAuth";
+import { ReactComponent as PrairieIcon } from "src/icons/PrairieIcon.svg";
+import { Theme } from "src/theme/types/createPalette";
+import { useViewport } from "src/hooks/useViewport";
+
+import { ROUTES } from "src/app/types";
 import ProfileAvatar from "./ProfileAvatar";
 import MenuIconButton from "./MenuIconButton";
 import LeftSidebar from "./LeftSidebar";
@@ -74,9 +75,14 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface ContainerProps {
   className?: string;
+  showIcon?: boolean;
 }
 
-const Container: React.FC<ContainerProps> = ({ children, className }) => {
+const Container: React.FC<ContainerProps> = ({
+  children,
+  showIcon,
+  className,
+}) => {
   const classes = useStyles();
   const history = useHistory();
   const { isMobile } = useViewport();
@@ -110,19 +116,21 @@ const Container: React.FC<ContainerProps> = ({ children, className }) => {
         onClose={handleCloseMenuButton}
       />
 
-      {user && (
+      {(user || showIcon) && (
         <Grid container justify="center" className={classes.topBarWrapper}>
-          <Box className={classes.menuTriggerWrapper}>
-            <MenuIconButton onClick={handleClickMenuButton} />
-            {!isMobile && (
-              <ProfileAvatar
-                firstName={user.firstName}
-                lastName={user.lastName}
-                picture={user.profilePicture}
-                isClickable
-              />
-            )}
-          </Box>
+          {user ? (
+            <Box className={classes.menuTriggerWrapper}>
+              <MenuIconButton onClick={handleClickMenuButton} />
+              {!isMobile && (
+                <ProfileAvatar
+                  firstName={user.firstName}
+                  lastName={user.lastName}
+                  picture={user.profilePicture}
+                  isClickable
+                />
+              )}
+            </Box>
+          ) : null}
           <IconButton
             disableTouchRipple
             className={clsx(classes.iconButton, layoutClasses.noPadding)}

@@ -8,9 +8,9 @@ import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
-import { ROUTES } from "../app/types";
-import { useViewport } from "../hooks/useViewport";
-import { Theme } from "../theme/types/createPalette";
+import { ROUTES } from "src/app/types";
+import { useViewport } from "src/hooks/useViewport";
+import { Theme } from "src/theme/types/createPalette";
 
 import Button from "./Button";
 import MenuLink from "./MenuLink";

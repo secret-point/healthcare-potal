@@ -110,3 +110,8 @@ export interface IExtProvider {
 }
 
 export type UpdateProfileFormRequest = AtLeastOne<User>;
+
+export interface ICheckAssessmentLinkForm {
+  assessmentId?: string;
+  dob?: string;
+}

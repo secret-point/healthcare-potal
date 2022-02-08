@@ -5,7 +5,7 @@ import {
   RegisterForm,
   ResetPasswordLinkForm,
   VerifyResetPasswordCodeForm,
-} from "../types/user";
+} from "src/types/user";
 
 export const useFetchCurrentUser = () => {
   const apiFetch = useApiFetch();

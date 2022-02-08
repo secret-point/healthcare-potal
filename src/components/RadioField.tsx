@@ -10,8 +10,9 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import Radio from "@material-ui/core/Radio";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
-import { TDropItem } from "../types";
-import { Theme } from "../theme/types/createPalette";
+import { TDropItem } from "src/types";
+import { Theme } from "src/theme/types/createPalette";
+
 import { useColorStyles, useLayoutStyles } from "./useCommonStyles";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -25,11 +26,12 @@ const useStyles = makeStyles((theme: Theme) =>
     formControlLabel: {
       width: "100%",
       margin: theme.spacing(0),
-      padding: theme.spacing(1),
+      padding: theme.spacing(3, 2),
       borderRadius: theme.spacing(1),
       border: `1px solid rgba(0, 0, 0, 0.23)`,
-      "& span": {
-        fontSize: 16,
+      "& > span": {
+        padding: theme.spacing(0, 2, 0, 0),
+        fontSize: 18,
         "&:last-child": {
           color: theme.palette.primaryNavy.main,
         },

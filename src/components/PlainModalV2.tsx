@@ -2,8 +2,8 @@ import { FC, SVGProps } from "react";
 import Box from "@material-ui/core/Box";
 import { makeStyles, createStyles } from "@material-ui/core";
 
-import { ReactComponent as PrairieIcon } from "../assets/PrairieIcon.svg";
-import { useViewport } from "../hooks/useViewport";
+import { ReactComponent as PrairieIcon } from "src/assets/PrairieIcon.svg";
+import { useViewport } from "src/hooks/useViewport";
 
 interface PlainModalV2Props {
   background?: string;

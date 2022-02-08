@@ -1,8 +1,8 @@
 import Box from "@material-ui/core/Box";
 import { makeStyles, createStyles } from "@material-ui/core";
 
-import { ReactComponent as PrairieIcon } from "../assets/PrairieIcon.svg";
-import { useViewport } from "../hooks/useViewport";
+import { ReactComponent as PrairieIcon } from "src/assets/PrairieIcon.svg";
+import { useViewport } from "src/hooks/useViewport";
 
 const useStyles = makeStyles((theme) =>
   createStyles({

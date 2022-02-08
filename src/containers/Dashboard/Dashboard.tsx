@@ -2,17 +2,17 @@ import { useState } from "react";
 import { useHistory } from "react-router";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
-import { Theme } from "../../theme/types/createPalette";
+import { Theme } from "src/theme/types/createPalette";
 
-import { ROUTES } from "../../app/types";
-import { TodoItemType, TTodoItem } from "../../types";
-import Container from "../../components/Container";
-import VerifyIDDialog from "../../components/VerifyID/VerifyIDDialog";
+import { ROUTES } from "src/app/types";
+import { TodoItemType, TTodoItem } from "src/types";
+import Container from "src/components/Container";
+import VerifyIDDialog from "src/components/VerifyID/VerifyIDDialog";
+import { useAuth } from "src/hooks/useAuth";
 
 import CareTeam from "./CareProviders";
 import TodoList from "./TodoList";
 import ActivityProgress from "./ActivityProgress";
-import useAuth from "../../hooks/useAuth";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

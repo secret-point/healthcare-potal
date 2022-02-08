@@ -9,13 +9,14 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import SendIcon from "@material-ui/icons/Send";
 
+import { useSubmitFeedback } from "src/api";
+
 import {
   useColorStyles,
   useLayoutStyles,
   useBackgroundColorStyles,
 } from "./useCommonStyles";
 import TextInput from "./TextInput";
-import { useSubmitFeedback } from "../api";
 
 const useStyles = makeStyles((theme) =>
   createStyles({

@@ -4,10 +4,10 @@ import { useHistory } from "react-router";
 import { useForm, FormProvider } from "react-hook-form";
 import LinearProgress from "@material-ui/core/LinearProgress";
 
-import { useRegister } from "../../api";
-import Container from "../../components/Container";
-import PlainModal from "../../components/PlainModalV1";
-import { ONBOARDING } from "../../types";
+import { useRegister } from "src/api";
+import Container from "src/components/Container";
+import PlainModal from "src/components/PlainModalV1";
+import { ONBOARDING } from "src/types";
 
 import NameInputForm from "./NameInputForm";
 import ContactForm from "./ContactForm";

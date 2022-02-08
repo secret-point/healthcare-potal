@@ -1,4 +1,4 @@
-import { SeverityTypes } from "../../types";
+import { SeverityTypes } from "src/types";
 
 export const MAX_PRAIRIE_SCORE = 48;
 

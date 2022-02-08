@@ -9,11 +9,12 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
-import { TFieldRow } from "../types/general";
+import { TFieldRow } from "src/types/general";
+
 import Button from "./Button";
 import FieldComponent from "./FieldComponent";
 import { useColorStyles } from "./useCommonStyles";
-import { getFormErrorMessages } from "../utils/helper";
+import { getFormErrorMessages } from "src/utils/helper";
 import PasswordUpdateResult from "./PasswordUpdateResult";
 
 const useStyles = makeStyles((theme) =>

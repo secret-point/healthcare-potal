@@ -2,17 +2,18 @@ import { useMemo, useState } from "react";
 import { useSnackbar } from "notistack";
 import Grid from "@material-ui/core/Grid";
 
-import useAuth from "../../hooks/useAuth";
-import Container from "../../components/Container";
-import UpdateDialog from "../../components/UpdateDialog";
-import VerifyIDDialog from "../../components/VerifyID/VerifyIDDialog";
+import { useUpdateProfile, useUploadFile } from "src/api";
+import { UpdateProfileFormRequest } from "src/types";
+import { useAuth } from "src/hooks/useAuth";
+import Container from "src/components/Container";
+import UpdateDialog from "src/components/UpdateDialog";
+import VerifyIDDialog from "src/components/VerifyID/VerifyIDDialog";
+
 import { EditableField } from "./types";
 import { UPDATE_PROFILE_DIALOGS } from "./constants";
 import AccountInformation from "./AccountInformation";
 import ContactInformation from "./ContactInformation";
 import UserProfilePhoto from "./UserProfilePhoto";
-import { useUpdateProfile, useUploadFile } from "../../api";
-import { UpdateProfileFormRequest } from "../../types";
 
 export default function Profile() {
   const { user, loadUser } = useAuth();

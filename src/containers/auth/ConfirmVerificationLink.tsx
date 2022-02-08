@@ -5,15 +5,16 @@ import { useSnackbar } from "notistack";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 
-import { useChangePasswordCode, useVerifyResetPasswordCode } from "../../api";
-import { ChangePasswordCodeForm } from "../../types";
-import { ROUTES } from "../../app/types";
-import { useQueryParams } from "../../api/useQueryParams";
-import Button from "../../components/Button";
-import Container from "../../components/Container";
-import PlainModal from "../../components/PlainModalV1";
+import { useChangePasswordCode, useVerifyResetPasswordCode } from "src/api";
+import { useQueryParams } from "src/api/useQueryParams";
+import { ChangePasswordCodeForm } from "src/types";
+import { ROUTES } from "src/app/types";
+import Button from "src/components/Button";
+import Container from "src/components/Container";
+import PlainModal from "src/components/PlainModalV1";
+import { useLayoutStyles } from "src/components/useCommonStyles";
+
 import PasswordForm from "../onboarding/PasswordForm";
-import { useLayoutStyles } from "../../components/useCommonStyles";
 
 const ConfirmVerificationLink = () => {
   const history = useHistory();

@@ -1,10 +1,7 @@
-import { FieldType } from "../../types/general";
-import {
-  CARE_PROVIDER_TYPES,
-  INFORMATION_TYPES,
-} from "../../constants/identity";
-import { usStates } from "../../constants/usStates";
-import { phoneNumberPattern, validateEmail } from "../../utils/string";
+import { FieldType } from "src/types/general";
+import { CARE_PROVIDER_TYPES, INFORMATION_TYPES } from "src/constants/identity";
+import { usStates } from "src/constants/usStates";
+import { phoneNumberPattern, validateEmail } from "src/utils/string";
 
 export const CARE_PROVIDER = {
   label: "Who would you like us to coordinate your care with?",

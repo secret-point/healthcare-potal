@@ -10,16 +10,16 @@ import { ResponsiveLine } from "@nivo/line";
 // @ts-ignore
 import { linearGradientDef } from "@nivo/core";
 
-import { ButtonLink } from "../Link";
-import { TProgress } from "../../types";
-import { formatFullDay } from "../../utils/date";
+import { ROUTES } from "src/app/types";
+import { TProgress } from "src/types";
+import { formatFullDay } from "src/utils/date";
 import {
   useCardStyles,
   useColorStyles,
   useFontStyles,
   useLayoutStyles,
-} from "../useCommonStyles";
-import { ROUTES } from "../../app/types";
+} from "src/components/useCommonStyles";
+import { ButtonLink } from "src/components/Link";
 
 const useStyles = makeStyles(() =>
   createStyles({

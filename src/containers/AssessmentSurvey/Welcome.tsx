@@ -3,12 +3,9 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
-import Button from "../../components/Button";
-import {
-  useFontStyles,
-  useLayoutStyles,
-} from "../../components/useCommonStyles";
-import { useViewport } from "../../hooks/useViewport";
+import Button from "src/components/Button";
+import { useFontStyles, useLayoutStyles } from "src/components/useCommonStyles";
+import { useViewport } from "src/hooks/useViewport";
 
 const useStyles = makeStyles(() =>
   createStyles({

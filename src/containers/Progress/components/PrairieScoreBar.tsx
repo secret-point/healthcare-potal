@@ -3,13 +3,14 @@ import { FC } from "react";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
-import { MAX_PRAIRIE_SCORE, prairieScoreDefs } from "../constants";
 import {
   useFontStyles,
   useBackgroundColorStyles,
-} from "../../../components/useCommonStyles";
-import { Theme } from "../../../theme/types/createPalette";
-import { useViewport } from "../../../hooks/useViewport";
+} from "src/components/useCommonStyles";
+import { Theme } from "src/theme/types/createPalette";
+import { useViewport } from "src/hooks/useViewport";
+
+import { MAX_PRAIRIE_SCORE, prairieScoreDefs } from "../constants";
 
 type StyleProps = {
   percent: number;

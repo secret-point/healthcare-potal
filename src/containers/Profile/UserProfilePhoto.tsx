@@ -3,9 +3,10 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
-import { User } from "../../types";
-import { Theme } from "../../theme/types/createPalette";
-import ProfileAvatar from "../../components/ProfileAvatar";
+import { User } from "src/types";
+import { Theme } from "src/theme/types/createPalette";
+import ProfileAvatar from "src/components/ProfileAvatar";
+
 import ProfileAvatarUpload from "./ProfileAvatarUpload";
 
 const useStyles = makeStyles((theme: Theme) =>

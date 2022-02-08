@@ -7,11 +7,11 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
-import { ButtonLink } from "../../../components/Link";
-import { useBackgroundColorStyles } from "../../../components/useCommonStyles";
-import { ROUTES } from "../../../app/types";
-import { TProgress } from "../../../types";
-import { Theme } from "../../../theme/types/createPalette";
+import { ButtonLink } from "src/components/Link";
+import { useBackgroundColorStyles } from "src/components/useCommonStyles";
+import { ROUTES } from "src/app/types";
+import { TProgress } from "src/types";
+import { Theme } from "src/theme/types/createPalette";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

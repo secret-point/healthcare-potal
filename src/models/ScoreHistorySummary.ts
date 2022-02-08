@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { ProgressTypes, TProgress, TProgressSummary } from "../types";
+import { ProgressTypes, TProgress, TProgressSummary } from "src/types";
 
 const SCORE_DELTA = 3;
 

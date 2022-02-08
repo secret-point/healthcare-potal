@@ -1,7 +1,7 @@
 import { useSnackbar } from "notistack";
 import { useCallback } from "react";
 
-const useNotification = () => {
+export const useNotification = () => {
   const { enqueueSnackbar } = useSnackbar();
 
   const handleError = useCallback(
@@ -25,5 +25,3 @@ const useNotification = () => {
 
   return { handleError, handleSuccess };
 };
-
-export default useNotification;

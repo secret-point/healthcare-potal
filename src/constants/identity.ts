@@ -1,4 +1,4 @@
-import { TDropItem } from "../types/general";
+import { TDropItem } from "src/types/general";
 
 export const EMERGENCY_RELATIONSHIPS: TDropItem[] = [
   { code: "Mother", display: "Mother" },
@@ -280,4 +280,20 @@ export const INFORMATION_TYPES: TDropItem[] = [
   { code: "Genetic test", display: "Genetic test" },
   { code: "Assessment record", display: "Assessment record" },
   { code: "Discharge summary", display: "Discharge summary" },
+];
+
+export const SOURCE_TYPES: TDropItem[] = [
+  { code: "Referral from provider", display: "Referral from provider" },
+  { code: "IG/FB Ad", display: "IG/FB Ad" },
+  { code: "Social media", display: "Social media" },
+  { code: "Search", display: "Search" },
+  { code: "Online Advertisement", display: "Online Advertisement" },
+  {
+    code: "Online Profile (Psychology Today, yelp)",
+    display: "Online Profile (Psychology Today, yelp)",
+  },
+  { code: "Word of mouth", display: "Word of mouth" },
+  { code: "Other Social Media", display: "Other Social Media" },
+  { code: "Referral", display: "Referral" },
+  { code: "Decline to Respond", display: "Decline to Respond" },
 ];

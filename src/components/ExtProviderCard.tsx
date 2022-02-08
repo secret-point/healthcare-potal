@@ -5,8 +5,9 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
-import { IExtProvider } from "../types";
-import { formatPhoneNumber } from "../utils/string";
+import { IExtProvider } from "src/types";
+import { formatPhoneNumber } from "src/utils/string";
+
 import {
   useColorStyles,
   useFontStyles,

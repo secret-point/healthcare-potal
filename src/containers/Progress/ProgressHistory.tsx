@@ -3,16 +3,17 @@ import { useHistory } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 
-import { ROUTES } from "../../app/types";
-import { useFetchProgressList } from "../../api/memberApi";
-import { useLayoutStyles } from "../../components/useCommonStyles";
+import { ROUTES } from "src/app/types";
+import { useFetchProgressList } from "src/api/memberApi";
+import { useLayoutStyles } from "src/components/useCommonStyles";
+
 import PrairieScoreHistory from "./components/PrairieScoreHistory";
 import PrairieStatusCardSlices from "./components/PrairieStatusCardSlices";
 
 const ProgressHistory = () => {
   const history = useHistory();
   const layoutClasses = useLayoutStyles();
-  const { data: progressList = [], isSuccess } = useFetchProgressList();
+  const { data: progressList = [], isSuccess } = useFetchProgressList(true);
   const [active, setActive] = useState(progressList.length - 1);
 
   useEffect(() => {

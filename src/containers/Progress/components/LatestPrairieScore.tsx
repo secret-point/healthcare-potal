@@ -11,8 +11,9 @@ import {
   useColorStyles,
   useFontStyles,
   useLayoutStyles,
-} from "../../../components/useCommonStyles";
-import { TProgress } from "../../../types";
+} from "src/components/useCommonStyles";
+import { TProgress } from "src/types";
+
 import { MAX_PRAIRIE_SCORE } from "../constants";
 import PrairieScoreBar from "./PrairieScoreBar";
 

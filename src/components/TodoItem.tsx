@@ -5,8 +5,9 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 
-import { TodoItemType, TTodoItem } from "../types";
-import { formatFullDay } from "../utils/date";
+import { TodoItemType, TTodoItem } from "src/types";
+import { formatFullDay } from "src/utils/date";
+
 import { TextButton } from "./Button";
 import {
   useCardStyles,

@@ -1,4 +1,4 @@
-import { UserIDVerificationStatus } from "../types";
+import { UserIDVerificationStatus } from "src/types";
 
 export const emailPattern = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 

@@ -1,31 +1,31 @@
 import clsx from "clsx";
 import { FC, useMemo } from "react";
+import { useHistory } from "react-router-dom";
 import { useForm, FormProvider, useFormContext } from "react-hook-form";
 
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
-import { Theme } from "../../theme/types/createPalette";
-import { useUpdateCoordinationForm } from "../../api";
-import Button from "../../components/Button";
-import Container from "../../components/Container";
+import { Theme } from "src/theme/types/createPalette";
+import { useUpdateCoordinationForm } from "src/api";
+import { ROUTES } from "src/app/types";
+import Button from "src/components/Button";
+import Container from "src/components/Container";
 import {
   useColorStyles,
   useLayoutStyles,
-} from "../../components/useCommonStyles";
-import MultiInstance from "../../components/MultiInstance";
-import useAuth from "../../hooks/useAuth";
-import { getFormErrorMessages } from "../../utils/helper";
+} from "src/components/useCommonStyles";
+import MultiInstance from "src/components/MultiInstance";
+import { useAuth } from "src/hooks/useAuth";
+import { useNotification } from "src/hooks/useNotification";
+import { getFormErrorMessages } from "src/utils/helper";
 
 import { CARE_PROVIDER } from "./constants";
 import {
   convertUserToCoordinationForm,
   convertCoordinationFormToUser,
 } from "./utils";
-import useNotification from "../../hooks/useNotification";
-import { useHistory } from "react-router-dom";
-import { ROUTES } from "../../app/types";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

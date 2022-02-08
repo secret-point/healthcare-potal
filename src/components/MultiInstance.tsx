@@ -11,8 +11,9 @@ import { makeStyles, createStyles } from "@material-ui/core/styles";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 
-import { Theme } from "../theme/types/createPalette";
-import { TCustomFieldProperty } from "../types";
+import { Theme } from "src/theme/types/createPalette";
+import { TCustomFieldProperty } from "src/types";
+
 import FieldComponent from "./FieldComponent";
 import { TextButton } from "./Button";
 import { useColorStyles, useLayoutStyles } from "./useCommonStyles";

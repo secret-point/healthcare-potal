@@ -6,8 +6,8 @@ import { makeStyles, createStyles } from "@material-ui/core/styles";
 import Badge from "@material-ui/core/Badge";
 import Typography from "@material-ui/core/Typography";
 
-import { useViewport } from "../hooks/useViewport";
-import { Theme } from "../theme/types/createPalette";
+import { useViewport } from "src/hooks/useViewport";
+import { Theme } from "src/theme/types/createPalette";
 import { useLayoutStyles } from "./useCommonStyles";
 import ArrowButtonGroup from "./ArrowButtonGroup";
 

@@ -5,13 +5,14 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
 
-import { ROUTES } from "../../app/types";
-import { ButtonLink } from "../Link";
+import { ROUTES } from "src/app/types";
+
+import { ButtonLink } from "src/components/Link";
 import {
   useCardStyles,
   useColorStyles,
   useLayoutStyles,
-} from "../useCommonStyles";
+} from "src/components/useCommonStyles";
 
 const SymptomsReport = () => {
   const cardClasses = useCardStyles();

@@ -1,11 +1,12 @@
 import { FC } from "react";
 
+import { FieldType, TCustomField } from "src/types/general";
+
 import Dropdown from "./Dropdown";
 import RadioField from "./RadioField";
 import SingleInstance from "./SingleInstance";
 import MultiInstance from "./MultiInstance";
 import TextInput from "./TextInput";
-import { FieldType, TCustomField } from "../types/general";
 
 interface FieldComponentProps {
   field: TCustomField;

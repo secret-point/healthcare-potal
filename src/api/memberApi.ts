@@ -3,10 +3,12 @@ import { orderBy } from "lodash";
 import dayjs from "dayjs";
 
 import { QUERY_KEYS } from "./constants";
-import { useApiFetch } from "./useApiFetch";
+import { useApiFetch, serializeQueryParameters } from "./useApiFetch";
 import {
   ICareMember,
-  TCheckInFormRequest,
+  ICheckAssessmentLinkForm,
+  TAsssessmentFormRequest,
+  TOneTimeAsssessmentFormRequest,
   TCoordinationFormRequest,
   TInTakeFormRequest,
   TFeedbackRequest,
@@ -14,7 +16,7 @@ import {
   TProgress,
   TTodoItem,
   UpdateProfileFormRequest,
-} from "../types";
+} from "src/types";
 
 export type CheckTriggerBody = {
   memberID: string;
@@ -65,7 +67,7 @@ export const useCreateProgress = () => {
   );
 };
 
-export const useFetchProgressList = () => {
+export const useFetchProgressList = (enabled?: boolean) => {
   const apiFetch = useApiFetch();
 
   return useQuery(
@@ -81,16 +83,29 @@ export const useFetchProgressList = () => {
             "days"
           ) !== 0
       );
+    },
+    {
+      enabled,
     }
   );
 };
 
-export const useUpdateCheckInForm = () => {
+export const useCreateNewAssessment = () => {
   const apiFetch = useApiFetch();
 
   return useMutation(
-    (data: TCheckInFormRequest) =>
+    (data: TAsssessmentFormRequest) =>
       apiFetch("/mp/assessment", { method: "POST", data }),
+    { mutationKey: QUERY_KEYS.UPDATE_ASSESSMENT_FORM }
+  );
+};
+
+export const useCreateOneTimeNewAssessment = () => {
+  const apiFetch = useApiFetch();
+
+  return useMutation(
+    (data: TOneTimeAsssessmentFormRequest) =>
+      apiFetch("/mp/one-time-assessment", { method: "POST", data }),
     { mutationKey: QUERY_KEYS.UPDATE_ASSESSMENT_FORM }
   );
 };
@@ -141,6 +156,23 @@ export const useVerifyID = () => {
       mutationKey: QUERY_KEYS.SUBMIT_FEEDBACK,
     }
   );
+};
+
+export const useCheckAssessmentLink = () => {
+  const apiFetch = useApiFetch();
+
+  return (form: ICheckAssessmentLinkForm) => {
+    if (!form.assessmentId) {
+      return null;
+    }
+
+    return apiFetch(
+      `/mp/check-assessment-link${serializeQueryParameters(form)}`,
+      {
+        method: "GET",
+      }
+    );
+  };
 };
 
 export const useUploadFile = () => {

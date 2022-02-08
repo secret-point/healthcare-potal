@@ -1,7 +1,7 @@
 import Grid from "@material-ui/core/Grid";
 
-import Container from "../../components/Container";
-import { useLayoutStyles } from "../../components/useCommonStyles";
+import Container from "src/components/Container";
+import { useLayoutStyles } from "src/components/useCommonStyles";
 
 import LatestProgress from "./LatestProgress";
 import ProgressHistory from "./ProgressHistory";

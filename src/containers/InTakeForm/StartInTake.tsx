@@ -3,11 +3,8 @@ import { FC } from "react";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 
-import Button from "../../components/Button";
-import {
-  useFontStyles,
-  useLayoutStyles,
-} from "../../components/useCommonStyles";
+import Button from "src/components/Button";
+import { useFontStyles, useLayoutStyles } from "src/components/useCommonStyles";
 
 interface StartInTakeProps {
   onCancel: VoidFunction;

@@ -2,9 +2,10 @@ import { FC } from "react";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 
+import { ReactComponent as GreenCheckIcon } from "src/icons/GreenCheckIcon.svg";
+import { ReactComponent as RedCrossIcon } from "src/icons/RedCrossIcon.svg";
+
 import { useLayoutStyles } from "./useCommonStyles";
-import { ReactComponent as GreenCheckIcon } from "../icons/GreenCheckIcon.svg";
-import { ReactComponent as RedCrossIcon } from "../icons/RedCrossIcon.svg";
 
 interface PasswordUpdateResultProps {
   shouldPasswordMatch: boolean;

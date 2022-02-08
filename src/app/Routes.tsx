@@ -1,16 +1,16 @@
 import { Redirect, Route, Switch, useLocation } from "react-router-dom";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 
-import SignIn from "../containers/auth/SignIn";
-import Profile from "../containers/Profile/Profile";
-import Progress from "../containers/Progress/Progress";
-import Dashboard from "../containers/Dashboard/Dashboard";
-import Onboarding from "../containers/onboarding/Onboarding";
-import ResetPassword from "../containers/auth/ResetPassword";
-import AssessmentSurvey from "../containers/AssessmentSurvey/AssessmentSurvey";
-import InTakeForm from "../containers/InTakeForm/InTakeForm";
-import CareCoordination from "../containers/CareCoordination/CareCoordination";
-import ConfirmVerificationLink from "../containers/auth/ConfirmVerificationLink";
+import SignIn from "src/containers/auth/SignIn";
+import Profile from "src/containers/Profile/Profile";
+import Progress from "src/containers/Progress/Progress";
+import Dashboard from "src/containers/Dashboard/Dashboard";
+import Onboarding from "src/containers/onboarding/Onboarding";
+import ResetPassword from "src/containers/auth/ResetPassword";
+import AssessmentSurvey from "src/containers/AssessmentSurvey/AssessmentSurvey";
+import InTakeForm from "src/containers/InTakeForm/InTakeForm";
+import CareCoordination from "src/containers/CareCoordination/CareCoordination";
+import ConfirmVerificationLink from "src/containers/auth/ConfirmVerificationLink";
 
 import { ROUTES } from "./types";
 
@@ -40,6 +40,9 @@ export function AuthorizedRoutes() {
             <Profile />
           </Route>
           <Route path={ROUTES.ASSESSMENT} exact>
+            <AssessmentSurvey />
+          </Route>
+          <Route path={`${ROUTES.ASSESSMENT}/:assessmentId`} exact>
             <AssessmentSurvey />
           </Route>
           <Route path={ROUTES.PROGRESS} exact>
@@ -77,6 +80,10 @@ export function UnauthorizedRoutes() {
 
       <Route path={ROUTES.VERIFICATION_LINK}>
         <ConfirmVerificationLink />
+      </Route>
+
+      <Route path={`${ROUTES.ASSESSMENT}/:assessmentId`} exact>
+        <AssessmentSurvey />
       </Route>
 
       <Redirect to={{ pathname: ROUTES.LOGIN, state: { from: location } }} />

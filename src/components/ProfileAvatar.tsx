@@ -4,9 +4,9 @@ import { useHistory } from "react-router";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
-import { Theme } from "../theme/types/createPalette";
-import { getCapitalizedFirstLetters } from "../utils/string";
-import { ROUTES } from "../app/types";
+import { ROUTES } from "src/app/types";
+import { Theme } from "src/theme/types/createPalette";
+import { getCapitalizedFirstLetters } from "src/utils/string";
 
 interface StyleProps {
   width?: number;

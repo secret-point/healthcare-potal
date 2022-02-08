@@ -7,14 +7,15 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import AssessmentOutlinedIcon from "@material-ui/icons/AssessmentOutlined";
 
-import { ROUTES } from "../../app/types";
-import { ButtonLink } from "../Link";
+import { ROUTES } from "src/app/types";
+import { TProgress } from "src/types";
+
+import { ButtonLink } from "src/components/Link";
 import {
   useCardStyles,
   useColorStyles,
   useLayoutStyles,
-} from "../useCommonStyles";
-import { TProgress } from "../../types";
+} from "src/components/useCommonStyles";
 
 interface SurveyProgressProps {
   lastProgress: TProgress;

@@ -6,13 +6,13 @@ import {
   createContext,
   useEffect,
 } from "react";
-import { User } from "../types";
+import { User } from "src/types";
 import {
   storeToken,
   removeToken,
   useSignIn,
   useFetchCurrentUser,
-} from "../api/authApi";
+} from "src/api/authApi";
 
 type AuthContextType = {
   user?: User;
@@ -82,6 +82,6 @@ export function AuthProvider(props: any) {
   return <AuthContext.Provider value={values} {...props} />;
 }
 
-export default function useAuth() {
+export function useAuth() {
   return useContext(AuthContext);
 }
