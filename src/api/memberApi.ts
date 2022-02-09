@@ -105,7 +105,7 @@ export const useCreateOneTimeNewAssessment = () => {
 
   return useMutation(
     (data: TOneTimeAsssessmentFormRequest) =>
-      apiFetch("/mp/one-time-assessment", { method: "POST", data }),
+      apiFetch("/mp/one-time-assessment/submit", { method: "POST", data }),
     { mutationKey: QUERY_KEYS.UPDATE_ASSESSMENT_FORM }
   );
 };
@@ -167,7 +167,7 @@ export const useCheckAssessmentLink = () => {
     }
 
     return apiFetch(
-      `/mp/check-assessment-link${serializeQueryParameters(form)}`,
+      `/mp/one-time-assessment/check${serializeQueryParameters(form)}`,
       {
         method: "GET",
       }
