@@ -85,9 +85,12 @@ const AssessmentSurvey = () => {
           form[question.code]
         );
       } else if (question.type === "MCQ") {
-        formResult.sideEffects = question.options
-          ?.filter((option) => form[option.code])
+        formResult.sideEffects = (question.options || [])
+          .filter((option) => form[option.code])
           .map((option) => option.display);
+        if (form.MCQ_OTHER_REASON) {
+          formResult.sideEffects.push(form.MCQ_OTHER_REASON);
+        }
       } else {
         formResult.comment = form.comment;
       }

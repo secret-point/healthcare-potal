@@ -77,9 +77,9 @@ export const useFetchProgressList = (enabled?: boolean) => {
       const orderedProgresses = orderBy(data, "updatedAt");
       return orderedProgresses.filter(
         (progress, index) =>
-          index === 0 ||
+          index === orderedProgresses.length - 1 ||
           dayjs(progress.updatedAt).diff(
-            orderedProgresses[index - 1].updatedAt,
+            orderedProgresses[index + 1].updatedAt,
             "days"
           ) !== 0
       );
