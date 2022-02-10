@@ -140,6 +140,28 @@ const InTakeForm = () => {
     }
   };
 
+  const handleBackForm = () => {
+    const newForm = { ...form, ...methods.getValues() };
+    setForm(newForm);
+
+    switch (currentStep) {
+      case InTakeFormSteps.SELF_INFORMATION:
+        setCurrentStep(InTakeFormSteps.START);
+        break;
+      case InTakeFormSteps.ADDITIONAL_INFORMATION:
+        setCurrentStep(InTakeFormSteps.SELF_INFORMATION);
+        break;
+      case InTakeFormSteps.FEELING_INFORMATION:
+        setCurrentStep(InTakeFormSteps.ADDITIONAL_INFORMATION);
+        break;
+      case InTakeFormSteps.MEDICAL_HISTORY:
+        setCurrentStep(InTakeFormSteps.FEELING_INFORMATION);
+        break;
+      default:
+        break;
+    }
+  };
+
   const handleNextForm = () => {
     const newForm = { ...form, ...methods.getValues() };
     setForm(newForm);
@@ -174,6 +196,7 @@ const InTakeForm = () => {
               {isInProgress && (
                 <InTakeFormInput
                   currentStep={currentStep}
+                  onBack={handleBackForm}
                   onNext={handleNextForm}
                   onLeave={handleLeaveForm}
                 />

@@ -35,12 +35,14 @@ const IN_TAKE_FORM_PROGRESS: Data<number> = {
 
 interface InTakeFormInputProps {
   currentStep: InTakeFormSteps;
+  onBack: VoidFunction;
   onNext: VoidFunction;
   onLeave: VoidFunction;
 }
 
 const InTakeFormInput: FC<InTakeFormInputProps> = ({
   currentStep,
+  onBack,
   onNext,
   onLeave,
 }) => {
@@ -107,13 +109,25 @@ const InTakeFormInput: FC<InTakeFormInputProps> = ({
       )}
 
       <Grid item xs={12} className={layoutClasses.mt6}>
-        <Button
-          text="Next"
-          type="submit"
-          color="primary"
-          variant="contained"
-          onClick={handleClickNext}
-        />
+        <Grid container spacing={2} justify="center">
+          <Grid item xs={3}>
+            <Button
+              text="Back"
+              color="default"
+              variant="contained"
+              onClick={onBack}
+            />
+          </Grid>
+          <Grid item xs={5}>
+            <Button
+              text="Next"
+              type="submit"
+              color="primary"
+              variant="contained"
+              onClick={handleClickNext}
+            />
+          </Grid>
+        </Grid>
       </Grid>
 
       <Grid item xs={12}>
