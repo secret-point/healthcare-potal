@@ -30,24 +30,42 @@ interface TodoListProps {
 const TodoList: React.FC<TodoListProps> = ({ user, onClickItem }) => {
   const { data: todoList = [] } = useGetMemberTodos();
 
-  const incompletedTodos = useMemo(
-    () =>
-      todoList.filter((todo) => {
-        if (todo.completed) return false;
-        // For now we will not show the verify id todoItem
-        if (todo.todoItemType === TodoItemType.VERIFY_ID) return false;
-        // If user status is not pending, and todoItem is not completed, we will filter it out
-        if (
-          user.status !== "Pending" &&
-          todo.todoItemType === TodoItemType.COMPLETE_INTAKE_FORM
-        ) {
-          return false;
-        }
+  const incompletedTodos = useMemo(() => {
+    const hasTrackProgressCard = todoList.some(
+      (todo) =>
+        !todo.completed &&
+        todo.todoItemType === TodoItemType.TRACK_YOUR_PROGRESS
+    );
 
-        return true;
-      }),
-    [user.status, todoList]
-  );
+    return todoList.filter((todo) => {
+      if (todo.completed) {
+        return false;
+      }
+
+      // For now we will not show the verify id todoItem
+      if (todo.todoItemType === TodoItemType.VERIFY_ID) {
+        return false;
+      }
+
+      // If user status is not pending, and todoItem is not completed, we will filter it out
+      if (
+        user.status !== "Pending" &&
+        todo.todoItemType === TodoItemType.COMPLETE_INTAKE_FORM
+      ) {
+        return false;
+      }
+
+      // If user has both track and check card, we will delete check card.
+      if (
+        hasTrackProgressCard &&
+        todo.todoItemType === TodoItemType.CHECK_YOUR_PROGRESS
+      ) {
+        return false;
+      }
+
+      return true;
+    });
+  }, [user.status, todoList]);
 
   return (
     <Carousel
