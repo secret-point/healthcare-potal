@@ -32,7 +32,7 @@ const InTakeForm = () => {
       user.status !== "Pending" &&
       currentStep === InTakeFormSteps.START
     ) {
-      history.push(ROUTES.DASHBOARD);
+      // history.push(ROUTES.DASHBOARD);
     }
   }, [currentStep, user, history]);
 
@@ -142,6 +142,7 @@ const InTakeForm = () => {
 
   const handleBackForm = () => {
     const newForm = { ...form, ...methods.getValues() };
+    methods.control.defaultValuesRef.current = newForm;
     setForm(newForm);
 
     switch (currentStep) {
