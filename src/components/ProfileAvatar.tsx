@@ -34,6 +34,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
 
     roundedImage: {
+      objectFit: "cover",
       borderRadius: (props: StyleProps) =>
         Math.max(props.width || 40, props.height || 40),
     },
