@@ -10,6 +10,19 @@ import { Theme } from "src/theme/types/createPalette";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    chip: {
+      border: `1px solid ${theme.palette.secondaryNavy2.main}`,
+      borderRadius: 12,
+      backgroundColor: "white !important",
+      fontSize: 12,
+      padding: theme.spacing(0, 1),
+      height: theme.spacing(3),
+    },
+    selectedChip: {
+      borderColor: theme.palette.secondary.main,
+      borderRadius: 12,
+      color: theme.palette.secondary.main,
+    },
     formControlLabel: {
       width: "100%",
       margin: theme.spacing(0),
@@ -37,6 +50,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface BookingSearchOptionProps {
+  className?: string;
   label: string;
   value: Nullable<string>;
   options: string[];
@@ -44,6 +58,7 @@ interface BookingSearchOptionProps {
 }
 
 const BookingSearchOption: FC<BookingSearchOptionProps> = ({
+  className,
   label,
   value,
   options,
@@ -65,10 +80,10 @@ const BookingSearchOption: FC<BookingSearchOptionProps> = ({
   const id = isMenuOpen ? label : undefined;
 
   return (
-    <>
+    <div className={className}>
       <Chip
         label={value || label}
-        color={value ? "primary" : "default"}
+        className={clsx(classes.chip, value && classes.selectedChip)}
         onClick={handleClick}
       />
 
@@ -96,7 +111,7 @@ const BookingSearchOption: FC<BookingSearchOptionProps> = ({
           />
         ))}
       </Popover>
-    </>
+    </div>
   );
 };
 

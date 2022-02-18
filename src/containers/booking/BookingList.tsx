@@ -3,6 +3,7 @@ import _ from "lodash";
 import Grid from "@material-ui/core/Grid";
 
 import { BookingSearchForm } from "src/types";
+import Container from "src/components/Container";
 import BookingSearchBar from "src/components/Booking/BookingSearchBar";
 import { useAllCareProviderList } from "src/api/providerApi";
 import { formatUserType } from "src/utils/helper";
@@ -38,7 +39,7 @@ const BookingList: FC<BookingListProps> = () => {
   );
 
   return (
-    <Grid container>
+    <Container showIcon>
       <Grid item xs={12}>
         <BookingSearchBar
           searchForm={searchForm}
@@ -46,10 +47,11 @@ const BookingList: FC<BookingListProps> = () => {
           languages={languages}
           types={types}
           states={states}
+          showCount={3}
           onChange={setSearchForm}
         />
       </Grid>
-    </Grid>
+    </Container>
   );
 };
 

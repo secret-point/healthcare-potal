@@ -1,9 +1,11 @@
 import { FC } from "react";
 import Box from "@material-ui/core/Box";
+import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
 import { Theme } from "src/theme/types/createPalette";
 import { BookingSearchForm } from "src/types";
+import { ReactComponent as SearchIcon } from "src/icons/Search.svg";
 
 import BookingSearchOption from "./BookingSearchOption";
 
@@ -13,6 +15,31 @@ const useStyles = makeStyles((theme: Theme) =>
       background: "white",
       border: `1px solid ${theme.palette.distinctiveGray.main}`,
       borderRadius: theme.spacing(1),
+      padding: theme.spacing(3),
+      display: "flex",
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+    },
+
+    optionList: {
+      display: "flex",
+      alignItems: "center",
+      flexDirection: "row",
+    },
+
+    iconWrapper: {
+      marginRight: theme.spacing(3),
+    },
+
+    searchOption: {
+      "&:not(:last-child)": {
+        marginRight: theme.spacing(1),
+      },
+    },
+
+    showCount: {
+      justifySelf: "flex-end",
     },
   })
 );
@@ -29,6 +56,7 @@ interface BookingSearchBarProps {
   languages: string[];
   types: string[];
   states: string[];
+  showCount: number;
   onChange: (form: BookingSearchForm) => void;
 }
 
@@ -38,6 +66,7 @@ const BookingSearchBar: FC<BookingSearchBarProps> = ({
   types,
   states,
   searchForm,
+  showCount,
   onChange,
 }) => {
   const classes = useStyles();
@@ -67,17 +96,28 @@ const BookingSearchBar: FC<BookingSearchBarProps> = ({
 
   return (
     <Box className={classes.container}>
-      {searchOptions.map((searchOption) => (
-        <BookingSearchOption
-          key={searchOption.key}
-          value={searchForm[searchOption.key]}
-          label={searchOption.label}
-          options={searchOption.options}
-          onChange={(value: Nullable<string>) => {
-            onChange({ ...searchForm, [searchOption.key]: value });
-          }}
-        />
-      ))}
+      <Box className={classes.optionList}>
+        <SearchIcon className={classes.iconWrapper} />
+
+        {searchOptions.map((searchOption) => (
+          <BookingSearchOption
+            key={searchOption.key}
+            className={classes.searchOption}
+            value={searchForm[searchOption.key]}
+            label={searchOption.label}
+            options={searchOption.options}
+            onChange={(value: Nullable<string>) => {
+              onChange({ ...searchForm, [searchOption.key]: value });
+            }}
+          />
+        ))}
+      </Box>
+
+      {Boolean(showCount) && (
+        <Typography className={classes.showCount}>
+          {`Showing ${showCount} providers`}
+        </Typography>
+      )}
     </Box>
   );
 };
