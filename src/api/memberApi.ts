@@ -41,7 +41,7 @@ export const useFetchCareProviders = () => {
   return useQuery(
     [QUERY_KEYS.FETCH_CARE_TEAM_LIST],
     async (): Promise<ICareMember[]> => {
-      const { data } = await apiFetch("/mp/care-providers");
+      const { data } = await apiFetch("/mp/providers");
       return data;
     }
   );
@@ -115,7 +115,7 @@ export const useUpdateInTakeForm = () => {
 
   return useMutation(
     (data: TInTakeFormRequest) =>
-      apiFetch("/mp/intake-form", { method: "PUT", data }),
+      apiFetch("/mp/intake", { method: "PUT", data }),
     {
       mutationKey: QUERY_KEYS.UPDATE_INTAKE_FORM,
     }
@@ -127,7 +127,7 @@ export const useUpdateCoordinationForm = () => {
 
   return useMutation(
     (data: TCoordinationFormRequest) =>
-      apiFetch("/mp/care-coordination", { method: "PUT", data }),
+      apiFetch("/mp/coordination", { method: "PUT", data }),
     {
       mutationKey: QUERY_KEYS.UPDATE_COORDINATION_FORM,
     }
@@ -151,7 +151,7 @@ export const useVerifyID = () => {
 
   return useMutation(
     (documentURL: string) =>
-      apiFetch("/mp/verify-id", { method: "PUT", data: { documentURL } }),
+      apiFetch("/mp/id/verify", { method: "PUT", data: { documentURL } }),
     {
       mutationKey: QUERY_KEYS.SUBMIT_FEEDBACK,
     }
