@@ -83,6 +83,11 @@ export interface ChangePasswordCodeForm {
   confirmPassword: string;
 }
 
+export interface IInsurance {
+  _id: string;
+  type: string;
+}
+
 export interface ICareMember
   extends Pick<User, "_id" | "firstName" | "lastName"> {
   profilePic: string;
@@ -92,6 +97,7 @@ export interface ICareMember
   since?: string;
   status: string;
   userType: "cc" | "psych" | "Care Partner";
+  insurance: IInsurance[];
 }
 
 export interface IExtProvider {

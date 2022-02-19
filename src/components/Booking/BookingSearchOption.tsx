@@ -1,0 +1,175 @@
+import clsx from "clsx";
+import { FC, MouseEventHandler, useState } from "react";
+import Box from "@material-ui/core/Box";
+import Chip from "@material-ui/core/Chip";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Divider from "@material-ui/core/Divider";
+import Popover from "@material-ui/core/Popover";
+import Radio from "@material-ui/core/Radio";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles, createStyles } from "@material-ui/core/styles";
+
+import { Theme } from "src/theme/types/createPalette";
+import Button from "src/components/Button";
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    chip: {
+      border: `1px solid ${theme.palette.secondaryNavy2.main}`,
+      borderRadius: 12,
+      backgroundColor: "white !important",
+      fontSize: 12,
+      padding: theme.spacing(0, 1),
+      height: theme.spacing(3),
+    },
+    selectedChip: {
+      borderColor: theme.palette.secondary.main,
+      borderRadius: 12,
+      color: theme.palette.secondary.main,
+    },
+    formControlLabel: {
+      width: "100%",
+      margin: theme.spacing(0.5),
+      "& > span": {
+        padding: theme.spacing(0),
+        fontSize: 12,
+        "&:last-child": {
+          marginLeft: theme.spacing(1),
+          color: theme.palette.primaryNavy.main,
+        },
+      },
+    },
+    selectedFormControlLabel: {
+      "& .MuiFormControlLabel-label": {
+        color: theme.palette.secondaryGreen1.main,
+      },
+      "& span:last-child": {
+        color: theme.palette.secondaryGreen1.main,
+      },
+    },
+    popoverPaper: {
+      padding: theme.spacing(2),
+      width: 200,
+    },
+    popoverLabel: {
+      marginBottom: theme.spacing(1),
+    },
+    divider: {
+      margin: theme.spacing(1, -3, 1.5, -3),
+    },
+    actionBox: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+    },
+    button: {
+      padding: theme.spacing(1),
+    },
+    buttonText: {
+      fontSize: 12,
+      textTransform: "none",
+    },
+  })
+);
+
+interface BookingSearchOptionProps {
+  className?: string;
+  label: string;
+  value: Nullable<string>;
+  options: string[];
+  onChange: (value: Nullable<string>) => void;
+}
+
+const BookingSearchOption: FC<BookingSearchOptionProps> = ({
+  className,
+  label,
+  value,
+  options,
+  onChange,
+}) => {
+  const classes = useStyles();
+  const [current, setCurrent] = useState(value);
+  const [anchorEl, setAnchorEl] = useState<HTMLDivElement | null>(null);
+
+  const handleClick: MouseEventHandler<HTMLDivElement> = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleChange = (value: Nullable<string>) => {
+    onChange(value);
+    handleClose();
+  };
+
+  const isMenuOpen = Boolean(anchorEl);
+  const id = isMenuOpen ? label : undefined;
+
+  return (
+    <div className={className}>
+      <Chip
+        label={value || label}
+        className={clsx(classes.chip, value && classes.selectedChip)}
+        onClick={handleClick}
+      />
+
+      <Popover
+        id={id}
+        open={isMenuOpen}
+        anchorEl={anchorEl}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "left",
+        }}
+        classes={{ paper: classes.popoverPaper }}
+      >
+        <Typography className={classes.popoverLabel}>{label}</Typography>
+
+        {options.map((option) => (
+          <FormControlLabel
+            value={option}
+            control={
+              <Radio
+                color="secondary"
+                checked={option === current}
+                onClick={() => setCurrent(option)}
+              />
+            }
+            label={option}
+            className={clsx(
+              classes.formControlLabel,
+              option === value && classes.selectedFormControlLabel
+            )}
+          />
+        ))}
+
+        <Divider className={classes.divider} />
+
+        <Box className={classes.actionBox}>
+          <Button
+            text="Clear"
+            noPadding
+            textClassName={classes.buttonText}
+            fullWidth={false}
+            variant="text"
+            onClick={() => handleChange(null)}
+          />
+          <Button
+            text="Save"
+            className={classes.button}
+            textClassName={classes.buttonText}
+            fullWidth={false}
+            variant="contained"
+            color="secondary"
+            onClick={() => handleChange(current)}
+          />
+        </Box>
+      </Popover>
+    </div>
+  );
+};
+
+export default BookingSearchOption;
