@@ -13,6 +13,9 @@ export const formatUserType = (userType: ICareMember["userType"]) => {
   }
 };
 
+export const formatUserNameAndTitle = (member: ICareMember) =>
+  [[member.firstName, member.lastName].join(" "), ...member.title].join(", ");
+
 export const getSeverityBasedOnScore = (score: TProgress): SeverityTypes => {
   if (score.totalGAD >= 15 || score.totalPHQ >= 20) {
     return SeverityTypes.SEVERE;

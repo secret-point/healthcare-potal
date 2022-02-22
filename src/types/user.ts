@@ -98,6 +98,9 @@ export interface ICareMember
   status: string;
   userType: "cc" | "psych" | "Care Partner";
   insurance: IInsurance[];
+  language: string[];
+  state: string;
+  title: string[];
 }
 
 export interface IExtProvider {
