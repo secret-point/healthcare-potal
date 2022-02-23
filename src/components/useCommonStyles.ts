@@ -294,7 +294,7 @@ export const useLayoutStyles = makeStyles(
         padding: 0,
       },
       noMargin: {
-        padding: 0,
+        margin: 0,
       },
       fullHeight: {
         height: "100%",

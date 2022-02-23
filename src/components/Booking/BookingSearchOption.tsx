@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     popoverPaper: {
-      padding: theme.spacing(2),
+      padding: theme.spacing(2, 1, 1, 2),
       width: 200,
     },
     popoverLabel: {
@@ -62,12 +62,22 @@ const useStyles = makeStyles((theme: Theme) =>
       alignItems: "center",
       justifyContent: "space-between",
     },
-    button: {
+    clearButton: {
+      padding: theme.spacing(0),
+      marginLeft: theme.spacing(-1),
+    },
+    saveButton: {
       padding: theme.spacing(1),
     },
     buttonText: {
       fontSize: 12,
       textTransform: "none",
+    },
+    clearButtonText: {
+      color: theme.palette.secondaryNavy1.main,
+    },
+    saveButtonText: {
+      color: "white",
     },
   })
 );
@@ -152,15 +162,16 @@ const BookingSearchOption: FC<BookingSearchOptionProps> = ({
           <Button
             text="Clear"
             noPadding
-            textClassName={classes.buttonText}
+            className={classes.clearButton}
+            textClassName={clsx(classes.buttonText, classes.clearButtonText)}
             fullWidth={false}
             variant="text"
             onClick={() => handleChange(null)}
           />
           <Button
             text="Save"
-            className={classes.button}
-            textClassName={classes.buttonText}
+            className={classes.saveButton}
+            textClassName={clsx(classes.buttonText, classes.saveButtonText)}
             fullWidth={false}
             variant="contained"
             color="secondary"

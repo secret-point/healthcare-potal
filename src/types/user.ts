@@ -105,6 +105,7 @@ export interface ICareMember
   boardCertification: number;
   experience: number;
   nextAvailableAt: Date;
+  bio: string;
 }
 
 export interface IExtProvider {

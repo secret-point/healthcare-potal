@@ -8,7 +8,7 @@ import { formatUserType } from "src/utils/helper";
 import Container from "src/components/Container";
 import { useLayoutStyles } from "src/components/useCommonStyles";
 import BookingSearchBar from "src/components/Booking/BookingSearchBar";
-import CareProviderCard from "src/components/Booking/CareProviderCard";
+import SmallCareProviderCard from "src/components/Booking/SmallCareProviderCard";
 
 interface BookingListProps {}
 
@@ -95,9 +95,13 @@ const BookingList: FC<BookingListProps> = () => {
         />
       </Grid>
 
-      <Grid container spacing={2}>
+      <Grid item xs={12}>
         {filteredCareProviders.map((provider) => (
-          <CareProviderCard key={provider._id} careProvider={provider} />
+          <SmallCareProviderCard
+            key={provider._id}
+            className={layoutClasses.mb1}
+            careProvider={provider}
+          />
         ))}
       </Grid>
     </Container>
