@@ -3,13 +3,15 @@ import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
+import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import { FC } from "react";
 import { Theme } from "src/theme/types/createPalette";
-import { ICareMember } from "src/types";
+import { ICareMemberWithMatchings } from "src/types";
 
 import ProfileAvatar from "src/components/ProfileAvatar";
-import { useLayoutStyles } from "../useCommonStyles";
 import { formatUserNameAndTitle } from "src/utils/helper";
+import { useFontStyles, useLayoutStyles } from "src/components/useCommonStyles";
+import CareProviderHighlights from "./CareProviderHighlights";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -22,21 +24,35 @@ const useStyles = makeStyles((theme: Theme) =>
     namingBox: {
       display: "flex",
       flexDirection: "column",
+      marginLeft: theme.spacing(2),
+      gap: theme.spacing(1),
+    },
+
+    header: {
+      display: "flex",
+      flexDirection: "row",
+    },
+
+    matching: {
+      color: theme.palette.secondary.main,
+      display: "flex",
+      alignItems: "center",
     },
   })
 );
 
 interface CareProviderCardProps {
-  careProvider: ICareMember;
+  careProvider: ICareMemberWithMatchings;
 }
 
 const CareProviderCard: FC<CareProviderCardProps> = ({ careProvider }) => {
   const classes = useStyles();
+  const fontClasses = useFontStyles();
   const layoutClasses = useLayoutStyles();
 
   return (
     <Grid container className={classes.container}>
-      <Grid item xs={12}>
+      <Grid item xs={12} className={classes.header}>
         <ProfileAvatar
           width={90}
           height={90}
@@ -49,6 +65,21 @@ const CareProviderCard: FC<CareProviderCardProps> = ({ careProvider }) => {
           <Typography variant="h3">
             {formatUserNameAndTitle(careProvider)}
           </Typography>
+
+          {careProvider.matchings.map((matching) => (
+            <Box key={matching} className={classes.matching}>
+              <CheckCircleIcon />
+              <Typography
+                color="secondary"
+                variant="body1"
+                className={clsx(fontClasses.fontBold, layoutClasses.ml1)}
+              >
+                {matching}
+              </Typography>
+            </Box>
+          ))}
+
+          <CareProviderHighlights careProvider={careProvider} />
         </Box>
       </Grid>
     </Grid>

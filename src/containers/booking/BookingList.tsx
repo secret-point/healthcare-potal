@@ -2,7 +2,7 @@ import { FC, useState, useMemo } from "react";
 import _ from "lodash";
 import Grid from "@material-ui/core/Grid";
 
-import { BookingSearchForm } from "src/types";
+import { BookingSearchForm, ICareMemberWithMatchings } from "src/types";
 import { useAllCareProviderList } from "src/api/providerApi";
 import { formatUserType } from "src/utils/helper";
 import Container from "src/components/Container";
@@ -42,39 +42,44 @@ const BookingList: FC<BookingListProps> = () => {
     [careProviders]
   );
 
-  const filteredCareProviders = useMemo(
-    () =>
-      careProviders
-        .map((careProvider) => {
-          let priority = 0;
-          // prettier-ignore
-          if (
-            searchForm.insurance &&
-            careProvider.insurance.some((insurance) => insurance.type === searchForm.insurance)
-          ) {
-            priority++;
-          }
-          // prettier-ignore
-          if (
-            searchForm.language &&
-            careProvider.language.some((language) => language === searchForm.language)
-          ) {
-            priority++;
-          }
-          // prettier-ignore
-          if (searchForm.type && formatUserType(careProvider.userType) === searchForm.type) {
-            priority++;
-          }
-          // prettier-ignore
-          if (searchForm.state && careProvider.state === searchForm.state) {
-            priority++;
-          }
-          return { ...careProvider, priority };
-        })
-        .sort((provider1, provider2) => provider2.priority - provider1.priority)
-        .slice(0, 3),
-    [careProviders, searchForm]
-  );
+  /* prettier-ignore */
+  const filteredCareProviders = useMemo(() => {
+    return careProviders
+      .map((careProvider) => {
+        const matchings = [];
+        if (
+          searchForm.insurance &&
+          careProvider.insurance.some((insurance) => insurance.type === searchForm.insurance)
+        ) {
+          matchings.push(`Accepts ${searchForm.insurance}`);
+        }
+
+        if (
+          searchForm.language &&
+          careProvider.language.some((language) => language === searchForm.language)
+        ) {
+          matchings.push(`Accepts ${searchForm.language}`);
+        }
+
+        if (
+          searchForm.type &&
+          formatUserType(careProvider.userType) === searchForm.type
+        ) {
+          matchings.push(`Accepts ${searchForm.type}`);
+        }
+
+        if (
+          searchForm.state &&
+          careProvider.state.some((state) => state === searchForm.state)
+        ) {
+          matchings.push(`Accepts patients in ${searchForm.state}`);
+        }
+
+        return { ...careProvider, matchings };
+      })
+      .sort((provider1, provider2) => provider2.matchings.length - provider1.matchings.length)
+      .slice(0, 3) as ICareMemberWithMatchings[];
+  }, [careProviders, searchForm]);
 
   return (
     <Container showIcon>

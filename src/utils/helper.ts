@@ -6,6 +6,8 @@ export const formatUserType = (userType: ICareMember["userType"]) => {
       return "Care Coordinator";
     case "psych":
       return "Psychiatrist";
+    case "therapist":
+      return "Therapist";
     case "Care Partner":
       return "Care Partner";
     default:
