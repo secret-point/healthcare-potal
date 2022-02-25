@@ -8,7 +8,7 @@ import { formatUserType } from "src/utils/helper";
 import Container from "src/components/Container";
 import { useLayoutStyles } from "src/components/useCommonStyles";
 import BookingSearchBar from "src/components/Booking/BookingSearchBar";
-import SmallCareProviderCard from "src/components/Booking/SmallCareProviderCard";
+import SmallCareProviderCard from "src/components/CareProvider/SmallCareProviderCard";
 
 interface BookingListProps {}
 

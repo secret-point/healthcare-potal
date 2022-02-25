@@ -1,22 +1,26 @@
 import clsx from "clsx";
+import { FC } from "react";
+import { useHistory } from "react-router";
 import Box from "@material-ui/core/Box";
+import Card from "@material-ui/core/Card";
 import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
-import { FC } from "react";
-import { Theme } from "src/theme/types/createPalette";
-import { ICareMemberWithMatchings } from "src/types";
 
+import { ROUTES } from "src/app/types";
 import Button from "src/components/Button";
 import ProfileAvatar from "src/components/ProfileAvatar";
 import { formatUserNameAndTitle } from "src/utils/helper";
+import { Theme } from "src/theme/types/createPalette";
+import { ICareMemberWithMatchings } from "src/types";
 import {
   useColorStyles,
   useFontStyles,
   useLayoutStyles,
 } from "src/components/useCommonStyles";
+
 import CareProviderHighlights from "./CareProviderHighlights";
 import CareProviderSpecialities from "./CareProviderSpecialities";
 
@@ -46,8 +50,6 @@ const useStyles = makeStyles((theme: Theme) =>
       alignItems: "center",
     },
 
-    divider: {},
-
     viewProfileBox: {
       display: "flex",
       alignItems: "center",
@@ -76,13 +78,18 @@ const SmallCareProviderCard: FC<SmallCareProviderCardProps> = ({
   careProvider,
   className,
 }) => {
+  const history = useHistory();
   const classes = useStyles();
   const fontClasses = useFontStyles();
   const colorClasses = useColorStyles();
   const layoutClasses = useLayoutStyles();
 
+  const handleClickViewProfile = () => {
+    history.push(`${ROUTES.BOOKING}/${careProvider._id}`);
+  };
+
   return (
-    <Grid item xs={12} className={clsx(classes.container, className)}>
+    <Card className={clsx(layoutClasses.padding4, className)}>
       <Grid container spacing={2}>
         <Grid item xs={12} className={classes.header}>
           <ProfileAvatar
@@ -138,7 +145,7 @@ const SmallCareProviderCard: FC<SmallCareProviderCardProps> = ({
         ) : null}
 
         <Grid item xs={12}>
-          <Divider className={classes.divider} />
+          <Divider />
         </Grid>
 
         <Grid item xs={12} className={classes.viewProfileBox}>
@@ -146,6 +153,7 @@ const SmallCareProviderCard: FC<SmallCareProviderCardProps> = ({
             text="View Profile"
             className={classes.viewProfileButton}
             fullWidth={false}
+            onClick={handleClickViewProfile}
           />
 
           <Typography className={colorClasses.secondaryNavy1}>
@@ -153,7 +161,7 @@ const SmallCareProviderCard: FC<SmallCareProviderCardProps> = ({
           </Typography>
         </Grid>
       </Grid>
-    </Grid>
+    </Card>
   );
 };
 

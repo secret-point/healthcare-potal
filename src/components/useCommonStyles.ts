@@ -290,6 +290,9 @@ export const useLayoutStyles = makeStyles(
       padding3: {
         padding: theme.spacing(3),
       },
+      padding4: {
+        padding: theme.spacing(4),
+      },
       noPadding: {
         padding: 0,
       },

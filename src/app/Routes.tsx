@@ -11,7 +11,8 @@ import AssessmentSurvey from "src/containers/AssessmentSurvey/AssessmentSurvey";
 import InTakeForm from "src/containers/InTakeForm/InTakeForm";
 import CareCoordination from "src/containers/CareCoordination/CareCoordination";
 import ConfirmVerificationLink from "src/containers/auth/ConfirmVerificationLink";
-import BookingList from "src/containers/booking/BookingList";
+import BookingListPage from "src/containers/booking/BookingListPage";
+import FullCareProviderPage from "src/containers/booking/FullCareProviderPage";
 
 import { ROUTES } from "./types";
 
@@ -84,7 +85,11 @@ export function UnauthorizedRoutes() {
       </Route>
 
       <Route path={ROUTES.BOOKING_LIST}>
-        <BookingList />
+        <BookingListPage />
+      </Route>
+
+      <Route path={`${ROUTES.BOOKING}/:providerId`} exact>
+        <FullCareProviderPage />
       </Route>
 
       <Route path={`${ROUTES.ASSESSMENT}/:assessmentId`} exact>
