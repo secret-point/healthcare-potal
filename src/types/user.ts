@@ -96,8 +96,16 @@ export interface ICareMember
   bookingPageLink?: string;
   since?: string;
   status: string;
-  userType: "cc" | "psych" | "Care Partner";
+  userType: "cc" | "psych" | "therapist" | "Care Partner";
   insurance: IInsurance[];
+  language: string[];
+  specialty: string[];
+  state: string[];
+  title: string[];
+  boardCertification: number;
+  experience: number;
+  nextAvailableAt: Date;
+  bio: string;
 }
 
 export interface IExtProvider {
@@ -120,4 +128,8 @@ export type UpdateProfileFormRequest = AtLeastOne<User>;
 export interface ICheckAssessmentLinkForm {
   assessmentId?: string;
   dob?: string;
+}
+
+export interface ICareMemberWithMatchings extends ICareMember {
+  matchings: string[];
 }

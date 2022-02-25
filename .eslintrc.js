@@ -101,5 +101,6 @@ module.exports = {
     "no-plusplus": "off",
     "no-underscore-dangle": "off",
     "no-confusing-arrow": "off",
+    "arrow-body-style": "off",
   },
 };
