@@ -2,7 +2,9 @@ import cloneDeep from "lodash/cloneDeep";
 import { FC, useMemo } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import Card from "@material-ui/core/Card";
+import Grid from "@material-ui/core/Grid";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
+import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 
 import { Theme } from "src/theme/types/createPalette";
 import InTakeFormGroupInput from "src/components/InTake/InTakeFormGroupInput";
@@ -44,12 +46,41 @@ const ProfileSetUpCard: FC<ProfileSetUpCardProps> = ({ payerOptions }) => {
     return profileFieldGroups;
   }, [payerOptions]);
 
+  const stripe = useStripe();
+  const elements = useElements();
+
+  const handleSubmit = async () => {
+    if (!elements || !stripe) {
+      return;
+    }
+
+    const card = elements.getElement(CardElement);
+    if (!card) {
+      return;
+    }
+
+    const { error, paymentMethod } = await stripe.createPaymentMethod({
+      card,
+      type: "card",
+    });
+
+    console.log(error, paymentMethod);
+  };
+
   return (
     <Card className={classes.card}>
       <FormProvider {...methods}>
-        {updatedProfileFieldGroups.map((group) => (
-          <InTakeFormGroupInput key={group.groupName} group={group} />
-        ))}
+        <form onSubmit={handleSubmit}>
+          <Grid container spacing={2}>
+            {updatedProfileFieldGroups.map((group) => (
+              <Grid key={group.groupName} item xs={12}>
+                <InTakeFormGroupInput group={group} />
+              </Grid>
+            ))}
+          </Grid>
+
+          <CardElement />
+        </form>
       </FormProvider>
     </Card>
   );

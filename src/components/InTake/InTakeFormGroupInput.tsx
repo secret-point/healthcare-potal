@@ -22,7 +22,7 @@ const InTakeFormGroupInput: FC<InTakeFormGroupInputProps> = ({ group }) => {
         item
         xs={12}
         className={clsx(
-          group.helperText ? layoutClasses.mb1 : layoutClasses.mb4
+          group.helperText ? layoutClasses.mb1 : layoutClasses.mb2
         )}
       >
         <Typography variant="h3" className={fontClasses.font500}>
@@ -31,7 +31,7 @@ const InTakeFormGroupInput: FC<InTakeFormGroupInputProps> = ({ group }) => {
       </Grid>
 
       {group.helperText && (
-        <Grid item xs={12} className={layoutClasses.mb4}>
+        <Grid item xs={12} className={layoutClasses.mb2}>
           <Typography variant="subtitle2">{group.helperText}</Typography>
         </Grid>
       )}
