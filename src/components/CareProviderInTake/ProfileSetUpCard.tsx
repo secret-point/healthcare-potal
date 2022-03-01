@@ -1,10 +1,13 @@
-import { FC } from "react";
+import cloneDeep from "lodash/cloneDeep";
+import { FC, useMemo } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import Card from "@material-ui/core/Card";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
 import { Theme } from "src/theme/types/createPalette";
 import InTakeFormGroupInput from "src/components/InTake/InTakeFormGroupInput";
+import { TDropItem } from "src/types";
+
 import { PROFILE_FIELD_GROUPS } from "./constants";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -23,9 +26,11 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface ProfileSetUpCardProps {}
+interface ProfileSetUpCardProps {
+  payerOptions: TDropItem[];
+}
 
-const ProfileSetUpCard: FC<ProfileSetUpCardProps> = () => {
+const ProfileSetUpCard: FC<ProfileSetUpCardProps> = ({ payerOptions }) => {
   const classes = useStyles();
 
   const methods = useForm({
@@ -33,10 +38,16 @@ const ProfileSetUpCard: FC<ProfileSetUpCardProps> = () => {
     defaultValues: {},
   });
 
+  const updatedProfileFieldGroups = useMemo(() => {
+    const profileFieldGroups = cloneDeep(PROFILE_FIELD_GROUPS);
+    profileFieldGroups[2].fields[0].options = payerOptions;
+    return profileFieldGroups;
+  }, [payerOptions]);
+
   return (
     <Card className={classes.card}>
       <FormProvider {...methods}>
-        {PROFILE_FIELD_GROUPS.map((group) => (
+        {updatedProfileFieldGroups.map((group) => (
           <InTakeFormGroupInput key={group.groupName} group={group} />
         ))}
       </FormProvider>

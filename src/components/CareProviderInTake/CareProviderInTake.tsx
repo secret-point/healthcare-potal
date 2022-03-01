@@ -1,10 +1,11 @@
-import { FC } from "react";
+import { FC, useMemo } from "react";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
+import { useAllPayerList } from "src/api/payerApi";
 import { useLayoutStyles } from "src/components/useCommonStyles";
 import Button from "src/components/Button";
-import { ICareMember } from "src/types";
+import { ICareMember, TDropItem } from "src/types";
 import { Theme } from "src/theme/types/createPalette";
 
 import BookAppointmentCard from "./BookAppointmentCard";
@@ -33,6 +34,14 @@ const CareProviderInTake: FC<CareProviderInTakeProps> = ({ careProvider }) => {
   const classes = useStyles();
   const layoutClasses = useLayoutStyles();
 
+  const { data: payers = [] } = useAllPayerList();
+  const payerOptions: TDropItem[] = useMemo(() => {
+    return payers.map((payer) => ({
+      code: payer._id,
+      display: payer.type,
+    }));
+  }, [payers]);
+
   return (
     <Grid container>
       <Grid item xs={12} className={layoutClasses.mt6}>
@@ -40,7 +49,7 @@ const CareProviderInTake: FC<CareProviderInTakeProps> = ({ careProvider }) => {
       </Grid>
 
       <Grid item xs={12} className={layoutClasses.mt4}>
-        <ProfileSetUpCard />
+        <ProfileSetUpCard payerOptions={payerOptions} />
       </Grid>
 
       <Grid item xs={12}>

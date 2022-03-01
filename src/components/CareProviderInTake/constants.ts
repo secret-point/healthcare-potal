@@ -1,3 +1,4 @@
+import { FormGroup } from "src/types/form";
 import { FieldType } from "src/types/general";
 import { phoneNumberPattern } from "src/utils/string";
 import { birthdayValidator } from "src/utils/validator";
@@ -9,7 +10,7 @@ const commons = {
   xs: 12,
 };
 
-export const PROFILE_FIELD_GROUPS = [
+export const PROFILE_FIELD_GROUPS: FormGroup[] = [
   {
     groupName: "Profile",
     fields: [
@@ -60,36 +61,7 @@ export const PROFILE_FIELD_GROUPS = [
       },
       {
         label: "Phone",
-        path: "email",
-        placeholder: "Phone",
-        type: FieldType.TEXT,
-        required: true,
-        validator: {
-          required: "Phone number is required.",
-          pattern: {
-            value: phoneNumberPattern,
-            message:
-              "Please enter a 10 digit number without any special characters.",
-          },
-        },
-        ...commons,
-      },
-    ],
-  },
-  {
-    groupName: "Contact",
-    fields: [
-      {
-        label: "Email",
-        path: "email",
-        placeholder: "Email",
-        type: FieldType.TEXT,
-        required: true,
-        ...commons,
-      },
-      {
-        label: "Phone",
-        path: "email",
+        path: "phone",
         placeholder: "Phone",
         type: FieldType.TEXT,
         required: true,
