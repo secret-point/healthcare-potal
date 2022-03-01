@@ -94,7 +94,7 @@ const FieldComponent: FC<FieldComponentProps> = ({ field, variant }) => {
               : "text"
           }
           InputLabelProps={{
-            shrink: field.shrink || false || field.type === FieldType.DATE,
+            shrink: field.shrink || field.type === FieldType.DATE,
           }}
           validator={field.validator || { required: field.required }}
         />

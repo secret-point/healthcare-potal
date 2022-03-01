@@ -9,7 +9,7 @@ import { Theme } from "src/theme/types/createPalette";
 import { TCustomField, User } from "src/types";
 import CustomList from "src/components/CustomList";
 import { TextButton } from "src/components/Button";
-import { EditableField } from "./types";
+import { AccountEditableField } from "src/types/form";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface AccountInformationProps {
   user: User;
-  onClickEdit: (fieldName: EditableField) => void;
+  onClickEdit: (fieldName: AccountEditableField) => void;
   onShowVerifyIDDialog: () => void;
 }
 
@@ -55,7 +55,7 @@ const AccountInformation: FC<AccountInformationProps> = ({
             {value}
           </Typography>
           <TextButton
-            onClick={() => onClickEdit(EditableField.PREFERRED_NAME)}
+            onClick={() => onClickEdit(AccountEditableField.PREFERRED_NAME)}
           />
         </Box>
       ),
@@ -74,7 +74,7 @@ const AccountInformation: FC<AccountInformationProps> = ({
       render: () => (
         <TextButton
           text="Reset Password"
-          onClick={() => onClickEdit(EditableField.RESET_PASSWORD)}
+          onClick={() => onClickEdit(AccountEditableField.RESET_PASSWORD)}
         />
       ),
     },

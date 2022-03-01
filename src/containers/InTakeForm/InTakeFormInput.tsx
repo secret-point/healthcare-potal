@@ -9,6 +9,7 @@ import { makeStyles, createStyles } from "@material-ui/core/styles";
 
 import { useAuth } from "src/hooks/useAuth";
 import Button from "src/components/Button";
+import InTakeFormGroupInput from "src/components/InTake/InTakeFormGroupInput";
 import {
   useColorStyles,
   useFontStyles,
@@ -16,7 +17,6 @@ import {
 } from "src/components/useCommonStyles";
 
 import { InTakeFormSteps, IN_TAKE_FORM_STEPS } from "./constants";
-import InTakeFormGroupInput from "./InTakeFormGroupInput";
 
 const useStyles = makeStyles(() =>
   createStyles({

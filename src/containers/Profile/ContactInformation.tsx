@@ -5,11 +5,10 @@ import Typography from "@material-ui/core/Typography";
 import { useAuth } from "src/hooks/useAuth";
 import CustomList from "src/components/CustomList";
 import { TextButton } from "src/components/Button";
-
-import { EditableField } from "./types";
+import { AccountEditableField } from "src/types/form";
 
 interface ContactInformationProps {
-  onClickEdit: (fieldName: EditableField) => void;
+  onClickEdit: (fieldName: AccountEditableField) => void;
 }
 
 const ContactInformation: FC<ContactInformationProps> = ({ onClickEdit }) => {
@@ -22,7 +21,7 @@ const ContactInformation: FC<ContactInformationProps> = ({ onClickEdit }) => {
       render: () => (
         <span>
           {user?.email}
-          <TextButton onClick={() => onClickEdit(EditableField.EMAIL)} />
+          <TextButton onClick={() => onClickEdit(AccountEditableField.EMAIL)} />
         </span>
       ),
     },
@@ -32,7 +31,9 @@ const ContactInformation: FC<ContactInformationProps> = ({ onClickEdit }) => {
       render: () => (
         <span>
           {user?.phone}
-          <TextButton onClick={() => onClickEdit(EditableField.PHONE_NUMBER)} />
+          <TextButton
+            onClick={() => onClickEdit(AccountEditableField.PHONE_NUMBER)}
+          />
         </span>
       ),
     },
@@ -43,7 +44,7 @@ const ContactInformation: FC<ContactInformationProps> = ({ onClickEdit }) => {
         <span>
           {user?.emergencyContact?.name}
           <TextButton
-            onClick={() => onClickEdit(EditableField.EMERGENCY_CONTACT)}
+            onClick={() => onClickEdit(AccountEditableField.EMERGENCY_CONTACT)}
           />
         </span>
       ),
@@ -54,7 +55,9 @@ const ContactInformation: FC<ContactInformationProps> = ({ onClickEdit }) => {
       render: () => (
         <span>
           {user?.billingAddress?.address1}
-          <TextButton onClick={() => onClickEdit(EditableField.ADDRESS)} />
+          <TextButton
+            onClick={() => onClickEdit(AccountEditableField.ADDRESS)}
+          />
         </span>
       ),
     },

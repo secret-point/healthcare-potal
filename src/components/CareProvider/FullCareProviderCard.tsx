@@ -9,17 +9,22 @@ import ProviderDetailsCard from "./ProviderDetailsCard";
 
 interface FullCareProviderCardProps {
   careProvider: ICareMember;
+  onClickBookAppointment: VoidFunction;
 }
 
 const FullCareProviderCard: FC<FullCareProviderCardProps> = ({
   careProvider,
+  onClickBookAppointment,
 }) => {
   const layoutClasses = useLayoutStyles();
 
   return (
     <Grid container>
       <Grid item xs={12} className={layoutClasses.mt6}>
-        <ProviderHeaderCard careProvider={careProvider} />
+        <ProviderHeaderCard
+          careProvider={careProvider}
+          onClickBookAppointment={onClickBookAppointment}
+        />
       </Grid>
       <Grid item xs={12} className={layoutClasses.mt3}>
         <ProviderDetailsCard careProvider={careProvider} />

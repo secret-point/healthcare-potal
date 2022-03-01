@@ -2,11 +2,10 @@ import { emailPattern, phoneNumberPattern } from "src/utils/string";
 import { usStates } from "src/constants/usStates";
 import { FieldType } from "src/types/general";
 import { EMERGENCY_RELATIONSHIPS } from "src/constants/identity";
-
-import { EditableField } from "./types";
+import { AccountEditableField } from "src/types/form";
 
 export const UPDATE_PROFILE_DIALOGS = {
-  [EditableField.PREFERRED_NAME]: {
+  [AccountEditableField.PREFERRED_NAME]: {
     title: "Preferred Name",
     rows: [
       {
@@ -23,7 +22,7 @@ export const UPDATE_PROFILE_DIALOGS = {
       },
     ],
   },
-  [EditableField.EMAIL]: {
+  [AccountEditableField.EMAIL]: {
     title: "Email",
     rows: [
       {
@@ -48,7 +47,7 @@ export const UPDATE_PROFILE_DIALOGS = {
       },
     ],
   },
-  [EditableField.PHONE_NUMBER]: {
+  [AccountEditableField.PHONE_NUMBER]: {
     title: "Phone Number",
     rows: [
       {
@@ -73,7 +72,7 @@ export const UPDATE_PROFILE_DIALOGS = {
       },
     ],
   },
-  [EditableField.EMERGENCY_CONTACT]: {
+  [AccountEditableField.EMERGENCY_CONTACT]: {
     title: "Emergency Contact",
     rows: [
       {
@@ -127,7 +126,7 @@ export const UPDATE_PROFILE_DIALOGS = {
       },
     ],
   },
-  [EditableField.ADDRESS]: {
+  [AccountEditableField.ADDRESS]: {
     title: "Address",
     rows: [
       {
@@ -187,7 +186,7 @@ export const UPDATE_PROFILE_DIALOGS = {
       },
     ],
   },
-  [EditableField.RESET_PASSWORD]: {
+  [AccountEditableField.RESET_PASSWORD]: {
     title: "Reset your password",
     rows: [
       {
