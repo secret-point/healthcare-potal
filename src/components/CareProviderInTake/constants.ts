@@ -1,3 +1,4 @@
+import { usStates } from "src/constants/usStates";
 import { FormGroup } from "src/types/form";
 import { FieldType } from "src/types/general";
 import { phoneNumberPattern } from "src/utils/string";
@@ -18,7 +19,6 @@ export const PROFILE_FIELD_GROUPS: FormGroup[] = [
         label: "First Name",
         path: "firstName",
         placeholder: "First Name",
-        type: FieldType.TEXT,
         required: true,
         ...commons,
       },
@@ -26,7 +26,6 @@ export const PROFILE_FIELD_GROUPS: FormGroup[] = [
         label: "Last Name",
         path: "lastName",
         placeholder: "Last Name",
-        type: FieldType.TEXT,
         required: true,
         ...commons,
       },
@@ -43,7 +42,6 @@ export const PROFILE_FIELD_GROUPS: FormGroup[] = [
         label: "Preferred Name",
         path: "preferredName",
         placeholder: "Preferred Name",
-        type: FieldType.TEXT,
         ...commons,
       },
     ],
@@ -55,7 +53,6 @@ export const PROFILE_FIELD_GROUPS: FormGroup[] = [
         label: "Email",
         path: "email",
         placeholder: "Email",
-        type: FieldType.TEXT,
         required: true,
         ...commons,
       },
@@ -63,7 +60,6 @@ export const PROFILE_FIELD_GROUPS: FormGroup[] = [
         label: "Phone",
         path: "phone",
         placeholder: "Phone",
-        type: FieldType.TEXT,
         required: true,
         validator: {
           required: "Phone number is required.",
@@ -94,7 +90,6 @@ export const PROFILE_FIELD_GROUPS: FormGroup[] = [
         label: "Insurance Member ID",
         path: "insuranceMemberId",
         placeholder: "Member ID",
-        type: FieldType.TEXT,
         required: true,
         /**
          * Deactivate the “member ID” section if insurance is chosen as “cash pay”
@@ -108,7 +103,72 @@ export const PROFILE_FIELD_GROUPS: FormGroup[] = [
         label: "Do you have a referral reference/authorization number?",
         path: "referral",
         placeholder: "Referral reference number",
-        type: FieldType.TEXT,
+        ...commons,
+      },
+    ],
+  },
+  {
+    groupName: "Payment",
+    fields: [
+      {
+        label: "Credit, Debit, or HSA Card",
+        path: "stripeToken",
+        type: FieldType.STRIPE_CARD,
+        required: true,
+        lg: 12,
+      },
+      {
+        label: "Address Line 1",
+        path: "billingAddress.address1",
+        required: true,
+        ...commons,
+      },
+      {
+        label: "Address Line 2",
+        path: "billingAddress.address2",
+        ...commons,
+      },
+      {
+        label: "City",
+        path: "billingAddress.city",
+        required: true,
+        ...commons,
+      },
+      {
+        label: "State",
+        path: "billingAddress.state",
+        type: FieldType.SELECT,
+        required: true,
+        options: usStates,
+        xs: 6,
+        lg: 3,
+      },
+      {
+        label: "Zip Code",
+        path: "billingAddress.zip",
+        placeholder: "Zip Code",
+        required: true,
+        ...commons,
+        xs: 6,
+        lg: 3,
+      },
+    ],
+  },
+  {
+    groupName: "Account Setup",
+    fields: [
+      {
+        label: "Password",
+        path: "password",
+        placeholder: "Password",
+        required: true,
+        ...commons,
+      },
+      {
+        label: "Confirm Password",
+        path: "confirmPassword",
+        placeholder: "Confirm Password",
+        required: true,
         ...commons,
       },
     ],
