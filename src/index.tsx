@@ -4,6 +4,8 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { CssBaseline, ThemeProvider } from "@material-ui/core";
 import { SnackbarProvider } from "notistack";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
 
 import App from "./app/App";
 import { theme } from "./theme/theme";
@@ -21,28 +23,32 @@ import "./index.css";
 // });
 const queryClient = new QueryClient();
 
+const stripePromise = loadStripe("pk_test_6pRNASCoBOKtIshFeQd4XMUh");
+
 ReactDOM.render(
   <React.StrictMode>
     <Router>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <SnackbarProvider
-          style={{ zIndex: 99999999999999999 }}
-          anchorOrigin={{
-            vertical: "bottom",
-            horizontal: "left",
-          }}
-          maxSnack={5}
-        >
-          <ViewportProvider>
-            <QueryClientProvider client={queryClient}>
-              <AuthProvider>
-                <App />
-              </AuthProvider>
-            </QueryClientProvider>
-          </ViewportProvider>
-        </SnackbarProvider>
-      </ThemeProvider>
+      <Elements stripe={stripePromise}>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <SnackbarProvider
+            style={{ zIndex: 99999999999999999 }}
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "left",
+            }}
+            maxSnack={5}
+          >
+            <ViewportProvider>
+              <QueryClientProvider client={queryClient}>
+                <AuthProvider>
+                  <App />
+                </AuthProvider>
+              </QueryClientProvider>
+            </ViewportProvider>
+          </SnackbarProvider>
+        </ThemeProvider>
+      </Elements>
     </Router>
   </React.StrictMode>,
   document.getElementById("root")

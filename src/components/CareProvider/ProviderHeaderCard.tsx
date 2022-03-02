@@ -49,15 +49,17 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface ProviderHeaderCardProps {
   careProvider: ICareMember;
+  onClickBookAppointment: VoidFunction;
 }
 
-const ProviderHeaderCard: FC<ProviderHeaderCardProps> = ({ careProvider }) => {
+const ProviderHeaderCard: FC<ProviderHeaderCardProps> = ({
+  careProvider,
+  onClickBookAppointment,
+}) => {
   const classes = useStyles();
   const fontClasses = useFontStyles();
   const colorClasses = useColorStyles();
   const layoutClasses = useLayoutStyles();
-
-  const handleClickBookAppointment = () => {};
 
   return (
     <Card className={classes.card}>
@@ -106,7 +108,7 @@ const ProviderHeaderCard: FC<ProviderHeaderCardProps> = ({ careProvider }) => {
             text="Book an appointment"
             className={classes.bookAppointmentButton}
             fullWidth={false}
-            onClick={handleClickBookAppointment}
+            onClick={onClickBookAppointment}
           />
         </Grid>
       </Grid>

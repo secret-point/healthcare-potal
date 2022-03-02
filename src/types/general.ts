@@ -37,6 +37,7 @@ export enum FieldType {
   MULTI_SELECT = "MULTI_SELECT",
   MULTI_INSTANCE = "MULTI_INSTANCE",
   SINGLE_INSTANCE = "SINGLE_INSTANCE",
+  STRIPE_CARD = "STRIPE_CARD",
 }
 
 export type TDropItem = {

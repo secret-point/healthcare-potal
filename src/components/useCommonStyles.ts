@@ -239,6 +239,9 @@ export const useLayoutStyles = makeStyles(
       mt3: {
         marginTop: theme.spacing(3),
       },
+      mt4: {
+        marginTop: theme.spacing(4),
+      },
       mt6: {
         marginTop: theme.spacing(6),
       },

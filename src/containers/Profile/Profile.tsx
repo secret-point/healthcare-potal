@@ -9,7 +9,7 @@ import Container from "src/components/Container";
 import UpdateDialog from "src/components/UpdateDialog";
 import VerifyIDDialog from "src/components/VerifyID/VerifyIDDialog";
 
-import { EditableField } from "./types";
+import { AccountEditableField } from "src/types/form";
 import { UPDATE_PROFILE_DIALOGS } from "./constants";
 import AccountInformation from "./AccountInformation";
 import ContactInformation from "./ContactInformation";
@@ -22,14 +22,14 @@ export default function Profile() {
   const uploadFile = useUploadFile();
   const updateProfile = useUpdateProfile();
 
-  const [editingField, setEditingField] = useState<EditableField>();
+  const [editingField, setEditingField] = useState<AccountEditableField>();
   const [showVerifyIDDialog, setShowVerifyIDDialog] = useState(false);
 
   const defaultValues = useMemo(() => ({ ...user, password: "" }), [user]);
 
   if (!user) return null;
 
-  const handleClickEdit = (fieldName: EditableField) => {
+  const handleClickEdit = (fieldName: AccountEditableField) => {
     setEditingField(fieldName);
   };
 
