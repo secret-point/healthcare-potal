@@ -22,7 +22,7 @@ const FullCareProviderPage: FC = () => {
 
   return (
     <Container showIcon>
-      <Grid container xl={6} lg={8} md={10}>
+      <Grid container item xl={6} lg={8} md={10}>
         {careProvider && (
           <FullCareProviderCard
             careProvider={careProvider}

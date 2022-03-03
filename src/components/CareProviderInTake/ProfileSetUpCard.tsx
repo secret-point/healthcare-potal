@@ -14,6 +14,7 @@ import InTakeFormGroupInput from "src/components/InTake/InTakeFormGroupInput";
 import { TDropItem } from "src/types";
 
 import { PROFILE_FIELD_GROUPS } from "./constants";
+import { useNotification } from "src/hooks/useNotification";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -79,6 +80,7 @@ const ProfileSetUpCard: FC<ProfileSetUpCardProps> = ({ payerOptions }) => {
 
   const stripe = useStripe();
   const elements = useElements();
+  const { handleError } = useNotification();
 
   const handleSubmit = async () => {
     if (!elements || !stripe) {
@@ -95,7 +97,15 @@ const ProfileSetUpCard: FC<ProfileSetUpCardProps> = ({ payerOptions }) => {
       type: "card",
     });
 
-    console.log(error, paymentMethod);
+    if (error || !paymentMethod) {
+      handleError(
+        `There was an error while processing the payment method. ${error?.code}`
+      );
+      return;
+    }
+
+    const paymentId = paymentMethod.id;
+    console.log(paymentId);
   };
 
   return (
@@ -149,6 +159,7 @@ const ProfileSetUpCard: FC<ProfileSetUpCardProps> = ({ payerOptions }) => {
           text="Book an appointment"
           fullWidth
           className={classes.appointmentButton}
+          onClick={handleSubmit}
         />
       </Grid>
     </>
