@@ -54,8 +54,10 @@ const BookingConfirmNextStepsCard: FC<BookingConfirmNextStepsCardProps> = ({
   return (
     <Card className={layoutClasses.padding4}>
       <Grid container spacing={2}>
-        <Grid item xs={12} className={fontClasses.fontBold}>
-          <Typography variant="h6">Next Steps</Typography>
+        <Grid item xs={12}>
+          <Typography variant="h6" className={fontClasses.fontBold}>
+            Next Steps
+          </Typography>
         </Grid>
 
         <Grid item xs={12}>

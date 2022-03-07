@@ -1,9 +1,9 @@
-import { FC, useState, useMemo } from "react";
+import { FC, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 
 import {
-  useAllCareProviderList,
+  useGetCareProvider,
   useCareMemberAvailabilitiesByEmail,
 } from "src/api/providerApi";
 import { ROUTES } from "src/app/types";
@@ -15,13 +15,9 @@ const CareProviderInTakePage: FC = () => {
   const [selectedTime, setSelectedTime] = useState("");
 
   const history = useHistory();
-  const { providerId } = useParams<{ providerId?: string }>();
+  const { providerId } = useParams<{ providerId: string }>();
 
-  const { data: careProviders = [] } = useAllCareProviderList();
-
-  const careProvider = useMemo(() => {
-    return careProviders.find((provider) => provider._id === providerId);
-  }, [careProviders, providerId]);
+  const { data: careProvider } = useGetCareProvider(providerId);
 
   const { data: availability } = useCareMemberAvailabilitiesByEmail(
     careProvider?.email

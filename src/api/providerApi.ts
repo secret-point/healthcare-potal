@@ -20,6 +20,18 @@ export const useAllCareProviderList = (enabled?: boolean) => {
   );
 };
 
+export const useGetCareProvider = (providerId: string) => {
+  const apiFetch = useApiFetch();
+
+  return useQuery(
+    [QUERY_KEYS.FETCH_CARE_PROVIDER, providerId],
+    async (): Promise<ICareMember> => {
+      const { data } = await apiFetch(`/mp/providers/${providerId}`);
+      return data;
+    }
+  );
+};
+
 export const useCareMemberAvailabilitiesByEmail = (email: Maybe<string>) => {
   const apiFetch = useApiFetch();
 
