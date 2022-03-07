@@ -3,16 +3,31 @@ import Grid from "@material-ui/core/Grid";
 
 import { useAllPayerList } from "src/api/payerApi";
 import { useLayoutStyles } from "src/components/useCommonStyles";
-import { ICareMember, TDropItem } from "src/types";
+import {
+  ICareMember,
+  ICareMemberAvailableDate,
+  TDropItem,
+  IProfileSetUpCardForm,
+} from "src/types";
 
 import BookAppointmentCard from "./BookAppointmentCard";
 import ProfileSetUpCard from "./ProfileSetUpCard";
 
 interface CareProviderInTakeProps {
+  availableDates: ICareMemberAvailableDate[];
   careProvider: ICareMember;
+  selectedTime: string;
+  onSelect: (time: string) => void;
+  onSubmit: (form: IProfileSetUpCardForm) => void;
 }
 
-const CareProviderInTake: FC<CareProviderInTakeProps> = ({ careProvider }) => {
+const CareProviderInTake: FC<CareProviderInTakeProps> = ({
+  availableDates,
+  careProvider,
+  selectedTime,
+  onSelect,
+  onSubmit,
+}) => {
   const layoutClasses = useLayoutStyles();
 
   const { data: payers = [] } = useAllPayerList();
@@ -26,11 +41,16 @@ const CareProviderInTake: FC<CareProviderInTakeProps> = ({ careProvider }) => {
   return (
     <Grid container>
       <Grid item xs={12} className={layoutClasses.mt6}>
-        <BookAppointmentCard careProvider={careProvider} />
+        <BookAppointmentCard
+          availableDates={availableDates}
+          careProvider={careProvider}
+          selectedTime={selectedTime}
+          onSelect={onSelect}
+        />
       </Grid>
 
       <Grid item xs={12} className={layoutClasses.mt4}>
-        <ProfileSetUpCard payerOptions={payerOptions} />
+        <ProfileSetUpCard payerOptions={payerOptions} onSubmit={onSubmit} />
       </Grid>
     </Grid>
   );

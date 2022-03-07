@@ -1,5 +1,5 @@
 import { usStates } from "src/constants/usStates";
-import { FormGroup } from "src/types/form";
+import { IFormGroup } from "src/types/form";
 import { FieldType } from "src/types/general";
 import { phoneNumberPattern } from "src/utils/string";
 import { birthdayValidator } from "src/utils/validator";
@@ -11,7 +11,7 @@ const commons = {
   xs: 12,
 };
 
-export const PROFILE_FIELD_GROUPS: FormGroup[] = [
+export const PROFILE_FIELD_GROUPS: IFormGroup[] = [
   {
     groupName: "Profile",
     fields: [

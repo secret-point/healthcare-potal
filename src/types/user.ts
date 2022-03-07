@@ -89,7 +89,7 @@ export interface IInsurance {
 }
 
 export interface ICareMember
-  extends Pick<User, "_id" | "firstName" | "lastName"> {
+  extends Pick<User, "_id" | "email" | "firstName" | "lastName"> {
   profilePic: string;
   primaryContact: string;
   secondaryContact?: string;

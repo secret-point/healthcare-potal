@@ -8,6 +8,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 
 import App from "./app/App";
+import config from "./utils/config";
 import { theme } from "./theme/theme";
 import { AuthProvider } from "./hooks/useAuth";
 import { ViewportProvider } from "./hooks/useViewport";
@@ -23,7 +24,7 @@ import "./index.css";
 // });
 const queryClient = new QueryClient();
 
-const stripePromise = loadStripe("pk_test_6pRNASCoBOKtIshFeQd4XMUh");
+const stripePromise = loadStripe(config.stripePublicKey);
 
 ReactDOM.render(
   <React.StrictMode>
