@@ -1,16 +1,20 @@
 import { FC, useState, useMemo } from "react";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 
 import {
   useAllCareProviderList,
   useCareMemberAvailabilitiesByEmail,
 } from "src/api/providerApi";
+import { ROUTES } from "src/app/types";
 import Container from "src/components/Container";
 import CareProviderInTake from "src/components/CareProviderInTake/CareProviderInTake";
+import { IProfileSetUpCardForm } from "src/types";
 
 const CareProviderInTakePage: FC = () => {
   const [selectedTime, setSelectedTime] = useState("");
+
+  const history = useHistory();
   const { providerId } = useParams<{ providerId?: string }>();
 
   const { data: careProviders = [] } = useAllCareProviderList();
@@ -25,6 +29,11 @@ const CareProviderInTakePage: FC = () => {
 
   const handleSelect = (time: string) => {
     setSelectedTime(time);
+  };
+
+  const handleSubmit = (_form: IProfileSetUpCardForm) => {
+    console.log(_form);
+    history.push(`${ROUTES.BOOKING}/${providerId}/confirm`);
   };
 
   if (!availability) {
@@ -42,6 +51,7 @@ const CareProviderInTakePage: FC = () => {
             careProvider={careProvider}
             selectedTime={selectedTime}
             onSelect={handleSelect}
+            onSubmit={handleSubmit}
           />
         )}
       </Grid>

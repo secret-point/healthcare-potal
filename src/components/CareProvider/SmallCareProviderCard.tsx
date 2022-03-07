@@ -1,6 +1,5 @@
 import clsx from "clsx";
 import { FC } from "react";
-import { useHistory } from "react-router";
 import Box from "@material-ui/core/Box";
 import Card from "@material-ui/core/Card";
 import Divider from "@material-ui/core/Divider";
@@ -9,7 +8,6 @@ import Typography from "@material-ui/core/Typography";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 
-import { ROUTES } from "src/app/types";
 import Button from "src/components/Button";
 import ProfileAvatar from "src/components/ProfileAvatar";
 import { formatUserNameAndTitle } from "src/utils/helper";
@@ -72,21 +70,18 @@ const useStyles = makeStyles((theme: Theme) =>
 interface SmallCareProviderCardProps {
   careProvider: ICareMemberWithMatchings;
   className?: string;
+  onClickProfile: (id: string) => void;
 }
 
 const SmallCareProviderCard: FC<SmallCareProviderCardProps> = ({
   careProvider,
   className,
+  onClickProfile,
 }) => {
-  const history = useHistory();
   const classes = useStyles();
   const fontClasses = useFontStyles();
   const colorClasses = useColorStyles();
   const layoutClasses = useLayoutStyles();
-
-  const handleClickViewProfile = () => {
-    history.push(`${ROUTES.BOOKING}/${careProvider._id}`);
-  };
 
   return (
     <Card className={clsx(layoutClasses.padding4, className)}>
@@ -153,7 +148,7 @@ const SmallCareProviderCard: FC<SmallCareProviderCardProps> = ({
             text="View Profile"
             className={classes.viewProfileButton}
             fullWidth={false}
-            onClick={handleClickViewProfile}
+            onClick={() => onClickProfile(careProvider._id)}
           />
 
           <Typography className={colorClasses.secondaryNavy1}>

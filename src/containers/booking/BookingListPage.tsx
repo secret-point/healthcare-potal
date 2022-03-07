@@ -1,21 +1,24 @@
-import { FC, useState, useMemo } from "react";
 import _ from "lodash";
+import { FC, useState, useMemo } from "react";
+import { useHistory } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 
-import { BookingSearchForm, ICareMemberWithMatchings } from "src/types";
+import { ROUTES } from "src/app/types";
 import { useAllCareProviderList } from "src/api/providerApi";
 import { formatUserType } from "src/utils/helper";
 import Container from "src/components/Container";
 import { useLayoutStyles } from "src/components/useCommonStyles";
 import BookingSearchBar from "src/components/Booking/BookingSearchBar";
 import SmallCareProviderCard from "src/components/CareProvider/SmallCareProviderCard";
+import { BookingSearchForm, ICareMemberWithMatchings } from "src/types";
 
 interface BookingListProps {}
 
 const BookingList: FC<BookingListProps> = () => {
-  const { data: careProviders = [] } = useAllCareProviderList();
-
+  const history = useHistory();
   const layoutClasses = useLayoutStyles();
+
+  const { data: careProviders = [] } = useAllCareProviderList();
 
   const [searchForm, setSearchForm] = useState<BookingSearchForm>({
     insurance: null,
@@ -81,6 +84,10 @@ const BookingList: FC<BookingListProps> = () => {
       .slice(0, 3) as ICareMemberWithMatchings[];
   }, [careProviders, searchForm]);
 
+  const handleClickViewProfile = (providerId: string) => {
+    history.push(`${ROUTES.BOOKING}/${providerId}`);
+  };
+
   return (
     <Container showIcon>
       <Grid item xs={12} className={layoutClasses.mb4}>
@@ -101,6 +108,7 @@ const BookingList: FC<BookingListProps> = () => {
             key={provider._id}
             className={layoutClasses.mb1}
             careProvider={provider}
+            onClickProfile={handleClickViewProfile}
           />
         ))}
       </Grid>

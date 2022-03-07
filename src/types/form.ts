@@ -9,15 +9,37 @@ export enum AccountEditableField {
   RESET_PASSWORD = "resetPassword",
 }
 
-export interface FormGroup {
+export interface IFormGroup {
   groupName: string;
   helperText?: string;
   fields: TCustomField[];
 }
 
-export interface InTakeFormStepDef {
+export interface IInTakeFormStepDef {
   title: string | ((data: any) => string);
-  groups: FormGroup[];
+  groups: IFormGroup[];
 }
 
-export type TInTakeFormDef = Data<InTakeFormStepDef>;
+export type TInTakeFormDef = Data<IInTakeFormStepDef>;
+
+export interface IProfileSetUpCardForm {
+  billingAddress: {
+    address1: string;
+    address2: string;
+    city: string;
+    state: string;
+    zip: string;
+  };
+  confirmPassword: string;
+  dob: string;
+  email: string;
+  firstName: string;
+  insuranceMemberId: string;
+  insurances: string[];
+  lastName: string;
+  password: string;
+  phone: string;
+  preferredName: string;
+  referral: string;
+  paymentId: string;
+}

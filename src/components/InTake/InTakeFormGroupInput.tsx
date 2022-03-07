@@ -6,10 +6,10 @@ import Typography from "@material-ui/core/Typography";
 
 import { useFontStyles, useLayoutStyles } from "src/components/useCommonStyles";
 import FieldComponent from "src/components/FieldComponent";
-import { FormGroup } from "src/types/form";
+import { IFormGroup } from "src/types/form";
 
 interface InTakeFormGroupInputProps {
-  group: FormGroup;
+  group: IFormGroup;
 }
 
 const InTakeFormGroupInput: FC<InTakeFormGroupInputProps> = ({ group }) => {

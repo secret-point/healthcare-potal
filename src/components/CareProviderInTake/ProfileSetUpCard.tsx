@@ -9,12 +9,12 @@ import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 
 import Button from "src/components/Button";
 import CheckboxField from "src/components/CheckboxField";
-import { Theme } from "src/theme/types/createPalette";
 import InTakeFormGroupInput from "src/components/InTake/InTakeFormGroupInput";
-import { TDropItem } from "src/types";
+import { useNotification } from "src/hooks/useNotification";
+import { Theme } from "src/theme/types/createPalette";
+import { IProfileSetUpCardForm, TDropItem } from "src/types";
 
 import { PROFILE_FIELD_GROUPS } from "./constants";
-import { useNotification } from "src/hooks/useNotification";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -36,7 +36,11 @@ const useStyles = makeStyles((theme: Theme) =>
     },
 
     appointmentButtonWrapper: {
-      padding: theme.spacing(2, 4, 0),
+      padding: theme.spacing(2, 4, 2),
+      position: "absolute",
+      left: 0,
+      right: 0,
+      bottom: theme.spacing(-10),
     },
 
     appointmentButton: {
@@ -62,9 +66,13 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface ProfileSetUpCardProps {
   payerOptions: TDropItem[];
+  onSubmit: (form: IProfileSetUpCardForm) => void;
 }
 
-const ProfileSetUpCard: FC<ProfileSetUpCardProps> = ({ payerOptions }) => {
+const ProfileSetUpCard: FC<ProfileSetUpCardProps> = ({
+  payerOptions,
+  onSubmit,
+}) => {
   const classes = useStyles();
 
   const methods = useForm({
@@ -83,6 +91,7 @@ const ProfileSetUpCard: FC<ProfileSetUpCardProps> = ({ payerOptions }) => {
   const { handleError } = useNotification();
 
   const handleSubmit = async () => {
+    const values = methods.getValues();
     if (!elements || !stripe) {
       return;
     }
@@ -105,64 +114,64 @@ const ProfileSetUpCard: FC<ProfileSetUpCardProps> = ({ payerOptions }) => {
     }
 
     const paymentId = paymentMethod.id;
-    console.log(paymentId);
+    onSubmit({ ...values, paymentId } as IProfileSetUpCardForm);
   };
 
   return (
-    <>
-      <Card className={classes.card}>
-        <FormProvider {...methods}>
-          <form onSubmit={handleSubmit}>
-            <Grid container spacing={2}>
-              {updatedProfileFieldGroups.map((group) => (
-                <Grid key={group.groupName} item xs={12}>
-                  <InTakeFormGroupInput group={group} />
-                </Grid>
-              ))}
-            </Grid>
+    <Card className={classes.card}>
+      <FormProvider {...methods}>
+        <form onSubmit={methods.handleSubmit(handleSubmit)}>
+          <Grid container spacing={2}>
+            {updatedProfileFieldGroups.map((group) => (
+              <Grid key={group.groupName} item xs={12}>
+                <InTakeFormGroupInput group={group} />
+              </Grid>
+            ))}
+          </Grid>
 
-            <Grid item xs={12}>
-              <Divider className={classes.divider} />
-            </Grid>
+          <Grid item xs={12}>
+            <Divider className={classes.divider} />
+          </Grid>
 
-            <Grid item xs={12}>
-              <CheckboxField
-                name="policy"
-                label={
-                  /* eslint-disable */
-                  <>
-                    I have read and understood the&nbsp;
-                    <span className={classes.highlightSpan}>
-                      Terms of Service, Privacy Policy
-                    </span>
-                    , and&nbsp;
-                    <span className={classes.highlightSpan}>
-                      Notice of Privacy Practices
-                    </span>
-                    &nbsp; and consent to receiving care via telehealth.
-                  </>
-                }
-                className={classes.checkboxField}
-              />
-              <CheckboxField
-                name="updates"
-                label="I agree to receive any updates about my care via text message notwithstanding the privacy risk of using text message."
-                className={classes.checkboxField}
-              />
-            </Grid>
-          </form>
-        </FormProvider>
-      </Card>
+          <Grid item xs={12}>
+            <CheckboxField
+              name="policy"
+              label={
+                /* eslint-disable */
+                <>
+                  I have read and understood the&nbsp;
+                  <span className={classes.highlightSpan}>
+                    Terms of Service, Privacy Policy
+                  </span>
+                  , and&nbsp;
+                  <span className={classes.highlightSpan}>
+                    Notice of Privacy Practices
+                  </span>
+                  &nbsp; and consent to receiving care via telehealth.
+                </>
+              }
+              required
+              className={classes.checkboxField}
+            />
+            <CheckboxField
+              name="updates"
+              label="I agree to receive any updates about my care via text message notwithstanding the privacy risk of using text message."
+              required
+              className={classes.checkboxField}
+            />
+          </Grid>
 
-      <Grid item xs={12} className={classes.appointmentButtonWrapper}>
-        <Button
-          text="Book an appointment"
-          fullWidth
-          className={classes.appointmentButton}
-          onClick={handleSubmit}
-        />
-      </Grid>
-    </>
+          <Grid item xs={12} className={classes.appointmentButtonWrapper}>
+            <Button
+              text="Book an appointment"
+              fullWidth
+              className={classes.appointmentButton}
+              type="submit"
+            />
+          </Grid>
+        </form>
+      </FormProvider>
+    </Card>
   );
 };
 

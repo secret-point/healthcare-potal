@@ -14,6 +14,7 @@ import ConfirmVerificationLink from "src/containers/auth/ConfirmVerificationLink
 import BookingListPage from "src/containers/booking/BookingListPage";
 import FullCareProviderPage from "src/containers/booking/FullCareProviderPage";
 import CareProviderIntakePage from "src/containers/booking/CareProviderIntakePage";
+import BookingConfirmPage from "src/containers/booking/BookingConfirmPage";
 
 import { ROUTES } from "./types";
 
@@ -95,6 +96,10 @@ export function UnauthorizedRoutes() {
 
       <Route path={`${ROUTES.BOOKING}/:providerId/intake`} exact>
         <CareProviderIntakePage />
+      </Route>
+
+      <Route path={`${ROUTES.BOOKING}/:providerId/confirm`} exact>
+        <BookingConfirmPage />
       </Route>
 
       <Route path={`${ROUTES.ASSESSMENT}/:assessmentId`} exact>

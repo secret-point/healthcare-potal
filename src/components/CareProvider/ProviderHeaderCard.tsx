@@ -1,7 +1,6 @@
 import clsx from "clsx";
 import { FC } from "react";
 import Box from "@material-ui/core/Box";
-import Card from "@material-ui/core/Card";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
@@ -12,9 +11,9 @@ import {
   useLayoutStyles,
 } from "src/components/useCommonStyles";
 import Button from "src/components/Button";
-import ProfileAvatar from "src/components/ProfileAvatar";
-import { formatUserNameAndTitle } from "src/utils/helper";
+import CareProviderCardWithAvatar from "src/components/CareProvider/CareProviderCardWithAvatar";
 import { ICareMember } from "src/types";
+import { formatUserNameAndTitle } from "src/utils";
 import { Theme } from "src/theme/types/createPalette";
 import { ReactComponent as CalendarIcon } from "src/icons/Calendar.svg";
 
@@ -22,18 +21,6 @@ import CareProviderHighlights from "./CareProviderHighlights";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    card: {
-      position: "relative",
-      padding: theme.spacing(4),
-      overflow: "visible",
-    },
-
-    profileAvatar: {
-      position: "absolute",
-      right: theme.spacing(4),
-      top: theme.spacing(-7.5),
-    },
-
     bookAppointmentButton: {
       background: `${theme.palette.secondaryGreen1.main} !important`,
       borderRadius: theme.spacing(1),
@@ -62,16 +49,7 @@ const ProviderHeaderCard: FC<ProviderHeaderCardProps> = ({
   const layoutClasses = useLayoutStyles();
 
   return (
-    <Card className={classes.card}>
-      <ProfileAvatar
-        width={120}
-        height={120}
-        firstName={careProvider.firstName}
-        lastName={careProvider.lastName}
-        picture={careProvider.profilePic}
-        className={classes.profileAvatar}
-      />
-
+    <CareProviderCardWithAvatar careProvider={careProvider}>
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <Typography variant="h3" className={fontClasses.fontNormal}>
@@ -112,7 +90,7 @@ const ProviderHeaderCard: FC<ProviderHeaderCardProps> = ({
           />
         </Grid>
       </Grid>
-    </Card>
+    </CareProviderCardWithAvatar>
   );
 };
 
