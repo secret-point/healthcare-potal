@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
 
     appointmentButtonWrapper: {
-      padding: theme.spacing(0, 4),
+      padding: theme.spacing(2, 4, 0),
     },
 
     appointmentButton: {

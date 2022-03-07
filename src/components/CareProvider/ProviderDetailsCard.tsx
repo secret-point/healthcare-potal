@@ -66,7 +66,7 @@ const ProviderDetailsCard: FC<ProviderDetailsCardProps> = ({
 
           <ul className={classes.insuranceList}>
             {careProvider.insurance.map((insurance) => (
-              <li>
+              <li key={insurance.type}>
                 <Typography variant="subtitle2">{insurance.type}</Typography>
               </li>
             ))}

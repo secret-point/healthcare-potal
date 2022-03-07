@@ -4,3 +4,19 @@ export interface BookingSearchForm {
   type: Nullable<string>;
   state: Nullable<string>;
 }
+
+export interface ICareMemberAvailableTime {
+  time: string;
+  slotsAvailable: number;
+}
+
+export interface ICareMemberAvailableDate {
+  date: string;
+  availableTimes: ICareMemberAvailableTime[];
+}
+
+export interface ICareMemberAvailability {
+  appointmentTypeID: string;
+  calendarID: string;
+  availableDates: ICareMemberAvailableDate[];
+}
