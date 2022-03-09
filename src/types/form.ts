@@ -43,3 +43,13 @@ export interface IProfileSetUpCardForm {
   referral: string;
   paymentId: string;
 }
+
+export interface IBookAppointmentForm {
+  calendarID: string;
+  datetime: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  smsOptIn: boolean;
+}

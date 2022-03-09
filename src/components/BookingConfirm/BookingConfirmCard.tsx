@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { FC } from "react";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
@@ -13,9 +14,15 @@ import { ReactComponent as VideoIcon } from "src/icons/VideoIcon.svg";
 
 interface BookingConfirmCardProps {
   careProvider: ICareMember;
+  bookedAt: Date;
+  duration: number;
 }
 
-const BookingConfirmCard: FC<BookingConfirmCardProps> = ({ careProvider }) => {
+const BookingConfirmCard: FC<BookingConfirmCardProps> = ({
+  careProvider,
+  bookedAt,
+  duration,
+}) => {
   const fontClasses = useFontStyles();
 
   return (
@@ -39,14 +46,16 @@ const BookingConfirmCard: FC<BookingConfirmCardProps> = ({ careProvider }) => {
             <Grid container alignItems="center">
               <DateIcon />
               <Typography variant="h5" className={fontClasses.font500}>
-                January 19, 2022 (Wednesday)
+                {dayjs(bookedAt).format("MMMM DD, YYYY (dddd)")}
               </Typography>
             </Grid>
 
             <Grid container alignItems="center">
               <TimeIcon />
               <Typography variant="h5" className={fontClasses.font500}>
-                03:00 PM ~ 03:50 PM (50 minutes)
+                {`${dayjs(bookedAt).format("hh:mm A")} ~ ${dayjs(bookedAt)
+                  .add(duration, "minutes")
+                  .format("hh:mm A")} (${duration} minutes)`}
               </Typography>
             </Grid>
 

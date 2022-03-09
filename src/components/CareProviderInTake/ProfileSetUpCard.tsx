@@ -91,13 +91,25 @@ const ProfileSetUpCard: FC<ProfileSetUpCardProps> = ({
   const { handleError } = useNotification();
 
   const handleSubmit = async () => {
-    const values = methods.getValues();
+    const values: any = methods.getValues();
+    if (!values.policy) {
+      handleError(null, "Please agree with our policy.");
+      return;
+    }
+
+    if (!values.updates) {
+      handleError(null, "Please agree to get the updates.");
+      return;
+    }
+
     if (!elements || !stripe) {
+      handleError(null, "There was an error while processing stripe.");
       return;
     }
 
     const card = elements.getElement(CardElement);
     if (!card) {
+      handleError(null, "Please fill out the payment details.");
       return;
     }
 
@@ -108,6 +120,7 @@ const ProfileSetUpCard: FC<ProfileSetUpCardProps> = ({
 
     if (error || !paymentMethod) {
       handleError(
+        error,
         `There was an error while processing the payment method. ${error?.code}`
       );
       return;

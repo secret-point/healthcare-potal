@@ -12,18 +12,28 @@ const BookingConfirmPage: FC = () => {
   const history = useHistory();
   const { providerId } = useParams<{ providerId: string }>();
 
+  if (!history.location.state) {
+    history.push(ROUTES.LOGIN);
+  }
+
   const { data: careProvider } = useGetCareProvider(providerId);
 
   const handleSignIn = () => {
     history.push(ROUTES.LOGIN);
   };
 
+  const { datetime, duration } = history.location.state as any;
+
   return (
     <Container showIcon>
       {careProvider && (
         <Grid container item xl={6} lg={8} md={10} spacing={4}>
           <Grid item xs={12}>
-            <BookingConfirmCard careProvider={careProvider} />
+            <BookingConfirmCard
+              careProvider={careProvider}
+              bookedAt={new Date(datetime)}
+              duration={Number(duration)}
+            />
           </Grid>
 
           <Grid item xs={12}>

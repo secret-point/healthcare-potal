@@ -5,7 +5,6 @@ import SignIn from "src/containers/auth/SignIn";
 import Profile from "src/containers/Profile/Profile";
 import Progress from "src/containers/Progress/Progress";
 import Dashboard from "src/containers/Dashboard/Dashboard";
-import Onboarding from "src/containers/onboarding/Onboarding";
 import ResetPassword from "src/containers/auth/ResetPassword";
 import AssessmentSurvey from "src/containers/AssessmentSurvey/AssessmentSurvey";
 import InTakeForm from "src/containers/InTakeForm/InTakeForm";
@@ -72,10 +71,6 @@ export function UnauthorizedRoutes() {
     <Switch>
       <Route path={ROUTES.LOGIN}>
         <SignIn />
-      </Route>
-
-      <Route path={ROUTES.REGISTER}>
-        <Onboarding />
       </Route>
 
       <Route path={ROUTES.RESET_PASSWORD}>

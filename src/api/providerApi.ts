@@ -1,6 +1,10 @@
-import { useQuery } from "react-query";
+import { useQuery, useMutation } from "react-query";
 
-import { ICareMember, ICareMemberAvailability } from "src/types";
+import {
+  IBookAppointmentForm,
+  ICareMember,
+  ICareMemberAvailability,
+} from "src/types";
 
 import { QUERY_KEYS } from "./constants";
 import { useApiFetch } from "./useApiFetch";
@@ -48,6 +52,21 @@ export const useCareMemberAvailabilitiesByEmail = (email: Maybe<string>) => {
 
       const { data } = await apiFetch(`/acuity/available-times?email=${email}`);
       return data;
+    }
+  );
+};
+
+export const useBookAppointment = () => {
+  const apiFetch = useApiFetch();
+
+  return useMutation(
+    (appointmentForm: IBookAppointmentForm) =>
+      apiFetch("/acuity/appointments", {
+        method: "POST",
+        data: appointmentForm,
+      }),
+    {
+      mutationKey: QUERY_KEYS.BOOK_APPOINTMENT,
     }
   );
 };

@@ -3,22 +3,31 @@ import { useHistory, useParams } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 
 import {
+  useRegister,
   useGetCareProvider,
   useCareMemberAvailabilitiesByEmail,
-} from "src/api/providerApi";
+  useBookAppointment,
+} from "src/api";
 import { ROUTES } from "src/app/types";
 import Container from "src/components/Container";
 import CareProviderInTake from "src/components/CareProviderInTake/CareProviderInTake";
-import { IProfileSetUpCardForm } from "src/types";
+import { useNotification } from "src/hooks/useNotification";
+import {
+  IBookAppointmentForm,
+  ICareMemberAvailability,
+  IProfileSetUpCardForm,
+} from "src/types";
 
 const CareProviderInTakePage: FC = () => {
   const [selectedTime, setSelectedTime] = useState("");
 
   const history = useHistory();
+  const { handleSuccess, handleError } = useNotification();
   const { providerId } = useParams<{ providerId: string }>();
 
+  const register = useRegister();
+  const bookAppointment = useBookAppointment();
   const { data: careProvider } = useGetCareProvider(providerId);
-
   const { data: availability } = useCareMemberAvailabilitiesByEmail(
     careProvider?.email
   );
@@ -27,16 +36,58 @@ const CareProviderInTakePage: FC = () => {
     setSelectedTime(time);
   };
 
-  const handleSubmit = (_form: IProfileSetUpCardForm) => {
-    console.log(_form);
-    history.push(`${ROUTES.BOOKING}/${providerId}/confirm`);
+  const getRegisterForm = (form: IProfileSetUpCardForm): any => ({
+    email: form.email,
+    firstName: form.firstName,
+    preferredName: form.preferredName,
+    lastName: form.lastName,
+    phone: form.phone,
+    password: form.password,
+    billingAddress: form.billingAddress,
+    dob: form.dob,
+    insurances: form.insurances,
+    stripeID: form.paymentId,
+    confirmPassword: form.confirmPassword,
+  });
+
+  const getAppointmentForm = (
+    form: IProfileSetUpCardForm,
+    availability: ICareMemberAvailability
+  ): IBookAppointmentForm => ({
+    email: form.email,
+    calendarID: availability.calendarID,
+    datetime: selectedTime,
+    firstName: form.firstName,
+    lastName: form.lastName,
+    phone: form.phone,
+    smsOptIn: true,
+  });
+
+  const handleSubmit = async (form: IProfileSetUpCardForm) => {
+    if (!availability) {
+      handleError(null, "There is no availability.");
+      return;
+    }
+    if (!selectedTime) {
+      handleError(null, "Please select a time.");
+      return;
+    }
+
+    const registerForm = getRegisterForm(form);
+    const appointmentForm = getAppointmentForm(form, availability);
+
+    try {
+      await register(registerForm);
+      handleSuccess("Successfully registered an account");
+      const { data } = await bookAppointment.mutateAsync(appointmentForm);
+      handleSuccess("Successfully scheduled an appointment");
+      history.push(`${ROUTES.BOOKING}/${providerId}/confirm`, data);
+    } catch (error) {
+      handleError(error);
+    }
   };
 
-  if (!availability) {
-    return null;
-  }
-
-  const { availableDates } = availability;
+  const { availableDates = [] } = availability || {};
 
   return (
     <Container showIcon>

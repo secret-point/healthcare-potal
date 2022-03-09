@@ -14,7 +14,7 @@ import Container from "src/components/Container";
 import PlainModal from "src/components/PlainModalV1";
 import { useLayoutStyles } from "src/components/useCommonStyles";
 
-import PasswordForm from "../onboarding/PasswordForm";
+import PasswordForm from "./PasswordForm";
 
 const ConfirmVerificationLink = () => {
   const history = useHistory();

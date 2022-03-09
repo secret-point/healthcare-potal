@@ -90,7 +90,7 @@ export const PROFILE_FIELD_GROUPS: IFormGroup[] = [
         label: "Insurance Member ID",
         path: "insuranceMemberId",
         placeholder: "Member ID",
-        required: true,
+        // required: true,
         /**
          * Deactivate the “member ID” section if insurance is chosen as “cash pay”
          * store insurance information +
