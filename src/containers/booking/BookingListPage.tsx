@@ -11,10 +11,9 @@ import { useLayoutStyles } from "src/components/useCommonStyles";
 import BookingSearchBar from "src/components/Booking/BookingSearchBar";
 import SmallCareProviderCard from "src/components/CareProvider/SmallCareProviderCard";
 import { BookingSearchForm, ICareMemberWithMatchings } from "src/types";
+import { CARE_PROVIDER_TYPES } from "./constants";
 
-interface BookingListProps {}
-
-const BookingList: FC<BookingListProps> = () => {
+const BookingListPage: FC = () => {
   const history = useHistory();
   const layoutClasses = useLayoutStyles();
 
@@ -27,7 +26,7 @@ const BookingList: FC<BookingListProps> = () => {
     state: null,
   });
 
-  const { insurances, languages, types, states } = useMemo(
+  const { insurances, languages, states } = useMemo(
     () => ({
       insurances: _(careProviders)
         .flatMap("insurance")
@@ -35,11 +34,6 @@ const BookingList: FC<BookingListProps> = () => {
         .uniq()
         .value(),
       languages: _(careProviders).flatMap("language").uniq().value(),
-      types: _(careProviders)
-        .flatMap("userType")
-        .map((type) => formatUserType(type))
-        .uniq()
-        .value(),
       states: _(careProviders).flatMap("state").uniq().value(),
     }),
     [careProviders]
@@ -48,27 +42,23 @@ const BookingList: FC<BookingListProps> = () => {
   /* prettier-ignore */
   const filteredCareProviders = useMemo(() => {
     return careProviders
+      .filter((careProvider) => CARE_PROVIDER_TYPES.some(
+        (type) => type === formatUserType(careProvider.userType))
+      )
       .map((careProvider) => {
         const matchings = [];
         if (
           searchForm.insurance &&
           careProvider.insurance.some((insurance) => insurance.type === searchForm.insurance)
         ) {
-          matchings.push(`Accepts ${searchForm.insurance}`);
+          matchings.push(`Accepts ${searchForm.insurance.toLowerCase()}`);
         }
 
         if (
           searchForm.language &&
           careProvider.language.some((language) => language === searchForm.language)
         ) {
-          matchings.push(`Accepts ${searchForm.language}`);
-        }
-
-        if (
-          searchForm.type &&
-          formatUserType(careProvider.userType) === searchForm.type
-        ) {
-          matchings.push(`Accepts ${searchForm.type}`);
+          matchings.push(`Speaks ${searchForm.language}`);
         }
 
         if (
@@ -95,7 +85,7 @@ const BookingList: FC<BookingListProps> = () => {
           searchForm={searchForm}
           insurances={insurances}
           languages={languages}
-          types={types}
+          providerTypes={CARE_PROVIDER_TYPES}
           states={states}
           showCount={3}
           onChange={setSearchForm}
@@ -106,7 +96,7 @@ const BookingList: FC<BookingListProps> = () => {
         {filteredCareProviders.map((provider) => (
           <SmallCareProviderCard
             key={provider._id}
-            className={layoutClasses.mb1}
+            className={layoutClasses.mb2}
             careProvider={provider}
             onClickProfile={handleClickViewProfile}
           />
@@ -116,4 +106,4 @@ const BookingList: FC<BookingListProps> = () => {
   );
 };
 
-export default BookingList;
+export default BookingListPage;

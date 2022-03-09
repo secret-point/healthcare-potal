@@ -1,14 +1,13 @@
 import clsx from "clsx";
 import { FC } from "react";
 import Box from "@material-ui/core/Box";
-import Card from "@material-ui/core/Card";
 import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 
-import Button from "src/components/Button";
+import { PrimaryButton } from "src/components/Button";
 import ProfileAvatar from "src/components/ProfileAvatar";
 import { formatUserNameAndTitle } from "src/utils/helper";
 import { Theme } from "src/theme/types/createPalette";
@@ -25,6 +24,7 @@ import CareProviderSpecialities from "./CareProviderSpecialities";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
+      background: "white",
       border: `1px solid ${theme.palette.distinctiveGray.main}`,
       borderRadius: theme.spacing(1),
       padding: theme.spacing(4),
@@ -53,17 +53,6 @@ const useStyles = makeStyles((theme: Theme) =>
       alignItems: "center",
       gap: theme.spacing(2),
     },
-
-    viewProfileButton: {
-      background: `${theme.palette.secondaryGreen1.main} !important`,
-      borderRadius: theme.spacing(1),
-      textTransform: "none",
-      padding: theme.spacing(1.5, 2),
-
-      "& .MuiTypography-root": {
-        color: "white !important",
-      },
-    },
   })
 );
 
@@ -84,7 +73,7 @@ const SmallCareProviderCard: FC<SmallCareProviderCardProps> = ({
   const layoutClasses = useLayoutStyles();
 
   return (
-    <Card className={clsx(layoutClasses.padding4, className)}>
+    <Box className={clsx(classes.container, className)}>
       <Grid container spacing={2}>
         <Grid item xs={12} className={classes.header}>
           <ProfileAvatar
@@ -118,7 +107,10 @@ const SmallCareProviderCard: FC<SmallCareProviderCardProps> = ({
         </Grid>
 
         <Grid item xs={12}>
-          <Typography variant="body1" className={colorClasses.secondaryNavy1}>
+          <Typography
+            variant="subtitle2"
+            className={colorClasses.secondaryNavy1}
+          >
             {careProvider.bio}
           </Typography>
         </Grid>
@@ -144,9 +136,8 @@ const SmallCareProviderCard: FC<SmallCareProviderCardProps> = ({
         </Grid>
 
         <Grid item xs={12} className={classes.viewProfileBox}>
-          <Button
+          <PrimaryButton
             text="View Profile"
-            className={classes.viewProfileButton}
             fullWidth={false}
             onClick={() => onClickProfile(careProvider._id)}
           />
@@ -156,7 +147,7 @@ const SmallCareProviderCard: FC<SmallCareProviderCardProps> = ({
           </Typography>
         </Grid>
       </Grid>
-    </Card>
+    </Box>
   );
 };
 

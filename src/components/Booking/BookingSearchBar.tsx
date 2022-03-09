@@ -54,7 +54,7 @@ interface BookingSearchBarProps {
   searchForm: BookingSearchForm;
   insurances: string[];
   languages: string[];
-  types: string[];
+  providerTypes: string[];
   states: string[];
   showCount: number;
   onChange: (form: BookingSearchForm) => void;
@@ -63,7 +63,7 @@ interface BookingSearchBarProps {
 const BookingSearchBar: FC<BookingSearchBarProps> = ({
   insurances,
   languages,
-  types,
+  providerTypes,
   states,
   searchForm,
   showCount,
@@ -75,7 +75,7 @@ const BookingSearchBar: FC<BookingSearchBarProps> = ({
     {
       label: "Type of provider",
       key: "type",
-      options: types,
+      options: providerTypes,
     },
     {
       label: "State",

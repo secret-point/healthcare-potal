@@ -7,7 +7,7 @@ import Grid from "@material-ui/core/Grid";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 
-import Button from "src/components/Button";
+import { PrimaryButton } from "src/components/Button";
 import CheckboxField from "src/components/CheckboxField";
 import InTakeFormGroupInput from "src/components/InTake/InTakeFormGroupInput";
 import { useNotification } from "src/hooks/useNotification";
@@ -51,6 +51,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
       "& .MuiTypography-root": {
         color: "white !important",
+        letterSpacing: "inherit",
       },
     },
 
@@ -175,12 +176,7 @@ const ProfileSetUpCard: FC<ProfileSetUpCardProps> = ({
           </Grid>
 
           <Grid item xs={12} className={classes.appointmentButtonWrapper}>
-            <Button
-              text="Book an appointment"
-              fullWidth
-              className={classes.appointmentButton}
-              type="submit"
-            />
+            <PrimaryButton text="Book an appointment" fullWidth type="submit" />
           </Grid>
         </form>
       </FormProvider>

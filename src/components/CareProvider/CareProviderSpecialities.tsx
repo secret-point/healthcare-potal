@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     chip: {
       color: theme.palette.secondaryNavy1.main,
+      background: theme.palette.backgroundGray.main,
       fontWeight: "bold",
       borderRadius: theme.spacing(0.5),
     },

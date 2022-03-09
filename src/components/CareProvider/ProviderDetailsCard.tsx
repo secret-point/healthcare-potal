@@ -1,17 +1,23 @@
 import { FC } from "react";
-import Card from "@material-ui/core/Card";
+import Box from "@material-ui/core/Box";
 import Chip from "@material-ui/core/Chip";
 import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
-import { useLayoutStyles } from "src/components/useCommonStyles";
 import { ICareMember } from "src/types";
 import { Theme } from "src/theme/types/createPalette";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    container: {
+      background: "white",
+      border: `1px solid ${theme.palette.distinctiveGray.main}`,
+      borderRadius: theme.spacing(1),
+      padding: theme.spacing(4),
+    },
+
     divider: {
       margin: theme.spacing(3, 0),
       width: "100%",
@@ -19,6 +25,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
     chip: {
       color: theme.palette.secondaryNavy1.main,
+      background: theme.palette.backgroundGray.main,
       fontWeight: "bold",
       borderRadius: theme.spacing(0.5),
       marginRight: theme.spacing(1),
@@ -54,10 +61,9 @@ const ProviderDetailsCard: FC<ProviderDetailsCardProps> = ({
   careProvider,
 }) => {
   const classes = useStyles();
-  const layoutClasses = useLayoutStyles();
 
   return (
-    <Card className={layoutClasses.padding4}>
+    <Box className={classes.container}>
       <Grid container>
         <Grid item xs={12}>
           <Typography className={classes.subtitle} variant="subtitle1">
@@ -77,7 +83,7 @@ const ProviderDetailsCard: FC<ProviderDetailsCardProps> = ({
 
         <Grid item xs={12}>
           <Typography className={classes.subtitle} variant="subtitle1">
-            Specialities
+            Specialties
           </Typography>
 
           {careProvider.specialty
@@ -146,7 +152,7 @@ const ProviderDetailsCard: FC<ProviderDetailsCardProps> = ({
           </ul>
         </Grid>
       </Grid>
-    </Card>
+    </Box>
   );
 };
 

@@ -3,7 +3,7 @@ import clsx from "clsx";
 import MuiButton, {
   ButtonProps as MuiButtonProps,
 } from "@material-ui/core/Button";
-import { makeStyles, createStyles } from "@material-ui/core/styles";
+import { makeStyles, createStyles, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 
 import { Theme } from "src/theme/types/createPalette";
@@ -160,3 +160,17 @@ export const TextButton: FC<TextButtonProps> = ({
 };
 
 export default Button;
+
+export const PrimaryButton = withStyles((theme: any) => ({
+  root: {
+    background: `${theme.palette.secondaryGreen1.main} !important`,
+    borderRadius: theme.spacing(1),
+    textTransform: "none",
+    padding: theme.spacing(1.5, 2),
+
+    "& .MuiTypography-root": {
+      color: "white !important",
+      letterSpacing: "inherit",
+    },
+  },
+}))(Button);

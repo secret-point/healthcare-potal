@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { FC, MouseEventHandler, useState } from "react";
+import { FC, MouseEventHandler, useEffect, useState } from "react";
 import Box from "@material-ui/core/Box";
 import Chip from "@material-ui/core/Chip";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
@@ -100,6 +100,10 @@ const BookingSearchOption: FC<BookingSearchOptionProps> = ({
   const classes = useStyles();
   const [current, setCurrent] = useState(value);
   const [anchorEl, setAnchorEl] = useState<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    setCurrent(value);
+  }, [value]);
 
   const handleClick: MouseEventHandler<HTMLDivElement> = (event) => {
     setAnchorEl(event.currentTarget);
