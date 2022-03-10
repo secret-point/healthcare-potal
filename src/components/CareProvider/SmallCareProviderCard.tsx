@@ -9,6 +9,7 @@ import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 
 import { PrimaryButton } from "src/components/Button";
 import ProfileAvatar from "src/components/ProfileAvatar";
+import { useViewport } from "src/hooks/useViewport";
 import { formatUserNameAndTitle } from "src/utils/helper";
 import { Theme } from "src/theme/types/createPalette";
 import { ICareMemberWithMatchings } from "src/types";
@@ -19,7 +20,7 @@ import {
 } from "src/components/useCommonStyles";
 
 import CareProviderHighlights from "./CareProviderHighlights";
-import CareProviderSpecialities from "./CareProviderSpecialities";
+import ChipsList from "./ChipsList";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -35,6 +36,7 @@ const useStyles = makeStyles((theme: Theme) =>
       flexDirection: "column",
       marginLeft: theme.spacing(2),
       gap: theme.spacing(1),
+      overflow: "hidden",
     },
 
     header: {
@@ -46,6 +48,12 @@ const useStyles = makeStyles((theme: Theme) =>
       color: theme.palette.secondary.main,
       display: "flex",
       alignItems: "center",
+    },
+
+    matchingTypo: {
+      overflow: "hidden",
+      textOverflow: "ellipsis",
+      whiteSpace: "nowrap",
     },
 
     viewProfileBox: {
@@ -71,14 +79,15 @@ const SmallCareProviderCard: FC<SmallCareProviderCardProps> = ({
   const fontClasses = useFontStyles();
   const colorClasses = useColorStyles();
   const layoutClasses = useLayoutStyles();
+  const { isMobile } = useViewport();
 
   return (
     <Box className={clsx(classes.container, className)}>
       <Grid container spacing={2}>
         <Grid item xs={12} className={classes.header}>
           <ProfileAvatar
-            width={90}
-            height={90}
+            width={isMobile ? 48 : 90}
+            height={isMobile ? 48 : 90}
             firstName={careProvider.firstName}
             lastName={careProvider.lastName}
             picture={careProvider.profilePic}
@@ -95,7 +104,11 @@ const SmallCareProviderCard: FC<SmallCareProviderCardProps> = ({
                 <Typography
                   color="secondary"
                   variant="body1"
-                  className={clsx(fontClasses.fontBold, layoutClasses.ml1)}
+                  className={clsx(
+                    fontClasses.fontBold,
+                    layoutClasses.ml1,
+                    classes.matchingTypo
+                  )}
                 >
                   {matching}
                 </Typography>
@@ -127,7 +140,11 @@ const SmallCareProviderCard: FC<SmallCareProviderCardProps> = ({
             >
               Specialties
             </Typography>
-            <CareProviderSpecialities careProvider={careProvider} />
+            <ChipsList
+              chips={careProvider.specialty
+                .filter((speciality) => speciality)
+                .slice(0, 10)}
+            />
           </Grid>
         ) : null}
 

@@ -1,29 +1,40 @@
 import Box from "@material-ui/core/Box";
 import Chip from "@material-ui/core/Chip";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
+import clsx from "clsx";
 import dayjs from "dayjs";
 import { FC } from "react";
 
+import { useViewport } from "src/hooks/useViewport";
 import { Theme } from "src/theme/types/createPalette";
 import { ICareMember } from "src/types";
+
+interface StyleProps {
+  isMobile: boolean;
+}
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
       display: "flex",
       alignItems: "center",
-      gap: theme.spacing(0.5),
+      flexWrap: "wrap",
+      gap: theme.spacing(1.5, 1),
     },
     chip: {
       color: theme.palette.primaryMint.main,
       fontWeight: "bold",
       borderRadius: theme.spacing(0.5),
+      height: ({ isMobile }: StyleProps) => (isMobile ? 20 : 32),
+
+      "& .MuiChip-label": {
+        padding: ({ isMobile }: StyleProps) =>
+          isMobile ? theme.spacing(0, 0.75) : theme.spacing(0, 1.5),
+      },
     },
     availableChip: {
       backgroundColor: "#ECF5E4",
       color: theme.palette.secondaryGreen1.main,
-      fontWeight: "bold",
-      borderRadius: theme.spacing(0.5),
     },
   })
 );
@@ -35,7 +46,8 @@ interface CareProviderHighlightsProps {
 const CareProviderHighlights: FC<CareProviderHighlightsProps> = ({
   careProvider,
 }) => {
-  const classes = useStyles();
+  const { isMobile } = useViewport();
+  const classes = useStyles({ isMobile });
 
   const ceritification = () => {
     if (careProvider.boardCertification >= 3) {
@@ -78,7 +90,10 @@ const CareProviderHighlights: FC<CareProviderHighlightsProps> = ({
       ) : null}
 
       {dayjs().diff(careProvider.nextAvailableAt, "day") <= 7 && (
-        <Chip label="Available Soon" className={classes.availableChip} />
+        <Chip
+          label="Available Soon"
+          className={clsx(classes.chip, classes.availableChip)}
+        />
       )}
     </Box>
   );

@@ -5,6 +5,7 @@ import { makeStyles, createStyles } from "@material-ui/core/styles";
 
 import { Theme } from "src/theme/types/createPalette";
 import { BookingSearchForm } from "src/types";
+import { useViewport } from "src/hooks/useViewport";
 import { ReactComponent as SearchIcon } from "src/icons/Search.svg";
 
 import BookingSearchOption from "./BookingSearchOption";
@@ -22,10 +23,18 @@ const useStyles = makeStyles((theme: Theme) =>
       justifyContent: "space-between",
     },
 
+    optionListWithSearch: {
+      display: "flex",
+      alignItems: "center",
+      flexDirection: "row",
+    },
+
     optionList: {
       display: "flex",
       alignItems: "center",
       flexDirection: "row",
+      flexWrap: "wrap",
+      gap: theme.spacing(1),
     },
 
     iconWrapper: {
@@ -70,6 +79,7 @@ const BookingSearchBar: FC<BookingSearchBarProps> = ({
   onChange,
 }) => {
   const classes = useStyles();
+  const { isMobile } = useViewport();
 
   const searchOptions: TSearchOption[] = [
     {
@@ -96,24 +106,26 @@ const BookingSearchBar: FC<BookingSearchBarProps> = ({
 
   return (
     <Box className={classes.container}>
-      <Box className={classes.optionList}>
+      <Box className={classes.optionListWithSearch}>
         <SearchIcon className={classes.iconWrapper} />
 
-        {searchOptions.map((searchOption) => (
-          <BookingSearchOption
-            key={searchOption.key}
-            className={classes.searchOption}
-            value={searchForm[searchOption.key]}
-            label={searchOption.label}
-            options={searchOption.options}
-            onChange={(value: Nullable<string>) => {
-              onChange({ ...searchForm, [searchOption.key]: value });
-            }}
-          />
-        ))}
+        <Box className={classes.optionList}>
+          {searchOptions.map((searchOption) => (
+            <BookingSearchOption
+              key={searchOption.key}
+              className={classes.searchOption}
+              value={searchForm[searchOption.key]}
+              label={searchOption.label}
+              options={searchOption.options}
+              onChange={(value: Nullable<string>) => {
+                onChange({ ...searchForm, [searchOption.key]: value });
+              }}
+            />
+          ))}
+        </Box>
       </Box>
 
-      {Boolean(showCount) && (
+      {Boolean(showCount) && !isMobile && (
         <Typography className={classes.showCount}>
           {`Showing ${showCount} providers`}
         </Typography>

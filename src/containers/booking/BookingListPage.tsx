@@ -51,7 +51,7 @@ const BookingListPage: FC = () => {
           searchForm.insurance &&
           careProvider.insurance.some((insurance) => insurance.type === searchForm.insurance)
         ) {
-          matchings.push(`Accepts ${searchForm.insurance.toLowerCase()}`);
+          matchings.push(`Accepts ${careProvider.insurance.map((insurance) => insurance.type.toLowerCase()).join(", ")}`);
         }
 
         if (

@@ -1,6 +1,5 @@
 import { FC } from "react";
 import Box from "@material-ui/core/Box";
-import Chip from "@material-ui/core/Chip";
 import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
@@ -8,6 +7,7 @@ import { makeStyles, createStyles } from "@material-ui/core/styles";
 
 import { ICareMember } from "src/types";
 import { Theme } from "src/theme/types/createPalette";
+import ChipsList from "./ChipsList";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -86,15 +86,9 @@ const ProviderDetailsCard: FC<ProviderDetailsCardProps> = ({
             Specialties
           </Typography>
 
-          {careProvider.specialty
-            .filter((each) => each)
-            .map((speciality) => (
-              <Chip
-                key={speciality}
-                label={speciality}
-                className={classes.chip}
-              />
-            ))}
+          <ChipsList
+            chips={careProvider.specialty.filter((speciality) => speciality)}
+          />
         </Grid>
 
         <Divider className={classes.divider} />
@@ -104,11 +98,9 @@ const ProviderDetailsCard: FC<ProviderDetailsCardProps> = ({
             Languages
           </Typography>
 
-          {careProvider.language
-            .filter((each) => each)
-            .map((language) => (
-              <Chip key={language} label={language} className={classes.chip} />
-            ))}
+          <ChipsList
+            chips={careProvider.language.filter((language) => language)}
+          />
         </Grid>
 
         <Divider className={classes.divider} />
@@ -118,11 +110,9 @@ const ProviderDetailsCard: FC<ProviderDetailsCardProps> = ({
             License
           </Typography>
 
-          {careProvider.state
-            .filter((each) => each)
-            .map((state) => (
-              <Chip key={state} label={state} className={classes.chip} />
-            ))}
+          <ChipsList
+            chips={careProvider.state.filter((state) => state).slice(0, 10)}
+          />
         </Grid>
 
         <Divider className={classes.divider} />
