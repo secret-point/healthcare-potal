@@ -35,7 +35,7 @@ export interface IProfileSetUpCardForm {
   email: string;
   firstName: string;
   insuranceMemberId: string;
-  insurances: string[];
+  insurance: string;
   lastName: string;
   password: string;
   phone: string;

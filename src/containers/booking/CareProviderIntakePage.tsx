@@ -45,7 +45,7 @@ const CareProviderInTakePage: FC = () => {
     password: form.password,
     billingAddress: form.billingAddress,
     dob: form.dob,
-    insurances: form.insurances,
+    insurances: [form.insurance],
     stripeID: form.paymentId,
     confirmPassword: form.confirmPassword,
   });

@@ -78,11 +78,10 @@ export const PROFILE_FIELD_GROUPS: IFormGroup[] = [
     fields: [
       {
         label: "Insurance",
-        path: "insurances",
+        path: "insurance",
         placeholder: "Insurance",
-        type: FieldType.MULTI_SELECT,
+        type: FieldType.SELECT,
         required: true,
-        // To be placed with the api response
         options: [],
         ...commons,
       },
