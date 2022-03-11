@@ -3,7 +3,8 @@ import { useQuery, useMutation } from "react-query";
 import {
   IBookAppointmentForm,
   ICareMember,
-  ICareMemberAvailability,
+  ICareMemberAvailableDates,
+  ICareMemberAvailableDatesAndTimes,
 } from "src/types";
 
 import { QUERY_KEYS } from "./constants";
@@ -36,12 +37,12 @@ export const useGetCareProvider = (providerId: string) => {
   );
 };
 
-export const useCareMemberAvailabilitiesByEmail = (email: Maybe<string>) => {
+export const useCareMemberAvailableTimesByEmail = (email: Maybe<string>) => {
   const apiFetch = useApiFetch();
 
   return useQuery(
-    [QUERY_KEYS.FETCH_PROVIDER_AVAILABILITIES, email],
-    async (): Promise<ICareMemberAvailability> => {
+    [QUERY_KEYS.FETCH_PROVIDER_AVAILABLE_TIMES, email],
+    async (): Promise<ICareMemberAvailableDatesAndTimes> => {
       if (!email) {
         return {
           appointmentTypeID: "",
@@ -51,6 +52,26 @@ export const useCareMemberAvailabilitiesByEmail = (email: Maybe<string>) => {
       }
 
       const { data } = await apiFetch(`/acuity/available-times?email=${email}`);
+      return data;
+    }
+  );
+};
+
+export const useCareMemberAvailableDatesByEmail = (email: Maybe<string>) => {
+  const apiFetch = useApiFetch();
+
+  return useQuery(
+    [QUERY_KEYS.FETCH_PROVIDER_AVAILABLE_DATES, email],
+    async (): Promise<ICareMemberAvailableDates> => {
+      if (!email) {
+        return {
+          appointmentTypeID: "",
+          calendarID: "",
+          availableDates: [],
+        };
+      }
+
+      const { data } = await apiFetch(`/acuity/available-dates?email=${email}`);
       return data;
     }
   );

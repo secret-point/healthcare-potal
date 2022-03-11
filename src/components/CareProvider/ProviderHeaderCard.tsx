@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import dayjs from "dayjs";
 import { FC } from "react";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
@@ -20,11 +21,13 @@ import CareProviderHighlights from "./CareProviderHighlights";
 
 interface ProviderHeaderCardProps {
   careProvider: ICareMember;
+  nextAvailableAt: Nullable<Date>;
   onClickBookAppointment: VoidFunction;
 }
 
 const ProviderHeaderCard: FC<ProviderHeaderCardProps> = ({
   careProvider,
+  nextAvailableAt,
   onClickBookAppointment,
 }) => {
   const { isMobile } = useViewport();
@@ -60,7 +63,10 @@ const ProviderHeaderCard: FC<ProviderHeaderCardProps> = ({
               variant="subtitle2"
               className={clsx(colorClasses.secondaryNavy1, layoutClasses.ml2)}
             >
-              <b>Next available appointment:</b>
+              <b>Next available appointment:&nbsp;</b>
+              {nextAvailableAt
+                ? dayjs(nextAvailableAt).format("MM/DD/YYYY hh:mm A")
+                : ""}
             </Typography>
           </Box>
         </Grid>

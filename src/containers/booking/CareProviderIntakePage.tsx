@@ -5,7 +5,7 @@ import Grid from "@material-ui/core/Grid";
 import {
   useRegister,
   useGetCareProvider,
-  useCareMemberAvailabilitiesByEmail,
+  useCareMemberAvailableTimesByEmail,
   useBookAppointment,
 } from "src/api";
 import { ROUTES } from "src/app/types";
@@ -14,7 +14,7 @@ import CareProviderInTake from "src/components/CareProviderInTake/CareProviderIn
 import { useNotification } from "src/hooks/useNotification";
 import {
   IBookAppointmentForm,
-  ICareMemberAvailability,
+  ICareMemberAvailableDatesAndTimes,
   IProfileSetUpCardForm,
 } from "src/types";
 
@@ -28,7 +28,7 @@ const CareProviderInTakePage: FC = () => {
   const register = useRegister();
   const bookAppointment = useBookAppointment();
   const { data: careProvider } = useGetCareProvider(providerId);
-  const { data: availability } = useCareMemberAvailabilitiesByEmail(
+  const { data: availability } = useCareMemberAvailableTimesByEmail(
     careProvider?.email
   );
 
@@ -52,7 +52,7 @@ const CareProviderInTakePage: FC = () => {
 
   const getAppointmentForm = (
     form: IProfileSetUpCardForm,
-    availability: ICareMemberAvailability
+    availability: ICareMemberAvailableDatesAndTimes
   ): IBookAppointmentForm => ({
     email: form.email,
     calendarID: availability.calendarID,

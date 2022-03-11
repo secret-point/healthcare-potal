@@ -2,7 +2,10 @@ import { FC } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 
-import { useGetCareProvider } from "src/api/providerApi";
+import {
+  useGetCareProvider,
+  useCareMemberAvailableTimesByEmail,
+} from "src/api/providerApi";
 import Container from "src/components/Container";
 import FullCareProviderCard from "src/components/CareProvider/FullCareProviderCard";
 import { ROUTES } from "src/app/types";
@@ -12,6 +15,15 @@ const FullCareProviderPage: FC = () => {
   const { providerId } = useParams<{ providerId: string }>();
 
   const { data: careProvider } = useGetCareProvider(providerId);
+
+  const { data: availability } = useCareMemberAvailableTimesByEmail(
+    careProvider?.email
+  );
+
+  const nextAvailable =
+    availability?.availableDates?.[0]?.availableTimes?.[0].time;
+
+  const nextAvailableAt = nextAvailable ? new Date(nextAvailable) : null;
 
   const handleClickBookAppointment = () => {
     history.push(`${ROUTES.BOOKING}/${providerId}/intake`);
@@ -23,6 +35,7 @@ const FullCareProviderPage: FC = () => {
         {careProvider && (
           <FullCareProviderCard
             careProvider={careProvider}
+            nextAvailableAt={nextAvailableAt}
             onClickBookAppointment={handleClickBookAppointment}
           />
         )}

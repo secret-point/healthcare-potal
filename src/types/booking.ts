@@ -15,8 +15,14 @@ export interface ICareMemberAvailableDate {
   availableTimes: ICareMemberAvailableTime[];
 }
 
-export interface ICareMemberAvailability {
+export interface ICareMemberAvailableDatesAndTimes {
   appointmentTypeID: string;
   calendarID: string;
   availableDates: ICareMemberAvailableDate[];
+}
+
+export interface ICareMemberAvailableDates {
+  appointmentTypeID: string;
+  calendarID: string;
+  availableDates: { date: string }[];
 }
