@@ -106,6 +106,7 @@ export interface ICareMember
   experience: number;
   nextAvailableAt: Date;
   bio: string;
+  hidden: boolean;
 }
 
 export interface IExtProvider {
