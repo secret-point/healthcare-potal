@@ -61,6 +61,10 @@ const useStyles = makeStyles((theme: Theme) =>
       alignItems: "center",
       gap: theme.spacing(2),
     },
+
+    mobileViewProfileBox: {
+      flexDirection: "column",
+    },
   })
 );
 
@@ -152,10 +156,17 @@ const SmallCareProviderCard: FC<SmallCareProviderCardProps> = ({
           <Divider />
         </Grid>
 
-        <Grid item xs={12} className={classes.viewProfileBox}>
+        <Grid
+          item
+          xs={12}
+          className={clsx(
+            classes.viewProfileBox,
+            isMobile && classes.mobileViewProfileBox
+          )}
+        >
           <PrimaryButton
             text="View Profile"
-            fullWidth={false}
+            fullWidth={isMobile}
             onClick={() => onClickProfile(careProvider._id)}
           />
 

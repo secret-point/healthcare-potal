@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
 
     mobileContent: {
-      margin: 0,
+      margin: theme.spacing(3, 0, 0),
     },
 
     topBarWrapper: {

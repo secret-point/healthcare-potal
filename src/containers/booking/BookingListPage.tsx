@@ -42,11 +42,13 @@ const BookingListPage: FC = () => {
   /* prettier-ignore */
   const filteredCareProviders = useMemo(() => {
     return careProviders
-      .filter((careProvider) => CARE_PROVIDER_TYPES.some(
-        (type) => type === formatUserType(careProvider.userType))
+      .filter((careProvider) => searchForm.type ?
+        formatUserType(careProvider.userType) === searchForm.type :
+        CARE_PROVIDER_TYPES.some((type) => type === formatUserType(careProvider.userType))
       )
       .map((careProvider) => {
         const matchings = [];
+
         if (
           searchForm.insurance &&
           careProvider.insurance.some((insurance) => insurance.type === searchForm.insurance)

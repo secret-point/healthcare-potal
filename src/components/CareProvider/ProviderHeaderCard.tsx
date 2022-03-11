@@ -11,6 +11,7 @@ import {
 } from "src/components/useCommonStyles";
 import { PrimaryButton } from "src/components/Button";
 import CareProviderCardWithAvatar from "src/components/CareProvider/CareProviderCardWithAvatar";
+import { useViewport } from "src/hooks/useViewport";
 import { ICareMember } from "src/types";
 import { formatUserNameAndTitle } from "src/utils";
 import { ReactComponent as CalendarIcon } from "src/icons/Calendar.svg";
@@ -26,6 +27,7 @@ const ProviderHeaderCard: FC<ProviderHeaderCardProps> = ({
   careProvider,
   onClickBookAppointment,
 }) => {
+  const { isMobile } = useViewport();
   const fontClasses = useFontStyles();
   const colorClasses = useColorStyles();
   const layoutClasses = useLayoutStyles();
@@ -66,7 +68,7 @@ const ProviderHeaderCard: FC<ProviderHeaderCardProps> = ({
         <Grid item xs={12}>
           <PrimaryButton
             text="Book an appointment"
-            fullWidth={false}
+            fullWidth={isMobile}
             onClick={onClickBookAppointment}
           />
         </Grid>

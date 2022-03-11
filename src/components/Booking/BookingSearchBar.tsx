@@ -39,6 +39,8 @@ const useStyles = makeStyles((theme: Theme) =>
 
     iconWrapper: {
       marginRight: theme.spacing(3),
+      minHeight: theme.spacing(2),
+      minWidth: theme.spacing(2),
     },
 
     searchOption: {

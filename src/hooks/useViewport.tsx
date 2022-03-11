@@ -37,16 +37,17 @@ const responsive = {
   },
   tablet: {
     max: 1024,
-    min: 468,
+    min: 640,
   },
   mobile: {
-    max: 468,
+    max: 640,
     min: 0,
   },
 };
 
 export const useViewport = () => {
   const { width, height } = useContext(viewportContext);
+
   const getDeviceType = (width: number) => {
     if (width >= responsive.desktop.min) return "desktop";
     if (width >= responsive.tablet.min) return "tablet";

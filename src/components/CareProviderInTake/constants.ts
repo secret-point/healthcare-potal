@@ -113,6 +113,7 @@ export const PROFILE_FIELD_GROUPS: IFormGroup[] = [
         label: "Credit, Debit, or HSA Card",
         path: "stripeToken",
         type: FieldType.STRIPE_CARD,
+        ...commons,
         required: true,
         lg: 12,
       },
