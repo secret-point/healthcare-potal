@@ -1,7 +1,8 @@
 import clsx from "clsx";
-import { FC, MouseEventHandler, useEffect, useState } from "react";
+import { ChangeEvent, FC, MouseEventHandler, useEffect, useState } from "react";
 import Box from "@material-ui/core/Box";
 import Chip from "@material-ui/core/Chip";
+import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Divider from "@material-ui/core/Divider";
 import Popover from "@material-ui/core/Popover";
@@ -85,14 +86,16 @@ const useStyles = makeStyles((theme: Theme) =>
 interface BookingSearchOptionProps {
   className?: string;
   label: string;
-  value: Nullable<string>;
+  type: "radio" | "check";
+  value: Nullable<string | string[]>;
   options: string[];
-  onChange: (value: Nullable<string>) => void;
+  onChange: (value: Nullable<string | string[]>) => void;
 }
 
 const BookingSearchOption: FC<BookingSearchOptionProps> = ({
   className,
   label,
+  type,
   value,
   options,
   onChange,
@@ -113,9 +116,22 @@ const BookingSearchOption: FC<BookingSearchOptionProps> = ({
     setAnchorEl(null);
   };
 
-  const handleChange = (value: Nullable<string>) => {
+  const handleChange = (value: Nullable<string | string[]>) => {
     onChange(value);
     handleClose();
+  };
+
+  const handleCheckboxChange = (
+    event: ChangeEvent<HTMLInputElement>,
+    option: string
+  ) => {
+    if (typeof current === "string" || !current) return;
+
+    if (event.target.checked) {
+      setCurrent([...current, option]);
+    } else {
+      setCurrent(current.filter((each) => each !== option));
+    }
   };
 
   const isMenuOpen = Boolean(anchorEl);
@@ -124,7 +140,7 @@ const BookingSearchOption: FC<BookingSearchOptionProps> = ({
   return (
     <div className={className}>
       <Chip
-        label={value || label}
+        label={Array.isArray(value) ? label : value || label}
         className={clsx(classes.chip, value && classes.selectedChip)}
         onClick={handleClick}
       />
@@ -142,23 +158,45 @@ const BookingSearchOption: FC<BookingSearchOptionProps> = ({
       >
         <Typography className={classes.popoverLabel}>{label}</Typography>
 
-        {options.map((option) => (
-          <FormControlLabel
-            value={option}
-            control={
-              <Radio
-                color="secondary"
-                checked={option === current}
-                onClick={() => setCurrent(option)}
-              />
-            }
-            label={option}
-            className={clsx(
-              classes.formControlLabel,
-              option === value && classes.selectedFormControlLabel
-            )}
-          />
-        ))}
+        {type === "radio" &&
+          options.map((option) => (
+            <FormControlLabel
+              value={option}
+              control={
+                <Radio
+                  color="secondary"
+                  checked={option === current}
+                  onClick={() => setCurrent(option)}
+                />
+              }
+              label={option}
+              className={clsx(
+                classes.formControlLabel,
+                option === value && classes.selectedFormControlLabel
+              )}
+            />
+          ))}
+
+        {type === "check" &&
+          options.map((option) => (
+            <FormControlLabel
+              value={option}
+              control={
+                <Checkbox
+                  color="secondary"
+                  checked={(current as string[])?.some(
+                    (each) => each === option
+                  )}
+                  onChange={(event) => handleCheckboxChange(event, option)}
+                />
+              }
+              label={option}
+              className={clsx(
+                classes.formControlLabel,
+                option === value && classes.selectedFormControlLabel
+              )}
+            />
+          ))}
 
         <Divider className={classes.divider} />
 
@@ -170,7 +208,7 @@ const BookingSearchOption: FC<BookingSearchOptionProps> = ({
             textClassName={clsx(classes.buttonText, classes.clearButtonText)}
             fullWidth={false}
             variant="text"
-            onClick={() => handleChange(null)}
+            onClick={() => handleChange(Array.isArray(value) ? [] : null)}
           />
           <Button
             text="Save"

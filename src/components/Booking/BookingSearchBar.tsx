@@ -59,6 +59,7 @@ type TSearchOption = {
   label: string;
   key: keyof BookingSearchForm;
   options: string[];
+  type: "radio" | "check";
 };
 
 interface BookingSearchBarProps {
@@ -88,21 +89,25 @@ const BookingSearchBar: FC<BookingSearchBarProps> = ({
       label: "Type of provider",
       key: "type",
       options: providerTypes,
+      type: "check",
     },
     {
       label: "State",
       key: "state",
       options: states,
+      type: "radio",
     },
     {
       label: "Insurance",
       key: "insurance",
       options: insurances,
+      type: "radio",
     },
     {
       label: "Language",
       key: "language",
       options: languages,
+      type: "radio",
     },
   ];
 
@@ -116,10 +121,11 @@ const BookingSearchBar: FC<BookingSearchBarProps> = ({
             <BookingSearchOption
               key={searchOption.key}
               className={classes.searchOption}
-              value={searchForm[searchOption.key]}
               label={searchOption.label}
+              type={searchOption.type}
+              value={searchForm[searchOption.key]}
               options={searchOption.options}
-              onChange={(value: Nullable<string>) => {
+              onChange={(value: Nullable<string | string[]>) => {
                 onChange({ ...searchForm, [searchOption.key]: value });
               }}
             />

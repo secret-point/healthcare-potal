@@ -22,7 +22,7 @@ const BookingListPage: FC = () => {
   const [searchForm, setSearchForm] = useState<BookingSearchForm>({
     insurance: null,
     language: null,
-    type: null,
+    type: [],
     state: null,
   });
 
@@ -42,10 +42,16 @@ const BookingListPage: FC = () => {
   /* prettier-ignore */
   const filteredCareProviders = useMemo(() => {
     return careProviders
-      .filter((careProvider) => !careProvider.hidden && (
-        searchForm.type ? formatUserType(careProvider.userType) === searchForm.type :
-        CARE_PROVIDER_TYPES.some((type) => type === formatUserType(careProvider.userType))
-      ))
+      .filter((careProvider) => {
+        if (careProvider.hidden) {
+          return false;
+        }
+        const userType = formatUserType(careProvider.userType);
+        if (searchForm.type.length) {
+          return searchForm.type.some((each) => each === userType);
+        }
+        return CARE_PROVIDER_TYPES.some((type) => type === userType);
+      })
       .map((careProvider) => {
         const matchings = [];
 
