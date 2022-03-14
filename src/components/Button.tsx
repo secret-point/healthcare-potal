@@ -172,5 +172,9 @@ export const PrimaryButton = withStyles((theme: any) => ({
       color: "white !important",
       letterSpacing: "inherit",
     },
+
+    "&.Mui-disabled": {
+      backgroundColor: `${theme.palette.disabled.main} !important`,
+    },
   },
 }))(Button);

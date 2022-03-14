@@ -31,6 +31,7 @@ const CareProviderInTake: FC<CareProviderInTakeProps> = ({
   const layoutClasses = useLayoutStyles();
 
   const { data: payers = [] } = useAllPayerList();
+
   const payerOptions: TDropItem[] = useMemo(() => {
     return payers.map((payer) => ({
       code: payer._id,
@@ -50,7 +51,11 @@ const CareProviderInTake: FC<CareProviderInTakeProps> = ({
       </Grid>
 
       <Grid item xs={12} className={layoutClasses.mt4}>
-        <ProfileSetUpCard payerOptions={payerOptions} onSubmit={onSubmit} />
+        <ProfileSetUpCard
+          selectedTime={selectedTime}
+          payerOptions={payerOptions}
+          onSubmit={onSubmit}
+        />
       </Grid>
     </Grid>
   );
