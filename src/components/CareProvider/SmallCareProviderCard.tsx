@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import { FC } from "react";
 import Box from "@material-ui/core/Box";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
@@ -12,7 +13,10 @@ import ProfileAvatar from "src/components/ProfileAvatar";
 import { useViewport } from "src/hooks/useViewport";
 import { formatUserNameAndTitle } from "src/utils/helper";
 import { Theme } from "src/theme/types/createPalette";
-import { ICareMemberWithMatchings } from "src/types";
+import {
+  ICareMemberWithMatchings,
+  ICareMemberAvailabilityRecord,
+} from "src/types";
 import {
   useColorStyles,
   useFontStyles,
@@ -69,12 +73,14 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface SmallCareProviderCardProps {
+  availabilityRecord: ICareMemberAvailabilityRecord;
   careProvider: ICareMemberWithMatchings;
   className?: string;
   onClickProfile: (id: string) => void;
 }
 
 const SmallCareProviderCard: FC<SmallCareProviderCardProps> = ({
+  availabilityRecord,
   careProvider,
   className,
   onClickProfile,
@@ -170,9 +176,24 @@ const SmallCareProviderCard: FC<SmallCareProviderCardProps> = ({
             onClick={() => onClickProfile(careProvider._id)}
           />
 
-          <Typography className={colorClasses.secondaryNavy1}>
-            Next available appointment in 3 days
-          </Typography>
+          {!availabilityRecord.error ? (
+            <Typography className={colorClasses.secondaryNavy1}>
+              Next available appointment on&nbsp;
+              {availabilityRecord.isLoading ? (
+                <CircularProgress
+                  className={layoutClasses.ml1}
+                  size={20}
+                  color="secondary"
+                />
+              ) : (
+                availabilityRecord.data?.availableDates?.[0]?.date
+              )}
+            </Typography>
+          ) : (
+            <Typography className={colorClasses.accentRed}>
+              Not available
+            </Typography>
+          )}
         </Grid>
       </Grid>
     </Box>

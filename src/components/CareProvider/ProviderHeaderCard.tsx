@@ -2,6 +2,7 @@ import clsx from "clsx";
 import dayjs from "dayjs";
 import { FC } from "react";
 import Box from "@material-ui/core/Box";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 
@@ -22,12 +23,14 @@ import CareProviderHighlights from "./CareProviderHighlights";
 interface ProviderHeaderCardProps {
   careProvider: ICareMember;
   nextAvailableAt: Nullable<Date>;
+  isLoadingAvailability: boolean;
   onClickBookAppointment: VoidFunction;
 }
 
 const ProviderHeaderCard: FC<ProviderHeaderCardProps> = ({
   careProvider,
   nextAvailableAt,
+  isLoadingAvailability,
   onClickBookAppointment,
 }) => {
   const { isMobile } = useViewport();
@@ -64,6 +67,13 @@ const ProviderHeaderCard: FC<ProviderHeaderCardProps> = ({
               className={clsx(colorClasses.secondaryNavy1, layoutClasses.ml2)}
             >
               <b>Next available appointment:&nbsp;</b>
+              {isLoadingAvailability && (
+                <CircularProgress
+                  className={layoutClasses.ml1}
+                  size={16}
+                  color="secondary"
+                />
+              )}
               {nextAvailableAt
                 ? dayjs(nextAvailableAt).format("MM/DD/YYYY hh:mm A")
                 : ""}

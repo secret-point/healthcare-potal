@@ -10,12 +10,14 @@ import ProviderDetailsCard from "./ProviderDetailsCard";
 interface FullCareProviderCardProps {
   careProvider: ICareMember;
   nextAvailableAt: Nullable<Date>;
+  isLoadingAvailability: boolean;
   onClickBookAppointment: VoidFunction;
 }
 
 const FullCareProviderCard: FC<FullCareProviderCardProps> = ({
   careProvider,
   nextAvailableAt,
+  isLoadingAvailability,
   onClickBookAppointment,
 }) => {
   const layoutClasses = useLayoutStyles();
@@ -26,6 +28,7 @@ const FullCareProviderCard: FC<FullCareProviderCardProps> = ({
         <ProviderHeaderCard
           careProvider={careProvider}
           nextAvailableAt={nextAvailableAt}
+          isLoadingAvailability={isLoadingAvailability}
           onClickBookAppointment={onClickBookAppointment}
         />
       </Grid>

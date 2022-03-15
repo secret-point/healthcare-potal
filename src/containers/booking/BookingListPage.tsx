@@ -1,5 +1,5 @@
 import _ from "lodash";
-import { FC, useState, useMemo } from "react";
+import { FC, useEffect, useState, useMemo } from "react";
 import { useHistory } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 
@@ -11,13 +11,17 @@ import { useLayoutStyles } from "src/components/useCommonStyles";
 import BookingSearchBar from "src/components/Booking/BookingSearchBar";
 import SmallCareProviderCard from "src/components/CareProvider/SmallCareProviderCard";
 import { BookingSearchForm, ICareMemberWithMatchings } from "src/types";
+
 import { CARE_PROVIDER_TYPES } from "./constants";
+import useCareMemberAvailableTimes from "./useCareMemberAvailableTimes";
 
 const BookingListPage: FC = () => {
   const history = useHistory();
   const layoutClasses = useLayoutStyles();
 
   const { data: careProviders = [] } = useAllCareProviderList();
+
+  const { recordsByEmail, fetchNewRecords } = useCareMemberAvailableTimes();
 
   const [searchForm, setSearchForm] = useState<BookingSearchForm>({
     insurance: null,
@@ -82,6 +86,12 @@ const BookingListPage: FC = () => {
       .slice(0, 3) as ICareMemberWithMatchings[];
   }, [careProviders, searchForm]);
 
+  useEffect(() => {
+    filteredCareProviders.forEach((provider) => {
+      fetchNewRecords(provider.email);
+    });
+  }, [fetchNewRecords, filteredCareProviders]);
+
   const handleClickViewProfile = (providerId: string) => {
     history.push(`${ROUTES.BOOKING}/${providerId}`);
   };
@@ -104,6 +114,9 @@ const BookingListPage: FC = () => {
         {filteredCareProviders.map((provider) => (
           <SmallCareProviderCard
             key={provider._id}
+            availabilityRecord={
+              recordsByEmail[provider.email] || { isLoading: true, data: null }
+            }
             className={layoutClasses.mb2}
             careProvider={provider}
             onClickProfile={handleClickViewProfile}

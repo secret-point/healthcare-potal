@@ -16,7 +16,7 @@ const FullCareProviderPage: FC = () => {
 
   const { data: careProvider } = useGetCareProvider(providerId);
 
-  const { data: availability } = useCareMemberAvailableTimesByEmail(
+  const { data: availability, isLoading } = useCareMemberAvailableTimesByEmail(
     careProvider?.email
   );
 
@@ -36,6 +36,7 @@ const FullCareProviderPage: FC = () => {
           <FullCareProviderCard
             careProvider={careProvider}
             nextAvailableAt={nextAvailableAt}
+            isLoadingAvailability={isLoading}
             onClickBookAppointment={handleClickBookAppointment}
           />
         )}

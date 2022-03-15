@@ -136,12 +136,17 @@ const BookingSearchOption: FC<BookingSearchOptionProps> = ({
 
   const isMenuOpen = Boolean(anchorEl);
   const id = isMenuOpen ? label : undefined;
+  const chipLabel = (Array.isArray(value) ? value.join(", ") : value) || label;
 
   return (
     <div className={className}>
       <Chip
-        label={Array.isArray(value) ? label : value || label}
-        className={clsx(classes.chip, value && classes.selectedChip)}
+        label={chipLabel}
+        className={clsx(
+          classes.chip,
+          Array.isArray(value) && value.length && classes.selectedChip,
+          !Array.isArray(value) && value && classes.selectedChip
+        )}
         onClick={handleClick}
       />
 

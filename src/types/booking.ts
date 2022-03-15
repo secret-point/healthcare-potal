@@ -26,3 +26,9 @@ export interface ICareMemberAvailableDates {
   calendarID: string;
   availableDates: { date: string }[];
 }
+
+export interface ICareMemberAvailabilityRecord {
+  isLoading: boolean;
+  error?: boolean;
+  data: Nullable<ICareMemberAvailableDatesAndTimes>;
+}
