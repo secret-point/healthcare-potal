@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import dayjs from "dayjs";
 import { FC } from "react";
 import Box from "@material-ui/core/Box";
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -186,7 +187,9 @@ const SmallCareProviderCard: FC<SmallCareProviderCardProps> = ({
                   color="secondary"
                 />
               ) : (
-                availabilityRecord.data?.availableDates?.[0]?.date
+                dayjs(
+                  availabilityRecord.data?.availableDates?.[0]?.date
+                ).format("MMMM DD, YYYY (dddd)")
               )}
             </Typography>
           ) : (

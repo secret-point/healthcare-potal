@@ -8,6 +8,7 @@ import { makeStyles, createStyles } from "@material-ui/core/styles";
 
 import { PrimaryButton } from "src/components/Button";
 import CheckboxField from "src/components/CheckboxField";
+import PasswordUpdateResult from "src/components/PasswordUpdateResult";
 import InTakeFormGroupInput from "src/components/InTake/InTakeFormGroupInput";
 import { useViewport } from "src/hooks/useViewport";
 import { Theme } from "src/theme/types/createPalette";
@@ -93,6 +94,16 @@ const ProfileSetUpForm: FC<ProfileSetUpFormProps> = ({
   const isDisabled =
     !isDirty || hasErrors || !values.updates || !values.policy || !selectedTime;
 
+  const password = values.password;
+  const confirmPassword = values.confirmPassword;
+
+  const showResult = Boolean(password || confirmPassword);
+  const shouldPasswordMatch =
+    Boolean(password) &&
+    Boolean(confirmPassword) &&
+    password === confirmPassword;
+  const shouldLongerThan8 = Boolean(password) && password.length >= 8;
+
   return (
     <>
       <Grid container spacing={2}>
@@ -102,6 +113,13 @@ const ProfileSetUpForm: FC<ProfileSetUpFormProps> = ({
           </Grid>
         ))}
       </Grid>
+
+      {showResult && (
+        <PasswordUpdateResult
+          shouldLongerThan8={shouldLongerThan8}
+          shouldPasswordMatch={shouldPasswordMatch}
+        />
+      )}
 
       <Grid item xs={12}>
         <Divider className={classes.divider} />

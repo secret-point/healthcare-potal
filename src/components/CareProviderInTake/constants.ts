@@ -162,6 +162,7 @@ export const PROFILE_FIELD_GROUPS: IFormGroup[] = [
         path: "password",
         placeholder: "Password",
         required: true,
+        type: FieldType.PASSWORD,
         ...commons,
       },
       {
@@ -169,6 +170,7 @@ export const PROFILE_FIELD_GROUPS: IFormGroup[] = [
         path: "confirmPassword",
         placeholder: "Confirm Password",
         required: true,
+        type: FieldType.PASSWORD,
         ...commons,
       },
     ],

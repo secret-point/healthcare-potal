@@ -75,7 +75,7 @@ const ProviderHeaderCard: FC<ProviderHeaderCardProps> = ({
                 />
               )}
               {nextAvailableAt
-                ? dayjs(nextAvailableAt).format("MM/DD/YYYY hh:mm A")
+                ? dayjs(nextAvailableAt).format("MMMM DD YYYY on hh:mm A")
                 : ""}
             </Typography>
           </Box>
