@@ -92,6 +92,27 @@ const SmallCareProviderCard: FC<SmallCareProviderCardProps> = ({
   const layoutClasses = useLayoutStyles();
   const { isMobile } = useViewport();
 
+  const getDifferenceLabel = () => {
+    const today = new Date();
+    const date = dayjs(availabilityRecord.data?.availableDates?.[0]?.date);
+    const diffInDays = Math.ceil(date.diff(today, "days", true));
+    const diffInWeeks = Math.ceil(date.diff(today, "weeks", true));
+    const diffInMonths = Math.ceil(date.diff(today, "months", true));
+
+    if (diffInDays < 7) {
+      return `${diffInDays} days`;
+    }
+    if (diffInWeeks <= 4) {
+      return `${diffInWeeks} weeks`;
+    }
+    return `${diffInMonths} months`;
+  };
+
+  const isNotAvailable =
+    availabilityRecord.error ||
+    (!availabilityRecord.isLoading &&
+      !availabilityRecord.data?.availableDates.length);
+
   return (
     <Box className={clsx(classes.container, className)}>
       <Grid container spacing={2}>
@@ -177,25 +198,19 @@ const SmallCareProviderCard: FC<SmallCareProviderCardProps> = ({
             onClick={() => onClickProfile(careProvider._id)}
           />
 
-          {!availabilityRecord.error ? (
-            <Typography className={colorClasses.secondaryNavy1}>
-              Next available appointment on&nbsp;
-              {availabilityRecord.isLoading ? (
-                <CircularProgress
-                  className={layoutClasses.ml1}
-                  size={20}
-                  color="secondary"
-                />
-              ) : (
-                dayjs(
-                  availabilityRecord.data?.availableDates?.[0]?.date
-                ).format("MMMM DD, YYYY (dddd)")
-              )}
-            </Typography>
-          ) : (
+          {isNotAvailable ? (
             <Typography className={colorClasses.accentRed}>
               Not available
             </Typography>
+          ) : (
+            <Typography className={colorClasses.secondaryNavy1}>
+              Next available appointment in&nbsp;
+              {!availabilityRecord.isLoading && getDifferenceLabel()}
+            </Typography>
+          )}
+
+          {availabilityRecord.isLoading && (
+            <CircularProgress size={20} color="secondary" />
           )}
         </Grid>
       </Grid>

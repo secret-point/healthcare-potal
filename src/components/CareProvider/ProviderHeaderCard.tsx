@@ -67,17 +67,18 @@ const ProviderHeaderCard: FC<ProviderHeaderCardProps> = ({
               className={clsx(colorClasses.secondaryNavy1, layoutClasses.ml2)}
             >
               <b>Next available appointment:&nbsp;</b>
-              {isLoadingAvailability && (
-                <CircularProgress
-                  className={layoutClasses.ml1}
-                  size={16}
-                  color="secondary"
-                />
-              )}
               {nextAvailableAt
                 ? dayjs(nextAvailableAt).format("MMMM DD YYYY on hh:mm A")
                 : ""}
             </Typography>
+
+            {isLoadingAvailability && (
+              <CircularProgress
+                className={layoutClasses.ml1}
+                size={16}
+                color="secondary"
+              />
+            )}
           </Box>
         </Grid>
 
