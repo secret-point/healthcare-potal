@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { useHistory } from "react-router";
 import dayjs from "dayjs";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
@@ -10,6 +11,7 @@ import { TCustomField, User } from "src/types";
 import CustomList from "src/components/CustomList";
 import { TextButton } from "src/components/Button";
 import { AccountEditableField } from "src/types/form";
+import { ROUTES } from "src/app/types";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -42,6 +44,7 @@ const AccountInformation: FC<AccountInformationProps> = ({
   onClickEdit,
 }) => {
   const classes = useStyles();
+  const history = useHistory();
 
   const fields: TCustomField[] = [
     { label: "First Name", path: "firstName" },
@@ -63,7 +66,7 @@ const AccountInformation: FC<AccountInformationProps> = ({
     {
       label: "Date of Birth",
       path: "dob",
-      render: (value) => dayjs(value).format("MM/DD/YYYY"),
+      render: (value: any) => dayjs(value).format("MM/DD/YYYY"),
     },
     { label: "Preferred Pronoun", path: "pronouns" },
     { label: "Biological Sex", path: "gender" },
@@ -78,6 +81,18 @@ const AccountInformation: FC<AccountInformationProps> = ({
         />
       ),
     },
+    user.status === "Pending"
+      ? {
+          label: "Intake Form",
+          path: "onboarding",
+          render: () => (
+            <TextButton
+              text="Complete the intake form"
+              onClick={() => history.push(ROUTES.INTAKE_FORM)}
+            />
+          ),
+        }
+      : null,
     // Hide the verify id for now
     // {
     //   label: "ID",
@@ -93,7 +108,7 @@ const AccountInformation: FC<AccountInformationProps> = ({
     //     </Box>
     //   ),
     // },
-  ];
+  ].filter((each) => each) as TCustomField[];
 
   return (
     <Grid container spacing={2}>
