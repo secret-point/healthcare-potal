@@ -14,10 +14,7 @@ import ProfileAvatar from "src/components/ProfileAvatar";
 import { useViewport } from "src/hooks/useViewport";
 import { formatUserNameAndTitle } from "src/utils/helper";
 import { Theme } from "src/theme/types/createPalette";
-import {
-  ICareMemberWithMatchings,
-  ICareMemberAvailabilityRecord,
-} from "src/types";
+import { ICareMemberWithAvailability } from "src/types";
 import {
   useColorStyles,
   useFontStyles,
@@ -74,14 +71,12 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface SmallCareProviderCardProps {
-  availabilityRecord: ICareMemberAvailabilityRecord;
-  careProvider: ICareMemberWithMatchings;
+  careProvider: ICareMemberWithAvailability;
   className?: string;
   onClickProfile: (id: string) => void;
 }
 
 const SmallCareProviderCard: FC<SmallCareProviderCardProps> = ({
-  availabilityRecord,
   careProvider,
   className,
   onClickProfile,
@@ -94,7 +89,7 @@ const SmallCareProviderCard: FC<SmallCareProviderCardProps> = ({
 
   const getDifferenceLabel = () => {
     const today = new Date();
-    const date = dayjs(availabilityRecord.data?.availableDates?.[0]?.date);
+    const date = dayjs(careProvider.availableDate);
     const diffInDays = Math.ceil(date.diff(today, "days", true));
     const diffInWeeks = Math.ceil(date.diff(today, "weeks", true));
     const diffInMonths = Math.ceil(date.diff(today, "months", true));
@@ -107,11 +102,6 @@ const SmallCareProviderCard: FC<SmallCareProviderCardProps> = ({
     }
     return `${diffInMonths} months`;
   };
-
-  const isNotAvailable =
-    availabilityRecord.error ||
-    (!availabilityRecord.isLoading &&
-      !availabilityRecord.data?.availableDates.length);
 
   return (
     <Box className={clsx(classes.container, className)}>
@@ -198,18 +188,18 @@ const SmallCareProviderCard: FC<SmallCareProviderCardProps> = ({
             onClick={() => onClickProfile(careProvider._id)}
           />
 
-          {isNotAvailable ? (
+          {careProvider.isNotAvailable ? (
             <Typography className={colorClasses.accentRed}>
               Not available
             </Typography>
           ) : (
             <Typography className={colorClasses.secondaryNavy1}>
               Next available appointment in&nbsp;
-              {!availabilityRecord.isLoading && getDifferenceLabel()}
+              {!careProvider.isAvailabilityLoading && getDifferenceLabel()}
             </Typography>
           )}
 
-          {availabilityRecord.isLoading && (
+          {careProvider.isAvailabilityLoading && (
             <CircularProgress size={20} color="secondary" />
           )}
         </Grid>

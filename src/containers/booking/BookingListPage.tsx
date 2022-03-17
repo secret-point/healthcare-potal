@@ -10,7 +10,7 @@ import Container from "src/components/Container";
 import { useLayoutStyles } from "src/components/useCommonStyles";
 import BookingSearchBar from "src/components/Booking/BookingSearchBar";
 import SmallCareProviderCard from "src/components/CareProvider/SmallCareProviderCard";
-import { BookingSearchForm, ICareMemberWithMatchings } from "src/types";
+import { BookingSearchForm, ICareMemberWithAvailability } from "src/types";
 
 import { CARE_PROVIDER_TYPES } from "./constants";
 import useCareMemberAvailableTimes from "./useCareMemberAvailableTimes";
@@ -59,6 +59,16 @@ const BookingListPage: FC = () => {
       .map((careProvider) => {
         const matchings = [];
 
+        const availabilityRecord =
+          recordsByEmail[careProvider.email] ||
+          { isLoading: true, data: null };
+
+        const isAvailabilityLoading = availabilityRecord.isLoading;
+        const availableDate = availabilityRecord.data?.availableDates?.[0]?.date;
+        const isNotAvailable =
+          availabilityRecord.error ||
+          (!availabilityRecord.isLoading && !availabilityRecord.data?.availableDates.length);
+
         if (
           searchForm.insurance &&
           careProvider.insurance.some((insurance) => insurance.type === searchForm.insurance)
@@ -80,11 +90,32 @@ const BookingListPage: FC = () => {
           matchings.push(`Accepts patients in ${searchForm.state}`);
         }
 
-        return { ...careProvider, matchings };
+        return {
+          ...careProvider,
+          availableDate,
+          isNotAvailable,
+          isAvailabilityLoading,
+          matchings,
+        };
       })
-      .sort((provider1, provider2) => provider2.matchings.length - provider1.matchings.length)
-      .slice(0, 3) as ICareMemberWithMatchings[];
-  }, [careProviders, searchForm]);
+      .sort((provider1, provider2) => {
+        if (provider1.isNotAvailable && !provider2.isNotAvailable) {
+          return 1;
+        }
+        if (!provider1.isNotAvailable && provider2.isNotAvailable) {
+          return -1;
+        }
+        if (!provider1.isNotAvailable && !provider2.isNotAvailable) {
+          if (!provider1.isAvailabilityLoading && provider2.isAvailabilityLoading) {
+            return -1;
+          }
+          if (provider1.isAvailabilityLoading && !provider2.isAvailabilityLoading) {
+            return 1;
+          }
+        }
+        return provider2.matchings.length - provider1.matchings.length;
+      }) as ICareMemberWithAvailability[];
+  }, [careProviders, searchForm, recordsByEmail]);
 
   useEffect(() => {
     filteredCareProviders.forEach((provider) => {
@@ -114,9 +145,6 @@ const BookingListPage: FC = () => {
         {filteredCareProviders.map((provider) => (
           <SmallCareProviderCard
             key={provider._id}
-            availabilityRecord={
-              recordsByEmail[provider.email] || { isLoading: true, data: null }
-            }
             className={layoutClasses.mb2}
             careProvider={provider}
             onClickProfile={handleClickViewProfile}

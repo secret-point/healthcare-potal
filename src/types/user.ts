@@ -131,6 +131,9 @@ export interface ICheckAssessmentLinkForm {
   dob?: string;
 }
 
-export interface ICareMemberWithMatchings extends ICareMember {
+export interface ICareMemberWithAvailability extends ICareMember {
+  availableDate?: Date;
+  isNotAvailable: boolean;
+  isAvailabilityLoading: boolean;
   matchings: string[];
 }
