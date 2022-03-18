@@ -9,6 +9,7 @@ export enum ROUTES {
   PROGRESS = "/progress",
   INTAKE_FORM = "/intake-form",
   CARE_COORDINATION = "/care-coordination",
+  PHARMACY = "/pharmacy",
   BOOKING = "/booking",
   BOOKING_LIST = "/booking/list",
 }

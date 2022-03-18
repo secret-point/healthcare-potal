@@ -35,6 +35,8 @@ const TodoItem: FC<TodoItemProps> = ({ item, onClick }) => {
         return "Take the survey";
       case TodoItemType.TRACK_YOUR_PROGRESS:
         return "Take the assessment";
+      case TodoItemType.CHOOSE_YOUR_PHARMACY:
+        return "Update preference";
       default:
         return null;
     }
@@ -50,6 +52,8 @@ const TodoItem: FC<TodoItemProps> = ({ item, onClick }) => {
         return "Check your progress";
       case TodoItemType.TRACK_YOUR_PROGRESS:
         return "Track your progress";
+      case TodoItemType.CHOOSE_YOUR_PHARMACY:
+        return "Choose your pharmacy";
       default:
         return null;
     }

@@ -10,6 +10,7 @@ import ResetPassword from "src/containers/auth/ResetPassword";
 import AssessmentSurvey from "src/containers/AssessmentSurvey/AssessmentSurvey";
 import InTakeForm from "src/containers/InTakeForm/InTakeForm";
 import CareCoordination from "src/containers/CareCoordination/CareCoordination";
+import PharmacySelection from "src/containers/pharmacy/PharmacySelection";
 import ConfirmVerificationLink from "src/containers/auth/ConfirmVerificationLink";
 import BookingListPage from "src/containers/booking/BookingListPage";
 import FullCareProviderPage from "src/containers/booking/FullCareProviderPage";
@@ -57,6 +58,9 @@ export function AuthorizedRoutes() {
           </Route>
           <Route path={ROUTES.CARE_COORDINATION} exact>
             <CareCoordination />
+          </Route>
+          <Route path={ROUTES.PHARMACY} exact>
+            <PharmacySelection />
           </Route>
           <Redirect to={ROUTES.DASHBOARD} />
         </Switch>

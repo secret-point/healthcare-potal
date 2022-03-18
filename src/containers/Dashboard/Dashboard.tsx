@@ -2,13 +2,13 @@ import { useState } from "react";
 import { useHistory } from "react-router";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
-import { Theme } from "src/theme/types/createPalette";
 
 import { ROUTES } from "src/app/types";
 import { TodoItemType, TTodoItem } from "src/types";
 import Container from "src/components/Container";
 import VerifyIDDialog from "src/components/VerifyID/VerifyIDDialog";
 import { useAuth } from "src/hooks/useAuth";
+import { Theme } from "src/theme/types/createPalette";
 
 import CareTeam from "./CareProviders";
 import TodoList from "./TodoList";
@@ -49,6 +49,9 @@ export default function Dashboard() {
         break;
       case TodoItemType.VERIFY_ID:
         setShowVerifyIDDialog(true);
+        break;
+      case TodoItemType.CHOOSE_YOUR_PHARMACY:
+        history.push(ROUTES.PHARMACY);
         break;
       default:
         break;
