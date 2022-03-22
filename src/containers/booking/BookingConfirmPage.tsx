@@ -12,17 +12,18 @@ const BookingConfirmPage: FC = () => {
   const history = useHistory();
   const { providerId } = useParams<{ providerId: string }>();
 
-  if (!history.location.state) {
-    history.push(ROUTES.LOGIN);
-  }
-
   const { data: careProvider } = useGetCareProvider(providerId);
 
   const handleSignIn = () => {
     history.push(ROUTES.LOGIN);
   };
 
-  const { datetime, duration } = history.location.state as any;
+  if (!history.location.state) {
+    history.push(ROUTES.LOGIN);
+    return null;
+  }
+
+  const { datetime, duration } = (history.location.state || {}) as any;
 
   return (
     <Container showIcon>

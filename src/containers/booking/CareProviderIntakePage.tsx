@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { FC, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
@@ -44,7 +45,7 @@ const CareProviderInTakePage: FC = () => {
     phone: form.phone,
     password: form.password,
     billingAddress: form.billingAddress,
-    dob: form.dob,
+    dob: dayjs(form.dob),
     insurances: [form.insurance],
     stripeID: form.paymentId,
     confirmPassword: form.confirmPassword,

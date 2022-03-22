@@ -17,6 +17,7 @@ const useStyles = makeStyles((theme: Theme) =>
     availabilityWrapper: {
       flexWrap: "wrap",
       overflow: "auto",
+      gap: theme.spacing(1),
       marginBottom: theme.spacing(1),
     },
 
@@ -32,7 +33,6 @@ const TimeChip = withStyles((theme) => ({
     border: "1px solid #E3E3E3",
     borderRadius: theme.spacing(1),
     cursor: "pointer",
-    marginRight: theme.spacing(1),
   },
 }))(Chip);
 

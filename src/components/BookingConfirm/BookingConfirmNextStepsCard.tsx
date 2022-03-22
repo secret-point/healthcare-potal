@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
       "& .MuiTypography-root": {
         color: "white !important",
+        letterSpacing: 0,
       },
     },
   })
