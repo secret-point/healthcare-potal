@@ -14,10 +14,10 @@ const FullCareProviderPage: FC = () => {
   const history = useHistory();
   const { providerId } = useParams<{ providerId: string }>();
 
-  const { data: careProvider } = useGetCareProvider(providerId);
+  const { data: provider } = useGetCareProvider(providerId);
 
   const { data: availability, isLoading } = useCareMemberAvailableTimesByEmail(
-    careProvider?.email
+    provider?.email
   );
 
   const nextAvailable =
@@ -32,11 +32,15 @@ const FullCareProviderPage: FC = () => {
   return (
     <Container showIcon>
       <Grid container item xl={6} lg={8} md={10}>
-        {careProvider && (
+        {provider && (
           <FullCareProviderCard
-            careProvider={careProvider}
-            nextAvailableAt={nextAvailableAt}
-            isLoadingAvailability={isLoading}
+            careProvider={{
+              ...provider,
+              isNotAvailable: false,
+              isAvailabilityLoading: isLoading,
+              matchings: [],
+              availableDate: nextAvailableAt || undefined,
+            }}
             onClickBookAppointment={handleClickBookAppointment}
           />
         )}

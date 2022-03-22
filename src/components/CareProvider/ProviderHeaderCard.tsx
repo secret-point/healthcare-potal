@@ -14,23 +14,19 @@ import {
 import { PrimaryButton } from "src/components/Button";
 import CareProviderCardWithAvatar from "src/components/CareProvider/CareProviderCardWithAvatar";
 import { useViewport } from "src/hooks/useViewport";
-import { ICareMember } from "src/types";
+import { ICareMemberWithAvailability } from "src/types";
 import { formatUserNameAndTitle } from "src/utils";
 import { ReactComponent as CalendarIcon } from "src/icons/Calendar.svg";
 
 import CareProviderHighlights from "./CareProviderHighlights";
 
 interface ProviderHeaderCardProps {
-  careProvider: ICareMember;
-  nextAvailableAt: Nullable<Date>;
-  isLoadingAvailability: boolean;
+  careProvider: ICareMemberWithAvailability;
   onClickBookAppointment: VoidFunction;
 }
 
 const ProviderHeaderCard: FC<ProviderHeaderCardProps> = ({
   careProvider,
-  nextAvailableAt,
-  isLoadingAvailability,
   onClickBookAppointment,
 }) => {
   const { isMobile } = useViewport();
@@ -67,12 +63,14 @@ const ProviderHeaderCard: FC<ProviderHeaderCardProps> = ({
               className={clsx(colorClasses.secondaryNavy1, layoutClasses.ml2)}
             >
               <b>Next available appointment:&nbsp;</b>
-              {nextAvailableAt
-                ? dayjs(nextAvailableAt).format("MMMM DD YYYY on hh:mm A")
+              {careProvider.availableDate
+                ? dayjs(careProvider.availableDate).format(
+                    "MMMM DD YYYY on hh:mm A"
+                  )
                 : ""}
             </Typography>
 
-            {isLoadingAvailability && (
+            {careProvider.isAvailabilityLoading && (
               <CircularProgress
                 className={layoutClasses.ml1}
                 size={16}

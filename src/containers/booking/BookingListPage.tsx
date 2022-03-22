@@ -58,10 +58,10 @@ const BookingListPage: FC = () => {
       })
       .map((careProvider) => {
         const matchings = [];
+        let isMatched = true;
 
-        const availabilityRecord =
-          recordsByEmail[careProvider.email] ||
-          { isLoading: true, data: null };
+        const availabilityRecord = recordsByEmail[careProvider.email]
+          || { isLoading: true, data: null };
 
         const isAvailabilityLoading = availabilityRecord.isLoading;
         const availableDate = availabilityRecord.data?.availableDates?.[0]?.date;
@@ -69,25 +69,28 @@ const BookingListPage: FC = () => {
           availabilityRecord.error ||
           (!availabilityRecord.isLoading && !availabilityRecord.data?.availableDates.length);
 
-        if (
-          searchForm.insurance &&
-          careProvider.insurance.some((insurance) => insurance.type === searchForm.insurance)
-        ) {
-          matchings.push(`Accepts ${careProvider.insurance.map((insurance) => insurance.type.toLowerCase()).join(", ")}`);
+        if (searchForm.insurance) {
+          if (careProvider.insurance.some((insurance) => insurance.type === searchForm.insurance)) {
+            matchings.push(`Accepts ${searchForm.insurance}`);
+          } else {
+            isMatched = false;
+          }
         }
 
-        if (
-          searchForm.language &&
-          careProvider.language.some((language) => language === searchForm.language)
-        ) {
-          matchings.push(`Speaks ${searchForm.language}`);
+        if (searchForm.language) {
+          if (careProvider.language.some((language) => language === searchForm.language)) {
+            matchings.push(`Speaks ${searchForm.language}`);
+          } else {
+            isMatched = false;
+          }
         }
 
-        if (
-          searchForm.state &&
-          careProvider.state.some((state) => state === searchForm.state)
-        ) {
-          matchings.push(`Accepts patients in ${searchForm.state}`);
+        if (searchForm.state) {
+          if (careProvider.state.some((state) => state === searchForm.state)) {
+            matchings.push(`Accepts patients in ${searchForm.state}`);
+          } else {
+            isMatched = false;
+          }
         }
 
         return {
@@ -96,8 +99,10 @@ const BookingListPage: FC = () => {
           isNotAvailable,
           isAvailabilityLoading,
           matchings,
+          isMatched,
         };
       })
+      .filter((provider) => provider.isMatched)
       .sort((provider1, provider2) => {
         if (provider1.isNotAvailable && !provider2.isNotAvailable) {
           return 1;

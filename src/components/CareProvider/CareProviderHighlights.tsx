@@ -7,7 +7,7 @@ import { FC } from "react";
 
 import { useViewport } from "src/hooks/useViewport";
 import { Theme } from "src/theme/types/createPalette";
-import { ICareMember } from "src/types";
+import { ICareMemberWithAvailability } from "src/types";
 
 interface StyleProps {
   isMobile: boolean;
@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface CareProviderHighlightsProps {
-  careProvider: ICareMember;
+  careProvider: ICareMemberWithAvailability;
 }
 
 const CareProviderHighlights: FC<CareProviderHighlightsProps> = ({
@@ -89,12 +89,13 @@ const CareProviderHighlights: FC<CareProviderHighlightsProps> = ({
         <Chip label={experience()} color="primary" className={classes.chip} />
       ) : null}
 
-      {dayjs().diff(careProvider.nextAvailableAt, "day") <= 7 && (
-        <Chip
-          label="Available Soon"
-          className={clsx(classes.chip, classes.availableChip)}
-        />
-      )}
+      {careProvider.availableDate &&
+        dayjs(careProvider.availableDate).diff(new Date(), "day") <= 14 && (
+          <Chip
+            label="Available Soon"
+            className={clsx(classes.chip, classes.availableChip)}
+          />
+        )}
     </Box>
   );
 };
