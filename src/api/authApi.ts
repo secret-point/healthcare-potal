@@ -30,7 +30,7 @@ export const useSignIn = () => {
   }): Promise<AuthorizedUser> => {
     const { data } = await apiFetch("/mp/login", {
       method: "POST",
-      data: { email, password },
+      data: { email: email.toLowerCase(), password },
     });
     return {
       ...data.member,
